@@ -1,0 +1,38 @@
+{
+  "schema": "bacteria-scenario",
+  "version": 1,
+  "meta": {
+    "title": "Deepwater Horizon: the oil-eaters",
+    "date": "2026-07-18",
+    "lesson": "In April 2010 the Deepwater Horizon rig blew out and released roughly 4.9 million barrels of crude oil into the warm Gulf of Mexico. Crude is mostly alkanes — long-chain hydrocarbons in the same energy class the game treats as the fatty 'lipid' resource. Within weeks, oil-degrading bacteria such as Alcanivorax bloomed and digested the slick using the enzyme alkane hydroxylase (alkB). Your founder carries a lipase re-skinned as alkB. Upgrade it to break the oil down faster than the slick spreads — but a warm, calm summer sea also feeds grazers that will hunt your colony.",
+    "citation": "Hazen et al. (2010), Science 330:204-208. doi:10.1126/science.1195979",
+    "difficulty": "hard",
+    "realWorldBasis": "Deepwater Horizon oil spill, Gulf of Mexico (2010)",
+    "authorNote": "Oil = lipid class; alkB = enzyme index 0, re-skinned. No new engine verbs; grazer/phage pressure set via env."
+  },
+  "env": {
+    "day": { "startHour": 6, "latitude": 28, "dayOfYear": 120 },
+    "diel": { "tempBase": 26, "tempAmp": 3, "foodFloor": 0.45, "grazeNight": 1.1, "q10": 2.2, "waterNight": [10, 6, 4], "waterDay": [40, 34, 22] },
+    "substrate": { "count": 70 },
+    "predator": { "count": 5 },
+    "phage": { "greenCount": 16, "goldCount": 4 }
+  },
+  "resources": [
+    { "index": 0, "label": "crude oil", "enzymeLabel": "alkane hydroxylase (alkB)", "color": "#3a2f28" }
+  ],
+  "particles": {
+    "oilDroplet": { "label": "oil droplet", "mix": [0.95, 0.03, 0.02], "rMin": 40, "rMax": 90, "shape": "aggregate", "weight": 1.6 },
+    "tarball": { "label": "weathered tarball", "mix": [0.80, 0.12, 0.08], "rMin": 60, "rMax": 110, "shape": "shard", "weight": 0.8 }
+  },
+  "actions": {
+    "enzyme0": { "label": "alkB expression", "color": "#efd98a", "weight": 3.2 },
+    "chemotaxis": { "label": "oil-seeking chemotaxis", "color": "#ffd24a", "weight": 1.4 },
+    "antibiotic": { "label": "antibiotic", "color": "#ff5a5a", "weight": 0.6 }
+  },
+  "organisms": {
+    "cells": [
+      { "id": "alcanivorax", "label": "Alcanivorax-like oil degrader", "color": "#d8b25a", "genome": { "enzLvl": [2, 0, 1], "chemoLevel": 1 }, "immigrateWeight": 1.5 },
+      { "id": "generalist", "label": "background heterotroph", "color": "#9fb0c0", "genome": { "enzLvl": [0, 1, 1] }, "immigrateWeight": 1.0 }
+    ]
+  }
+}
