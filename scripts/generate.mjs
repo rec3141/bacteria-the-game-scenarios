@@ -91,7 +91,9 @@ async function modelScenario(prompt) {
     console.error(`[generate] no scenario tool call. stop_reason=${data.stop_reason}; block types=${(data.content || []).map((b) => b.type).join(",")}`);
     throw new Error("model did not emit a scenario object");
   }
-  return tool.input;   // already a parsed JSON object
+  // The schema/version discriminators are OUR fixed envelope, not the model's to get right — stamp them
+  // so a model that fumbles the boilerplate can't fail an otherwise-good scenario.
+  return { ...tool.input, schema: "bacteria-scenario", version: 1 };
 }
 function extractJson(text) {
   const fence = text.match(/```(?:json)?\s*([\s\S]*?)```/);
@@ -101,8 +103,22 @@ function extractJson(text) {
   return JSON.parse(body.slice(start, end + 1));
 }
 
-// ---- DOI resolution (Crossref metadata + abstract) -------------------------------------------------
+// ---- DOI resolution — metadata from Crossref, abstract from whichever source has it ----------------
+// The abstract is what keeps the lesson HONEST: without it the model writes from memory and invents
+// paper-specific claims. Crossref often lacks abstracts, so we cascade to Europe PMC and Semantic
+// Scholar (both carry abstracts for most life-science papers) before giving up.
 function stripJats(s) { return typeof s === "string" ? s.replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim() : ""; }
+async function tryJson(url, headers) {
+  try { const r = await fetch(url, { headers }); return r.ok ? await r.json() : null; } catch { return null; }
+}
+async function fetchAbstract(doi) {
+  const epmc = await tryJson(`https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:${encodeURIComponent(doi)}&resultType=core&format=json`);
+  const a1 = epmc?.resultList?.result?.[0]?.abstractText;
+  if (a1) return { text: stripJats(a1), source: "Europe PMC" };
+  const s2 = await tryJson(`https://api.semanticscholar.org/graph/v1/paper/DOI:${encodeURIComponent(doi)}?fields=abstract`);
+  if (s2?.abstract) return { text: stripJats(s2.abstract), source: "Semantic Scholar" };
+  return { text: "", source: "" };
+}
 async function resolveDoi(doi) {
   const clean = doi.trim().replace(/^https?:\/\/(dx\.)?doi\.org\//i, "");
   if (!/^10\.\d{4,9}\/\S+$/.test(clean)) throw new Error("that does not look like a DOI");
@@ -113,10 +129,11 @@ async function resolveDoi(doi) {
   const m = (await res.json()).message;
   const year = m.published?.["date-parts"]?.[0]?.[0] || m.created?.["date-parts"]?.[0]?.[0] || "";
   const authors = (m.author || []).slice(0, 3).map((a) => a.family).filter(Boolean).join(", ");
+  let abstract = stripJats(m.abstract), absSource = abstract ? "Crossref" : "";
+  if (!abstract) { const f = await fetchAbstract(clean); abstract = f.text; absSource = f.source; }
   return {
-    doi: clean,
+    doi: clean, abstract, absSource,
     title: Array.isArray(m.title) ? m.title[0] : m.title || "",
-    abstract: stripJats(m.abstract),
     journal: Array.isArray(m["container-title"]) ? m["container-title"][0] : "",
     subjects: m.subject || [],
     citation: `${authors}${authors ? " " : ""}(${year}). ${Array.isArray(m.title) ? m.title[0] : ""}. doi:${clean}`.trim(),
@@ -140,8 +157,11 @@ async function buildPrompt() {
     const doi = arg("doi");
     if (!doi) throw new Error("--doi required in doi mode");
     const p = await resolveDoi(doi);
-    const src = p.abstract ? `Abstract: ${p.abstract}` : "(no abstract available — use the title and your knowledge of the topic)";
-    return { prompt: `${schemaSpec()}\n\nBuild a scenario seeded by this scientific paper. Capture its microbial system as a playable level and teach its key finding in the mini-lesson. Use this citation verbatim in meta.citation: "${p.citation}".\n\nTitle: ${p.title}\nJournal: ${p.journal}\nSubjects: ${p.subjects.join(", ")}\n${src}${novelty}`,
+    console.log(`[generate] resolved ${p.doi} — abstract source: ${p.absSource || "NONE"}`);
+    const grounding = p.abstract
+      ? `Abstract (source: ${p.absSource}):\n${p.abstract}\n\nGround the mini-lesson STRICTLY in this abstract and title. Do NOT state any specific figure, sample count, location, organism, mechanism, or finding that is not present in the abstract above — no invented specifics. It is fine to add general, well-established textbook background about the habitat/organism type.`
+      : `No abstract could be retrieved for this paper. Therefore keep the mini-lesson GENERAL: describe the habitat/organism type at a textbook level and do NOT attribute any specific claim, number, or finding to this paper. Do not fabricate details you cannot verify.`;
+    return { prompt: `${schemaSpec()}\n\nBuild a scenario seeded by this scientific paper. Capture its microbial system as a playable level and teach its topic in the mini-lesson. Use this citation verbatim in meta.citation: "${p.citation}".\n\nTitle: ${p.title}\nJournal: ${p.journal}\nSubjects: ${p.subjects.join(", ")}\n${grounding}${novelty}`,
       idHint: `doi-${slug(p.doi)}`, citation: p.citation };
   }
   return { prompt: `${schemaSpec()}\n\nInvent today's scenario: pick a real, vivid microbial-ecology situation (a specific event, habitat, or organism) with strong educational value.${novelty}`, idHint: `daily-${today}` };
