@@ -1,0 +1,261 @@
+{
+  "schema": "bacteria-scenario",
+  "version": 1,
+  "meta": {
+    "title": "Nitrifiers of the Streambed: AOB vs AOA in an Agricultural Creek",
+    "date": "2026-07-18",
+    "lesson": "In a small farmland stream in southern Germany, ammonia from fertilizer runoff seeps into streambed sediments. Two different microbial groups can oxidize this ammonia to nitrite, the first step of nitrification: ammonia-oxidising bacteria (AOB, e.g. Nitrosomonas, Nitrosospira) and ammonia-oxidising archaea (AOA). AOA are usually far more numerous in the sediment, but this game teaches a counterintuitive finding: AOB, though rarer, respond more strongly to ammonium pulses and actually dominate the real nitrification activity. Gene abundance alone is a poor predictor of who is doing the work in situ — you have to measure activity, not just count genes. Play as sediment microbes competing for ammonium seeping down from the agricultural field above; watch how the low-abundance but high-affinity/high-Vmax AOB population out-competes the numerous but sluggish AOA when nitrogen pulses hit, especially in shallow, well-flushed sediment versus deeper, more stable layers.",
+    "citation": "Wang, Störiko, Jung (2026). Linking Abundance and Activity of Ammonia‐Oxidising Bacteria and Archaea in an Agriculturally Impacted First‐Order Stream. doi:10.1111/1462-2920.70369",
+    "difficulty": "hard",
+    "realWorldBasis": "First-order agricultural stream, southern Germany; AOB vs AOA nitrification kinetics"
+  },
+  "env": {
+    "day.lengthSec": 600,
+    "day.startHour": 7,
+    "day.latitude": 48.5,
+    "day.dayOfYear": 170,
+    "diel.tempBase": 14,
+    "diel.tempAmp": 3,
+    "diel.tempLag": 2,
+    "diel.foodFloor": 0.18,
+    "diel.grazeNight": 0.5,
+    "diel.twilight": 1.2,
+    "diel.q10": 2.2,
+    "diel.q10RefC": 12,
+    "substrate.count": 26,
+    "substrate.sizeMin": 4,
+    "substrate.sizeMax": 11,
+    "substrate.lifeMin": 20,
+    "substrate.lifeMax": 55,
+    "predator.count": 3,
+    "predator.senseRange": 60,
+    "predator.chaseSpeed": 1.3,
+    "predator.wanderSpeed": 0.6,
+    "predator.mealEnergy": 30,
+    "predator.metabolism": 0.05,
+    "predator.resistStep": 0.1,
+    "predator.resistMax": 0.6,
+    "predator.reproEnergy": 90,
+    "predator.reproCooldown": 40,
+    "cell.startEnergy": 55,
+    "cell.divideThreshold": 100,
+    "enzyme.life": 14,
+    "enzyme.maxRadius": 28,
+    "eps.lifePerLevel": 10,
+    "eps.radius": 16
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Ammonium seep lipid-analog",
+      "enzymeLabel": "Ammonia monooxygenase (AMO)",
+      "color": "#f2c14e"
+    },
+    {
+      "index": 1,
+      "label": "Organic-N protein matter",
+      "enzymeLabel": "Protease",
+      "color": "#c04851"
+    },
+    {
+      "index": 2,
+      "label": "Sediment carbohydrate film",
+      "enzymeLabel": "Glycosidase",
+      "color": "#5a7d5a"
+    }
+  ],
+  "particles": {
+    "ammonium_pulse": {
+      "label": "Fertilizer-derived ammonium pulse",
+      "mix": [
+        5,
+        1,
+        0.5
+      ],
+      "rMin": 3,
+      "rMax": 7,
+      "shape": "aggregate",
+      "weight": 6
+    },
+    "background_organic": {
+      "label": "Background streambed organic matter",
+      "mix": [
+        1,
+        2,
+        2
+      ],
+      "rMin": 4,
+      "rMax": 9,
+      "shape": "shard",
+      "weight": 4
+    },
+    "biofilm_patch": {
+      "label": "Biofilm carbohydrate patch",
+      "mix": [
+        0.3,
+        0.5,
+        3
+      ],
+      "rMin": 5,
+      "rMax": 10,
+      "shape": "ellipse",
+      "squash": 0.6,
+      "weight": 3
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Ammonia monooxygenase secretion",
+      "color": "#f2c14e",
+      "weight": 9
+    },
+    "enzyme1": {
+      "label": "Protease secretion",
+      "color": "#c04851",
+      "weight": 3
+    },
+    "enzyme2": {
+      "label": "Glycosidase secretion",
+      "color": "#5a7d5a",
+      "weight": 3
+    },
+    "chemotaxis": {
+      "label": "Ammonium-gradient taxis",
+      "color": "#3a7ca5",
+      "weight": 7
+    },
+    "antibiotic": {
+      "label": "Nitrification inhibitor exudate",
+      "color": "#8e44ad",
+      "weight": 2
+    },
+    "eps": {
+      "label": "Sediment biofilm matrix",
+      "color": "#7f8c8d",
+      "weight": 4
+    },
+    "crispr": {
+      "label": "Phage defense",
+      "color": "#2c3e50",
+      "weight": 1
+    },
+    "twitching": {
+      "label": "Sediment grain surface twitching",
+      "color": "#16a085",
+      "weight": 5
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "aob_nitrosomonas",
+        "label": "Nitrosomonas-like AOB (rare, high-response)",
+        "color": "#f39c12",
+        "genome": {
+          "enzLvl": [
+            10,
+            2,
+            1
+          ],
+          "chemoLevel": 6,
+          "antibiotic": 1,
+          "eps": 2,
+          "crispr": false,
+          "twitching": 3
+        },
+        "immigrateWeight": 3
+      },
+      {
+        "id": "aob_nitrosospira",
+        "label": "Nitrosospira-like AOB (rare, high-response)",
+        "color": "#e67e22",
+        "genome": {
+          "enzLvl": [
+            9,
+            2,
+            1
+          ],
+          "chemoLevel": 5,
+          "antibiotic": 1,
+          "eps": 2,
+          "crispr": false,
+          "twitching": 4
+        },
+        "immigrateWeight": 3
+      },
+      {
+        "id": "aoa_archaeon",
+        "label": "Ammonia-oxidising archaeon (abundant, sluggish)",
+        "color": "#2ecc71",
+        "genome": {
+          "enzLvl": [
+            4,
+            1,
+            1
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 3,
+          "crispr": true,
+          "twitching": 1
+        },
+        "immigrateWeight": 8
+      },
+      {
+        "id": "heterotroph_generalist",
+        "label": "Sediment heterotroph generalist",
+        "color": "#95a5a6",
+        "genome": {
+          "enzLvl": [
+            1,
+            4,
+            4
+          ],
+          "chemoLevel": 3,
+          "antibiotic": 0,
+          "eps": 3,
+          "crispr": false,
+          "twitching": 2
+        },
+        "immigrateWeight": 4
+      }
+    ]
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 15,
+        "salinity": 0.3,
+        "light": 0.7,
+        "nutrient": 0.9
+      },
+      {
+        "depth": 5,
+        "tempC": 14,
+        "salinity": 0.3,
+        "light": 0.3,
+        "nutrient": 0.7
+      },
+      {
+        "depth": 15,
+        "tempC": 12.5,
+        "salinity": 0.4,
+        "light": 0.05,
+        "nutrient": 0.5
+      },
+      {
+        "depth": 30,
+        "tempC": 11.5,
+        "salinity": 0.4,
+        "light": 0,
+        "nutrient": 0.3
+      }
+    ],
+    "thermocline": {
+      "depth": 10,
+      "sharpness": 0.4
+    }
+  }
+}
