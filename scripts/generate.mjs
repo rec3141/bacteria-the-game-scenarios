@@ -6,7 +6,7 @@
 // Needs ANTHROPIC_API_KEY in the environment (GitHub Secrets in CI). The generated JSON is validated
 // with the SAME validator the game runs; an invalid generation is retried once, then fails the job so a
 // bad scenario never lands. Copyright/appropriateness is left to the model's own judgment by design.
-import { readFileSync, writeFileSync, readdirSync, existsSync, mkdirSync } from "node:fs";
+import { readFileSync, writeFileSync, readdirSync, existsSync, mkdirSync, appendFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { validateScenario } from "./validator.mjs";
@@ -179,5 +179,5 @@ async function generateOnce(prompt) {
   writeFileSync(indexPath, JSON.stringify(index, null, 2) + "\n");
 
   console.log(`✓ wrote scenarios/${id}.json — "${raw.meta.title}"`);
-  console.log(`::set-output name=scenario_id::${id}`);
+  if (process.env.GITHUB_OUTPUT) { try { appendFileSync(process.env.GITHUB_OUTPUT, `scenario_id=${id}\n`); } catch {} }
 })().catch((e) => { console.error("generate error:", e.message); process.exit(1); });
