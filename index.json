@@ -2,6 +2,7 @@
   "schema": "bacteria-scenario-index",
   "version": 1,
   "scenarios": [
-    { "id": "deepwater-horizon", "title": "Deepwater Horizon: the oil-eaters", "date": "2026-07-18", "difficulty": "hard", "realWorldBasis": "Deepwater Horizon oil spill, Gulf of Mexico (2010)", "file": "scenarios/deepwater-horizon.json" }
+    { "id": "deepwater-horizon", "title": "Deepwater Horizon: the oil-eaters", "date": "2026-07-18", "difficulty": "hard", "realWorldBasis": "Deepwater Horizon oil spill, Gulf of Mexico (2010)", "file": "scenarios/deepwater-horizon.json" },
+    { "id": "arctic-bloom", "title": "Arctic under-ice bloom", "date": "2026-07-18", "difficulty": "normal", "realWorldBasis": "Arctic spring under-ice phytoplankton bloom", "file": "scenarios/arctic-bloom.json" }
   ]
 }
