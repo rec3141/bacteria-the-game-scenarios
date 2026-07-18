@@ -1,0 +1,47 @@
+Here is today's scenario — a cyanobacterial harmful algal bloom.
+
+```json
+{
+  "schema": "bacteria-scenario",
+  "version": 1,
+  "meta": {
+    "title": "Lake Erie cyanobacterial bloom",
+    "date": "2026-07-18",
+    "lesson": "Every late summer, warm calm water and phosphorus runoff turn western Lake Erie a vivid green as the cyanobacterium Microcystis blooms. These cells are buoyant — they make gas vesicles and sticky EPS that float them into a surface scum where light is brightest, shading out competitors below. Many strains make microcystin, a liver toxin, which acts here like the game's antibiotic against grazers and rivals. Ride your buoyancy to stay in the sunlit surface layer, build EPS to float, and use your toxin to hold the top of the water column.",
+    "citation": "Michalak et al. (2013), PNAS 110:6448-6452. doi:10.1073/pnas.1216006110",
+    "difficulty": "normal",
+    "realWorldBasis": "Lake Erie Microcystis bloom (2011)"
+  },
+  "env": {
+    "day": { "startHour": 9, "latitude": 42, "dayOfYear": 220 },
+    "diel": { "tempBase": 25, "tempAmp": 3, "grazeNight": 1.0, "waterNight": [8, 24, 14], "waterDay": [60, 150, 70] },
+    "substrate": { "count": 60 },
+    "predator": { "count": 4 }
+  },
+  "resources": [
+    { "index": 2, "label": "photosynthate", "enzymeLabel": "glycogen phosphorylase", "color": "#7ad06a" }
+  ],
+  "actions": {
+    "eps": { "label": "gas vesicles + EPS (buoyancy)", "color": "#8ad0c0", "weight": 3.0 },
+    "antibiotic": { "label": "microcystin toxin", "color": "#5ac84a", "weight": 1.8 },
+    "enzyme2": { "label": "glycogen phosphorylase", "color": "#7ad06a", "weight": 1.4 }
+  },
+  "organisms": {
+    "cells": [
+      { "id": "microcystis", "label": "Microcystis (bloom former)", "color": "#66c46a", "genome": { "enzLvl": [0, 0, 2], "eps": 2, "antibiotic": 1 }, "immigrateWeight": 1.6, "bloom": true },
+      { "id": "green-alga", "label": "background green alga", "color": "#9fd0a0", "genome": { "enzLvl": [1, 0, 1] }, "immigrateWeight": 1.0 }
+    ]
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      { "depth": 0, "tempC": 27, "salinity": 0, "light": 1.0, "nutrient": 0.6 },
+      { "depth": 6, "tempC": 24, "salinity": 0, "light": 0.3, "nutrient": 0.8 },
+      { "depth": 30, "tempC": 18, "salinity": 0, "light": 0.02, "nutrient": 1.0 }
+    ],
+    "thermocline": { "depth": 6, "sharpness": 0.7 }
+  }
+}
+```
+
+That should make a distinct, educational level.
