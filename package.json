@@ -1,0 +1,10 @@
+{
+  "name": "bacteria-the-game-scenarios",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "validate": "node scripts/validate-all.mjs",
+    "generate": "node scripts/generate.mjs"
+  }
+}
