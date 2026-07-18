@@ -73,11 +73,18 @@ async function callClaude(prompt) {
   const res = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
     headers: { "x-api-key": process.env.ANTHROPIC_API_KEY, "anthropic-version": "2023-06-01", "content-type": "application/json" },
-    body: JSON.stringify({ model: MODEL, max_tokens: 4000, messages: [{ role: "user", content: prompt }] }),
+    body: JSON.stringify({
+      model: MODEL, max_tokens: 8000,
+      system: "You generate scenarios for a marine-microbiology game. Output ONE JSON object and nothing else — no prose, no explanation, no markdown code fences.",
+      // Prefill the assistant turn with an opening brace so the model is forced to emit JSON, not prose.
+      messages: [{ role: "user", content: prompt }, { role: "assistant", content: "{" }],
+    }),
   });
-  if (!res.ok) throw new Error(`Anthropic API ${res.status}: ${(await res.text()).slice(0, 300)}`);
+  if (!res.ok) throw new Error(`Anthropic API ${res.status}: ${(await res.text()).slice(0, 500)}`);
   const data = await res.json();
-  return (data.content || []).map((c) => c.text || "").join("");
+  const text = (data.content || []).filter((b) => b.type === "text").map((b) => b.text).join("");
+  if (!text.trim()) console.error(`[generate] model returned no text. stop_reason=${data.stop_reason}; keys=${Object.keys(data).join(",")}`);
+  return "{" + text;   // we prefilled the "{", which the API does not echo back
 }
 function extractJson(text) {
   const fence = text.match(/```(?:json)?\s*([\s\S]*?)```/);
@@ -138,7 +145,12 @@ async function buildPrompt() {
 const mockFile = arg("mock");
 async function generateOnce(prompt) {
   const text = mockFile ? readFileSync(mockFile, "utf8") : await callClaude(prompt);
-  const raw = extractJson(text);
+  let raw;
+  try { raw = extractJson(text); }
+  catch (e) {
+    console.error(`[generate] could not parse model output: ${e.message}\n--- raw model output (first 1200 chars) ---\n${text.slice(0, 1200)}\n--- end ---`);
+    throw e;
+  }
   const result = validateScenario(raw, defaults);
   return { raw, result };
 }
