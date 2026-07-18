@@ -66,8 +66,22 @@ It must satisfy this schema (any unknown key, out-of-range value, or new "verb" 
 }
 
 Design goals: a SPECIFIC, real microbial-ecology situation with genuine educational value; a mechanically
-distinct feel via env + a re-skinned enzyme; a mini-lesson that teaches the science. Keep numbers physically
-plausible. Prefer real organisms and real events. The date field must be exactly "${today}".`;
+distinct feel via env + a re-skinned enzyme; a mini-lesson that teaches the science. Prefer real organisms
+and real events. The date field must be exactly "${today}".
+
+PARAMETER GUIDE — what the numbers do (defaults in [brackets]; deviate only with a reason):
+- day.lengthSec [240] s/day. day.latitude [45] (use the SITE's real latitude; higher = stronger seasonal light). day.dayOfYear [172] = season. day.startHour [0].
+- diel.tempBase [20] = mean water temperature °C (use the site's real temperature). diel.tempAmp [6] = day/night swing. diel.foodFloor [0.3] = night food as a fraction of noon (keep >= 0.2). diel.q10 [2].
+- substrate.count [80] = HOW MANY food particles exist. This is the single biggest control on playability. KEEP IT 60-130. Even for a nutrient-poor (oligotrophic) real habitat, do NOT go below ~55 — convey low productivity with SMALLER particles (substrate.sizeMin/sizeMax) or tougher grazing/competition, NOT by starving the board. A near-empty sea is not fun and not the goal.
+- predator.count [4] grazers. phage.greenCount [18], phage.goldCount [4]. cell.startEnergy [100], cell.divideThreshold [200] (<= 230).
+
+FEEDING — the founder MUST be able to eat, or the level is dead on arrival:
+- There are exactly 3 food classes: index 0 = lipid/fatty, 1 = protein, 2 = carbohydrate — each digested by its own enzyme (enzyme0/enzyme1/enzyme2). A "novel enzyme" is a re-skin of one of these on its class.
+- Each particle's "mix" [c0,c1,c2] sets its composition. Whatever class DOMINATES your particles, organisms.cells[0].genome.enzLvl MUST be >= 2 in that class, or the founder starves immediately. Example: 90%-class-0 oil droplets → founder enzLvl [2, x, 1].
+- Always keep enzLvl[2] (carbohydrase) >= 1 — it is the universal founding enzyme.
+- If you define no particles, the default mixed marine-snow set is used; then a generalist founder (enzLvl ~ [1,1,1]) is safest.
+
+COLUMN scenarios (a stratified water column, column.enabled=true): food particles SINK toward the floor, so set substrate.count on the higher side (90-130) and make sure the founder can eat what's near it. Use a column only when depth genuinely matters (surface vs deep).`;
 }
 
 // Force the model to return a JSON object by making it call a tool (with tool_choice). This guarantees
