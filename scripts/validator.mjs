@@ -304,7 +304,7 @@
         if (!id || ids.has(id)) return scReject("organism cell id missing or duplicated");
         ids.add(id);
         const g = c.genome || {};
-        const gErr = scOnlyKeys(g, new Set(["enzLvl", "chemoLevel", "antibiotic", "eps", "crispr", "twitching"]), "genome");
+        const gErr = scOnlyKeys(g, new Set(["enzLvl", "chemoLevel", "antibiotic", "eps", "crispr", "twitching", "chemolithotroph"]), "genome");
         if (gErr) return scReject(gErr);
         const enz = g.enzLvl;
         if (!Array.isArray(enz) || enz.length !== 3) return scReject("genome.enzLvl must have length 3");
@@ -317,7 +317,7 @@
         if (c.color != null && !color) return scReject("organism cell color must be #rrggbb");
         organisms.cells.push({ id, label: scStr(c.label, 40) || "", color,
           genome: { enzLvl: [enz[0], enz[1], enz[2]], chemoLevel: g.chemoLevel|0, antibiotic: g.antibiotic|0,
-            eps: g.eps|0, crispr: g.crispr === true, twitching: g.twitching === true },
+            eps: g.eps|0, crispr: g.crispr === true, twitching: g.twitching === true, chemolithotroph: g.chemolithotroph === true },
           immigrateWeight: iw, bloom: c.bloom === true });
       }
     }
@@ -328,9 +328,19 @@
     if (raw.column != null) {
       const col = raw.column;
       if (!col || typeof col !== "object") return scReject("column must be an object");
-      const colErr = scOnlyKeys(col, new Set(["enabled", "layers", "thermocline"]), "column");
+      const colErr = scOnlyKeys(col, new Set(["enabled", "layers", "thermocline", "chemical"]), "column");
       if (colErr) return scReject(colErr);
       if (col.enabled != null && typeof col.enabled !== "boolean") return scReject("column.enabled must be boolean");
+      // optional chemical-energy field for chemolithotroph scenarios
+      if (col.chemical != null) {
+        const cf = col.chemical;
+        if (!cf || typeof cf !== "object") return scReject("column.chemical must be an object");
+        const cfErr = scOnlyKeys(cf, new Set(["peakDepth", "spread", "strength", "color"]), "column.chemical");
+        if (cfErr) return scReject(cfErr);
+        const band = (v, lo, hi, name) => v == null || (Number.isFinite(v) && v >= lo && v <= hi) ? null : `column.chemical ${name} out of range`;
+        for (const chk of [band(cf.peakDepth, 0, 1, "peakDepth"), band(cf.spread, 0.01, 1, "spread"), band(cf.strength, 0, 1, "strength")]) if (chk) return scReject(chk);
+        if (cf.color != null && !scColor(cf.color)) return scReject("column.chemical.color must be #rrggbb");
+      }
       if (col.layers != null) {
         if (!Array.isArray(col.layers) || !col.layers.length) return scReject("column.layers must be a non-empty array");
         let prevDepth = -Infinity;
@@ -344,7 +354,7 @@
           for (const chk of [band(L.tempC, -10, 50, "tempC"), band(L.salinity, 0, 60, "salinity"), band(L.light, 0, 1, "light"), band(L.nutrient, 0, 1, "nutrient")]) if (chk) return scReject(chk);
         }
       }
-      column = scClone(col); column.enabled = col.enabled === true; // parsed; v1 does not read it into the sim
+      column = scClone(col); column.enabled = col.enabled === true;
     }
 
     return { ok: true, scenario: { meta, cfg, resources, particles, actions, organisms, column } };
