@@ -1,0 +1,132 @@
+{
+  "schema": "bacteria-scenario",
+  "version": 1,
+  "meta": {
+    "title": "Oxygen minimum zone",
+    "date": "2026-07-18",
+    "lesson": "In parts of the ocean, a thick mid-water layer holds almost no dissolved oxygen — an oxygen minimum zone, formed where sinking organic matter is respired faster than currents can resupply O2. These expanding 'dead zones' are anything but dead to microbes: deprived of oxygen, bacteria switch to breathing nitrate instead, driving denitrification and anammox that strip fixed nitrogen from the sea and release greenhouse nitrous oxide. Sink into the anoxic mid-layer and your metabolism runs on nitrate; the bright oxygenated surface belongs to your aerobic competitors.",
+    "citation": "Ulloa et al. (2012), PNAS 109:15996-16003. doi:10.1073/pnas.1205009109",
+    "difficulty": "hard",
+    "realWorldBasis": "Eastern tropical Pacific oxygen minimum zone"
+  },
+  "env": {
+    "day": {
+      "startHour": 8,
+      "latitude": 10,
+      "dayOfYear": 200
+    },
+    "diel": {
+      "tempBase": 16,
+      "tempAmp": 4,
+      "foodFloor": 0.6,
+      "waterNight": [
+        6,
+        14,
+        22
+      ],
+      "waterDay": [
+        40,
+        90,
+        120
+      ]
+    },
+    "substrate": {
+      "count": 65
+    },
+    "predator": {
+      "count": 4
+    }
+  },
+  "resources": [
+    {
+      "index": 1,
+      "label": "nitrate / organic N",
+      "enzymeLabel": "nitrate reductase (denitrification)",
+      "color": "#8a7ad0"
+    }
+  ],
+  "actions": {
+    "enzyme1": {
+      "label": "nitrate reduction",
+      "color": "#ef8b3c",
+      "weight": 2.8
+    },
+    "chemotaxis": {
+      "label": "redox-cline chemotaxis",
+      "color": "#ffd24a",
+      "weight": 1.6
+    },
+    "eps": {
+      "label": "particle-attached biofilm",
+      "color": "#8ad0c0",
+      "weight": 1.2
+    },
+    "antibiotic": {
+      "label": "antibiosis",
+      "color": "#ff5a5a",
+      "weight": 0.6
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "denitrifier",
+        "label": "denitrifying bacterium",
+        "color": "#8a7ad0",
+        "genome": {
+          "enzLvl": [
+            0,
+            2,
+            1
+          ],
+          "chemoLevel": 1
+        },
+        "immigrateWeight": 1.5
+      },
+      {
+        "id": "anammox",
+        "label": "anammox planctomycete",
+        "color": "#a08ad0",
+        "genome": {
+          "enzLvl": [
+            0,
+            1,
+            1
+          ],
+          "eps": 1
+        },
+        "immigrateWeight": 0.9
+      }
+    ]
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 22,
+        "salinity": 34,
+        "light": 1,
+        "nutrient": 0.3
+      },
+      {
+        "depth": 12,
+        "tempC": 15,
+        "salinity": 35,
+        "light": 0.15,
+        "nutrient": 1
+      },
+      {
+        "depth": 45,
+        "tempC": 10,
+        "salinity": 35,
+        "light": 0,
+        "nutrient": 0.8
+      }
+    ],
+    "thermocline": {
+      "depth": 12,
+      "sharpness": 0.85
+    }
+  }
+}
