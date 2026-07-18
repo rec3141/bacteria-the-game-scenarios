@@ -10,6 +10,7 @@ import { readFileSync, writeFileSync, readdirSync, existsSync, mkdirSync, append
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { validateScenario } from "./validator.mjs";
+import { buildIndex } from "./build-index.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const repo = join(here, "..");
@@ -190,13 +191,7 @@ async function generateOnce(prompt) {
   if (!existsSync(scenDir)) mkdirSync(scenDir, { recursive: true });
   const id = slug(idHint);
   writeFileSync(join(scenDir, `${id}.json`), JSON.stringify(raw, null, 2) + "\n");
-
-  // update index.json
-  const indexPath = join(repo, "index.json");
-  const index = existsSync(indexPath) ? JSON.parse(readFileSync(indexPath, "utf8")) : { schema: "bacteria-scenario-index", version: 1, scenarios: [] };
-  index.scenarios = (index.scenarios || []).filter((s) => s.id !== id);
-  index.scenarios.push({ id, title: raw.meta.title, date: raw.meta.date, difficulty: raw.meta.difficulty || "normal", realWorldBasis: raw.meta.realWorldBasis || "", file: `scenarios/${id}.json` });
-  writeFileSync(indexPath, JSON.stringify(index, null, 2) + "\n");
+  buildIndex(repo);   // rebuild index.json from the files on disk — never accumulates stale/duplicate rows
 
   console.log(`✓ wrote scenarios/${id}.json — "${raw.meta.title}"`);
   if (process.env.GITHUB_OUTPUT) { try { appendFileSync(process.env.GITHUB_OUTPUT, `scenario_id=${id}\n`); } catch {} }
