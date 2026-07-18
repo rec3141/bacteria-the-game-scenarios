@@ -81,7 +81,12 @@ FEEDING — the founder MUST be able to eat, or the level is dead on arrival:
 - Always keep enzLvl[2] (carbohydrase) >= 1 — it is the universal founding enzyme.
 - If you define no particles, the default mixed marine-snow set is used; then a generalist founder (enzLvl ~ [1,1,1]) is safest.
 
-COLUMN scenarios (a stratified water column, column.enabled=true): food particles SINK toward the floor, so set substrate.count on the higher side (90-130) and make sure the founder can eat what's near it. Use a column only when depth genuinely matters (surface vs deep).`;
+COLUMN scenarios (a stratified water column, column.enabled=true): food particles SINK toward the floor, so set substrate.count on the higher side (90-130) and make sure the founder can eat what's near it. Use a column only when depth genuinely matters (surface vs deep).
+
+CHEMOSYNTHESIS / CHEMOLITHOTROPHY (hydrothermal vents, cold seeps, sulfur/ammonia/nitrite oxidizers, nitrifiers, anammox): these microbes do NOT digest particles — they fix carbon using energy from a dissolved reduced chemical. Use the ENGINE PRIMITIVE, never a re-skinned digestion enzyme (breaking down a particle with "nitrate reductase" is biologically backwards):
+- set "chemolithotroph": true inside the genome of the chemosynthetic organism(s);
+- set column.enabled=true and add column.chemical: { "peakDepth": 0..1 (fraction of the column where the chemical is richest — a vent floor ~0.9, a redox/oxycline ~0.5), "spread": 0.05..0.3, "strength": 0.6..1, "color": "#rrggbb" }.
+A chemolithotroph draws energy from the field at its depth and must stay in the plume — it needs no particle enzyme (keep its enzLvl low, e.g. [0,0,1]).`;
 }
 
 // Force the model to return a JSON object by making it call a tool (with tool_choice). This guarantees
