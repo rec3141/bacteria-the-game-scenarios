@@ -41,6 +41,14 @@
       "difficulty": "hard",
       "realWorldBasis": "Eastern tropical Pacific oxygen minimum zone",
       "file": "scenarios/oxygen-minimum-zone.json"
+    },
+    {
+      "id": "daily-2026-07-18",
+      "title": "Sargasso Sea: Prochlorococcus at the Edge of Starvation",
+      "date": "2026-07-18",
+      "difficulty": "hard",
+      "realWorldBasis": "Sargasso Sea oligotrophic gyre, Prochlorococcus ecotype stratification (BATS site)",
+      "file": "scenarios/daily-2026-07-18.json"
     }
   ]
 }
