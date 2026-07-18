@@ -57,7 +57,8 @@ jobs:
           git add scenarios/ index.json
           git commit -m "Scenario seeded from a submitted DOI"
           git push origin "$branch"
-          url=$(gh pr create --base main --head "$branch" \
-            --title "DOI scenario" \
-            --body "Auto-generated from a submitted DOI. Review the lesson, citation, and parameters before merging.")
-          if [ -n "$ISSUE_NUMBER" ]; then gh issue comment "$ISSUE_NUMBER" --body "Thanks! A level seeded from your paper is proposed here: $url"; fi
+          body="Auto-generated from a submitted DOI. Review the lesson, citation, and parameters before merging."
+          # When it came from an issue, "Closes #N" auto-closes that submission issue on merge.
+          if [ -n "$ISSUE_NUMBER" ]; then body="$body"$'\n\n'"Closes #$ISSUE_NUMBER"; fi
+          url=$(gh pr create --base main --head "$branch" --title "DOI scenario" --body "$body")
+          if [ -n "$ISSUE_NUMBER" ]; then gh issue comment "$ISSUE_NUMBER" --body "Thanks! A level seeded from your paper is proposed here: $url — merging it will close this issue."; fi
