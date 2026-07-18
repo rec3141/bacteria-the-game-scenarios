@@ -3,44 +3,12 @@
   "version": 1,
   "scenarios": [
     {
-      "id": "deepwater-horizon",
-      "title": "Deepwater Horizon: the oil-eaters",
-      "date": "2026-07-18",
-      "difficulty": "hard",
-      "realWorldBasis": "Deepwater Horizon oil spill, Gulf of Mexico (2010)",
-      "file": "scenarios/deepwater-horizon.json"
-    },
-    {
       "id": "arctic-bloom",
       "title": "Arctic under-ice bloom",
       "date": "2026-07-18",
       "difficulty": "normal",
       "realWorldBasis": "Arctic spring under-ice phytoplankton bloom",
       "file": "scenarios/arctic-bloom.json"
-    },
-    {
-      "id": "lake-erie-bloom",
-      "title": "Lake Erie cyanobacterial bloom",
-      "date": "2026-07-18",
-      "difficulty": "normal",
-      "realWorldBasis": "Lake Erie Microcystis bloom (2011)",
-      "file": "scenarios/lake-erie-bloom.json"
-    },
-    {
-      "id": "doi-10-1038-s41579-019-0160-2",
-      "title": "Deep-sea hydrothermal vents",
-      "date": "2026-07-18",
-      "difficulty": "hard",
-      "realWorldBasis": "Deep-sea hydrothermal vent chemosynthetic communities",
-      "file": "scenarios/doi-10-1038-s41579-019-0160-2.json"
-    },
-    {
-      "id": "oxygen-minimum-zone",
-      "title": "Oxygen minimum zone",
-      "date": "2026-07-18",
-      "difficulty": "hard",
-      "realWorldBasis": "Eastern tropical Pacific oxygen minimum zone",
-      "file": "scenarios/oxygen-minimum-zone.json"
     },
     {
       "id": "daily-2026-07-18",
@@ -51,12 +19,20 @@
       "file": "scenarios/daily-2026-07-18.json"
     },
     {
-      "id": "doi-10-1126-science-1261359",
-      "title": "Tara Oceans: Temperature Sorts the Epipelagic Microbiome",
+      "id": "deepwater-horizon",
+      "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
-      "difficulty": "normal",
-      "realWorldBasis": "Tara Oceans global metagenomic survey, 243 samples, 68 locations, epi/mesopelagic",
-      "file": "scenarios/doi-10-1126-science-1261359.json"
+      "difficulty": "hard",
+      "realWorldBasis": "Deepwater Horizon oil spill, Gulf of Mexico (2010)",
+      "file": "scenarios/deepwater-horizon.json"
+    },
+    {
+      "id": "doi-10-1038-s41579-019-0160-2",
+      "title": "Deep-sea hydrothermal vents",
+      "date": "2026-07-18",
+      "difficulty": "hard",
+      "realWorldBasis": "Deep-sea hydrothermal vent chemosynthetic communities",
+      "file": "scenarios/doi-10-1038-s41579-019-0160-2.json"
     },
     {
       "id": "doi-10-1111-1462-2920-70369",
@@ -73,6 +49,22 @@
       "difficulty": "normal",
       "realWorldBasis": "Tara Oceans metagenomics: epipelagic vs mesopelagic vertical stratification driven by temperature",
       "file": "scenarios/doi-10-1126-science-1261359.json"
+    },
+    {
+      "id": "lake-erie-bloom",
+      "title": "Lake Erie cyanobacterial bloom",
+      "date": "2026-07-18",
+      "difficulty": "normal",
+      "realWorldBasis": "Lake Erie Microcystis bloom (2011)",
+      "file": "scenarios/lake-erie-bloom.json"
+    },
+    {
+      "id": "oxygen-minimum-zone",
+      "title": "Oxygen minimum zone",
+      "date": "2026-07-18",
+      "difficulty": "hard",
+      "realWorldBasis": "Eastern tropical Pacific oxygen minimum zone",
+      "file": "scenarios/oxygen-minimum-zone.json"
     }
   ]
 }
