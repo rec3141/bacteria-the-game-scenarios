@@ -133,15 +133,18 @@ async function buildPrompt() {
   return { prompt: `${schemaSpec()}\n\nInvent today's scenario: pick a real, vivid microbial-ecology situation (a specific event, habitat, or organism) with strong educational value.${novelty}`, idHint: `daily-${today}` };
 }
 
+// --mock <file> feeds a canned model response instead of calling the API, so the WHOLE pipeline
+// (resolve → prompt → parse → validate → write → index) is exercisable in CI without a paid key.
+const mockFile = arg("mock");
 async function generateOnce(prompt) {
-  const text = await callClaude(prompt);
+  const text = mockFile ? readFileSync(mockFile, "utf8") : await callClaude(prompt);
   const raw = extractJson(text);
   const result = validateScenario(raw, defaults);
   return { raw, result };
 }
 
 (async () => {
-  if (!process.env.ANTHROPIC_API_KEY) { console.error("ANTHROPIC_API_KEY is not set"); process.exit(2); }
+  if (!mockFile && !process.env.ANTHROPIC_API_KEY) { console.error("ANTHROPIC_API_KEY is not set"); process.exit(2); }
   const { prompt, idHint } = await buildPrompt();
   let { raw, result } = await generateOnce(prompt);
   if (!result.ok) {
