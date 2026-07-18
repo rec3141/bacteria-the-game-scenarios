@@ -91,7 +91,9 @@ async function modelScenario(prompt) {
     console.error(`[generate] no scenario tool call. stop_reason=${data.stop_reason}; block types=${(data.content || []).map((b) => b.type).join(",")}`);
     throw new Error("model did not emit a scenario object");
   }
-  return tool.input;   // already a parsed JSON object
+  // The schema/version discriminators are OUR fixed envelope, not the model's to get right — stamp them
+  // so a model that fumbles the boilerplate can't fail an otherwise-good scenario.
+  return { ...tool.input, schema: "bacteria-scenario", version: 1 };
 }
 function extractJson(text) {
   const fence = text.match(/```(?:json)?\s*([\s\S]*?)```/);
