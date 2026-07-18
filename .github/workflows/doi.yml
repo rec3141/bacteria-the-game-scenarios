@@ -1,0 +1,40 @@
+name: DOI scenario
+on:
+  workflow_dispatch:
+    inputs:
+      doi:
+        description: 'DOI to seed a level from (e.g. 10.1126/science.1195979)'
+        required: true
+  repository_dispatch:
+    types: [doi-submission]   # the game backend POSTs {event_type:"doi-submission", client_payload:{doi}}
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Resolve + generate from DOI
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/generate.mjs --mode doi --doi "${{ github.event.inputs.doi || github.event.client_payload.doi }}"
+      - name: Validate
+        run: node scripts/validate-all.mjs
+      - name: Open PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "scenario-bot"
+          git config user.email "scenario-bot@users.noreply.github.com"
+          branch="doi/$(date +%s)"
+          git checkout -b "$branch"
+          git add scenarios/ index.json
+          git commit -m "Scenario seeded from a submitted DOI"
+          git push origin "$branch"
+          gh pr create --base main --head "$branch" \
+            --title "DOI scenario" \
+            --body "Auto-generated from a submitted DOI. Review the lesson, citation, and parameters before merging."
