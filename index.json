@@ -41,6 +41,14 @@
       "difficulty": "hard",
       "realWorldBasis": "Eastern tropical Pacific oxygen minimum zone",
       "file": "scenarios/oxygen-minimum-zone.json"
+    },
+    {
+      "id": "doi-10-1126-science-1261359",
+      "title": "Tara Oceans: Temperature Sorts the Epipelagic Microbiome",
+      "date": "2026-07-18",
+      "difficulty": "normal",
+      "realWorldBasis": "Tara Oceans global metagenomic survey, 243 samples, 68 locations, epi/mesopelagic",
+      "file": "scenarios/doi-10-1126-science-1261359.json"
     }
   ]
 }

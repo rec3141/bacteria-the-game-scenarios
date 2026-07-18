@@ -1,0 +1,270 @@
+{
+  "schema": "bacteria-scenario",
+  "version": 1,
+  "meta": {
+    "title": "Tara Oceans: Temperature Sorts the Epipelagic Microbiome",
+    "date": "2026-07-18",
+    "lesson": "The Tara Oceans expedition sequenced 7.2 terabases of metagenomic DNA from 68 sites worldwide, building a reference catalog of >40 million microbial genes. A key discovery: across the sunlit epipelagic zone, community composition is shaped primarily by temperature rather than nutrients or geography, producing a vertically stratified ocean where warm surface waters host distinct microbial guilds from the cooler mesopelagic below. Remarkably, over 73% of core functional gene abundance is shared with the human gut microbiome, suggesting universal metabolic modules recur across wildly different ecosystems. In this level, warm surface specialists and cold deep-water specialists compete along a thermocline; success depends on matching your enzyme and chemotaxis strategy to your thermal niche.",
+    "citation": "Sunagawa, Coelho, Chaffron (2015). Structure and function of the global ocean microbiome. doi:10.1126/science.1261359",
+    "difficulty": "normal",
+    "realWorldBasis": "Tara Oceans global metagenomic survey, 243 samples, 68 locations, epi/mesopelagic"
+  },
+  "env": {
+    "day.lengthSec": 600,
+    "day.startHour": 9,
+    "day.latitude": 10,
+    "day.dayOfYear": 170,
+    "diel.tempBase": 20,
+    "diel.tempAmp": 6,
+    "diel.tempLag": 2,
+    "diel.foodFloor": 0.18,
+    "diel.grazeNight": 0.5,
+    "diel.twilight": 0.9,
+    "diel.q10": 2.1,
+    "diel.q10RefC": 20,
+    "diel.waterNight.0": 0.02,
+    "diel.waterNight.1": 0.05,
+    "diel.waterNight.2": 0.1,
+    "diel.waterDay.0": 0.35,
+    "diel.waterDay.1": 0.4,
+    "diel.waterDay.2": 0.5,
+    "substrate.count": 55,
+    "substrate.sizeMin": 2,
+    "substrate.sizeMax": 8,
+    "substrate.lifeMin": 30,
+    "substrate.lifeMax": 90,
+    "predator.count": 3,
+    "predator.senseRange": 60,
+    "predator.chaseSpeed": 1.3,
+    "predator.wanderSpeed": 0.6,
+    "predator.mealEnergy": 40,
+    "predator.metabolism": 0.05,
+    "predator.resistStep": 0.1,
+    "predator.resistMax": 0.6,
+    "predator.reproEnergy": 100,
+    "predator.reproCooldown": 20,
+    "phage.greenCount": 4,
+    "phage.goldCount": 2,
+    "phage.hostTolerance": 0.4,
+    "phage.adsorbBase": 0.15,
+    "phage.life.0": 20,
+    "phage.life.1": 40,
+    "phage.latent.0": 8,
+    "phage.latent.1": 15,
+    "phage.burst.0": 6,
+    "phage.burst.1": 12,
+    "cell.startEnergy": 55,
+    "cell.divideThreshold": 100,
+    "enzyme.life": 25,
+    "enzyme.maxRadius": 18,
+    "toxin.life": 20,
+    "toxin.maxRadius": 15,
+    "eps.lifePerLevel": 10,
+    "eps.radius": 12
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid particles",
+      "enzymeLabel": "Lipase",
+      "color": "#e8b84b"
+    },
+    {
+      "index": 1,
+      "label": "Protein aggregates",
+      "enzymeLabel": "Protease",
+      "color": "#c1554d"
+    },
+    {
+      "index": 2,
+      "label": "Polysaccharide flocs",
+      "enzymeLabel": "Glycosidase",
+      "color": "#4ba3e8"
+    }
+  ],
+  "particles": {
+    "surfacePhytoDetritus": {
+      "label": "Surface phytoplankton detritus",
+      "mix": [
+        0.5,
+        0.3,
+        0.2
+      ],
+      "rMin": 2,
+      "rMax": 5,
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 6
+    },
+    "marineSnow": {
+      "label": "Sinking marine snow",
+      "mix": [
+        0.2,
+        0.3,
+        0.5
+      ],
+      "rMin": 4,
+      "rMax": 8,
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 4
+    },
+    "protistCellDebris": {
+      "label": "Picoeukaryote cell debris",
+      "mix": [
+        0.3,
+        0.5,
+        0.2
+      ],
+      "rMin": 2,
+      "rMax": 4,
+      "shape": "ellipse",
+      "squash": 0.6,
+      "weight": 3
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase secretion",
+      "color": "#e8b84b",
+      "weight": 5
+    },
+    "enzyme1": {
+      "label": "Protease secretion",
+      "color": "#c1554d",
+      "weight": 5
+    },
+    "enzyme2": {
+      "label": "Glycosidase secretion",
+      "color": "#4ba3e8",
+      "weight": 5
+    },
+    "chemotaxis": {
+      "label": "Thermal gradient sensing",
+      "color": "#7fd0e0",
+      "weight": 6
+    },
+    "antibiotic": {
+      "label": "Bacteriocin release",
+      "color": "#8a4fbf",
+      "weight": 3
+    },
+    "eps": {
+      "label": "Mucilage sheath",
+      "color": "#9fdb8f",
+      "weight": 4
+    },
+    "crispr": {
+      "label": "CRISPR phage defense",
+      "color": "#d98fd9",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Pilus twitching motility",
+      "color": "#c9c94a",
+      "weight": 3
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "pelagibacter_epi",
+        "label": "Pelagibacter (SAR11) — warm epipelagic specialist",
+        "color": "#5bc0eb",
+        "genome": {
+          "enzLvl": [
+            4,
+            3,
+            2
+          ],
+          "chemoLevel": 3,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": 1
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "prochlorococcus_surface",
+        "label": "Prochlorococcus — surface photic zone",
+        "color": "#3ddc84",
+        "genome": {
+          "enzLvl": [
+            3,
+            2,
+            3
+          ],
+          "chemoLevel": 4,
+          "antibiotic": 1,
+          "eps": 2,
+          "crispr": false,
+          "twitching": 0
+        },
+        "immigrateWeight": 5
+      },
+      {
+        "id": "meso_gammaproteobacterium",
+        "label": "Mesopelagic gammaproteobacterium — cold deep specialist",
+        "color": "#4a5fc1",
+        "genome": {
+          "enzLvl": [
+            2,
+            4,
+            4
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 2,
+          "eps": 3,
+          "crispr": true,
+          "twitching": 0
+        },
+        "immigrateWeight": 4
+      }
+    ]
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 26,
+        "salinity": 36,
+        "light": 1,
+        "nutrient": 0.15
+      },
+      {
+        "depth": 50,
+        "tempC": 22,
+        "salinity": 36,
+        "light": 0.6,
+        "nutrient": 0.25
+      },
+      {
+        "depth": 100,
+        "tempC": 15,
+        "salinity": 35.5,
+        "light": 0.15,
+        "nutrient": 0.45
+      },
+      {
+        "depth": 200,
+        "tempC": 9,
+        "salinity": 35,
+        "light": 0.02,
+        "nutrient": 0.65
+      },
+      {
+        "depth": 400,
+        "tempC": 6,
+        "salinity": 34.8,
+        "light": 0,
+        "nutrient": 0.8
+      }
+    ],
+    "thermocline": {
+      "depth": 100,
+      "sharpness": 0.7
+    }
+  }
+}
