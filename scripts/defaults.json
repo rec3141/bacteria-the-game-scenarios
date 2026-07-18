@@ -1,0 +1,9 @@
+{
+  "day": { "lengthSec": 240, "startHour": 0, "latitude": 45, "dayOfYear": 172 },
+  "diel": { "tempBase": 20, "tempAmp": 6, "tempLag": 0.15, "foodFloor": 0.3, "grazeNight": 1, "twilight": 0.1, "q10": 2, "q10RefC": 20, "waterNight": [5, 20, 30], "waterDay": [40, 120, 150] },
+  "substrate": { "count": 80, "sizeMin": 20, "sizeMax": 60, "lifeMin": 30, "lifeMax": 90 },
+  "predator": { "count": 4, "senseRange": 170, "chaseSpeed": 42.5, "wanderSpeed": 25, "mealEnergy": 58, "metabolism": 10, "resistStep": 0.12, "resistMax": 0.85, "reproEnergy": 320, "reproCooldown": 11, "safetyMax": 300 },
+  "phage": { "greenCount": 18, "goldCount": 4, "hostTolerance": 2, "adsorbBase": 0.3, "maxCount": 2500, "life": [16, 24], "latent": [9, 15], "burst": [4, 8] },
+  "cell": { "startEnergy": 100, "divideThreshold": 200, "maxEnergy": 260 },
+  "enzyme": { "life": 6, "maxRadius": 40 }, "toxin": { "life": 4.5, "maxRadius": 40 }, "eps": { "lifePerLevel": 4, "radius": 24 }
+}
