@@ -6,27 +6,49 @@ on:
         description: 'DOI to seed a level from (e.g. 10.1126/science.1195979)'
         required: true
   repository_dispatch:
-    types: [doi-submission]   # the game backend POSTs {event_type:"doi-submission", client_payload:{doi}}
+    types: [doi-submission]     # a backend may POST {event_type:"doi-submission", client_payload:{doi}}
+  issues:
+    types: [opened]            # or a player opens an issue whose body contains "DOI: 10...."
 permissions:
   contents: write
   pull-requests: write
+  issues: write
 jobs:
   generate:
+    # only run the issue path when the body actually carries a DOI marker
+    if: github.event_name != 'issues' || contains(github.event.issue.body, 'DOI:')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
+      - name: Extract DOI
+        id: doi
+        env:
+          # via env, never inline ${{ }} in run: — an issue body is untrusted and would be a shell-injection vector
+          EVENT: ${{ github.event_name }}
+          INPUT_DOI: ${{ github.event.inputs.doi }}
+          PAYLOAD_DOI: ${{ github.event.client_payload.doi }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: |
+          case "$EVENT" in
+            workflow_dispatch)    doi="$INPUT_DOI" ;;
+            repository_dispatch)  doi="$PAYLOAD_DOI" ;;
+            issues)               doi=$(printf '%s' "$ISSUE_BODY" | grep -oiE '10\.[0-9]{4,9}/[^[:space:]]+' | head -1) ;;
+          esac
+          if [ -z "$doi" ]; then echo "no DOI found"; exit 1; fi
+          echo "value=$doi" >> "$GITHUB_OUTPUT"
       - name: Resolve + generate from DOI
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: node scripts/generate.mjs --mode doi --doi "${{ github.event.inputs.doi || github.event.client_payload.doi }}"
+        run: node scripts/generate.mjs --mode doi --doi "${{ steps.doi.outputs.value }}"
       - name: Validate
         run: node scripts/validate-all.mjs
       - name: Open PR
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
         run: |
           git config user.name "scenario-bot"
           git config user.email "scenario-bot@users.noreply.github.com"
@@ -35,6 +57,7 @@ jobs:
           git add scenarios/ index.json
           git commit -m "Scenario seeded from a submitted DOI"
           git push origin "$branch"
-          gh pr create --base main --head "$branch" \
+          url=$(gh pr create --base main --head "$branch" \
             --title "DOI scenario" \
-            --body "Auto-generated from a submitted DOI. Review the lesson, citation, and parameters before merging."
+            --body "Auto-generated from a submitted DOI. Review the lesson, citation, and parameters before merging.")
+          if [ -n "$ISSUE_NUMBER" ]; then gh issue comment "$ISSUE_NUMBER" --body "Thanks! A level seeded from your paper is proposed here: $url"; fi
