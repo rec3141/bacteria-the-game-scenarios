@@ -51,6 +51,14 @@
       "file": "scenarios/doi-10-1126-science-1261359.json"
     },
     {
+      "id": "hydrothermal-vent",
+      "title": "Hydrothermal vent: life without sunlight",
+      "date": "2026-07-18",
+      "difficulty": "hard",
+      "realWorldBasis": "Deep-sea hydrothermal vent chemosynthetic community",
+      "file": "scenarios/hydrothermal-vent.json"
+    },
+    {
       "id": "lake-erie-bloom",
       "title": "Lake Erie cyanobacterial bloom",
       "date": "2026-07-18",
