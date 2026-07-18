@@ -1,0 +1,28 @@
+{
+  "schema": "bacteria-scenario",
+  "version": 1,
+  "meta": {
+    "title": "Arctic under-ice bloom",
+    "date": "2026-07-18",
+    "lesson": "Each spring, as Arctic sea ice thins and melt ponds form, sunlight finally reaches the water below and triggers a massive bloom of ice-associated diatoms in the thin sunlit layer just under the ice. Below that photic zone the water is cold, dark, and nutrient-rich. Your lineage lives in this stratified column: stay near the bright surface to feed while the bloom lasts, because the deep is a cold, lightless refuge with little to eat.",
+    "citation": "Arrigo et al. (2012), Science 336:1408. doi:10.1126/science.1215065",
+    "difficulty": "normal",
+    "realWorldBasis": "Arctic spring under-ice phytoplankton bloom"
+  },
+  "env": {
+    "day": { "startHour": 10, "latitude": 78, "dayOfYear": 172 },
+    "diel": { "tempBase": 1, "tempAmp": 1, "waterNight": [6, 12, 20], "waterDay": [70, 150, 190] }
+  },
+  "resources": [
+    { "index": 0, "label": "diatom lipid", "enzymeLabel": "lipase", "color": "#bfe08a" }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      { "depth": 0, "tempC": 2, "salinity": 32, "light": 1.0, "nutrient": 0.3 },
+      { "depth": 8, "tempC": 1, "salinity": 33, "light": 0.35, "nutrient": 0.7 },
+      { "depth": 40, "tempC": -1, "salinity": 35, "light": 0.02, "nutrient": 1.0 }
+    ],
+    "thermocline": { "depth": 8, "sharpness": 0.8 }
+  }
+}
