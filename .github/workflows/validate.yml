@@ -2,9 +2,9 @@ name: Validate scenarios
 on:
   workflow_dispatch:
   push:
-    paths: ['scenarios/**', 'scripts/**']
+    paths: ['scenarios/**', 'scripts/**', 'index.json']
   pull_request:
-    paths: ['scenarios/**', 'scripts/**']
+    paths: ['scenarios/**', 'scripts/**', 'index.json']
 jobs:
   validate:
     runs-on: ubuntu-latest
@@ -14,3 +14,14 @@ jobs:
         with:
           node-version: '20'
       - run: node scripts/validate-all.mjs
+  pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Smoke-test the generation pipeline (mock LLM, no API key)
+        run: |
+          node scripts/generate.mjs --mode daily --mock fixtures/mock-response.txt
+          node scripts/validate-all.mjs
