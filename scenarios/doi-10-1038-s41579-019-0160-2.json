@@ -1,0 +1,135 @@
+{
+  "schema": "bacteria-scenario",
+  "version": 1,
+  "meta": {
+    "title": "Deep-sea hydrothermal vents",
+    "date": "2026-07-18",
+    "lesson": "Kilometres below the sunlit ocean, hydrothermal vents pump out superheated fluid loaded with hydrogen sulfide, hydrogen, and methane. No sunlight reaches this depth, so the base of the food web is not photosynthesis but chemosynthesis: chemolithoautotrophic bacteria such as Sulfurovum and Beggiatoa oxidize the reduced chemicals in the plume to fix carbon, building thick microbial mats around the vents. Follow the chemical gradient down toward the hot vent fluid — your enzyme oxidizes sulfide instead of digesting food, and biofilm anchors you in the plume where the energy is.",
+    "citation": "Dick (2019). The microbiomes of deep-sea hydrothermal vents: distributed globally, shaped locally. Nat Rev Microbiol. doi:10.1038/s41579-019-0160-2",
+    "difficulty": "hard",
+    "realWorldBasis": "Deep-sea hydrothermal vent chemosynthetic communities"
+  },
+  "env": {
+    "day": {
+      "startHour": 0,
+      "latitude": 0
+    },
+    "diel": {
+      "tempBase": 6,
+      "tempAmp": 0.5,
+      "foodFloor": 0.9,
+      "waterNight": [
+        4,
+        6,
+        10
+      ],
+      "waterDay": [
+        8,
+        12,
+        18
+      ]
+    },
+    "substrate": {
+      "count": 55
+    },
+    "predator": {
+      "count": 3
+    }
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "reduced sulfur (H2S)",
+      "enzymeLabel": "sulfide:quinone oxidoreductase",
+      "color": "#d9c24a"
+    }
+  ],
+  "actions": {
+    "enzyme0": {
+      "label": "sulfide oxidation",
+      "color": "#efd98a",
+      "weight": 3
+    },
+    "chemotaxis": {
+      "label": "plume chemotaxis",
+      "color": "#ffd24a",
+      "weight": 2
+    },
+    "eps": {
+      "label": "mat-forming biofilm",
+      "color": "#8ad0c0",
+      "weight": 1.6
+    },
+    "antibiotic": {
+      "label": "antibiosis",
+      "color": "#ff5a5a",
+      "weight": 0.5
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "sulfurovum",
+        "label": "Sulfurovum-like sulfur oxidizer",
+        "color": "#d9c24a",
+        "genome": {
+          "enzLvl": [
+            2,
+            0,
+            1
+          ],
+          "chemoLevel": 2,
+          "eps": 1
+        },
+        "immigrateWeight": 1.6,
+        "bloom": false
+      },
+      {
+        "id": "beggiatoa",
+        "label": "Beggiatoa-like mat former",
+        "color": "#e6e0b0",
+        "genome": {
+          "enzLvl": [
+            1,
+            0,
+            1
+          ],
+          "chemoLevel": 1,
+          "eps": 3
+        },
+        "immigrateWeight": 1,
+        "bloom": true
+      }
+    ]
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 3,
+        "salinity": 35,
+        "light": 0.03,
+        "nutrient": 0.2
+      },
+      {
+        "depth": 20,
+        "tempC": 12,
+        "salinity": 34,
+        "light": 0.01,
+        "nutrient": 0.7
+      },
+      {
+        "depth": 40,
+        "tempC": 45,
+        "salinity": 33,
+        "light": 0,
+        "nutrient": 1
+      }
+    ],
+    "thermocline": {
+      "depth": 30,
+      "sharpness": 0.9
+    }
+  }
+}
