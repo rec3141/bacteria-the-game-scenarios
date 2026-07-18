@@ -1,5 +1,6 @@
 name: Validate scenarios
 on:
+  workflow_dispatch:
   push:
     paths: ['scenarios/**', 'scripts/**']
   pull_request:
