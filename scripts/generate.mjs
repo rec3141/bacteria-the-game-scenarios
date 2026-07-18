@@ -69,22 +69,29 @@ distinct feel via env + a re-skinned enzyme; a mini-lesson that teaches the scie
 plausible. Prefer real organisms and real events. The date field must be exactly "${today}".`;
 }
 
-async function callClaude(prompt) {
+// Force the model to return a JSON object by making it call a tool (with tool_choice). This guarantees
+// structured output regardless of how chatty the model would otherwise be — no prose-parsing, no prefill
+// (which claude-sonnet-5 rejects). validateScenario does the real schema enforcement afterwards.
+async function modelScenario(prompt) {
   const res = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
     headers: { "x-api-key": process.env.ANTHROPIC_API_KEY, "anthropic-version": "2023-06-01", "content-type": "application/json" },
     body: JSON.stringify({
       model: MODEL, max_tokens: 8000,
-      system: "You generate scenarios for a marine-microbiology game. Output ONE JSON object and nothing else — no prose, no explanation, no markdown code fences.",
-      // Prefill the assistant turn with an opening brace so the model is forced to emit JSON, not prose.
-      messages: [{ role: "user", content: prompt }, { role: "assistant", content: "{" }],
+      system: "You generate scenarios for a marine-microbiology game. Return the finished scenario by calling the emit_scenario tool with the JSON object as its input.",
+      tools: [{ name: "emit_scenario", description: "Emit the finished scenario as a single JSON object matching the schema in the prompt.", input_schema: { type: "object", additionalProperties: true } }],
+      tool_choice: { type: "tool", name: "emit_scenario" },
+      messages: [{ role: "user", content: prompt }],
     }),
   });
   if (!res.ok) throw new Error(`Anthropic API ${res.status}: ${(await res.text()).slice(0, 500)}`);
   const data = await res.json();
-  const text = (data.content || []).filter((b) => b.type === "text").map((b) => b.text).join("");
-  if (!text.trim()) console.error(`[generate] model returned no text. stop_reason=${data.stop_reason}; keys=${Object.keys(data).join(",")}`);
-  return "{" + text;   // we prefilled the "{", which the API does not echo back
+  const tool = (data.content || []).find((b) => b.type === "tool_use");
+  if (!tool || !tool.input || typeof tool.input !== "object") {
+    console.error(`[generate] no scenario tool call. stop_reason=${data.stop_reason}; block types=${(data.content || []).map((b) => b.type).join(",")}`);
+    throw new Error("model did not emit a scenario object");
+  }
+  return tool.input;   // already a parsed JSON object
 }
 function extractJson(text) {
   const fence = text.match(/```(?:json)?\s*([\s\S]*?)```/);
@@ -144,13 +151,8 @@ async function buildPrompt() {
 // (resolve → prompt → parse → validate → write → index) is exercisable in CI without a paid key.
 const mockFile = arg("mock");
 async function generateOnce(prompt) {
-  const text = mockFile ? readFileSync(mockFile, "utf8") : await callClaude(prompt);
-  let raw;
-  try { raw = extractJson(text); }
-  catch (e) {
-    console.error(`[generate] could not parse model output: ${e.message}\n--- raw model output (first 1200 chars) ---\n${text.slice(0, 1200)}\n--- end ---`);
-    throw e;
-  }
+  // mock mode reads a canned text reply (for hermetic CI); live mode gets a parsed object via tool use.
+  const raw = mockFile ? extractJson(readFileSync(mockFile, "utf8")) : await modelScenario(prompt);
   const result = validateScenario(raw, defaults);
   return { raw, result };
 }
