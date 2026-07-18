@@ -1,0 +1,268 @@
+{
+  "schema": "bacteria-scenario",
+  "version": 1,
+  "meta": {
+    "title": "Sargasso Sea: Prochlorococcus at the Edge of Starvation",
+    "date": "2026-07-18",
+    "lesson": "In the oligotrophic Sargasso Sea, the tiny cyanobacterium Prochlorococcus dominates by minimizing cell size and genome content, scavenging phosphorus and nitrogen at vanishingly low concentrations. Its ecotypes partition the water column: high-light strains thrive near the surface while low-light strains persist deeper, tracking a steep light gradient. Because dissolved organic carbon and nutrients are scarce, cells invest little in exoenzymes and instead rely on high-affinity uptake and tight cooperation with heterotrophic bacteria that remineralize nutrients. Viral lysis by cyanophages recycles scarce nutrients back into the community, a process central to the 'leaky pipe' of the microbial loop. This scenario asks players to balance minimal enzyme investment against chemotaxis toward faint nutrient patches, while surviving phage pressure in one of Earth's most nutrient-poor marine ecosystems.",
+    "citation": "Partensky, Hess & Vaulot (1999) Microbiol Mol Biol Rev; Rocap et al. (2003) Nature (Prochlorococcus ecotypes)",
+    "difficulty": "hard",
+    "realWorldBasis": "Sargasso Sea oligotrophic gyre, Prochlorococcus ecotype stratification (BATS site)"
+  },
+  "env": {
+    "day.lengthSec": 900,
+    "day.startHour": 7,
+    "day.latitude": 31.7,
+    "day.dayOfYear": 199,
+    "diel.tempBase": 26,
+    "diel.tempAmp": 1.5,
+    "diel.tempLag": 2,
+    "diel.foodFloor": 0.05,
+    "diel.grazeNight": 0.3,
+    "diel.twilight": 0.6,
+    "diel.q10": 2.1,
+    "diel.q10RefC": 20,
+    "diel.waterNight.0": 0.02,
+    "diel.waterNight.1": 0.015,
+    "diel.waterNight.2": 0.01,
+    "diel.waterDay.0": 0.03,
+    "diel.waterDay.1": 0.02,
+    "diel.waterDay.2": 0.015,
+    "substrate.count": 40,
+    "substrate.sizeMin": 0.4,
+    "substrate.sizeMax": 1.2,
+    "substrate.lifeMin": 20,
+    "substrate.lifeMax": 60,
+    "predator.count": 2,
+    "predator.senseRange": 5,
+    "predator.chaseSpeed": 1.2,
+    "predator.wanderSpeed": 0.5,
+    "predator.mealEnergy": 25,
+    "predator.metabolism": 0.4,
+    "predator.resistStep": 0.1,
+    "predator.resistMax": 0.6,
+    "predator.reproEnergy": 60,
+    "predator.reproCooldown": 40,
+    "phage.greenCount": 6,
+    "phage.goldCount": 3,
+    "phage.hostTolerance": 0.3,
+    "phage.adsorbBase": 0.25,
+    "phage.life.0": 15,
+    "phage.life.1": 30,
+    "phage.latent.0": 8,
+    "phage.latent.1": 16,
+    "phage.burst.0": 10,
+    "phage.burst.1": 25,
+    "cell.startEnergy": 30,
+    "cell.divideThreshold": 55,
+    "enzyme.life": 12,
+    "enzyme.maxRadius": 2.5,
+    "toxin.life": 10,
+    "toxin.maxRadius": 1.5,
+    "eps.lifePerLevel": 6,
+    "eps.radius": 1.8
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid micro-patch",
+      "enzymeLabel": "Lipase (scarce)",
+      "color": "#e8c547"
+    },
+    {
+      "index": 1,
+      "label": "Amino-N trace",
+      "enzymeLabel": "Peptidase (high-affinity)",
+      "color": "#6fa8dc"
+    },
+    {
+      "index": 2,
+      "label": "Glycolate exudate",
+      "enzymeLabel": "Glycolate oxidase",
+      "color": "#93c47d"
+    }
+  ],
+  "particles": {
+    "dom_flecks": {
+      "label": "Dissolved organic matter fleck",
+      "mix": [
+        0.3,
+        0.4,
+        0.3
+      ],
+      "rMin": 0.15,
+      "rMax": 0.4,
+      "shape": "shard",
+      "weight": 8
+    },
+    "phyto_debris": {
+      "label": "Phytoplankton cell debris",
+      "mix": [
+        0.5,
+        0.3,
+        0.2
+      ],
+      "rMin": 0.3,
+      "rMax": 0.7,
+      "shape": "ellipse",
+      "squash": 0.7,
+      "weight": 4
+    },
+    "marine_snow_trace": {
+      "label": "Faint marine snow",
+      "mix": [
+        0.2,
+        0.3,
+        0.5
+      ],
+      "rMin": 0.5,
+      "rMax": 1.1,
+      "shape": "aggregate",
+      "weight": 2
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Secrete lipase (costly)",
+      "color": "#e8c547",
+      "weight": 2
+    },
+    "enzyme1": {
+      "label": "High-affinity peptidase",
+      "color": "#6fa8dc",
+      "weight": 6
+    },
+    "enzyme2": {
+      "label": "Glycolate oxidase",
+      "color": "#93c47d",
+      "weight": 3
+    },
+    "chemotaxis": {
+      "label": "Nutrient-gradient tracking",
+      "color": "#4fc3f7",
+      "weight": 9
+    },
+    "antibiotic": {
+      "label": "Bacteriocin release",
+      "color": "#c27ba0",
+      "weight": 1
+    },
+    "eps": {
+      "label": "Minimal EPS sheath",
+      "color": "#a9a9a9",
+      "weight": 3
+    },
+    "crispr": {
+      "label": "CRISPR phage defense",
+      "color": "#ff9966",
+      "weight": 5
+    },
+    "twitching": {
+      "label": "Twitching motility",
+      "color": "#f6b26b",
+      "weight": 2
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "prochlorococcus_hl",
+        "label": "Prochlorococcus (high-light ecotype)",
+        "color": "#7fffd4",
+        "genome": {
+          "enzLvl": [
+            1,
+            4,
+            2
+          ],
+          "chemoLevel": 5,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": true,
+          "twitching": false
+        },
+        "immigrateWeight": 8
+      },
+      {
+        "id": "prochlorococcus_ll",
+        "label": "Prochlorococcus (low-light ecotype)",
+        "color": "#4682b4",
+        "genome": {
+          "enzLvl": [
+            1,
+            5,
+            2
+          ],
+          "chemoLevel": 6,
+          "antibiotic": 0,
+          "eps": 2,
+          "crispr": true,
+          "twitching": false
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "heterotroph_scavenger",
+        "label": "Heterotrophic scavenger (Pelagibacter-like)",
+        "color": "#dda0dd",
+        "genome": {
+          "enzLvl": [
+            2,
+            6,
+            3
+          ],
+          "chemoLevel": 4,
+          "antibiotic": 0,
+          "eps": 0,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 4
+      }
+    ]
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 27,
+        "salinity": 36.5,
+        "light": 1,
+        "nutrient": 0.05
+      },
+      {
+        "depth": 20,
+        "tempC": 26,
+        "salinity": 36.6,
+        "light": 0.6,
+        "nutrient": 0.08
+      },
+      {
+        "depth": 60,
+        "tempC": 22,
+        "salinity": 36.7,
+        "light": 0.25,
+        "nutrient": 0.15
+      },
+      {
+        "depth": 100,
+        "tempC": 18,
+        "salinity": 36.5,
+        "light": 0.08,
+        "nutrient": 0.3
+      },
+      {
+        "depth": 150,
+        "tempC": 14,
+        "salinity": 36.2,
+        "light": 0.01,
+        "nutrient": 0.45
+      }
+    ],
+    "thermocline": {
+      "depth": 80,
+      "sharpness": 0.6
+    }
+  }
+}
