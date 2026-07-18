@@ -43,20 +43,20 @@
       "file": "scenarios/oxygen-minimum-zone.json"
     },
     {
-      "id": "doi-10-1126-science-1261359",
-      "title": "Tara Oceans: Temperature Sorts the Epipelagic Microbiome",
-      "date": "2026-07-18",
-      "difficulty": "normal",
-      "realWorldBasis": "Tara Oceans global metagenomic survey, 243 samples, 68 locations, epi/mesopelagic",
-      "file": "scenarios/doi-10-1126-science-1261359.json"
-    },
-    {
       "id": "doi-10-1111-1462-2920-70369",
       "title": "Nitrifiers of the Streambed: AOB vs AOA in an Agricultural Creek",
       "date": "2026-07-18",
       "difficulty": "hard",
       "realWorldBasis": "First-order agricultural stream, southern Germany; AOB vs AOA nitrification kinetics",
       "file": "scenarios/doi-10-1111-1462-2920-70369.json"
+    },
+    {
+      "id": "doi-10-1126-science-1261359",
+      "title": "Ocean Microbiome: Vertical Stratification Epi to Mesopelagic",
+      "date": "2026-07-18",
+      "difficulty": "normal",
+      "realWorldBasis": "Tara Oceans metagenomics: epipelagic vs mesopelagic vertical stratification driven by temperature",
+      "file": "scenarios/doi-10-1126-science-1261359.json"
     }
   ]
 }
