@@ -43,6 +43,12 @@
       "file": "scenarios/oxygen-minimum-zone.json"
     },
     {
+      "id": "daily-2026-07-18",
+      "title": "Sargasso Sea: Prochlorococcus at the Edge of Starvation",
+      "date": "2026-07-18",
+      "difficulty": "hard",
+      "realWorldBasis": "Sargasso Sea oligotrophic gyre, Prochlorococcus ecotype stratification (BATS site)",
+      "file": "scenarios/daily-2026-07-18.json"
       "id": "doi-10-1126-science-1261359",
       "title": "Tara Oceans: Temperature Sorts the Epipelagic Microbiome",
       "date": "2026-07-18",
