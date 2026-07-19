@@ -19,6 +19,14 @@
       "file": "scenarios/daily-2026-07-18.json"
     },
     {
+      "id": "daily-2026-07-19",
+      "title": "Winogradsky Column: Sulfur Cycling in a Marsh Sediment Jar",
+      "date": "2026-07-19",
+      "difficulty": "hard",
+      "realWorldBasis": "Winogradsky column microcosm; purple/green sulfur bacteria in marsh sediment",
+      "file": "scenarios/daily-2026-07-19.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
