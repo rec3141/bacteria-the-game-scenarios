@@ -1,0 +1,215 @@
+{
+  "schema": "bacteria-scenario",
+  "version": 1,
+  "meta": {
+    "title": "Winogradsky Column: Sulfur Cycling in Estuary Mud",
+    "date": "2026-07-20",
+    "lesson": "A Winogradsky column recreates a stratified sediment ecosystem in a jar: light and oxygen penetrate from the top, while organic matter and sulfide accumulate near the anoxic bottom. Purple and green sulfur bacteria live at the oxic/anoxic interface, oxidizing hydrogen sulfide instead of using enzymes to break down food particles. This scenario asks you to keep a chemolithotrophic founder alive within a narrow sulfide-rich band, illustrating how redox gradients create sharply layered niches in muddy estuary sediments.",
+    "citation": "Winogradsky, S. (1887) original column experiments; modern estuarine sulfur-cycling studies (e.g. Wadden Sea, San Francisco Bay mudflats).",
+    "difficulty": "hard",
+    "realWorldBasis": "Winogradsky column / estuarine sulfureta redox stratification"
+  },
+  "env": {
+    "day.lengthSec": 260,
+    "day.startHour": 7,
+    "day.latitude": 40,
+    "day.dayOfYear": 200,
+    "diel.tempBase": 19,
+    "diel.tempAmp": 4,
+    "diel.tempLag": 2,
+    "diel.foodFloor": 0.25,
+    "diel.grazeNight": 0.5,
+    "diel.twilight": 0.15,
+    "diel.q10": 2.1,
+    "diel.q10RefC": 20,
+    "substrate.count": 95,
+    "substrate.sizeMin": 3,
+    "substrate.sizeMax": 9,
+    "substrate.lifeMin": 40,
+    "substrate.lifeMax": 90,
+    "predator.count": 3,
+    "predator.senseRange": 60,
+    "predator.chaseSpeed": 1.1,
+    "predator.wanderSpeed": 0.6,
+    "predator.mealEnergy": 30,
+    "predator.metabolism": 0.05,
+    "phage.greenCount": 14,
+    "phage.goldCount": 3,
+    "cell.startEnergy": 100,
+    "cell.divideThreshold": 200
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid detritus",
+      "enzymeLabel": "Lipase",
+      "color": "#d9a441"
+    },
+    {
+      "index": 1,
+      "label": "Protein detritus",
+      "enzymeLabel": "Protease",
+      "color": "#b5654a"
+    },
+    {
+      "index": 2,
+      "label": "Carbohydrate detritus",
+      "enzymeLabel": "Amylase",
+      "color": "#8fae52"
+    }
+  ],
+  "particles": {
+    "muddetritus": {
+      "label": "Sediment organic floc",
+      "mix": [
+        0.3,
+        0.3,
+        0.4
+      ],
+      "rMin": 3,
+      "rMax": 8,
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 6
+    },
+    "surfacealgae": {
+      "label": "Settling algal debris",
+      "mix": [
+        0.2,
+        0.2,
+        0.6
+      ],
+      "rMin": 2,
+      "rMax": 6,
+      "shape": "shard",
+      "squash": 0.8,
+      "weight": 3
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase secretion",
+      "color": "#d9a441",
+      "weight": 3
+    },
+    "enzyme1": {
+      "label": "Protease secretion",
+      "color": "#b5654a",
+      "weight": 3
+    },
+    "enzyme2": {
+      "label": "Amylase secretion",
+      "color": "#8fae52",
+      "weight": 4
+    },
+    "chemotaxis": {
+      "label": "Redox-gradient seeking",
+      "color": "#7a5cff",
+      "weight": 6
+    },
+    "antibiotic": {
+      "label": "Bacteriocin release",
+      "color": "#c94f4f",
+      "weight": 2
+    },
+    "eps": {
+      "label": "Sulfide-protective slime",
+      "color": "#4fa8c9",
+      "weight": 5
+    },
+    "crispr": {
+      "label": "Phage immunity",
+      "color": "#999999",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Vertical migration twitch",
+      "color": "#66cc99",
+      "weight": 4
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "purple_sulfur",
+        "label": "Purple Sulfur Bacterium (Chromatium-like)",
+        "color": "#8a3ffc",
+        "genome": {
+          "enzLvl": [
+            0,
+            0,
+            1
+          ],
+          "chemoLevel": 3,
+          "antibiotic": 0,
+          "eps": 2,
+          "crispr": false,
+          "twitching": true,
+          "chemolithotroph": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "heterotroph_generalist",
+        "label": "Estuarine Heterotroph",
+        "color": "#66aa66",
+        "genome": {
+          "enzLvl": [
+            1,
+            1,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 4
+      }
+    ]
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 21,
+        "salinity": 18,
+        "light": 0.9,
+        "nutrient": 0.3
+      },
+      {
+        "depth": 0.3,
+        "tempC": 20,
+        "salinity": 20,
+        "light": 0.4,
+        "nutrient": 0.5
+      },
+      {
+        "depth": 0.6,
+        "tempC": 19,
+        "salinity": 22,
+        "light": 0.05,
+        "nutrient": 0.7
+      },
+      {
+        "depth": 1,
+        "tempC": 18,
+        "salinity": 24,
+        "light": 0,
+        "nutrient": 0.9
+      }
+    ],
+    "thermocline": {
+      "depth": 0.55,
+      "sharpness": 0.6
+    },
+    "chemical": {
+      "peakDepth": 0.7,
+      "spread": 0.15,
+      "strength": 0.85,
+      "color": "#ffcc66"
+    }
+  }
+}

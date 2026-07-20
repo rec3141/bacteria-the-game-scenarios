@@ -19,6 +19,14 @@
       "file": "scenarios/daily-2026-07-18.json"
     },
     {
+      "id": "daily-2026-07-20",
+      "title": "Winogradsky Column: Sulfur Cycling in Estuary Mud",
+      "date": "2026-07-20",
+      "difficulty": "hard",
+      "realWorldBasis": "Winogradsky column / estuarine sulfureta redox stratification",
+      "file": "scenarios/daily-2026-07-20.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
