@@ -19,6 +19,14 @@
       "file": "scenarios/daily-2026-07-18.json"
     },
     {
+      "id": "daily-2026-07-21",
+      "title": "Coral Bleaching: Vibrio Invasion of the Mucus Layer",
+      "date": "2026-07-21",
+      "difficulty": "normal",
+      "realWorldBasis": "Great Barrier Reef marine heatwave bleaching event, shallow reef flat",
+      "file": "scenarios/daily-2026-07-21.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
