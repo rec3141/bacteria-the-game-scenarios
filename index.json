@@ -19,6 +19,14 @@
       "file": "scenarios/daily-2026-07-18.json"
     },
     {
+      "id": "daily-2026-07-22",
+      "title": "Cholera in the Estuary: Vibrio and the Chitin Shell Bloom",
+      "date": "2026-07-22",
+      "difficulty": "normal",
+      "realWorldBasis": "Vibrio cholerae chitin-zooplankton association, Bay of Bengal estuaries",
+      "file": "scenarios/daily-2026-07-22.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
