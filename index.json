@@ -19,6 +19,38 @@
       "file": "scenarios/daily-2026-07-18.json"
     },
     {
+      "id": "daily-2026-07-19",
+      "title": "Winogradsky Column: Sulfur Cycling in a Marsh Sediment Jar",
+      "date": "2026-07-19",
+      "difficulty": "hard",
+      "realWorldBasis": "Winogradsky column microcosm; purple/green sulfur bacteria in marsh sediment",
+      "file": "scenarios/daily-2026-07-19.json"
+    },
+    {
+      "id": "daily-2026-07-20",
+      "title": "Winogradsky Column: Sulfur Cycling in Estuary Mud",
+      "date": "2026-07-20",
+      "difficulty": "hard",
+      "realWorldBasis": "Winogradsky column / estuarine sulfureta redox stratification",
+      "file": "scenarios/daily-2026-07-20.json"
+    },
+    {
+      "id": "daily-2026-07-21",
+      "title": "Coral Bleaching: Vibrio Invasion of the Mucus Layer",
+      "date": "2026-07-21",
+      "difficulty": "normal",
+      "realWorldBasis": "Great Barrier Reef marine heatwave bleaching event, shallow reef flat",
+      "file": "scenarios/daily-2026-07-21.json"
+    },
+    {
+      "id": "daily-2026-07-22",
+      "title": "Cholera in the Estuary: Vibrio and the Chitin Shell Bloom",
+      "date": "2026-07-22",
+      "difficulty": "normal",
+      "realWorldBasis": "Vibrio cholerae chitin-zooplankton association, Bay of Bengal estuaries",
+      "file": "scenarios/daily-2026-07-22.json"
+    },
+    {
       "id": "daily-2026-07-23",
       "title": "Coral Bleaching: Vibrio Takes the Reef",
       "date": "2026-07-23",

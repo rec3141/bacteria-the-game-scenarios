@@ -1,0 +1,211 @@
+{
+  "schema": "bacteria-scenario",
+  "version": 1,
+  "meta": {
+    "title": "Winogradsky Column: Sulfur Cycling in a Marsh Sediment Jar",
+    "date": "2026-07-19",
+    "lesson": "A Winogradsky column is a sealed sediment-and-water microcosm that self-organizes into vertical microbial guilds along redox and light gradients. Near the bottom, sulfate-reducing bacteria generate hydrogen sulfide from decaying organic matter in anoxic mud. Just above, purple and green sulfur bacteria oxidize that sulfide photosynthetically using light that penetrates the shallower layers, fixing carbon without oxygen. This scenario models a chemolithotrophic sulfur-oxidizer living in the sulfide-rich but still faintly lit zone of the column, competing with heterotrophic decomposers feeding on settling detritus. The lesson: redox stratification, not sunlight alone, structures who lives where, and sulfide is both a poison and an energy source depending on which microbe you are.",
+    "citation": "Winogradsky, S. (1888) columns; classic teaching model of sediment redox stratification.",
+    "difficulty": "hard",
+    "realWorldBasis": "Winogradsky column microcosm; purple/green sulfur bacteria in marsh sediment"
+  },
+  "env": {
+    "day.lengthSec": 260,
+    "day.startHour": 8,
+    "day.latitude": 38,
+    "day.dayOfYear": 200,
+    "diel.tempBase": 19,
+    "diel.tempAmp": 4,
+    "diel.tempLag": 2,
+    "diel.foodFloor": 0.35,
+    "diel.grazeNight": 0.5,
+    "diel.q10": 2.2,
+    "substrate.count": 100,
+    "substrate.sizeMin": 2,
+    "substrate.sizeMax": 6,
+    "substrate.lifeMin": 40,
+    "substrate.lifeMax": 90,
+    "predator.count": 3,
+    "predator.senseRange": 60,
+    "predator.chaseSpeed": 1.1,
+    "predator.wanderSpeed": 0.5,
+    "predator.mealEnergy": 30,
+    "predator.metabolism": 0.1,
+    "cell.startEnergy": 100,
+    "cell.divideThreshold": 210,
+    "phage.greenCount": 14,
+    "phage.goldCount": 3
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid detritus",
+      "enzymeLabel": "Lipase",
+      "color": "#c9a227"
+    },
+    {
+      "index": 1,
+      "label": "Dead microbial protein",
+      "enzymeLabel": "Protease",
+      "color": "#8b5a2b"
+    },
+    {
+      "index": 2,
+      "label": "Plant fiber carbohydrate",
+      "enzymeLabel": "Cellulase",
+      "color": "#4c7a3d"
+    }
+  ],
+  "particles": {
+    "detritus_clump": {
+      "label": "Settling organic detritus",
+      "mix": [
+        0.3,
+        0.4,
+        0.3
+      ],
+      "rMin": 3,
+      "rMax": 7,
+      "shape": "aggregate",
+      "weight": 6
+    },
+    "mud_floc": {
+      "label": "Anoxic mud floc",
+      "mix": [
+        0.15,
+        0.25,
+        0.6
+      ],
+      "rMin": 2,
+      "rMax": 5,
+      "shape": "shard",
+      "weight": 4
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase secretion",
+      "color": "#c9a227",
+      "weight": 3
+    },
+    "enzyme1": {
+      "label": "Protease secretion",
+      "color": "#8b5a2b",
+      "weight": 4
+    },
+    "enzyme2": {
+      "label": "Cellulase secretion",
+      "color": "#4c7a3d",
+      "weight": 3
+    },
+    "chemotaxis": {
+      "label": "Sulfide-seeking motility",
+      "color": "#b090d9",
+      "weight": 6
+    },
+    "antibiotic": {
+      "label": "Bacteriocin secretion",
+      "color": "#d94f4f",
+      "weight": 2
+    },
+    "eps": {
+      "label": "Sediment biofilm matrix",
+      "color": "#7a6a53",
+      "weight": 4
+    },
+    "crispr": {
+      "label": "CRISPR phage defense",
+      "color": "#4fa8d9",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Twitching motility",
+      "color": "#e0c95c",
+      "weight": 1
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "chromatium",
+        "label": "Purple sulfur bacterium (Chromatium-like)",
+        "color": "#8e3a8e",
+        "genome": {
+          "enzLvl": [
+            0,
+            0,
+            1
+          ],
+          "chemoLevel": 3,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false,
+          "chemolithotroph": true
+        },
+        "immigrateWeight": 5
+      },
+      {
+        "id": "decomposer",
+        "label": "Heterotrophic sediment decomposer",
+        "color": "#6b4423",
+        "genome": {
+          "enzLvl": [
+            2,
+            3,
+            2
+          ],
+          "chemoLevel": 0,
+          "antibiotic": 1,
+          "eps": 2,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 4
+      }
+    ]
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 21,
+        "salinity": 5,
+        "light": 0.9,
+        "nutrient": 0.2
+      },
+      {
+        "depth": 0.3,
+        "tempC": 20,
+        "salinity": 6,
+        "light": 0.5,
+        "nutrient": 0.4
+      },
+      {
+        "depth": 0.6,
+        "tempC": 18,
+        "salinity": 8,
+        "light": 0.15,
+        "nutrient": 0.7
+      },
+      {
+        "depth": 1,
+        "tempC": 17,
+        "salinity": 10,
+        "light": 0.02,
+        "nutrient": 0.95
+      }
+    ],
+    "thermocline": {
+      "depth": 0.55,
+      "sharpness": 0.4
+    },
+    "chemical": {
+      "peakDepth": 0.75,
+      "spread": 0.18,
+      "strength": 0.9,
+      "color": "#d4b483"
+    }
+  }
+}

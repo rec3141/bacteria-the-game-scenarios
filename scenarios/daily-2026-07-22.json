@@ -1,0 +1,238 @@
+{
+  "schema": "bacteria-scenario",
+  "version": 1,
+  "meta": {
+    "title": "Cholera in the Estuary: Vibrio and the Chitin Shell Bloom",
+    "date": "2026-07-22",
+    "lesson": "Vibrio cholerae persists in brackish estuaries by attaching to chitinous zooplankton exoskeletons (copepods, crab larvae). Chitin is a carbohydrate polymer, and V. cholerae expresses chitinases to degrade it for both nutrition and biofilm attachment, which also aids environmental survival between human outbreaks. Warm post-monsoon water temperatures and zooplankton blooms drive Vibrio population explosions, correlating with seasonal cholera outbreaks. This scenario models a copepod-rich estuary where a chitin-degrading Vibrio-like founder must exploit carbohydrate-dominant particles (molted shells and chitin flakes), competing with protein specialists, while grazers (copepods) and phage predation shape the population.",
+    "citation": "Colwell, R.R. (1996) Science 274:2025; Huq et al. Appl Environ Microbiol 2005",
+    "difficulty": "normal",
+    "realWorldBasis": "Vibrio cholerae chitin-zooplankton association, Bay of Bengal estuaries"
+  },
+  "env": {
+    "day.lengthSec": 240,
+    "day.startHour": 7,
+    "day.latitude": 22,
+    "day.dayOfYear": 200,
+    "diel.tempBase": 29,
+    "diel.tempAmp": 4,
+    "diel.tempLag": 2,
+    "diel.foodFloor": 0.35,
+    "diel.grazeNight": 0.6,
+    "diel.twilight": 0.5,
+    "diel.q10": 2.2,
+    "diel.q10RefC": 28,
+    "substrate.count": 100,
+    "substrate.sizeMin": 3,
+    "substrate.sizeMax": 9,
+    "substrate.lifeMin": 40,
+    "substrate.lifeMax": 90,
+    "predator.count": 5,
+    "predator.senseRange": 90,
+    "predator.chaseSpeed": 1.3,
+    "predator.wanderSpeed": 0.6,
+    "predator.mealEnergy": 30,
+    "predator.metabolism": 0.05,
+    "predator.resistStep": 0.1,
+    "predator.resistMax": 0.8,
+    "predator.reproEnergy": 150,
+    "predator.reproCooldown": 20,
+    "phage.greenCount": 20,
+    "phage.goldCount": 6,
+    "phage.hostTolerance": 0.5,
+    "phage.adsorbBase": 0.3,
+    "cell.startEnergy": 100,
+    "cell.divideThreshold": 200,
+    "enzyme.life": 12,
+    "enzyme.maxRadius": 40
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid Droplet",
+      "enzymeLabel": "Lipase",
+      "color": "#e8c060"
+    },
+    {
+      "index": 1,
+      "label": "Copepod Protein Debris",
+      "enzymeLabel": "Protease",
+      "color": "#d97878"
+    },
+    {
+      "index": 2,
+      "label": "Chitin Shell Flake",
+      "enzymeLabel": "Chitinase",
+      "color": "#7fd4a0"
+    }
+  ],
+  "particles": {
+    "chitinFlake": {
+      "label": "Molted Copepod Shell",
+      "mix": [
+        0.05,
+        0.15,
+        0.8
+      ],
+      "rMin": 4,
+      "rMax": 9,
+      "shape": "shard",
+      "weight": 7
+    },
+    "copepodCarcass": {
+      "label": "Copepod Carcass",
+      "mix": [
+        0.2,
+        0.6,
+        0.2
+      ],
+      "rMin": 4,
+      "rMax": 8,
+      "shape": "ellipse",
+      "squash": 0.6,
+      "weight": 4
+    },
+    "marineSnow": {
+      "label": "Marine Snow Aggregate",
+      "mix": [
+        0.3,
+        0.3,
+        0.4
+      ],
+      "rMin": 3,
+      "rMax": 7,
+      "shape": "aggregate",
+      "weight": 3
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase Secretion",
+      "color": "#e8c060",
+      "weight": 3
+    },
+    "enzyme1": {
+      "label": "Protease Secretion",
+      "color": "#d97878",
+      "weight": 4
+    },
+    "enzyme2": {
+      "label": "Chitinase Secretion",
+      "color": "#7fd4a0",
+      "weight": 9
+    },
+    "chemotaxis": {
+      "label": "Chitin-Sensing Chemotaxis",
+      "color": "#66ccff",
+      "weight": 7
+    },
+    "antibiotic": {
+      "label": "Bacteriocin Release",
+      "color": "#b060d0",
+      "weight": 3
+    },
+    "eps": {
+      "label": "Biofilm EPS on Shell",
+      "color": "#a0e0c0",
+      "weight": 6
+    },
+    "crispr": {
+      "label": "CRISPR Phage Defense",
+      "color": "#ffaa33",
+      "weight": 5
+    },
+    "twitching": {
+      "label": "Twitching Motility (Shell Attach)",
+      "color": "#66aaff",
+      "weight": 5
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "vibrio_chitin",
+        "label": "Vibrio cholerae (chitin-adapted)",
+        "color": "#4fd18a",
+        "genome": {
+          "enzLvl": [
+            1,
+            1,
+            3
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 2,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 8
+      },
+      {
+        "id": "protein_competitor",
+        "label": "Alteromonas sp. (protein specialist)",
+        "color": "#d97878",
+        "genome": {
+          "enzLvl": [
+            1,
+            3,
+            1
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 4
+      },
+      {
+        "id": "vibrio_toxigenic",
+        "label": "Vibrio cholerae (toxigenic, CRISPR+)",
+        "color": "#2fa06a",
+        "genome": {
+          "enzLvl": [
+            0,
+            1,
+            3
+          ],
+          "chemoLevel": 3,
+          "antibiotic": 1,
+          "eps": 3,
+          "crispr": true,
+          "twitching": true
+        },
+        "immigrateWeight": 3
+      }
+    ]
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 30,
+        "salinity": 15,
+        "light": 0.9,
+        "nutrient": 0.5
+      },
+      {
+        "depth": 0.5,
+        "tempC": 29,
+        "salinity": 18,
+        "light": 0.4,
+        "nutrient": 0.7
+      },
+      {
+        "depth": 1,
+        "tempC": 27,
+        "salinity": 22,
+        "light": 0.05,
+        "nutrient": 0.9
+      }
+    ],
+    "thermocline": {
+      "depth": 0.5,
+      "sharpness": 0.3
+    }
+  }
+}

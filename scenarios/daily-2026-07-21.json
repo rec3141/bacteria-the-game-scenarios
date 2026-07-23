@@ -1,0 +1,173 @@
+{
+  "schema": "bacteria-scenario",
+  "version": 1,
+  "meta": {
+    "title": "Coral Bleaching: Vibrio Invasion of the Mucus Layer",
+    "date": "2026-07-21",
+    "lesson": "Rising seawater temperature stresses reef corals and weakens their protective mucus microbiome, allowing opportunistic pathogens like Vibrio coralliilyticus to bloom and degrade coral tissue. This scenario models a shallow reef flat during a marine heatwave: warm, oxygen-rich, sunlit water by day and a smaller nighttime dip. Coral-mucus organic matter is protein- and carbohydrate-rich (mucopolysaccharides and glycoproteins), so protease and carbohydrase activity are the keys to feeding. Grazing amoeba-like protists and phage that hunt the bacterial population add realistic top-down pressure, illustrating how thermal stress tips a stable symbiosis into dysbiosis.",
+    "citation": "Ben-Haim et al. 2003, Vibrio coralliilyticus coral pathogen; Bourne et al. 2009 reef microbiome shifts during bleaching",
+    "difficulty": "normal",
+    "realWorldBasis": "Great Barrier Reef marine heatwave bleaching event, shallow reef flat"
+  },
+  "env": {
+    "day.lengthSec": 240,
+    "day.startHour": 7,
+    "day.latitude": -18.3,
+    "day.dayOfYear": 20,
+    "diel.tempBase": 29,
+    "diel.tempAmp": 3,
+    "diel.tempLag": 2,
+    "diel.foodFloor": 0.35,
+    "diel.grazeNight": 0.5,
+    "diel.twilight": 0.15,
+    "diel.q10": 2.2,
+    "diel.q10RefC": 25,
+    "substrate.count": 95,
+    "substrate.sizeMin": 3,
+    "substrate.sizeMax": 9,
+    "substrate.lifeMin": 40,
+    "substrate.lifeMax": 90,
+    "predator.count": 4,
+    "predator.senseRange": 60,
+    "predator.chaseSpeed": 1.3,
+    "predator.wanderSpeed": 0.6,
+    "predator.mealEnergy": 30,
+    "predator.metabolism": 0.05,
+    "phage.greenCount": 16,
+    "phage.goldCount": 8,
+    "phage.hostTolerance": 0.5,
+    "cell.startEnergy": 100,
+    "cell.divideThreshold": 200
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid droplet",
+      "enzymeLabel": "Lipase",
+      "color": "#e8c468"
+    },
+    {
+      "index": 1,
+      "label": "Mucus glycoprotein",
+      "enzymeLabel": "Coral-mucus protease",
+      "color": "#e07a5f"
+    },
+    {
+      "index": 2,
+      "label": "Mucopolysaccharide",
+      "enzymeLabel": "Glycosidase",
+      "color": "#81b29a"
+    }
+  ],
+  "particles": {
+    "mucusStrand": {
+      "label": "Coral mucus strand",
+      "mix": [
+        0.15,
+        0.55,
+        0.3
+      ],
+      "rMin": 4,
+      "rMax": 9,
+      "shape": "shard",
+      "weight": 7
+    },
+    "sloughedTissue": {
+      "label": "Sloughed coral tissue",
+      "mix": [
+        0.25,
+        0.45,
+        0.3
+      ],
+      "rMin": 3,
+      "rMax": 7,
+      "shape": "aggregate",
+      "weight": 3
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase secretion",
+      "color": "#e8c468",
+      "weight": 3
+    },
+    "enzyme1": {
+      "label": "Protease secretion",
+      "color": "#e07a5f",
+      "weight": 8
+    },
+    "enzyme2": {
+      "label": "Glycosidase secretion",
+      "color": "#81b29a",
+      "weight": 6
+    },
+    "chemotaxis": {
+      "label": "Mucus-layer chemotaxis",
+      "color": "#f2cc8f",
+      "weight": 6
+    },
+    "antibiotic": {
+      "label": "Coralliilytic toxin",
+      "color": "#9d0208",
+      "weight": 5
+    },
+    "eps": {
+      "label": "Biofilm matrix",
+      "color": "#3d405b",
+      "weight": 4
+    },
+    "crispr": {
+      "label": "Phage resistance (CRISPR)",
+      "color": "#457b9d",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Twitching motility",
+      "color": "#606c38",
+      "weight": 2
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "vibrio_coralliilyticus",
+        "label": "Vibrio coralliilyticus",
+        "color": "#c1121f",
+        "genome": {
+          "enzLvl": [
+            1,
+            3,
+            2
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 2,
+          "eps": 1,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 8
+      },
+      {
+        "id": "commensal_mucus_bacterium",
+        "label": "Commensal mucus commensal (Pseudoalteromonas-like)",
+        "color": "#2a9d8f",
+        "genome": {
+          "enzLvl": [
+            1,
+            2,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 2,
+          "crispr": true,
+          "twitching": false
+        },
+        "immigrateWeight": 5
+      }
+    ]
+  },
+  "column": {
+    "enabled": false
+  }
+}
