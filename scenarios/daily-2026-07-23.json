@@ -1,0 +1,214 @@
+{
+  "schema": "bacteria-scenario",
+  "version": 1,
+  "meta": {
+    "title": "Coral Bleaching: Vibrio Takes the Reef",
+    "date": "2026-07-23",
+    "lesson": "In 2016 marine heatwave conditions on the Great Barrier Reef, warming seawater destabilized the symbiosis between corals and their algal partners (zooxanthellae), causing mass bleaching. As corals weakened, opportunistic Vibrio coralliilyticus bacteria - normally minor reef residents - proliferated explosively, exploiting the flood of dissolved organic carbon and mucus leaking from stressed coral tissue. This scenario models a coral-associated Vibrio population during a marine heatwave: warm, sun-drenched shallow water raises metabolic rates (Q10 effect) and daytime food (coral mucus exudate, rich in lipids and carbohydrates), while a resident probiotic-like competitor (Pseudoalteromonas-like guardian) tries to hold the microbiome in balance. The lesson: temperature stress on a host can flip its microbiome from mutualistic to pathogenic by favoring fast-growing opportunists over stable symbionts, and enzyme specialization (mucus-degrading lipases/glycosidases) plus toxin production let opportunists outcompete residents once thermal thresholds are crossed.",
+    "citation": "Ushijima et al. 2014, 'Vibrio coralliilyticus infection during coral bleaching'; Great Barrier Reef 2016 mass bleaching event",
+    "difficulty": "normal",
+    "realWorldBasis": "2016 Great Barrier Reef mass bleaching event, Vibrio coralliilyticus opportunism"
+  },
+  "env": {
+    "day.lengthSec": 240,
+    "day.startHour": 7,
+    "day.latitude": -18.3,
+    "day.dayOfYear": 60,
+    "diel.tempBase": 30,
+    "diel.tempAmp": 3,
+    "diel.tempLag": 2,
+    "diel.foodFloor": 0.35,
+    "diel.grazeNight": 0.5,
+    "diel.twilight": 0.5,
+    "diel.q10": 2.3,
+    "diel.q10RefC": 20,
+    "substrate.count": 95,
+    "substrate.sizeMin": 3,
+    "substrate.sizeMax": 9,
+    "substrate.lifeMin": 40,
+    "substrate.lifeMax": 90,
+    "predator.count": 3,
+    "predator.senseRange": 60,
+    "predator.chaseSpeed": 1.2,
+    "predator.wanderSpeed": 0.6,
+    "predator.mealEnergy": 40,
+    "predator.metabolism": 0.05,
+    "cell.startEnergy": 100,
+    "cell.divideThreshold": 200,
+    "toxin.life": 6,
+    "toxin.maxRadius": 30,
+    "eps.lifePerLevel": 8,
+    "eps.radius": 20
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Coral Mucus Lipids",
+      "enzymeLabel": "Mucus Lipase",
+      "color": "#e8c07d"
+    },
+    {
+      "index": 1,
+      "label": "Tissue Proteins",
+      "enzymeLabel": "Protease",
+      "color": "#d95d5d"
+    },
+    {
+      "index": 2,
+      "label": "Mucus Glycans",
+      "enzymeLabel": "Glycosidase",
+      "color": "#7fd1c7"
+    }
+  ],
+  "particles": {
+    "mucusStrand": {
+      "label": "Sloughed Mucus Strand",
+      "mix": [
+        5,
+        2,
+        5
+      ],
+      "rMin": 3,
+      "rMax": 8,
+      "shape": "shard",
+      "weight": 6
+    },
+    "tissueDebris": {
+      "label": "Bleached Tissue Debris",
+      "mix": [
+        2,
+        6,
+        2
+      ],
+      "rMin": 3,
+      "rMax": 7,
+      "shape": "aggregate",
+      "weight": 4
+    },
+    "algalDebris": {
+      "label": "Expelled Zooxanthellae",
+      "mix": [
+        3,
+        2,
+        6
+      ],
+      "rMin": 4,
+      "rMax": 9,
+      "shape": "ellipse",
+      "squash": 0.6,
+      "weight": 3
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Mucus Lipase",
+      "color": "#e8c07d",
+      "weight": 6
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#d95d5d",
+      "weight": 4
+    },
+    "enzyme2": {
+      "label": "Glycosidase",
+      "color": "#7fd1c7",
+      "weight": 6
+    },
+    "chemotaxis": {
+      "label": "Mucus-seeking Chemotaxis",
+      "color": "#f2f2f2",
+      "weight": 5
+    },
+    "antibiotic": {
+      "label": "Coralliilytic Toxin",
+      "color": "#b23a48",
+      "weight": 5
+    },
+    "eps": {
+      "label": "Biofilm Matrix",
+      "color": "#8a9b6e",
+      "weight": 3
+    },
+    "crispr": {
+      "label": "Phage Resistance",
+      "color": "#5a5a8a",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Twitching Motility",
+      "color": "#c9c9c9",
+      "weight": 2
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "vibrio_opportunist",
+        "label": "Vibrio coralliilyticus (opportunist)",
+        "color": "#b23a48",
+        "genome": {
+          "enzLvl": [
+            3,
+            1,
+            2
+          ],
+          "chemoLevel": 3,
+          "antibiotic": 3,
+          "eps": 1,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 8
+      },
+      {
+        "id": "pseudoalteromonas_guardian",
+        "label": "Pseudoalteromonas (reef guardian)",
+        "color": "#3a7ca5",
+        "genome": {
+          "enzLvl": [
+            1,
+            2,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 4,
+          "eps": 3,
+          "crispr": true,
+          "twitching": false
+        },
+        "immigrateWeight": 4
+      }
+    ]
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 31,
+        "salinity": 35,
+        "light": 1,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 3,
+        "tempC": 30,
+        "salinity": 35,
+        "light": 0.8,
+        "nutrient": 0.7
+      },
+      {
+        "depth": 8,
+        "tempC": 28,
+        "salinity": 35,
+        "light": 0.4,
+        "nutrient": 0.5
+      }
+    ],
+    "thermocline": {
+      "depth": 5,
+      "sharpness": 0.4
+    }
+  }
+}

@@ -19,6 +19,14 @@
       "file": "scenarios/daily-2026-07-18.json"
     },
     {
+      "id": "daily-2026-07-23",
+      "title": "Coral Bleaching: Vibrio Takes the Reef",
+      "date": "2026-07-23",
+      "difficulty": "normal",
+      "realWorldBasis": "2016 Great Barrier Reef mass bleaching event, Vibrio coralliilyticus opportunism",
+      "file": "scenarios/daily-2026-07-23.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
