@@ -14,6 +14,7 @@ jobs:
         with:
           node-version: '20'
       - run: node scripts/validate-all.mjs
+      - run: node scripts/selftest.mjs
   pipeline:
     runs-on: ubuntu-latest
     steps:

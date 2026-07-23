@@ -1,0 +1,39 @@
+name: Player-submitted DOIs
+# Players submit a paper from inside the game, which appends it to a public JSON queue on
+# bacteria.cryomics.org. We poll that queue rather than having the site push to us, so the web
+# server needs no GitHub credential at all -- see the header of scripts/queue.mjs.
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: publish-scenarios
+  cancel-in-progress: false
+jobs:
+  drain:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Build any newly submitted DOIs
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          node scripts/queue.mjs > pending.tsv
+          while IFS=$'\t' read -r doi id; do
+            [ -n "$doi" ] || continue
+            echo "::group::$id"
+            # Per DOI, not per run: one paper Crossref cannot resolve must not strand everyone
+            # queued behind it. A failure writes nothing, so the entry simply stays pending and
+            # is retried next poll until queue.mjs ages it out.
+            if node scripts/generate.mjs --mode doi --doi "$doi" && node scripts/validate-all.mjs; then
+              scripts/publish.sh "Scenario from a player-submitted paper" "$id"
+            else
+              echo "::warning::could not build a scenario from $doi"
+            fi
+            echo "::endgroup::"
+          done < pending.tsv

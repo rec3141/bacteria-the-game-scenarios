@@ -5,6 +5,8 @@
   "private": true,
   "scripts": {
     "validate": "node scripts/validate-all.mjs",
-    "generate": "node scripts/generate.mjs"
+    "generate": "node scripts/generate.mjs",
+    "test": "node scripts/selftest.mjs",
+    "queue": "node scripts/queue.mjs"
   }
 }

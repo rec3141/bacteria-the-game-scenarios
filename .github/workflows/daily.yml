@@ -5,7 +5,12 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
-  pull-requests: write
+# Never let two publishing runs generate at the same time. publish.sh survives a race,
+# but serialising here also keeps generate.mjs's novelty prompt accurate: it reads the
+# committed scenarios/, so a concurrent run would be invisible to it.
+concurrency:
+  group: publish-scenarios
+  cancel-in-progress: false
 jobs:
   generate:
     runs-on: ubuntu-latest
@@ -15,22 +20,13 @@ jobs:
         with:
           node-version: '20'
       - name: Generate today's scenario
+        id: gen
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: node scripts/generate.mjs --mode daily
       - name: Validate
         run: node scripts/validate-all.mjs
-      - name: Open PR
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git config user.name "scenario-bot"
-          git config user.email "scenario-bot@users.noreply.github.com"
-          branch="daily/$(date +%Y-%m-%d-%H%M%S)"
-          git checkout -b "$branch"
-          git add scenarios/ index.json
-          git commit -m "Daily AI-generated scenario"
-          git push origin "$branch"
-          gh pr create --base main --head "$branch" \
-            --title "Daily scenario ($(date +%Y-%m-%d))" \
-            --body "Auto-generated daily scenario. Review the mini-lesson and parameters before merging."
+      # Straight to main -- no PR. The validate step above is the gate, and it runs the
+      # same validator the game itself runs. See the header of scripts/publish.sh.
+      - name: Publish
+        run: scripts/publish.sh "Daily scenario ($(date +%Y-%m-%d))" "${{ steps.gen.outputs.scenario_id }}"

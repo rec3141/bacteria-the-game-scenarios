@@ -11,8 +11,10 @@ on:
     types: [opened]            # or a player opens an issue whose body contains "DOI: 10...."
 permissions:
   contents: write
-  pull-requests: write
   issues: write
+concurrency:
+  group: publish-scenarios
+  cancel-in-progress: false
 jobs:
   generate:
     # only run the issue path when the body actually carries a DOI marker
@@ -40,25 +42,25 @@ jobs:
           if [ -z "$doi" ]; then echo "no DOI found"; exit 1; fi
           echo "value=$doi" >> "$GITHUB_OUTPUT"
       - name: Resolve + generate from DOI
+        id: gen
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: node scripts/generate.mjs --mode doi --doi "${{ steps.doi.outputs.value }}"
+          # Through env for the same reason the extract step above uses it: this value came
+          # out of an issue body, and inline ${{ }} would paste it into the shell as CODE.
+          DOI: ${{ steps.doi.outputs.value }}
+        run: node scripts/generate.mjs --mode doi --doi "$DOI"
       - name: Validate
         run: node scripts/validate-all.mjs
-      - name: Open PR
+      - name: Publish
+        run: scripts/publish.sh "Scenario seeded from a submitted DOI" "${{ steps.gen.outputs.scenario_id }}"
+      # The submitter used to wait on a human merging a PR. Now the level is live the moment
+      # this step runs, so hand them the link that actually plays it and close the issue.
+      - name: Reply to the submitting issue
+        if: github.event_name == 'issues'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
+          SCENARIO_ID: ${{ steps.gen.outputs.scenario_id }}
         run: |
-          git config user.name "scenario-bot"
-          git config user.email "scenario-bot@users.noreply.github.com"
-          branch="doi/$(date +%s)"
-          git checkout -b "$branch"
-          git add scenarios/ index.json
-          git commit -m "Scenario seeded from a submitted DOI"
-          git push origin "$branch"
-          body="Auto-generated from a submitted DOI. Review the lesson, citation, and parameters before merging."
-          # When it came from an issue, "Closes #N" auto-closes that submission issue on merge.
-          if [ -n "$ISSUE_NUMBER" ]; then body="$body"$'\n\n'"Closes #$ISSUE_NUMBER"; fi
-          url=$(gh pr create --base main --head "$branch" --title "DOI scenario" --body "$body")
-          if [ -n "$ISSUE_NUMBER" ]; then gh issue comment "$ISSUE_NUMBER" --body "Thanks! A level seeded from your paper is proposed here: $url — merging it will close this issue."; fi
+          gh issue comment "$ISSUE_NUMBER" --body "Thanks! Your paper is now a playable level: https://bacteria.cryomics.org/?scenario=$SCENARIO_ID"
+          gh issue close "$ISSUE_NUMBER"

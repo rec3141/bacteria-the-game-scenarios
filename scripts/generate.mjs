@@ -11,6 +11,7 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { validateScenario } from "./validator.mjs";
 import { buildIndex } from "./build-index.mjs";
+import { slug, cleanDoi, DOI_RE } from "./doi-id.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const repo = join(here, "..");
@@ -140,8 +141,8 @@ async function fetchAbstract(doi) {
   return { text: "", source: "" };
 }
 async function resolveDoi(doi) {
-  const clean = doi.trim().replace(/^https?:\/\/(dx\.)?doi\.org\//i, "");
-  if (!/^10\.\d{4,9}\/\S+$/.test(clean)) throw new Error("that does not look like a DOI");
+  const clean = cleanDoi(doi);
+  if (!DOI_RE.test(clean)) throw new Error("that does not look like a DOI");
   const res = await fetch(`https://api.crossref.org/works/${encodeURIComponent(clean)}`, {
     headers: { "User-Agent": "bacteria-the-game-scenarios (mailto:noreply@cryomics.org)" },
   });
@@ -167,8 +168,6 @@ function archiveSummary() {
     catch { return null; }
   }).filter(Boolean);
 }
-
-function slug(s) { return String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60) || "scenario"; }
 
 async function buildPrompt() {
   const archive = archiveSummary();
