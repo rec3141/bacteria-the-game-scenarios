@@ -25,7 +25,7 @@ open at once conflicted by construction, and while they sat unmerged `generate.m
 | --- | --- | --- |
 | `daily.yml` | cron, 12:17 UTC | Claude invents a fresh microbial-ecology situation |
 | `queue.yml` | cron, every 15 min | DOIs players submitted **from inside the game** |
-| `doi.yml` | manual / `repository_dispatch` / a GitHub issue containing `DOI:` | one specific paper |
+| `doi.yml` | manual / `repository_dispatch` | one specific paper, on demand |
 
 All three publish through `scripts/publish.sh`, which sidesteps merging rather than trying to survive
 it: reset to current `main`, drop the generated files on top, rebuild the index from whatever files

@@ -1,4 +1,12 @@
 name: DOI scenario
+# One specific paper, on demand. Players do NOT come through here any more — they submit from inside
+# the game and queue.yml picks it up (no GitHub account required, which was the whole point). This is
+# the manual/admin path: run it yourself, or POST a repository_dispatch from a backend.
+#
+# There used to be a third trigger: a player opening an issue whose body contained "DOI:". It is gone
+# because it still asked for a GitHub account, so it was strictly worse than the in-game form for the
+# people it was meant to serve — and it was the one untrusted input in this workflow, which made every
+# value here something to handle at arm's length.
 on:
   workflow_dispatch:
     inputs:
@@ -7,18 +15,13 @@ on:
         required: true
   repository_dispatch:
     types: [doi-submission]     # a backend may POST {event_type:"doi-submission", client_payload:{doi}}
-  issues:
-    types: [opened]            # or a player opens an issue whose body contains "DOI: 10...."
 permissions:
   contents: write
-  issues: write
 concurrency:
   group: publish-scenarios
   cancel-in-progress: false
 jobs:
   generate:
-    # only run the issue path when the body actually carries a DOI marker
-    if: github.event_name != 'issues' || contains(github.event.issue.body, 'DOI:')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -28,16 +31,16 @@ jobs:
       - name: Extract DOI
         id: doi
         env:
-          # via env, never inline ${{ }} in run: — an issue body is untrusted and would be a shell-injection vector
+          # Through env rather than inline ${{ }}: a repository_dispatch payload is supplied by whoever
+          # holds a token, not necessarily by us, and inline expansion would paste it into the shell as
+          # code. generate.mjs validates the shape properly; this just keeps it out of the interpreter.
           EVENT: ${{ github.event_name }}
           INPUT_DOI: ${{ github.event.inputs.doi }}
           PAYLOAD_DOI: ${{ github.event.client_payload.doi }}
-          ISSUE_BODY: ${{ github.event.issue.body }}
         run: |
           case "$EVENT" in
             workflow_dispatch)    doi="$INPUT_DOI" ;;
             repository_dispatch)  doi="$PAYLOAD_DOI" ;;
-            issues)               doi=$(printf '%s' "$ISSUE_BODY" | grep -oiE '10\.[0-9]{4,9}/[^[:space:]]+' | head -1) ;;
           esac
           if [ -z "$doi" ]; then echo "no DOI found"; exit 1; fi
           echo "value=$doi" >> "$GITHUB_OUTPUT"
@@ -45,22 +48,9 @@ jobs:
         id: gen
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          # Through env for the same reason the extract step above uses it: this value came
-          # out of an issue body, and inline ${{ }} would paste it into the shell as CODE.
           DOI: ${{ steps.doi.outputs.value }}
         run: node scripts/generate.mjs --mode doi --doi "$DOI"
       - name: Validate
         run: node scripts/validate-all.mjs
       - name: Publish
         run: scripts/publish.sh "Scenario seeded from a submitted DOI" "${{ steps.gen.outputs.scenario_id }}"
-      # The submitter used to wait on a human merging a PR. Now the level is live the moment
-      # this step runs, so hand them the link that actually plays it and close the issue.
-      - name: Reply to the submitting issue
-        if: github.event_name == 'issues'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
-          SCENARIO_ID: ${{ steps.gen.outputs.scenario_id }}
-        run: |
-          gh issue comment "$ISSUE_NUMBER" --body "Thanks! Your paper is now a playable level: https://bacteria.cryomics.org/?scenario=$SCENARIO_ID"
-          gh issue close "$ISSUE_NUMBER"

@@ -90,6 +90,9 @@ const repo = join(here, "..");
     const y = readFileSync(join(repo, ".github/workflows", wf), "utf8");
     assert.ok(!/gh pr create/.test(y), `${wf} must publish directly, not via a PR that can go stale`);
     assert.match(y, /group: publish-scenarios/, `${wf} must share the publish concurrency group`);
+    // No workflow may route players through GitHub. The in-game form is the submission path precisely
+    // so that nobody needs an account; an `issues:` trigger would quietly reintroduce that demand.
+    assert.ok(!/^\s{2}issues:/m.test(y), `${wf} must not accept submissions via GitHub issues`);
   }
 }
 
