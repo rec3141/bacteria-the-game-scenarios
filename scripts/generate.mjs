@@ -75,6 +75,16 @@ It must satisfy this schema (any unknown key, out-of-range value, or new "verb" 
   "organisms": { "cells": [ { "id": str, "label": str, "color": "#rrggbb",
       "genome": { "enzLvl": [int,int,int] 0..12, "chemoLevel": int, "antibiotic": int, "eps": int, "crispr": bool, "twitching": bool },
       "immigrateWeight": 0..10 } ] },
+  "terrain": [  // OPTIONAL, column scenarios only — solid, fixed scenery bounding the water.
+      // Sea ice overhead, sediment or a vent floor underfoot. It is NOT food: it cannot be digested,
+      // it just gets in the way, which is the point. Up to 4 layers.
+      { "at": "top"|"bottom", "thickness": 20..800 (px), "color": "#rrggbb", "label": str,
+        "roughness": 0..1,    // 0 = a dead-flat slab; higher = an undulating surface with relief
+        "porosity": 0..1,     // voids threaded THROUGH the layer — brine channels in ice, burrows in
+                              // mud. This is what makes it a habitat instead of a wall: cells can
+                              // swim into the pores and shelter there. 0.3-0.5 reads well.
+        "poreSize": 6..200,   // scale of those voids (small = fine channels, large = caverns)
+        "featureSize": 40..2000 } ],  // horizontal scale of the surface relief
   "column": {   // OPTIONAL — a stratified water column. Include when depth matters (surface vs deep).
     "enabled": true|false,
     "layers": [ { "depth": num (ascending, >=0), "tempC": -10..50, "salinity": 0..60, "light": 0..1, "nutrient": 0..1 } ],
@@ -120,6 +130,8 @@ FEEDING — the founder MUST be able to eat, or the level is dead on arrival:
 - If you define no particles, the default mixed marine-snow set is used; then a generalist founder (enzLvl ~ [1,1,1]) is safest.
 
 COLUMN scenarios (a stratified water column, column.enabled=true): food particles SINK toward the floor, so set substrate.count on the higher side (90-130) and make sure the founder can eat what's near it. Use a column only when depth genuinely matters (surface vs deep).
+
+TERRAIN (column scenarios only): where the habitat has a real physical boundary, build it. Sea ice on the underside of Antarctic fast ice, sediment at the bottom of an estuary, the mineral floor of a vent field, a microbial mat's mineral crust. Give it porosity 0.3-0.5 whenever the organisms actually live INSIDE that structure — brine channels, burrows, the interstitial spaces of a sediment — because a porous layer is somewhere to shelter and forage, while a solid one is only a wall. Match the colour to the material (pale blue-white ice, dark brown mud, grey rock). Skip terrain entirely for open-water scenarios: the open ocean has no floor worth drawing.
 
 CHEMOSYNTHESIS / CHEMOLITHOTROPHY (hydrothermal vents, cold seeps, sulfur/ammonia/nitrite oxidizers, nitrifiers, anammox): these microbes do NOT digest particles — they fix carbon using energy from a dissolved reduced chemical. Use the ENGINE PRIMITIVE, never a re-skinned digestion enzyme (breaking down a particle with "nitrate reductase" is biologically backwards):
 - set "chemolithotroph": true inside the genome of the chemosynthetic organism(s);

@@ -215,7 +215,7 @@
     if (!raw || typeof raw !== "object" || Array.isArray(raw)) return scReject("scenario is not an object");
     if (raw.schema !== "bacteria-scenario") return scReject("wrong schema tag");
     if (raw.version !== 1) return scReject("unsupported schema version");
-    const topErr = scOnlyKeys(raw, new Set(["schema", "version", "meta", "env", "resources", "particles", "actions", "organisms", "column"]), "top-level");
+    const topErr = scOnlyKeys(raw, new Set(["schema", "version", "meta", "env", "resources", "particles", "actions", "organisms", "column", "terrain"]), "top-level");
     if (topErr) return scReject(topErr);
 
     // ---- meta (required) ----
@@ -413,7 +413,34 @@
       column = scClone(col); column.enabled = col.enabled === true;
     }
 
-    return { ok: true, scenario: { meta, cfg, resources, particles, actions, organisms, column } };
+    // ---- terrain: solid, fixed scenery bounding the column (sea ice above, sediment below) --------
+    // Data only, like everything else: a scenario describes a slab and the game builds it. Thickness
+    // is capped well short of the column height so terrain can never seal the water off entirely.
+    let terrain = null;
+    if (raw.terrain != null) {
+      if (!Array.isArray(raw.terrain)) return scReject("terrain must be an array");
+      if (raw.terrain.length > 4) return scReject("at most 4 terrain layers");
+      terrain = [];
+      for (const t of raw.terrain) {
+        if (!t || typeof t !== "object" || Array.isArray(t)) return scReject("terrain layer must be an object");
+        const tErr = scOnlyKeys(t, new Set(["at", "thickness", "color", "label", "roughness", "porosity", "poreSize", "featureSize"]), "terrain layer");
+        if (tErr) return scReject(tErr);
+        if (t.at !== "top" && t.at !== "bottom") return scReject('terrain layer "at" must be "top" or "bottom"');
+        if (!Number.isFinite(t.thickness) || t.thickness < 20 || t.thickness > 800) return scReject("terrain thickness must be 20..800");
+        if (t.color != null && !/^#[0-9a-fA-F]{6}$/.test(t.color)) return scReject("terrain color must be #rrggbb");
+        const frac = (v, name) => v == null || (Number.isFinite(v) && v >= 0 && v <= 1) ? null : `terrain ${name} must be 0..1`;
+        for (const chk of [frac(t.roughness, "roughness"), frac(t.porosity, "porosity")]) if (chk) return scReject(chk);
+        if (t.poreSize != null && (!Number.isFinite(t.poreSize) || t.poreSize < 6 || t.poreSize > 200)) return scReject("terrain poreSize must be 6..200");
+        if (t.featureSize != null && (!Number.isFinite(t.featureSize) || t.featureSize < 40 || t.featureSize > 2000)) return scReject("terrain featureSize must be 40..2000");
+        terrain.push({ at: t.at, thickness: t.thickness, color: t.color || "#9fb6c4",
+          label: scStr(t.label, 40) || "", roughness: t.roughness == null ? 0.35 : t.roughness,
+          porosity: t.porosity == null ? 0 : t.porosity,
+          poreSize: t.poreSize == null ? 26 : t.poreSize,
+          featureSize: t.featureSize == null ? 260 : t.featureSize });
+      }
+    }
+
+    return { ok: true, scenario: { meta, cfg, resources, particles, actions, organisms, column, terrain } };
   }
   // SCENARIO_VALIDATOR_END
 
