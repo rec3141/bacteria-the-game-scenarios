@@ -135,13 +135,16 @@
   "terrain": [
     {
       "at": "bottom",
-      "thickness": 260,
+      "thickness": 200,
       "color": "#3f3a44",
-      "label": "sulfide chimney floor",
-      "roughness": 0.8,
+      "label": "sulfide chimneys",
+      "roughness": 0.3,
       "porosity": 0.3,
       "poreSize": 22,
-      "featureSize": 200
+      "featureSize": 220,
+      "spires": 0.55,
+      "spireHeight": 300,
+      "spireWidth": 52
     }
   ]
 }

@@ -84,7 +84,13 @@ It must satisfy this schema (any unknown key, out-of-range value, or new "verb" 
                               // mud. This is what makes it a habitat instead of a wall: cells can
                               // swim into the pores and shelter there. 0.3-0.5 reads well.
         "poreSize": 6..200,   // scale of those voids (small = fine channels, large = caverns)
-        "featureSize": 40..2000 } ],  // horizontal scale of the surface relief
+        "featureSize": 40..2000,      // horizontal scale of the surface relief
+        // SPIRES — narrow vertical structures standing off the layer: black-smoker chimneys, rocky
+        // pinnacles, ice keels hanging from a ceiling. roughness alone can only make rolling hills,
+        // so use these when the habitat has actual towers. Omit them for a flat mud or ice sheet.
+        "spires": 0..1,        // how much of the width grows one (0 = none, 0.5 = about half)
+        "spireHeight": 0..800, // how far they stand off the layer, in px
+        "spireWidth": 10..400 } ],  // girth: 40-70 is a slender chimney, 200 a broad pinnacle
   "column": {   // OPTIONAL — a stratified water column. Include when depth matters (surface vs deep).
     "enabled": true|false,
     "layers": [ { "depth": num (ascending, >=0), "tempC": -10..50, "salinity": 0..60, "light": 0..1, "nutrient": 0..1 } ],

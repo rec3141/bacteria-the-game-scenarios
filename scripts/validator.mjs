@@ -423,20 +423,25 @@
       terrain = [];
       for (const t of raw.terrain) {
         if (!t || typeof t !== "object" || Array.isArray(t)) return scReject("terrain layer must be an object");
-        const tErr = scOnlyKeys(t, new Set(["at", "thickness", "color", "label", "roughness", "porosity", "poreSize", "featureSize"]), "terrain layer");
+        const tErr = scOnlyKeys(t, new Set(["at", "thickness", "color", "label", "roughness", "porosity", "poreSize", "featureSize", "spires", "spireHeight", "spireWidth"]), "terrain layer");
         if (tErr) return scReject(tErr);
         if (t.at !== "top" && t.at !== "bottom") return scReject('terrain layer "at" must be "top" or "bottom"');
         if (!Number.isFinite(t.thickness) || t.thickness < 20 || t.thickness > 800) return scReject("terrain thickness must be 20..800");
         if (t.color != null && !/^#[0-9a-fA-F]{6}$/.test(t.color)) return scReject("terrain color must be #rrggbb");
         const frac = (v, name) => v == null || (Number.isFinite(v) && v >= 0 && v <= 1) ? null : `terrain ${name} must be 0..1`;
-        for (const chk of [frac(t.roughness, "roughness"), frac(t.porosity, "porosity")]) if (chk) return scReject(chk);
+        for (const chk of [frac(t.roughness, "roughness"), frac(t.porosity, "porosity"), frac(t.spires, "spires")]) if (chk) return scReject(chk);
+        if (t.spireHeight != null && (!Number.isFinite(t.spireHeight) || t.spireHeight < 0 || t.spireHeight > 800)) return scReject("terrain spireHeight must be 0..800");
+        if (t.spireWidth != null && (!Number.isFinite(t.spireWidth) || t.spireWidth < 10 || t.spireWidth > 400)) return scReject("terrain spireWidth must be 10..400");
         if (t.poreSize != null && (!Number.isFinite(t.poreSize) || t.poreSize < 6 || t.poreSize > 200)) return scReject("terrain poreSize must be 6..200");
         if (t.featureSize != null && (!Number.isFinite(t.featureSize) || t.featureSize < 40 || t.featureSize > 2000)) return scReject("terrain featureSize must be 40..2000");
         terrain.push({ at: t.at, thickness: t.thickness, color: t.color || "#9fb6c4",
           label: scStr(t.label, 40) || "", roughness: t.roughness == null ? 0.35 : t.roughness,
           porosity: t.porosity == null ? 0 : t.porosity,
           poreSize: t.poreSize == null ? 26 : t.poreSize,
-          featureSize: t.featureSize == null ? 260 : t.featureSize });
+          featureSize: t.featureSize == null ? 260 : t.featureSize,
+          spires: t.spires == null ? 0 : t.spires,
+          spireHeight: t.spireHeight == null ? 0 : t.spireHeight,
+          spireWidth: t.spireWidth == null ? 60 : t.spireWidth });
       }
     }
 
