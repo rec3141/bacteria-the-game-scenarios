@@ -257,5 +257,17 @@
       "depth": 10,
       "sharpness": 0.4
     }
-  }
+  },
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 200,
+      "color": "#6a6152",
+      "label": "streambed gravel",
+      "roughness": 0.55,
+      "porosity": 0.5,
+      "poreSize": 32,
+      "featureSize": 320
+    }
+  ]
 }

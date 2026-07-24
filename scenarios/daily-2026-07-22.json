@@ -234,5 +234,17 @@
       "depth": 0.5,
       "sharpness": 0.3
     }
-  }
+  },
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 220,
+      "color": "#4f3d2a",
+      "label": "estuarine mud",
+      "roughness": 0.35,
+      "porosity": 0.45,
+      "poreSize": 30,
+      "featureSize": 400
+    }
+  ]
 }

@@ -10,19 +10,74 @@
     "realWorldBasis": "Arctic spring under-ice phytoplankton bloom"
   },
   "env": {
-    "day": { "startHour": 10, "latitude": 78, "dayOfYear": 172 },
-    "diel": { "tempBase": 1, "tempAmp": 1, "waterNight": [6, 12, 20], "waterDay": [70, 150, 190] }
+    "day": {
+      "startHour": 10,
+      "latitude": 78,
+      "dayOfYear": 172
+    },
+    "diel": {
+      "tempBase": 1,
+      "tempAmp": 1,
+      "waterNight": [
+        6,
+        12,
+        20
+      ],
+      "waterDay": [
+        70,
+        150,
+        190
+      ]
+    }
   },
   "resources": [
-    { "index": 0, "label": "diatom lipid", "enzymeLabel": "lipase", "color": "#bfe08a" }
+    {
+      "index": 0,
+      "label": "diatom lipid",
+      "enzymeLabel": "lipase",
+      "color": "#bfe08a"
+    }
   ],
   "column": {
     "enabled": true,
     "layers": [
-      { "depth": 0, "tempC": 2, "salinity": 32, "light": 1.0, "nutrient": 0.3 },
-      { "depth": 8, "tempC": 1, "salinity": 33, "light": 0.35, "nutrient": 0.7 },
-      { "depth": 40, "tempC": -1, "salinity": 35, "light": 0.02, "nutrient": 1.0 }
+      {
+        "depth": 0,
+        "tempC": 2,
+        "salinity": 32,
+        "light": 1,
+        "nutrient": 0.3
+      },
+      {
+        "depth": 8,
+        "tempC": 1,
+        "salinity": 33,
+        "light": 0.35,
+        "nutrient": 0.7
+      },
+      {
+        "depth": 40,
+        "tempC": -1,
+        "salinity": 35,
+        "light": 0.02,
+        "nutrient": 1
+      }
     ],
-    "thermocline": { "depth": 8, "sharpness": 0.8 }
-  }
+    "thermocline": {
+      "depth": 8,
+      "sharpness": 0.8
+    }
+  },
+  "terrain": [
+    {
+      "at": "top",
+      "thickness": 175,
+      "color": "#cfe4f2",
+      "label": "sea ice",
+      "roughness": 0.5,
+      "porosity": 0.45,
+      "poreSize": 18,
+      "featureSize": 300
+    }
+  ]
 }

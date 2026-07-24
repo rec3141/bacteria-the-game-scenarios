@@ -131,5 +131,17 @@
       "depth": 30,
       "sharpness": 0.9
     }
-  }
+  },
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 260,
+      "color": "#3f3a44",
+      "label": "sulfide chimney floor",
+      "roughness": 0.8,
+      "porosity": 0.3,
+      "poreSize": 22,
+      "featureSize": 200
+    }
+  ]
 }

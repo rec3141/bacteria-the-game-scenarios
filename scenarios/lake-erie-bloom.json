@@ -124,5 +124,17 @@
       "depth": 6,
       "sharpness": 0.7
     }
-  }
+  },
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 200,
+      "color": "#4a4530",
+      "label": "lake sediment",
+      "roughness": 0.3,
+      "porosity": 0.4,
+      "poreSize": 30,
+      "featureSize": 450
+    }
+  ]
 }

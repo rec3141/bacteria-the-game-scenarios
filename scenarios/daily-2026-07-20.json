@@ -211,5 +211,17 @@
       "strength": 0.85,
       "color": "#ffcc66"
     }
-  }
+  },
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 220,
+      "color": "#4f3d2a",
+      "label": "estuarine mud",
+      "roughness": 0.35,
+      "porosity": 0.45,
+      "poreSize": 30,
+      "featureSize": 400
+    }
+  ]
 }

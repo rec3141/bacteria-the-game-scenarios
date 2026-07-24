@@ -210,5 +210,17 @@
       "depth": 5,
       "sharpness": 0.4
     }
-  }
+  },
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 240,
+      "color": "#c9bda2",
+      "label": "reef carbonate",
+      "roughness": 0.7,
+      "porosity": 0.4,
+      "poreSize": 24,
+      "featureSize": 260
+    }
+  ]
 }

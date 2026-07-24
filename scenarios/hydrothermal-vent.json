@@ -10,33 +10,136 @@
     "realWorldBasis": "Deep-sea hydrothermal vent chemosynthetic community"
   },
   "env": {
-    "day": { "startHour": 0, "latitude": 0 },
-    "diel": { "tempBase": 6, "tempAmp": 0.5, "foodFloor": 0.9, "waterNight": [5, 7, 11], "waterDay": [9, 13, 18] },
-    "substrate": { "count": 60 },
-    "predator": { "count": 3 }
+    "day": {
+      "startHour": 0,
+      "latitude": 0
+    },
+    "diel": {
+      "tempBase": 6,
+      "tempAmp": 0.5,
+      "foodFloor": 0.9,
+      "waterNight": [
+        5,
+        7,
+        11
+      ],
+      "waterDay": [
+        9,
+        13,
+        18
+      ]
+    },
+    "substrate": {
+      "count": 60
+    },
+    "predator": {
+      "count": 3
+    }
   },
   "resources": [
-    { "index": 2, "label": "detritus", "enzymeLabel": "carbohydrase", "color": "#6fa8ff" }
+    {
+      "index": 2,
+      "label": "detritus",
+      "enzymeLabel": "carbohydrase",
+      "color": "#6fa8ff"
+    }
   ],
   "actions": {
-    "eps": { "label": "mat-forming biofilm", "color": "#8ad0c0", "weight": 2.2 },
-    "chemotaxis": { "label": "chemotaxis", "color": "#ffd24a", "weight": 1.4 },
-    "antibiotic": { "label": "antibiosis", "color": "#ff5a5a", "weight": 0.5 }
+    "eps": {
+      "label": "mat-forming biofilm",
+      "color": "#8ad0c0",
+      "weight": 2.2
+    },
+    "chemotaxis": {
+      "label": "chemotaxis",
+      "color": "#ffd24a",
+      "weight": 1.4
+    },
+    "antibiotic": {
+      "label": "antibiosis",
+      "color": "#ff5a5a",
+      "weight": 0.5
+    }
   },
   "organisms": {
     "cells": [
-      { "id": "sulfurovum", "label": "Sulfurovum-like sulfur oxidizer", "color": "#d9c24a", "genome": { "enzLvl": [0, 0, 1], "chemoLevel": 1, "eps": 1, "chemolithotroph": true }, "immigrateWeight": 1.8 },
-      { "id": "vent-heterotroph", "label": "vent heterotroph", "color": "#9fb0c0", "genome": { "enzLvl": [0, 1, 1] }, "immigrateWeight": 0.7 }
+      {
+        "id": "sulfurovum",
+        "label": "Sulfurovum-like sulfur oxidizer",
+        "color": "#d9c24a",
+        "genome": {
+          "enzLvl": [
+            0,
+            0,
+            1
+          ],
+          "chemoLevel": 1,
+          "eps": 1,
+          "chemolithotroph": true
+        },
+        "immigrateWeight": 1.8
+      },
+      {
+        "id": "vent-heterotroph",
+        "label": "vent heterotroph",
+        "color": "#9fb0c0",
+        "genome": {
+          "enzLvl": [
+            0,
+            1,
+            1
+          ]
+        },
+        "immigrateWeight": 0.7
+      }
     ]
   },
   "column": {
     "enabled": true,
     "layers": [
-      { "depth": 0, "tempC": 3, "salinity": 35, "light": 0.02, "nutrient": 0.2 },
-      { "depth": 20, "tempC": 8, "salinity": 34, "light": 0.005, "nutrient": 0.6 },
-      { "depth": 40, "tempC": 40, "salinity": 33, "light": 0.0, "nutrient": 1.0 }
+      {
+        "depth": 0,
+        "tempC": 3,
+        "salinity": 35,
+        "light": 0.02,
+        "nutrient": 0.2
+      },
+      {
+        "depth": 20,
+        "tempC": 8,
+        "salinity": 34,
+        "light": 0.005,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 40,
+        "tempC": 40,
+        "salinity": 33,
+        "light": 0,
+        "nutrient": 1
+      }
     ],
-    "thermocline": { "depth": 30, "sharpness": 0.9 },
-    "chemical": { "peakDepth": 0.92, "spread": 0.13, "strength": 0.95, "color": "#e6c84a" }
-  }
+    "thermocline": {
+      "depth": 30,
+      "sharpness": 0.9
+    },
+    "chemical": {
+      "peakDepth": 0.92,
+      "spread": 0.13,
+      "strength": 0.95,
+      "color": "#e6c84a"
+    }
+  },
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 260,
+      "color": "#3f3a44",
+      "label": "sulfide chimney floor",
+      "roughness": 0.8,
+      "porosity": 0.3,
+      "poreSize": 22,
+      "featureSize": 200
+    }
+  ]
 }
