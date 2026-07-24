@@ -67,6 +67,14 @@
       "file": "scenarios/deepwater-horizon.json"
     },
     {
+      "id": "doi-10-1038-nature00917",
+      "title": "SAR11: Cultivating the Ocean's Smallest Free-Living Cell",
+      "date": "2026-07-24",
+      "difficulty": "hard",
+      "realWorldBasis": "SAR11 clade cultivation from oligotrophic seawater via extinction dilution in low-nutrient media",
+      "file": "scenarios/doi-10-1038-nature00917.json"
+    },
+    {
       "id": "doi-10-1038-s41579-019-0160-2",
       "title": "Deep-sea hydrothermal vents",
       "date": "2026-07-18",

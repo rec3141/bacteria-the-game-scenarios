@@ -1,0 +1,162 @@
+{
+  "schema": "bacteria-scenario",
+  "version": 1,
+  "meta": {
+    "title": "SAR11: Cultivating the Ocean's Smallest Free-Living Cell",
+    "date": "2026-07-24",
+    "lesson": "SAR11 is an alphaproteobacterial lineage first recognized through rRNA gene surveys rather than culturing, and it turned out to be one of the most abundant bacterioplankton groups in seawater, appearing in nearly every pelagic community examined. For decades it resisted cultivation despite its ubiquity, a common problem in microbiology where sequence surveys reveal taxa that culture-based methods cannot capture. Success eventually came from a different strategy: diluting natural seawater communities down to very low cell densities and growing them in very low-nutrient media, rather than the rich media traditionally used in the lab. This let slow-growing, nutrient-frugal cells persist without being overwhelmed by fast-growing weeds. The isolated cells proved to be extraordinarily small, among the tiniest free-living cells ever brought into culture, consistent with an ecological strategy of minimizing cell volume and resource requirements in a chronically nutrient-poor ocean. This scenario asks you to grow a SAR11-like founder cell under scarce, low-nutrient conditions using efficient, low-cost metabolism rather than brute-force consumption.",
+    "citation": "Rappé, Connon, Vergin (2002). Cultivation of the ubiquitous SAR11 marine bacterioplankton clade. doi:10.1038/nature00917",
+    "difficulty": "hard",
+    "realWorldBasis": "SAR11 clade cultivation from oligotrophic seawater via extinction dilution in low-nutrient media"
+  },
+  "env": {
+    "day.lengthSec": 260,
+    "day.startHour": 6,
+    "day.latitude": 30,
+    "day.dayOfYear": 190,
+    "diel.tempBase": 22,
+    "diel.tempAmp": 3,
+    "diel.foodFloor": 0.22,
+    "diel.q10": 2,
+    "substrate.count": 65,
+    "substrate.sizeMin": 0.5,
+    "substrate.sizeMax": 1.6,
+    "substrate.lifeMin": 40,
+    "substrate.lifeMax": 90,
+    "predator.count": 3,
+    "predator.senseRange": 60,
+    "predator.mealEnergy": 40,
+    "cell.startEnergy": 85,
+    "cell.divideThreshold": 210
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Trace Lipid Micelles",
+      "enzymeLabel": "Lipase (low-yield)",
+      "color": "#c9b37a"
+    },
+    {
+      "index": 1,
+      "label": "Dissolved Free Amino Acids",
+      "enzymeLabel": "Protease (scavenging)",
+      "color": "#8aa6c1"
+    },
+    {
+      "index": 2,
+      "label": "Dissolved Carbohydrate Trace",
+      "enzymeLabel": "Glycosidase (baseline)",
+      "color": "#9fd3a0"
+    }
+  ],
+  "particles": {
+    "oligo_flake": {
+      "label": "Oligotrophic Marine Snow Speck",
+      "mix": [
+        0.25,
+        0.35,
+        0.4
+      ],
+      "rMin": 0.4,
+      "rMax": 1,
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 6
+    },
+    "dfaa_trace": {
+      "label": "DFAA Microparticle",
+      "mix": [
+        0.1,
+        0.7,
+        0.2
+      ],
+      "rMin": 0.3,
+      "rMax": 0.7,
+      "shape": "shard",
+      "squash": 1,
+      "weight": 4
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase (low-yield)",
+      "color": "#c9b37a",
+      "weight": 2
+    },
+    "enzyme1": {
+      "label": "Protease (scavenging)",
+      "color": "#8aa6c1",
+      "weight": 5
+    },
+    "enzyme2": {
+      "label": "Glycosidase (baseline)",
+      "color": "#9fd3a0",
+      "weight": 5
+    },
+    "chemotaxis": {
+      "label": "Nutrient-gradient Drift",
+      "color": "#7ec8e3",
+      "weight": 3
+    },
+    "antibiotic": {
+      "label": "Antibiotic Synthesis",
+      "color": "#e07a5f",
+      "weight": 0
+    },
+    "eps": {
+      "label": "Minimal EPS Sheath",
+      "color": "#b0b0b0",
+      "weight": 2
+    },
+    "crispr": {
+      "label": "CRISPR Immunity",
+      "color": "#6a4c93",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Twitching Motility",
+      "color": "#f2cc8f",
+      "weight": 1
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "sar11_founder",
+        "label": "SAR11-like Oligotroph",
+        "color": "#7fb3d5",
+        "genome": {
+          "enzLvl": [
+            1,
+            3,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "copiotroph_weed",
+        "label": "Fast-growing Copiotroph Competitor",
+        "color": "#d98880",
+        "genome": {
+          "enzLvl": [
+            2,
+            2,
+            2
+          ],
+          "chemoLevel": 0,
+          "antibiotic": 1,
+          "eps": 2,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 3
+      }
+    ]
+  }
+}
