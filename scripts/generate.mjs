@@ -50,8 +50,10 @@ It must satisfy this schema (any unknown key, out-of-range value, or new "verb" 
     ${ENV_WHITELIST.join(", ")} },
   "resources": [ up to 3, each { "index": 0|1|2, "label": str, "enzymeLabel": str, "color": "#rrggbb" } ],
       // index 0 = lipid/fat class, 1 = protein, 2 = carbohydrate. Re-skin only; you cannot add a 4th class.
-  "particles": { id: { "label": str, "mix": [num,num,num] (>=0, over the 3 classes), "rMin": num, "rMax": num,
+  "particles": { id: { "label": str, "mix": [num,num,num] (>=0, over the 3 classes),
       "shape": "aggregate"|"ellipse"|"shard", "squash": 0.1..1 (ellipse only), "weight": 0..10 } },
+      // Particles carry no size of their own: every particle's radius is sampled from
+      // substrate.sizeMin/sizeMax in env. Set the size there, once, in PIXELS.
   "actions": { primitive: { "label": str, "color": "#rrggbb", "weight": 0..10 } },
       // primitives are EXACTLY: enzyme0, enzyme1, enzyme2, chemotaxis, antibiotic, eps, crispr, twitching.
       // You may rename/recolor/reweight them (weight 0 removes one) but NEVER invent a new primitive.
@@ -73,7 +75,9 @@ and real events. The date field must be exactly "${today}".
 PARAMETER GUIDE — what the numbers do (defaults in [brackets]; deviate only with a reason):
 - day.lengthSec [240] s/day. day.latitude [45] (use the SITE's real latitude; higher = stronger seasonal light). day.dayOfYear [172] = season. day.startHour [0].
 - diel.tempBase [20] = mean water temperature °C (use the site's real temperature). diel.tempAmp [6] = day/night swing. diel.foodFloor [0.3] = night food as a fraction of noon (keep >= 0.2). diel.q10 [2].
-- substrate.count [80] = HOW MANY food particles exist. This is the single biggest control on playability. KEEP IT 60-130. Even for a nutrient-poor (oligotrophic) real habitat, do NOT go below ~55 — convey low productivity with SMALLER particles (substrate.sizeMin/sizeMax) or tougher grazing/competition, NOT by starving the board. A near-empty sea is not fun and not the goal.
+- substrate.count [80] = HOW MANY food particles exist. This is the single biggest control on playability. KEEP IT 60-130. Even for a nutrient-poor (oligotrophic) real habitat, do NOT go below ~55. A near-empty sea is not fun and not the goal.
+- substrate.sizeMin [20] and substrate.sizeMax [60] = particle radius in SCREEN PIXELS. These are NOT micrometres and NOT real cell dimensions — a playable particle is tens of pixels across, and a bacterium is drawn about 8 pixels wide. Writing a real microbial size here (0.4, 3, 9) produces food too small to see or eat and the level is dead on arrival. Keep sizeMin >= 15 and sizeMax >= 45 unless you have a specific reason, and never let the pair fall below 10/30.
+- To convey a nutrient-poor habitat, do NOT shrink the particles and do NOT starve the board. Use diel.foodFloor, substrate.lifeMin/lifeMax (food that vanishes sooner), tougher grazing (predator.count, predator.senseRange), or a founder that must work harder for the dominant resource class.
 - predator.count [4] grazers. phage.greenCount [18], phage.goldCount [4]. cell.startEnergy [100], cell.divideThreshold [200] (<= 230).
 
 FEEDING — the founder MUST be able to eat, or the level is dead on arrival:
