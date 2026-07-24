@@ -145,7 +145,8 @@
           "eps": 2,
           "crispr": false,
           "twitching": true,
-          "chemolithotroph": true
+          "chemolithotroph": true,
+          "phototroph": true
         },
         "immigrateWeight": 6
       },

@@ -360,7 +360,7 @@
         if (!id || ids.has(id)) return scReject("organism cell id missing or duplicated");
         ids.add(id);
         const g = c.genome || {};
-        const gErr = scOnlyKeys(g, new Set(["enzLvl", "chemoLevel", "antibiotic", "eps", "crispr", "twitching", "chemolithotroph"]), "genome");
+        const gErr = scOnlyKeys(g, new Set(["enzLvl", "chemoLevel", "antibiotic", "eps", "crispr", "twitching", "chemolithotroph", "phototroph"]), "genome");
         if (gErr) return scReject(gErr);
         const enz = g.enzLvl;
         if (!Array.isArray(enz) || enz.length !== 3) return scReject("genome.enzLvl must have length 3");
@@ -373,7 +373,7 @@
         if (c.color != null && !color) return scReject("organism cell color must be #rrggbb");
         organisms.cells.push({ id, label: scStr(c.label, 40) || "", color,
           genome: { enzLvl: [enz[0], enz[1], enz[2]], chemoLevel: g.chemoLevel|0, antibiotic: g.antibiotic|0,
-            eps: g.eps|0, crispr: g.crispr === true, twitching: g.twitching === true, chemolithotroph: g.chemolithotroph === true },
+            eps: g.eps|0, crispr: g.crispr === true, twitching: g.twitching === true, chemolithotroph: g.chemolithotroph === true, phototroph: g.phototroph === true },
           immigrateWeight: iw, bloom: c.bloom === true });
       }
     }

@@ -127,7 +127,8 @@
     "particleSink": 6,
     "bufferFrac": 0.25,
     "edgeMinSpeed": 0.12,
-    "chemRate": 5
+    "chemRate": 5,
+    "photoRate": 8
   },
   "cycle": {
     "reseedBacteria": 16,

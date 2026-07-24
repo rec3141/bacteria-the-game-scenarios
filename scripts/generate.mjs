@@ -147,6 +147,10 @@ CHEMOSYNTHESIS / CHEMOLITHOTROPHY (hydrothermal vents, cold seeps, sulfur/ammoni
 - set column.enabled=true and add column.chemical: { "peakDepth": 0..1 (fraction of the column where the chemical is richest — a vent floor ~0.9, a redox/oxycline ~0.5), "spread": 0.05..0.3, "strength": 0.6..1, "color": "#rrggbb" }.
 A chemolithotroph draws energy from the field at its depth and must stay in the plume — it needs no particle enzyme (keep its enzLvl low, e.g. [0,0,1]).
 
+PHOTOSYNTHESIS — set "phototroph": true in a genome. A phototroph fixes carbon from LIGHT, which falls off with depth through the photic zone AND follows the day/night cycle: it earns nothing at night, so it must bank energy by day or wait the dark out as a cyst. Use it for cyanobacteria, algae, and any photosynthetic mat or bloom. In a column, light is strongest at the surface, so a phototroph lives high and a chemolithotroph lives deep.
+
+BOTH TOGETHER — set "phototroph": true AND "chemolithotroph": true for ANOXYGENIC photosynthesis: purple and green sulfur bacteria run photosynthesis on light while using sulfide as the electron donor instead of water, so they need BOTH, and the scarcer of the two sets their growth. That makes them live in the narrow band where enough light still reaches down and enough sulfide still reaches up — which is exactly why a Winogradsky column stratifies into coloured layers, and the most interesting thing you can build with this engine. Set the light gradient (column.layers' light values, and the photic depth they imply) and the chemical plume so those two bands OVERLAP somewhere, or the organism has nowhere to live.
+
 PARAMETER TABLE — every path you may set in "env", as  path [default] (range) — what it does.
 Anything not listed here is NOT settable and will make the scenario invalid. Stay inside the stated
 range; a value outside it is clamped, so it will not do what you intended.
