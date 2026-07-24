@@ -66,7 +66,7 @@ for attempt in 1 2 3 4 5; do
   git commit -m "$SUBJECT"
 
   if git push origin HEAD:main; then
-    echo "publish: pushed $* to main"
+    echo "publish: pushed ${*:-failure record} to main"
     exit 0
   fi
   echo "publish: push rejected (attempt $attempt) -- main moved, replaying onto it"
