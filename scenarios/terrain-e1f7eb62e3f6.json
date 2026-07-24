@@ -1,0 +1,266 @@
+{
+  "schema": "bacteria-scenario",
+  "version": 1,
+  "meta": {
+    "title": "Cold Seep Mud: Methanotrophs of the Gulf of Mexico",
+    "date": "2026-07-24",
+    "lesson": "At Gulf of Mexico cold seeps, methane and short-chain hydrocarbons leak from the seafloor into porous, sulfide-rich sediment. Aerobic methanotrophic and methylotrophic bacteria colonize this soft mud, oxidizing methane-derived carbon (here modeled as the lipid/fat class) using methane monooxygenase. They live packed into burrows and pore spaces alongside sulfate-reducing neighbors, competing for the seep's patchy hydrocarbon falls rather than sunlight-driven production. Unlike hydrothermal vents, cold seeps are chemically gentler and much colder, so the community is slow-growing, densely aggregated, and highly locally concentrated around methane seepage points, with grazers and phages persisting for a long time in the cold, food-limited water above the mud.",
+    "citation": "Cold seep methanotrophy, Gulf of Mexico continental slope (Joye lab / GC185, GC600 seep sites)",
+    "difficulty": "normal",
+    "realWorldBasis": "Gulf of Mexico cold seep methanotroph mats (e.g. Bush Hill, GC185)"
+  },
+  "env": {
+    "diel.tempBase": 6,
+    "diel.tempAmp": 0.8,
+    "diel.q10": 2.4,
+    "diel.q10RefC": 8,
+    "diel.foodFloor": 0.6,
+    "diel.waterNight.0": 3,
+    "diel.waterNight.1": 6,
+    "diel.waterNight.2": 10,
+    "diel.waterDay.0": 12,
+    "diel.waterDay.1": 30,
+    "diel.waterDay.2": 34,
+    "diel.lightGamma": 3,
+    "day.latitude": 27,
+    "day.dayOfYear": 172,
+    "day.lengthSec": 280,
+    "respirationBase": 0.55,
+    "substrate.count": 78,
+    "substrate.sizeMin": 34,
+    "substrate.sizeMax": 170,
+    "substrate.lifeMin": 220,
+    "substrate.lifeMax": 420,
+    "substrate.driftMin": 4,
+    "substrate.driftMax": 9,
+    "substrate.moteEnergy": 8,
+    "substrate.minPerRes": 3,
+    "enzyme.maxRadius": 30,
+    "enzyme.life": 6.5,
+    "cell.thrust": 15000,
+    "cell.dragRate": 75,
+    "cell.maxSpeed": 150,
+    "cell.uptake": 11,
+    "cell.startEnergy": 100,
+    "cell.divideThreshold": 190,
+    "cell.cystBelow": 20,
+    "cell.cystWake": 55,
+    "cell.cystMetab": 0.02,
+    "cell.chemoRange0": 260,
+    "cell.chemoBias": 1.1,
+    "cell.genomeUpkeep": 0.06,
+    "predator.count": 3,
+    "predator.wanderSpeed": 16,
+    "predator.chaseSpeed": 28,
+    "predator.senseRange": 140,
+    "predator.metabolism": 6,
+    "predator.mealEnergy": 62,
+    "phage.greenCount": 10,
+    "phage.life.0": 26,
+    "phage.life.1": 40,
+    "phage.latent.0": 14,
+    "phage.latent.1": 22,
+    "phage.goldCount": 3,
+    "phage.goldMinDist": 700
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Methane/oil seep floc",
+      "enzymeLabel": "Methane monooxygenase",
+      "color": "#7a5a2e"
+    },
+    {
+      "index": 1,
+      "label": "Dead microbial biomass",
+      "enzymeLabel": "Protease",
+      "color": "#9c8a6a"
+    },
+    {
+      "index": 2,
+      "label": "Exopolymer mud floc",
+      "enzymeLabel": "Glycosidase",
+      "color": "#b8ad82"
+    }
+  ],
+  "particles": {
+    "seepFloc": {
+      "label": "Methane seep floc",
+      "mix": [
+        8,
+        1,
+        1
+      ],
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 8
+    },
+    "mudCrumb": {
+      "label": "Sulfidic mud crumb",
+      "mix": [
+        3,
+        2,
+        3
+      ],
+      "shape": "shard",
+      "squash": 1,
+      "weight": 4
+    },
+    "deadMat": {
+      "label": "Dead mat biomass",
+      "mix": [
+        1,
+        5,
+        1
+      ],
+      "shape": "ellipse",
+      "squash": 0.6,
+      "weight": 3
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Methane monooxygenase",
+      "color": "#e0873a",
+      "weight": 8
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#d9c48a",
+      "weight": 3
+    },
+    "enzyme2": {
+      "label": "Glycosidase",
+      "color": "#c7bb8e",
+      "weight": 3
+    },
+    "chemotaxis": {
+      "label": "Seep-tracking chemotaxis",
+      "color": "#ffb347",
+      "weight": 6
+    },
+    "antibiotic": {
+      "label": "Bacteriocin",
+      "color": "#8b3a3a",
+      "weight": 2
+    },
+    "eps": {
+      "label": "Mud biofilm EPS",
+      "color": "#a68a5b",
+      "weight": 5
+    },
+    "crispr": {
+      "label": "CRISPR immunity",
+      "color": "#5599aa",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Pili twitching",
+      "color": "#77aa55",
+      "weight": 3
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "methanotroph",
+        "label": "Methylococcus-like methanotroph",
+        "color": "#e0873a",
+        "genome": {
+          "enzLvl": [
+            3,
+            1,
+            1
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 8
+      },
+      {
+        "id": "sulfateReducer",
+        "label": "Sulfate-reducing neighbor",
+        "color": "#8b3a3a",
+        "genome": {
+          "enzLvl": [
+            1,
+            2,
+            1
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 2,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 4
+      },
+      {
+        "id": "mudGrazerResistant",
+        "label": "CRISPR-armed mud dweller",
+        "color": "#5599aa",
+        "genome": {
+          "enzLvl": [
+            2,
+            1,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": true,
+          "twitching": true
+        },
+        "immigrateWeight": 3
+      }
+    ]
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 8,
+        "salinity": 35,
+        "light": 0.5,
+        "nutrient": 0.2
+      },
+      {
+        "depth": 0.4,
+        "tempC": 6.5,
+        "salinity": 35.5,
+        "light": 0.1,
+        "nutrient": 0.4
+      },
+      {
+        "depth": 0.75,
+        "tempC": 5.5,
+        "salinity": 36,
+        "light": 0,
+        "nutrient": 0.75
+      },
+      {
+        "depth": 1,
+        "tempC": 5,
+        "salinity": 37,
+        "light": 0,
+        "nutrient": 1
+      }
+    ],
+    "thermocline": {
+      "depth": 0.45,
+      "sharpness": 0.4
+    }
+  },
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 180,
+      "color": "#4a4530",
+      "porosity": 0.4
+    }
+  ]
+}

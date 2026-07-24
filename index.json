@@ -138,6 +138,14 @@
       "realWorldBasis": "Eastern tropical Pacific oxygen minimum zone",
       "file": "scenarios/oxygen-minimum-zone.json",
       "doi": "10.1073/pnas.1205009109"
+    },
+    {
+      "id": "terrain-e1f7eb62e3f6",
+      "title": "Cold Seep Mud: Methanotrophs of the Gulf of Mexico",
+      "date": "2026-07-24",
+      "difficulty": "normal",
+      "realWorldBasis": "Gulf of Mexico cold seep methanotroph mats (e.g. Bush Hill, GC185)",
+      "file": "scenarios/terrain-e1f7eb62e3f6.json"
     }
   ]
 }
