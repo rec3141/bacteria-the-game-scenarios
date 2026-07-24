@@ -252,6 +252,14 @@ async function generateOnce(prompt) {
 }
 
 (async () => {
+  // --print-prompt: dump exactly what the model will be sent and stop. The prompt is assembled from
+  // params.json, the archive and several blocks of guidance, so "is X actually in there?" is not a
+  // question worth answering by reading the source.
+  if (process.argv.includes("--print-prompt")) {
+    const { prompt } = await buildPrompt();
+    process.stdout.write(prompt + "\n");
+    return;
+  }
   if (!mockFile && !process.env.ANTHROPIC_API_KEY) { console.error("ANTHROPIC_API_KEY is not set"); process.exit(2); }
   const { prompt, idHint } = await buildPrompt();
   let { raw, result } = await generateOnce(prompt);

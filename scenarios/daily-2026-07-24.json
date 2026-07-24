@@ -244,5 +244,17 @@
       "depth": 0.35,
       "sharpness": 0.6
     }
-  }
+  },
+  "terrain": [
+    {
+      "at": "top",
+      "thickness": 190,
+      "color": "#cfe4f2",
+      "label": "platelet ice",
+      "roughness": 0.55,
+      "porosity": 0.45,
+      "poreSize": 18,
+      "featureSize": 300
+    }
+  ]
 }

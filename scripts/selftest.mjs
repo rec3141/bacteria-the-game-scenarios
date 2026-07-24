@@ -6,7 +6,7 @@
 // regenerates on every 15-minute poll, quietly burning API budget. They share doi-id.mjs to make
 // that impossible, and this pins the shape generate.mjs actually derives.
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { execFileSync } from "node:child_process";
@@ -142,9 +142,34 @@ const repo = join(here, "..");
 
   const gen = readFileSync(join(here, "generate.mjs"), "utf8");
   assert.match(gen, /MOVE 20-30 PARAMETERS/, "the brief must ask for a real redesign, not a re-skin");
+  // a feature the generator cannot see may as well not exist
+  assert.match(gen, /"terrain": \[/, "the terrain schema must be shown to the model");
+  assert.match(gen, /TERRAIN \(column scenarios only\)/, "terrain needs design guidance, not just a schema");
   assert.match(gen, /PARAM_GROUPS\(\)/, "the full table must actually be rendered into the prompt");
   assert.ok(!/const ENV_WHITELIST = \[/.test(gen),
     "the hand-kept whitelist must be gone — params.json is generated from game.js");
+}
+
+// ---- the library must actually exercise terrain ---------------------------------------------------
+// Terrain is the one feature with no other coverage in play: the validator can accept it and the
+// generator can describe it while no level anywhere is built with it, and nobody would notice until
+// someone went looking. Keep at least one real scenario using it, top and bottom both represented.
+{
+  const dir = join(repo, "scenarios");
+  const withTerrain = readdirSync(dir).filter((f) => f.endsWith(".json"))
+    .map((f) => [f, JSON.parse(readFileSync(join(dir, f), "utf8"))])
+    .filter(([, s]) => Array.isArray(s.terrain) && s.terrain.length);
+  assert.ok(withTerrain.length, "at least one scenario must use terrain, or the feature ships untested");
+  const anchors = new Set(withTerrain.flatMap(([, s]) => s.terrain.map((t) => t.at)));
+  assert.ok(anchors.has("top") && anchors.has("bottom"),
+    "cover both a ceiling and a floor — they are placed by different arithmetic");
+  const porous = withTerrain.flatMap(([, s]) => s.terrain).some((t) => t.porosity > 0);
+  assert.ok(porous, "cover porosity too: a solid slab exercises none of the pore generation");
+  // and terrain only builds in column mode, so a scenario carrying it without a column is inert
+  for (const [f, s] of withTerrain) {
+    assert.ok(s.column && s.column.enabled === true,
+      `${f} declares terrain but is not a column scenario — terrain would never be built`);
+  }
 }
 
 // ---- publish.sh must not have regrown a PR step ---------------------------------------------------

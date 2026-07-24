@@ -207,5 +207,17 @@
       "strength": 0.9,
       "color": "#d4b483"
     }
-  }
+  },
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 230,
+      "color": "#5c4630",
+      "label": "marsh sediment",
+      "roughness": 0.4,
+      "porosity": 0.45,
+      "poreSize": 28,
+      "featureSize": 420
+    }
+  ]
 }
