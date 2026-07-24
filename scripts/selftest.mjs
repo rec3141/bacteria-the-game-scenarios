@@ -52,30 +52,37 @@ const repo = join(here, "..");
 // ---- queue.mjs filtering, driven through the real script ------------------------------------------
 {
   const now = Date.now();
+  const terrain = [{ at: "bottom", thickness: 200, color: "#3f3a44", porosity: 0.3, spires: 0.55, spireHeight: 300, spireWidth: 52 }];
   const queue = { schema: "bacteria-scenario-queue", version: 1, requests: [
-    { doi: "10.1126/science.1261359", ts: now - 1000 },              // already in scenarios/ -> skip
+    { doi: "10.1126/science.1261359", ts: now - 1200 },              // already in scenarios/ -> skip
     // credited, with a tab and newline in the name — those would split the TSV the workflow reads
-    { doi: "https://doi.org/10.1038/nature12352", ts: now - 500, name: "Ada\tLovelace\n" },
-    { doi: "not-a-doi", ts: now - 400 },                             // malformed -> skip
+    { doi: "https://doi.org/10.1038/nature12352", ts: now - 600, name: "Ada\tLovelace\n" },
+    { doi: "not-a-doi", ts: now - 500 },                             // malformed -> skip
     { doi: "10.9999/ancient.1", ts: now - 48 * 3600 * 1000 },        // aged out -> skip
-    { doi: "10.1128/AEM.00001-20", ts: now - 200 },                  // new -> build
+    { terrain, id: "terrain-abc123", ts: now - 400, name: "Bob" },   // a designed terrain -> build
+    { terrain, id: "BAD ID", ts: now - 350 },                        // malformed id -> skip
+    { doi: "10.1128/AEM.00001-20", ts: now - 200 },                  // over the per-run cap -> next poll
     { doi: "10.1128/aem.00001-20", ts: now - 100 },                  // same paper -> dedup
-    { doi: "10.5555/third.one", ts: now - 50 },                      // over the per-run cap -> next poll
   ] };
   const url = "data:application/json," + encodeURIComponent(JSON.stringify(queue));
   const out = execFileSync("node", [join(here, "queue.mjs")], {
     env: { ...process.env, SCENARIO_QUEUE_URL: url, SCENARIO_MAX_PER_RUN: "2" }, encoding: "utf8",
-    // NOT .trim() on the whole output: an anonymous request ends its line with an empty third
-    // column, and trimming would silently eat the last row's trailing tab.
+    // NOT .trim() on the whole output: an anonymous request ends its line with an empty last column,
+    // and trimming would silently eat the last row's trailing tab.
   }).split("\n").filter(Boolean).map((l) => l.split("\t"));
 
-  assert.deepEqual(out, [
-    // third column is the optional credit; the tab/newline are flattened to spaces so one submitter's
-    // name can never shift another row's columns, and an anonymous request emits an empty field
-    ["10.1038/nature12352", "doi-10-1038-nature12352", "Ada Lovelace"],
-    ["10.1128/AEM.00001-20", "doi-10-1128-aem-00001-20", ""],
-  ], "queue must emit oldest-first, deduped, capped, credited, and never re-emit a built scenario");
-  for (const row of out) assert.equal(row.length, 3, "every row must have exactly three columns");
+  // columns are mode, id, payload, name. name is LAST because it is the only field that can be empty,
+  // and bash `read` with a tab IFS collapses an empty MIDDLE column — putting it last keeps the rest
+  // aligned. The DOI's payload is the doi; the terrain's payload is base64 of its JSON.
+  assert.equal(out.length, 2, "oldest-first, capped at the per-run limit");
+  assert.deepEqual(out[0], ["doi", "doi-10-1038-nature12352", "10.1038/nature12352", "Ada Lovelace"],
+    "a credited DOI, with tabs/newlines in the name flattened to spaces");
+  assert.equal(out[1][0], "terrain", "the designed terrain is the second row");
+  assert.equal(out[1][1], "terrain-abc123", "it keeps the id the endpoint assigned");
+  assert.equal(out[1][3], "Bob", "its credit survives");
+  assert.deepEqual(JSON.parse(Buffer.from(out[1][2], "base64").toString("utf8")), terrain,
+    "the terrain payload round-trips through base64");
+  for (const row of out) assert.equal(row.length, 4, "every row must have exactly four columns");
 }
 
 // ---- a paper we cannot build must stop costing money ---------------------------------------------

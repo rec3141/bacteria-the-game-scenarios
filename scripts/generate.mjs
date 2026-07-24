@@ -244,6 +244,35 @@ async function buildPrompt() {
     return { prompt: `${schemaSpec()}\n\nBuild a scenario seeded by this scientific paper. Capture its microbial system as a playable level and teach its topic in the mini-lesson. Use this citation verbatim in meta.citation: "${p.citation}".\n\nTitle: ${p.title}\nJournal: ${p.journal}\nSubjects: ${p.subjects.join(", ")}\n${grounding}${novelty}`,
       idHint: `doi-${slug(p.doi)}`, citation: p.citation };
   }
+  if (mode === "terrain") {
+    // A terrain designed in the lab (base64 JSON), for which we invent a whole scenario. Validate the
+    // terrain up front — wrapped in a probe scenario — so a malformed one costs zero model calls.
+    const b64 = arg("terrain-b64");
+    if (!b64) throw new Error("--terrain-b64 required in terrain mode");
+    let terrain;
+    try { terrain = JSON.parse(Buffer.from(b64, "base64").toString("utf8")); }
+    catch (e) { throw new Error("terrain payload is not valid JSON: " + e.message); }
+    if (!Array.isArray(terrain)) terrain = [terrain];
+    const probe = { schema: "bacteria-scenario", version: 1,
+      meta: { title: "probe", date: today, lesson: "probe" },
+      column: { enabled: true, layers: [{ depth: 0, tempC: 6, light: 1 }, { depth: 1, tempC: 4, light: 0 }] },
+      terrain };
+    const check = validateScenario(probe, defaults);
+    if (!check.ok) throw new Error("submitted terrain is invalid: " + check.reason);
+
+    const desc = terrain.map((t) => {
+      const bits = [`a ${t.at === "top" ? "CEILING" : "FLOOR"} layer`, `"${t.label || (t.at === "top" ? "ice" : "sediment")}"`,
+        `${t.thickness}px thick`, `colour ${t.color || "unset"}`];
+      if (t.porosity > 0) bits.push(`porosity ${t.porosity} (voids threaded through it — a habitat cells live inside)`);
+      if (t.spires > 0 && t.spireHeight > 0) bits.push(`spires up to ${t.spireHeight}px tall (towers standing off the layer)`);
+      return "- " + bits.join(", ");
+    }).join("\n");
+
+    const idHint = arg("id") || `terrain-${today}`;
+    return {
+      prompt: `${schemaSpec()}\n\nThe physical setting of this level is ALREADY DESIGNED and FIXED as the terrain below. Do NOT change it and do NOT output a "terrain" field — it is stamped in for you.\n\nFixed terrain:\n${desc}\n\nRead what this terrain IS and build the real microbial community that lives against it — a porous sulfide floor with spires is a hydrothermal vent field; a porous ice ceiling is polar sea ice; a soft brown floor is estuarine or lake sediment; a pale carbonate floor is a reef. Choose real organisms and a specific, faithful habitat, and teach it in the mini-lesson.\n\nYou MUST set column.enabled=true with depth layers appropriate to this setting (terrain bounds a water column). Design env, organisms, resources, actions and particles to fit.${novelty}`,
+      idHint, terrain };
+  }
   return { prompt: `${schemaSpec()}\n\nInvent today's scenario: pick a real, vivid microbial-ecology situation (a specific event, habitat, or organism) with strong educational value.${novelty}`, idHint: `daily-${today}` };
 }
 
@@ -267,7 +296,7 @@ async function generateOnce(prompt) {
     return;
   }
   if (!mockFile && !process.env.ANTHROPIC_API_KEY) { console.error("ANTHROPIC_API_KEY is not set"); process.exit(2); }
-  const { prompt, idHint } = await buildPrompt();
+  const { prompt, idHint, terrain } = await buildPrompt();
   let { raw, result } = await generateOnce(prompt);
   if (!result.ok) {
     console.warn("first attempt invalid:", result.reason, "— retrying once");
@@ -282,6 +311,21 @@ async function generateOnce(prompt) {
   // hard sanitising happens in the endpoint that collected it and again in the game's validator.
   const credit = (arg("credit") || "").replace(/[\u0000-\u001f<>]/g, "").trim().slice(0, 40);
   if (credit) { raw.meta = { ...raw.meta, submittedBy: credit }; }
+
+  // A terrain seed: the boundary is the submitter's, not the model's, so stamp the terrain in verbatim
+  // — the model was told not to produce one. Force column mode too, because terrain only builds in a
+  // water column and a scenario that shipped the terrain without it would look fine and draw nothing.
+  // Then re-gate the whole thing: if forcing broke it, fail here rather than publish a dud.
+  if (terrain) {
+    raw.terrain = terrain;
+    raw.column = (raw.column && typeof raw.column === "object") ? raw.column : {};
+    raw.column.enabled = true;
+    if (!Array.isArray(raw.column.layers) || raw.column.layers.length < 1) {
+      raw.column.layers = [{ depth: 0, tempC: 6, light: 1 }, { depth: 1, tempC: 4, light: 0 }];
+    }
+    const recheck = validateScenario(raw, defaults);
+    if (!recheck.ok) { console.error("terrain stamp invalidated the scenario:", recheck.reason); process.exit(1); }
+  }
   writeFileSync(join(scenDir, `${id}.json`), JSON.stringify(raw, null, 2) + "\n");
   buildIndex(repo);   // rebuild index.json from the files on disk — never accumulates stale/duplicate rows
 

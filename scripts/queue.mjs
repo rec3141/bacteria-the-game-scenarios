@@ -1,6 +1,12 @@
-// Read the game's public DOI request queue and print the ones we have not built yet.
+// Read the game's public request queue and print the ones we have not built yet.
 //
-//   node scripts/queue.mjs            -> one "<doi>\t<id>" line per pending request
+//   node scripts/queue.mjs   -> one "<mode>\t<id>\t<payload>\t<name>" line per pending request
+//
+// name is LAST because it is the only field that can be empty (anonymous), and bash `read` with a
+// tab IFS collapses an empty MIDDLE field — putting it last keeps every other field aligned.
+//
+// Two kinds of request share the queue: a DOI (payload = the doi) and a terrain designed in the lab
+// (payload = base64 of the terrain JSON). The workflow branches on <mode>.
 //
 // Players submit a paper from inside the game; scenario-request.php on bacteria.cryomics.org
 // appends it to a plain JSON file. This script is the other half: a cron workflow polls that
@@ -69,10 +75,22 @@ const seen = new Set();
 // Oldest first: a burst of submissions drains in the order people sent them rather than starving
 // whoever was early.
 for (const r of requests.slice().sort((a, b) => (a.ts || 0) - (b.ts || 0))) {
-  const doi = cleanDoi(r && r.doi);
-  if (!DOI_RE.test(doi)) continue;                       // the endpoint filters these, but never trust the wire
-  if (r.ts && now - r.ts > MAX_AGE_MS) continue;
-  const id = doiScenarioId(doi);
+  if (!r || (r.ts && now - r.ts > MAX_AGE_MS)) continue;
+  let mode, id, payload;
+  if (r.terrain != null) {
+    // a terrain designed in the lab. The endpoint validated its shape and assigned the id, which is
+    // authoritative — a fresh scenario is invented for it, so there is no content to derive an id from.
+    id = typeof r.id === "string" && /^terrain-[a-z0-9]+$/.test(r.id) ? r.id : null;
+    if (!id || !Array.isArray(r.terrain) || !r.terrain.length || r.terrain.length > 4) continue;
+    mode = "terrain";
+    payload = Buffer.from(JSON.stringify(r.terrain), "utf8").toString("base64");   // no tabs/newlines
+  } else {
+    const doi = cleanDoi(r.doi);
+    if (!DOI_RE.test(doi)) continue;                     // the endpoint filters these, but never trust the wire
+    id = doiScenarioId(doi);
+    mode = "doi";
+    payload = doi;
+  }
   if (built.has(id) || seen.has(id)) continue;           // already a level, or asked for twice in one queue
   if (giveUp.has(id)) continue;                          // tried enough times; see failures.json
   seen.add(id);
@@ -80,9 +98,9 @@ for (const r of requests.slice().sort((a, b) => (a.ts || 0) - (b.ts || 0))) {
   // this file and scrubbed again by the scenario validator; this pass only stops a tab from
   // breaking the TSV the workflow reads.
   const name = typeof r.name === "string" ? r.name.replace(/[\t\r\n]+/g, " ").trim().slice(0, 40) : "";
-  pending.push({ doi, id, name });
+  pending.push({ mode, id, name, payload });
   if (pending.length >= MAX_PER_RUN) break;
 }
 
 console.error(`[queue] ${requests.length} request(s) on file, ${pending.length} to build`);
-for (const p of pending) console.log(`${p.doi}\t${p.id}\t${p.name}`);
+for (const p of pending) console.log(`${p.mode}\t${p.id}\t${p.payload}\t${p.name}`);
