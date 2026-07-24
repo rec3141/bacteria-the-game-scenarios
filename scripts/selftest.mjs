@@ -78,6 +78,34 @@ const repo = join(here, "..");
   for (const row of out) assert.equal(row.length, 3, "every row must have exactly three columns");
 }
 
+// ---- a paper we cannot build must stop costing money ---------------------------------------------
+// Dedup is derived from "does scenarios/<id>.json exist?", which is right for success and wrong for
+// failure: nothing gets written, so an unbuildable paper looks brand new on every 15-minute poll and
+// costs two model calls each time. failures.json is what makes the poller give up.
+{
+  const rf = readFileSync(join(here, "record-failure.mjs"), "utf8");
+  assert.match(rf, /attempts/, "failures must be counted, not just listed");
+  // the stored record carries no timestamp — it would churn the file and the git history on every
+  // failure even when nothing meaningful changed (checked on the written shape, not the prose)
+  const written = rf.match(/data\.failures\[id\] = \{[^}]*\}/);
+  assert.ok(written, "record-failure must write a failure record");
+  assert.ok(!/\bts\b|Date\.now/.test(written[0]), "the stored record must not carry a timestamp");
+
+  const q = readFileSync(join(here, "queue.mjs"), "utf8");
+  assert.match(q, /giveUp\.has\(id\)/, "the poller must skip papers it has given up on");
+  assert.match(q, /SCENARIO_MAX_ATTEMPTS/, "the attempt ceiling must be configurable");
+
+  // publish.sh must carry failures.json across its hard reset, or the record written moments earlier
+  // in the same job is thrown away and the poller retries forever anyway
+  const pub = readFileSync(join(here, "publish.sh"), "utf8");
+  assert.match(pub, /cp failures\.json "\$STASH\/failures\.json"/,
+    "publish.sh must preserve failures.json across the reset");
+  assert.match(pub, /if \[ -f failures\.json \]; then git add failures\.json; fi/,
+    "publish.sh must commit failures.json — and via `if`, since a bare && list aborts under set -e");
+  assert.ok(!/^\[ -f failures\.json \] &&/m.test(pub),
+    "a bare `[ -f x ] && cmd` statement aborts the whole publish under set -e when x is absent");
+}
+
 // ---- an absent queue is the normal state of a site nobody has submitted to ------------------------
 {
   const out = execFileSync("node", [join(here, "queue.mjs")], {

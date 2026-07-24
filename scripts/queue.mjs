@@ -11,7 +11,7 @@
 // There is no "mark as done" write-back, because there is nothing to write back WITH. Instead
 // dedup is derived: a request is pending exactly when scenarios/<derived id>.json is absent.
 // That is idempotent, survives a run dying halfway, and needs no state anywhere.
-import { readdirSync, existsSync } from "node:fs";
+import { readdirSync, existsSync, readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { DOI_RE, cleanDoi, doiScenarioId } from "./doi-id.mjs";
@@ -51,6 +51,18 @@ const built = new Set(
     : []
 );
 
+// Papers we have already tried and could not build. Without this a failure is indistinguishable from
+// a brand-new request -- nothing was written, so "does the scenario file exist?" says no every time --
+// and the poller pays for two model calls every 15 minutes until the entry ages out a day later.
+const MAX_ATTEMPTS = Number(process.env.SCENARIO_MAX_ATTEMPTS || 2);
+const giveUp = new Set();
+try {
+  const f = JSON.parse(readFileSync(join(repo, "failures.json"), "utf8"));
+  for (const [id, rec] of Object.entries(f.failures || {})) {
+    if (rec && Number(rec.attempts) >= MAX_ATTEMPTS) giveUp.add(id);
+  }
+} catch { /* no failures file yet, or unreadable → nothing to skip */ }
+
 const now = Date.now();
 const pending = [];
 const seen = new Set();
@@ -62,6 +74,7 @@ for (const r of requests.slice().sort((a, b) => (a.ts || 0) - (b.ts || 0))) {
   if (r.ts && now - r.ts > MAX_AGE_MS) continue;
   const id = doiScenarioId(doi);
   if (built.has(id) || seen.has(id)) continue;           // already a level, or asked for twice in one queue
+  if (giveUp.has(id)) continue;                          // tried enough times; see failures.json
   seen.add(id);
   // The optional credit name the submitter typed. Scrubbed by the endpoint before it ever reached
   // this file and scrubbed again by the scenario validator; this pass only stops a tab from

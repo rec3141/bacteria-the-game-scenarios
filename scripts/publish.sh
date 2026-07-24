@@ -25,7 +25,10 @@ cd "$(dirname "$0")/.."
 
 SUBJECT="${1:?commit subject required}"
 shift
-[ "$#" -gt 0 ] || { echo "publish: no scenario ids given, nothing to do"; exit 0; }
+# Zero ids is legitimate: recording a generation failure updates only failures.json.
+if [ "$#" -eq 0 ] && ! [ -f failures.json ]; then
+  echo "publish: nothing to publish"; exit 0
+fi
 
 # Hold the generated files outside the work tree: `git reset --hard` below would revert
 # any that overwrote a tracked file (a same-day daily re-run, a regenerated DOI).
@@ -35,6 +38,11 @@ for id in "$@"; do
   [ -f "scenarios/$id.json" ] || { echo "publish: scenarios/$id.json does not exist"; exit 1; }
   cp "scenarios/$id.json" "$STASH/$id.json"
 done
+# failures.json records which papers we have stopped paying to retry. It is ordinary tracked state,
+# so the reset below would throw away an update recorded moments ago in this same job.
+# `if`, not `[ -f x ] && cp`: under `set -e` a bare && list whose test fails IS a failed command,
+# and would abort the publish on the perfectly normal day when no failure has ever been recorded.
+if [ -f failures.json ]; then cp failures.json "$STASH/failures.json"; fi
 
 git config user.name "scenario-bot"
 git config user.email "scenario-bot@users.noreply.github.com"
@@ -46,9 +54,11 @@ for attempt in 1 2 3 4 5; do
   git reset --hard origin/main
 
   for id in "$@"; do cp "$STASH/$id.json" "scenarios/$id.json"; done
+  if [ -f "$STASH/failures.json" ]; then cp "$STASH/failures.json" failures.json; fi
   node scripts/build-index.mjs
 
   git add scenarios index.json
+  if [ -f failures.json ]; then git add failures.json; fi
   if git diff --cached --quiet; then
     echo "publish: main already holds these scenarios verbatim, nothing to commit"
     exit 0

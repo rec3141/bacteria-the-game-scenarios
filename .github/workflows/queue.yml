@@ -32,10 +32,15 @@ jobs:
             # is retried next poll until queue.mjs ages it out.
             # --credit is the optional name the submitter asked to be credited under; it is data,
             # passed as an argv element, and never reaches a shell.
-            if node scripts/generate.mjs --mode doi --doi "$doi" --credit "$credit" && node scripts/validate-all.mjs; then
+            if node scripts/generate.mjs --mode doi --doi "$doi" --credit "$credit" 2> >(tee /tmp/gen.err >&2) && node scripts/validate-all.mjs; then
               scripts/publish.sh "Scenario from a player-submitted paper" "$id"
             else
+              # Record it, or this paper is retried every 15 minutes for a day: nothing was written,
+              # so the "has it been built?" check says no on every poll and each retry costs two
+              # model calls. Two strikes and the poller leaves it alone.
               echo "::warning::could not build a scenario from $doi"
+              node scripts/record-failure.mjs "$doi" "$id" "$(tail -1 /tmp/gen.err 2>/dev/null)"
+              scripts/publish.sh "Record a paper that could not be built"
             fi
             echo "::endgroup::"
           done < pending.tsv
