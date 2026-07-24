@@ -115,6 +115,38 @@ const repo = join(here, "..");
   assert.equal(out.trim(), "", "an empty queue must produce no work and exit 0");
 }
 
+// ---- the model must be shown the whole parameter surface, with meaning and bounds -----------------
+// A 45-path list with no descriptions is why every generated level was the same ocean with a different
+// title: the model could only meaningfully move the dozen knobs it had been told about, and the other
+// 150 — protist behaviour, the phage lifecycle, the colour of the water — were unreachable and
+// unexplained. game.js documents all of them for its tuning panel.
+{
+  const params = JSON.parse(readFileSync(join(repo, "scripts/params.json"), "utf8")).params;
+  const n = Object.keys(params).length;
+  assert.ok(n > 120, `expected the full parameter surface, got ${n}`);
+  for (const [path, p] of Object.entries(params)) {
+    assert.ok(p.doc && p.doc.length > 5, `${path} has no doc string — the model cannot use what it cannot read`);
+    assert.ok(Number.isFinite(p.min) && Number.isFinite(p.max) && p.min <= p.max, `${path} has no usable range`);
+    assert.ok(p.default >= p.min && p.default <= p.max, `${path}: default ${p.default} is outside its own range`);
+  }
+  // the expressive ones that used to be unreachable
+  for (const path of ["diel.waterNight.0", "diel.waterDay.2", "predator.chaseSpeed", "phage.burst.1",
+                      "cell.uptake", "enzyme.maxRadius", "cycle.preyFloor"]) {
+    assert.ok(params[path], `${path} must be offered to the model`);
+  }
+  // and the ones that must never be
+  for (const path of ["cell.maxCells", "phage.maxCount", "predator.safetyMax", "grid.cs",
+                      "touchSpeedScale", "demo.foodScale", "column.enabled"]) {
+    assert.ok(!params[path], `${path} is a ceiling or a device knob and must not be settable by a scenario`);
+  }
+
+  const gen = readFileSync(join(here, "generate.mjs"), "utf8");
+  assert.match(gen, /MOVE 20-30 PARAMETERS/, "the brief must ask for a real redesign, not a re-skin");
+  assert.match(gen, /PARAM_GROUPS\(\)/, "the full table must actually be rendered into the prompt");
+  assert.ok(!/const ENV_WHITELIST = \[/.test(gen),
+    "the hand-kept whitelist must be gone — params.json is generated from game.js");
+}
+
 // ---- publish.sh must not have regrown a PR step ---------------------------------------------------
 {
   const pub = readFileSync(join(here, "publish.sh"), "utf8");

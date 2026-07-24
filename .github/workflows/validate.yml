@@ -15,6 +15,12 @@ jobs:
           node-version: '20'
       - run: node scripts/validate-all.mjs
       - run: node scripts/selftest.mjs
+      # defaults.json, params.json and validator.mjs are all derived from the game's game.js. They
+      # were kept in step by hand and drifted: 17 of defaults.json's values disagreed with the game,
+      # and since generate.mjs quotes them to the model as ground truth, every generated level came
+      # out with a fraction of the intended food. Nothing noticed, because nothing compared them.
+      - name: Check the derived files still match game.js
+        run: node scripts/sync-params.mjs --check
   pipeline:
     runs-on: ubuntu-latest
     steps:

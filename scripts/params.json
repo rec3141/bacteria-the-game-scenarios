@@ -1,0 +1,970 @@
+{
+  "schema": "bacteria-scenario-params",
+  "version": 1,
+  "params": {
+    "cell.radius": {
+      "default": 5,
+      "doc": "Cell body radius (px) — also its collision size.",
+      "min": 0.5,
+      "max": 50
+    },
+    "cell.baseHalf": {
+      "default": 9,
+      "doc": "Half-length of a freshly divided cell (px).",
+      "min": 0.9,
+      "max": 90
+    },
+    "cell.maxHalf": {
+      "default": 22,
+      "doc": "Half-length at full elongation, just before it splits (px).",
+      "min": 2.2,
+      "max": 220
+    },
+    "cell.lenBaseEnergy": {
+      "default": 55,
+      "doc": "Energy above which a cell starts elongating.",
+      "min": 5.5,
+      "max": 550
+    },
+    "cell.elongK": {
+      "default": 0.11,
+      "doc": "Extra half-length gained per unit of energy above lenBaseEnergy.",
+      "min": 0.011,
+      "max": 1.1
+    },
+    "cell.thrust": {
+      "default": 21270,
+      "doc": "Swim thrust. At low Reynolds number speed is thrust/dragRate, NOT an acceleration — the cell reaches this speed at once and loses it at once. Raise thrust alone and the cell swims faster; raise it with dragRate and the speed is unchanged, only the glide.",
+      "min": 2130,
+      "max": 213000
+    },
+    "cell.dragRate": {
+      "default": 60,
+      "doc": "How fast velocity relaxes onto what the thrust sustains (1/s). High = the cell stops dead when you let go, which is what a real bacterium does (viscosity beats inertia at this size). Low = it coasts like a submarine, which is wrong but forgiving. Also sets free-swim speed via thrust/dragRate.",
+      "min": 6,
+      "max": 600
+    },
+    "cell.cystDragRate": {
+      "default": 2.2,
+      "doc": "Same, for a dormant cyst. Kept low so a cyst keeps drifting with the water instead of freezing in place.",
+      "min": 0.22,
+      "max": 22
+    },
+    "cell.maxSpeed": {
+      "default": 240,
+      "doc": "Hard cap on swim speed (px/s), applied after thrust/dragRate.",
+      "min": 24,
+      "max": 2400
+    },
+    "cell.twitchSpeedScale": {
+      "default": 0.5,
+      "doc": "Self-propelled speed of a twitching cell while it is on a particle, as a fraction of ordinary open-water swimming. Particle drift is added separately while attached.",
+      "min": 0,
+      "max": 1
+    },
+    "cell.uptake": {
+      "default": 14,
+      "doc": "Nutrient absorbed per second while touching free motes.",
+      "min": 1.4,
+      "max": 140
+    },
+    "cell.startEnergy": {
+      "default": 110,
+      "doc": "Energy a new cell begins life with.",
+      "min": 11,
+      "max": 1100
+    },
+    "cell.maxEnergy": {
+      "default": 230,
+      "doc": "Energy ceiling — a cell can't store more than this.",
+      "min": 23,
+      "max": 2300
+    },
+    "cell.divideThreshold": {
+      "default": 175,
+      "doc": "Energy at which a cell divides in two.",
+      "min": 17.5,
+      "max": 1750
+    },
+    "cell.driftOnUpgrade": {
+      "default": 1,
+      "doc": "1 = every time YOU take a gold phage, one other random cell also changes — it gains a random gene or loses one. This is what keeps a SPREAD of genomes in the sea instead of a population that just tracks your genome (and it gives kill-the-winner something to bite on). 0 = off.",
+      "min": 0,
+      "max": 1,
+      "integer": true
+    },
+    "cell.driftGainChance": {
+      "default": 0.5,
+      "doc": "When drift fires, the chance the other cell GAINS a gene rather than losing one. 0.5 = a coin flip. Push it up and the whole sea escalates with you; push it down and genomes streamline around you.",
+      "min": 0,
+      "max": 1
+    },
+    "cell.swimCost": {
+      "default": 1.2,
+      "doc": "Energy per second burned while swimming.",
+      "min": 0.12,
+      "max": 12
+    },
+    "cell.enzymeCost": {
+      "default": 4,
+      "doc": "Energy spent per enzyme release.",
+      "min": 0.4,
+      "max": 40
+    },
+    "cell.antibioticCost": {
+      "default": 6,
+      "doc": "Energy spent per antibiotic release.",
+      "min": 0.6,
+      "max": 60
+    },
+    "cell.invulnTime": {
+      "default": 2.2,
+      "doc": "Seconds of immunity to grazing/infection right after dividing.",
+      "min": 0.22,
+      "max": 22
+    },
+    "cell.runMin": {
+      "default": 1.8,
+      "doc": "Shortest run an autonomous cell takes before tumbling (s).",
+      "min": 0.18,
+      "max": 18
+    },
+    "cell.runMax": {
+      "default": 3.4,
+      "doc": "Longest run an autonomous cell takes before tumbling (s).",
+      "min": 0.34,
+      "max": 34
+    },
+    "cell.tumbleDur": {
+      "default": 0.4,
+      "doc": "Seconds a cell spends tumbling (reorienting).",
+      "min": 0.04,
+      "max": 4
+    },
+    "cell.tumbleTurn": {
+      "default": 7,
+      "doc": "How sharply an autonomous cell turns while tumbling (rad/s).",
+      "min": 0.7,
+      "max": 70
+    },
+    "cell.playerTumbleTurn": {
+      "default": 2.2,
+      "doc": "How fast YOUR cell drifts off-heading when you let go of the controls. COSMETIC ONLY: you stop dead when you release (low Reynolds number), so this changes nothing about where you go — it's a reminder of the run-and-tumble your autonomous cells are actually doing. Don't document it as a movement mechanic; it isn't one.",
+      "min": 0.22,
+      "max": 22
+    },
+    "cell.enzymeCooldown.0": {
+      "default": 1,
+      "doc": "Seconds between an autonomous cell's enzyme releases (picked at random in this range). (Low end of the range.)",
+      "min": 0.1,
+      "max": 10
+    },
+    "cell.enzymeCooldown.1": {
+      "default": 2,
+      "doc": "Seconds between an autonomous cell's enzyme releases (picked at random in this range). (High end of the range.)",
+      "min": 0.2,
+      "max": 20
+    },
+    "cell.cystBelow": {
+      "default": 14,
+      "doc": "Energy below which an autonomous cell gives up and encysts (goes dormant).",
+      "min": 1.4,
+      "max": 140
+    },
+    "cell.cystWake": {
+      "default": 45,
+      "doc": "Energy a cyst must accumulate before it revives.",
+      "min": 4.5,
+      "max": 450
+    },
+    "cell.cystMetab": {
+      "default": 0.035,
+      "doc": "Energy per second burned while dormant — near zero, which is why cysts outlast famine.",
+      "min": 0.0035,
+      "max": 0.35
+    },
+    "cell.cystReviveEnergy": {
+      "default": 40,
+      "doc": "Energy handed to a cyst when you take control of it.",
+      "min": 4,
+      "max": 400
+    },
+    "cell.crisprEnergy": {
+      "default": 9,
+      "doc": "Energy gained when a CRISPR cell destroys a virus it's immune to.",
+      "min": 0.9,
+      "max": 90
+    },
+    "cell.cystDiffuse": {
+      "default": 55,
+      "doc": "How fast cysts drift passively with the water (brownian).",
+      "min": 5.5,
+      "max": 550
+    },
+    "cell.chemoRange0": {
+      "default": 300,
+      "doc": "Chemotaxis sensing range at the first level (px).",
+      "min": 30,
+      "max": 3000
+    },
+    "cell.chemoRangePer": {
+      "default": 140,
+      "doc": "Extra sensing range gained per further chemotaxis level.",
+      "min": 14,
+      "max": 1400
+    },
+    "cell.chemoBias": {
+      "default": 0.9,
+      "doc": "How much heading up-gradient stretches a run, per chemotaxis level — the bias in the biased random walk.",
+      "min": 0.09,
+      "max": 9
+    },
+    "cell.fedLinger": {
+      "default": 2.2,
+      "doc": "Seconds a cell stays in its 'well fed' state (shorter runs) after eating.",
+      "min": 0.22,
+      "max": 22
+    },
+    "cell.startUpgrades": {
+      "default": 0,
+      "doc": "TESTING AID: how many random adaptations the starting cell already has, drawn from the same pool a gold phage gives. 0 = the normal game. Raise it to drop straight into the late game instead of grinding there.",
+      "min": 0,
+      "max": 10,
+      "integer": true
+    },
+    "cell.genomeUpkeep": {
+      "default": 0.05,
+      "doc": "Extra respiration per adaptation tier — what a bigger genome costs to carry (the pressure to streamline).",
+      "min": 0.005,
+      "max": 0.5
+    },
+    "respirationBase": {
+      "default": 0.9,
+      "doc": "Baseline energy per second every cell burns just staying alive. The single biggest lever on how punishing the game is.",
+      "min": 0.09,
+      "max": 9
+    },
+    "substrate.count": {
+      "default": 60,
+      "doc": "How many food particles are kept drifting in the water. Applies as particles respawn.",
+      "min": 0,
+      "max": 1000,
+      "integer": true
+    },
+    "substrate.moteEnergy": {
+      "default": 7,
+      "doc": "Energy in each nutrient mote freed by dissolving a voxel.",
+      "min": 0.7,
+      "max": 70
+    },
+    "substrate.bloomEvery": {
+      "default": 0.5,
+      "doc": "Seconds per particle as the food field tracks the diel target — lower = the bloom rises and recedes faster. The target itself is substrate.count scaled by the light (see diel.foodFloor).",
+      "min": 0.05,
+      "max": 5
+    },
+    "substrate.sizeMin": {
+      "default": 30,
+      "doc": "Smallest particle radius (px).",
+      "min": 3,
+      "max": 300
+    },
+    "substrate.sizeMax": {
+      "default": 200,
+      "doc": "Largest particle radius (px).",
+      "min": 20,
+      "max": 2000
+    },
+    "substrate.sizeExp": {
+      "default": 1.6,
+      "doc": "Power-law exponent of the size spectrum: higher = far more small particles than large ones.",
+      "min": 0.16,
+      "max": 16
+    },
+    "substrate.carveRate": {
+      "default": 4.5,
+      "doc": "Density an enzyme removes per second, per voxel it covers — how fast you dig.",
+      "min": 0.45,
+      "max": 45
+    },
+    "substrate.lifeMin": {
+      "default": 130,
+      "doc": "Shortest particle lifespan (s).",
+      "min": 13,
+      "max": 1300
+    },
+    "substrate.lifeMax": {
+      "default": 300,
+      "doc": "Longest particle lifespan (s).",
+      "min": 30,
+      "max": 3000
+    },
+    "substrate.dissolveTime": {
+      "default": 9,
+      "doc": "Seconds a dying particle takes to erode away voxel by voxel.",
+      "min": 0.9,
+      "max": 90
+    },
+    "substrate.driftMin": {
+      "default": 9,
+      "doc": "Slowest particle drift (px/s).",
+      "min": 0.9,
+      "max": 90
+    },
+    "substrate.driftMax": {
+      "default": 20,
+      "doc": "Fastest particle drift (px/s).",
+      "min": 2,
+      "max": 200
+    },
+    "substrate.minPerRes": {
+      "default": 2,
+      "doc": "Minimum particles dominated by EACH resource, so every enzyme always has something to eat.",
+      "min": 0.2,
+      "max": 20,
+      "integer": true
+    },
+    "substrate.grainStrength": {
+      "default": 1,
+      "doc": "Depth shading: how strongly a voxel is lit by its distance to the particle's surface. Set to 0 for the old flat blocks (type 0 in the box — the slider is log-scaled and can't reach it).",
+      "min": 0,
+      "max": 2
+    },
+    "substrate.grainRim": {
+      "default": 1.16,
+      "doc": "Brightness of surface voxels. Above 1 makes the particle's skin catch the light; freshly carved faces brighten as they become the new surface.",
+      "min": 0,
+      "max": 4
+    },
+    "substrate.grainFalloff": {
+      "default": 0.2,
+      "doc": "How much brightness is lost per voxel step deeper into the mass. Higher = a harder, more dramatic gradient from skin to core.",
+      "min": 0.02,
+      "max": 2
+    },
+    "substrate.grainFloor": {
+      "default": 0.1,
+      "doc": "Darkest the buried core is allowed to get, so a big particle's middle doesn't go to black.",
+      "min": 0,
+      "max": 1
+    },
+    "enzyme.life": {
+      "default": 5,
+      "doc": "Seconds an enzyme cloud persists.",
+      "min": 0.5,
+      "max": 50
+    },
+    "enzyme.maxRadius": {
+      "default": 24,
+      "doc": "Enzyme cloud radius at full growth (px) — your effective digging reach.",
+      "min": 2.4,
+      "max": 240
+    },
+    "enzyme.growTime": {
+      "default": 0.4,
+      "doc": "Seconds the enzyme cloud takes to reach full size.",
+      "min": 0.04,
+      "max": 4
+    },
+    "toxin.life": {
+      "default": 4.5,
+      "doc": "Seconds the antibiotic cloud lingers.",
+      "min": 0.45,
+      "max": 45
+    },
+    "toxin.maxRadius": {
+      "default": 40,
+      "doc": "Antibiotic cloud radius at full growth (px).",
+      "min": 4,
+      "max": 400
+    },
+    "toxin.growTime": {
+      "default": 0.4,
+      "doc": "Seconds the antibiotic cloud takes to reach full size.",
+      "min": 0.04,
+      "max": 4
+    },
+    "toxin.dose": {
+      "default": 55,
+      "doc": "Instant damage dealt to a protist the moment the cloud touches it.",
+      "min": 5.5,
+      "max": 550
+    },
+    "toxin.potency": {
+      "default": 18,
+      "doc": "Further damage per second to protists sitting inside the cloud.",
+      "min": 1.8,
+      "max": 180
+    },
+    "toxin.radiusPer": {
+      "default": 0.34,
+      "doc": "Cloud radius gained per antibiotic level — leveling widens the cloud rather than strengthening it.",
+      "min": 0.034,
+      "max": 3.4
+    },
+    "toxin.crossDist": {
+      "default": 3,
+      "doc": "Cross-reactivity: bacteria at least this genetic distance from the releaser are harmed by its antibiotic too.",
+      "min": 0.3,
+      "max": 30,
+      "integer": true
+    },
+    "toxin.crossFactor": {
+      "default": 1,
+      "doc": "How hard that cross-reactive dose lands on those distant lineages (1 = the full dose).",
+      "min": 0.1,
+      "max": 10
+    },
+    "eps.lifePerLevel": {
+      "default": 4,
+      "doc": "Seconds of barrier lifetime added by each EPS expression level. Level 1 lasts this long; every later level adds the same amount again.",
+      "min": 0.4,
+      "max": 40
+    },
+    "eps.radius": {
+      "default": 24,
+      "doc": "Collision radius of one EPS block (px).",
+      "min": 2.4,
+      "max": 240
+    },
+    "eps.growTime": {
+      "default": 0.3,
+      "doc": "Seconds a newly released EPS block takes to reach full size.",
+      "min": 0.03,
+      "max": 3
+    },
+    "eps.cost": {
+      "default": 4,
+      "doc": "Energy spent per EPS block released.",
+      "min": 0.4,
+      "max": 40
+    },
+    "eps.maxCount": {
+      "default": 240,
+      "doc": "Global cap on live EPS blocks — the performance and ocean-access backstop.",
+      "min": 0,
+      "max": 2000,
+      "integer": true
+    },
+    "eps.cooldown.0": {
+      "default": 12,
+      "doc": "Seconds between autonomous EPS releases (picked at random in this range). (Low end of the range.)",
+      "min": 1.2,
+      "max": 120
+    },
+    "eps.cooldown.1": {
+      "default": 18,
+      "doc": "Seconds between autonomous EPS releases (picked at random in this range). (High end of the range.)",
+      "min": 1.8,
+      "max": 180
+    },
+    "eps.threatRange": {
+      "default": 95,
+      "doc": "How close a dangerous phage or protist must be before an autonomous producer releases EPS.",
+      "min": 9.5,
+      "max": 950
+    },
+    "nutrient.life": {
+      "default": 16,
+      "doc": "Seconds a freed nutrient mote floats before decaying.",
+      "min": 1.6,
+      "max": 160
+    },
+    "nutrient.radius": {
+      "default": 3.2,
+      "doc": "Pickup radius of a nutrient mote (px).",
+      "min": 0.32,
+      "max": 32
+    },
+    "cycle.reseedBacteria": {
+      "default": 16,
+      "doc": "Bacteria seeded in one go when a role-swap happens — the prey that drifts in the moment you become a grazer (and the founders if you ever revert).",
+      "min": 1.6,
+      "max": 160,
+      "integer": true
+    },
+    "cycle.reseedProtists": {
+      "default": 4,
+      "doc": "Protists seeded when the grazers are wiped out.",
+      "min": 0.4,
+      "max": 40,
+      "integer": true
+    },
+    "cycle.protistThrust": {
+      "default": 240,
+      "doc": "Swim speed of the protist you steer after a role swap.",
+      "min": 24,
+      "max": 2400
+    },
+    "cycle.protistEatScore": {
+      "default": 30,
+      "doc": "Calories scored per bacterium eaten while you're the protist.",
+      "min": 3,
+      "max": 300
+    },
+    "cycle.preyFloor": {
+      "default": 20,
+      "doc": "While you're the grazer, bacteria keep drifting in until there are at least this many to hunt — the prey population the sea maintains around you.",
+      "min": 2,
+      "max": 200,
+      "integer": true
+    },
+    "cycle.preyEvery": {
+      "default": 5,
+      "doc": "Seconds between those top-ups of drifting-in prey.",
+      "min": 0.5,
+      "max": 50
+    },
+    "cycle.turboSecs": {
+      "default": 0.25,
+      "doc": "Base length of a protist's turbo burst (Space, or the release button on a phone).",
+      "min": 0.025,
+      "max": 2.5
+    },
+    "cycle.turboMult": {
+      "default": 2.6,
+      "doc": "How much faster a protist swims during a turbo burst.",
+      "min": 0.26,
+      "max": 26
+    },
+    "cycle.turboCost": {
+      "default": 7,
+      "doc": "Energy a protist spends per turbo burst. It has no other use for energy but staying alive, so this is the real price of a sprint.",
+      "min": 0.7,
+      "max": 70
+    },
+    "cycle.turboGoldBonus": {
+      "default": 0.12,
+      "doc": "Seconds added to your turbo burst for each gold phage you catch AS A PROTIST — the grazer's version of an adaptation. Stacks for the rest of the run.",
+      "min": 0.012,
+      "max": 1.2
+    },
+    "cycle.turboMaxSecs": {
+      "default": 1.5,
+      "doc": "Ceiling on the turbo burst, however many gold phages you collect.",
+      "min": 0.15,
+      "max": 15
+    },
+    "day.lengthSec": {
+      "default": 240,
+      "doc": "Real seconds in one in-game day. The run ends when the day does.",
+      "min": 1,
+      "max": 86400
+    },
+    "day.startHour": {
+      "default": 0,
+      "doc": "Hour of the in-game day the run opens on (6 = dawn).",
+      "min": 0,
+      "max": 23
+    },
+    "day.latitude": {
+      "default": 45,
+      "doc": "Latitude of this run, degrees (+N / -S). With day.dayOfYear it gives the real sun: sunrise, sunset, how high it climbs. Past ~66.5 you get midnight sun or polar night depending on the season.",
+      "min": -90,
+      "max": 90
+    },
+    "day.dayOfYear": {
+      "default": 172,
+      "doc": "Day of the year, 1-365. 172 = June solstice, 355 = December solstice, 80/266 = the equinoxes. Sets the sun's declination, so it decides the season.",
+      "min": 1,
+      "max": 365,
+      "integer": true
+    },
+    "diel.tempBase": {
+      "default": 17,
+      "doc": "Mean water temperature across the day (°C).",
+      "min": -10,
+      "max": 50
+    },
+    "diel.tempAmp": {
+      "default": 5,
+      "doc": "Half the day's temperature swing (°C) — how far it climbs above the mean.",
+      "min": 0.5,
+      "max": 50
+    },
+    "diel.tempLag": {
+      "default": 0.05,
+      "doc": "How far the day's warmest moment trails the sun (fraction of a day).",
+      "min": 0,
+      "max": 1
+    },
+    "diel.foodFloor": {
+      "default": 0.35,
+      "doc": "Night-time food production, as a fraction of the midday bloom.",
+      "min": 0,
+      "max": 1
+    },
+    "diel.grazeNight": {
+      "default": 1,
+      "doc": "Extra grazing pressure at night, when the grazers rise to feed.",
+      "min": 0.1,
+      "max": 10
+    },
+    "diel.lightGamma": {
+      "default": 1.8,
+      "doc": "Shapes the daylight curve across the 24h. 1 = a plain sinusoid; higher deepens the night and sharpens midday. The light drives food supply, grazing pressure and the color of the water.",
+      "min": 0.18,
+      "max": 18
+    },
+    "diel.twilight": {
+      "default": 0.21,
+      "doc": "How far the sun sinks below the horizon before the light is fully gone. 0.21 is roughly nautical dusk (12 deg). Higher = longer, softer twilight.",
+      "min": 0,
+      "max": 1
+    },
+    "diel.waterNight.0": {
+      "default": 2,
+      "doc": "The sea's color at midnight (r, g, b). The water itself carries the time of day. (Low end of the range.)",
+      "min": 0,
+      "max": 255
+    },
+    "diel.waterNight.1": {
+      "default": 9,
+      "doc": "The sea's color at midnight (r, g, b). The water itself carries the time of day. (High end of the range.)",
+      "min": 0,
+      "max": 255
+    },
+    "diel.waterNight.2": {
+      "default": 22,
+      "doc": "The sea's color at midnight (r, g, b). The water itself carries the time of day. (High end of the range.)",
+      "min": 0,
+      "max": 255
+    },
+    "diel.waterDay.0": {
+      "default": 18,
+      "doc": "The sea's color at noon (r, g, b). Push it up to make midday brighter. (Low end of the range.)",
+      "min": 0,
+      "max": 255
+    },
+    "diel.waterDay.1": {
+      "default": 78,
+      "doc": "The sea's color at noon (r, g, b). Push it up to make midday brighter. (High end of the range.)",
+      "min": 0,
+      "max": 255
+    },
+    "diel.waterDay.2": {
+      "default": 92,
+      "doc": "The sea's color at noon (r, g, b). Push it up to make midday brighter. (High end of the range.)",
+      "min": 0,
+      "max": 255
+    },
+    "diel.goldTint": {
+      "default": 0.16,
+      "doc": "Strength of the warm glow while the sun is low (dawn/dusk).",
+      "min": 0,
+      "max": 1
+    },
+    "diel.q10": {
+      "default": 2,
+      "doc": "Q10: metabolic rate multiplies by this for every +10 degC. 2 = the textbook value (rate doubles). 1 = temperature has no effect. Applies to bacteria AND protists.",
+      "min": 0.2,
+      "max": 20
+    },
+    "diel.q10RefC": {
+      "default": 20,
+      "doc": "Reference temperature for Q10 — metabolism runs at its base rate here.",
+      "min": -50,
+      "max": 60
+    },
+    "predator.count": {
+      "default": 4,
+      "doc": "Target number of protist grazers. Applies as protists spawn, not retroactively.",
+      "min": 0.4,
+      "max": 40,
+      "integer": true
+    },
+    "predator.radius": {
+      "default": 22,
+      "doc": "Protist size (px).",
+      "min": 2.2,
+      "max": 220
+    },
+    "predator.wanderSpeed": {
+      "default": 25,
+      "doc": "Protist speed while searching for prey.",
+      "min": 2.5,
+      "max": 250
+    },
+    "predator.chaseSpeed": {
+      "default": 42.5,
+      "doc": "Protist speed while actively chasing a cell.",
+      "min": 4.25,
+      "max": 425
+    },
+    "predator.senseRange": {
+      "default": 170,
+      "doc": "How far a protist can detect your cells (px).",
+      "min": 17,
+      "max": 1700
+    },
+    "predator.satiatedTime": {
+      "default": 1,
+      "doc": "Seconds a protist rests, not hunting, after a meal.",
+      "min": 0.1,
+      "max": 10
+    },
+    "predator.startEnergy": {
+      "default": 100,
+      "doc": "Energy a new protist starts with.",
+      "min": 10,
+      "max": 1000
+    },
+    "predator.mealEnergy": {
+      "default": 58,
+      "doc": "Energy a protist gains per bacterium eaten.",
+      "min": 5.8,
+      "max": 580
+    },
+    "predator.metabolism": {
+      "default": 10,
+      "doc": "Energy per second a protist burns — raise it to starve the grazers out.",
+      "min": 1,
+      "max": 100
+    },
+    "predator.maturity": {
+      "default": 8,
+      "doc": "Seconds before a protist is old enough to reproduce.",
+      "min": 0.8,
+      "max": 80
+    },
+    "predator.reproEnergy": {
+      "default": 320,
+      "doc": "Energy a protist must reach to divide.",
+      "min": 32,
+      "max": 3200
+    },
+    "predator.reproCooldown": {
+      "default": 11,
+      "doc": "Minimum seconds between a protist's divisions.",
+      "min": 1.1,
+      "max": 110
+    },
+    "predator.minCount": {
+      "default": 2,
+      "doc": "Population floor: below this, a new protist drifts in from offscreen.",
+      "min": 0.2,
+      "max": 20,
+      "integer": true
+    },
+    "predator.immigrateEvery": {
+      "default": 8,
+      "doc": "Seconds between immigration checks when the protist population has crashed.",
+      "min": 0.8,
+      "max": 80
+    },
+    "predator.immigratePerPrey": {
+      "default": 0.04,
+      "doc": "Protist immigration target per bacterium alive — grazers arrive as their prey booms.",
+      "min": 0.004,
+      "max": 0.4
+    },
+    "predator.immigrateMax": {
+      "default": 14,
+      "doc": "Most protists that can arrive in a single immigration step (how fast they catch a boom).",
+      "min": 1.4,
+      "max": 140,
+      "integer": true
+    },
+    "predator.respawnFloor": {
+      "default": 0.5,
+      "doc": "Shortest protist respawn interval (s) — it halves on each extinction, down to this.",
+      "min": 0.05,
+      "max": 5
+    },
+    "predator.resistStep": {
+      "default": 0.12,
+      "doc": "Antibiotic resistance protists evolve each time they go fully extinct (0-1 fraction of toxin damage blunted). The arms race that lets grazers survive a colony that gasses them.",
+      "min": 0,
+      "max": 1
+    },
+    "predator.resistMax": {
+      "default": 0.85,
+      "doc": "Ceiling on evolved protist antibiotic resistance (0-1) — they never become fully immune.",
+      "min": 0,
+      "max": 1
+    },
+    "predator.cystMealFactor": {
+      "default": 0.45,
+      "doc": "Fraction of a normal meal's energy a protist gets from eating a cyst.",
+      "min": 0,
+      "max": 1
+    },
+    "predator.cystEatChance": {
+      "default": 0.45,
+      "doc": "Chance a bumped cyst is actually eaten rather than resisting.",
+      "min": 0,
+      "max": 1
+    },
+    "predator.killMotes": {
+      "default": 8,
+      "doc": "Food motes released when an ANTIBIOTIC kills a protist (dying of old age releases nothing).",
+      "min": 0.8,
+      "max": 80,
+      "integer": true
+    },
+    "predator.virusEnergy": {
+      "default": 5,
+      "doc": "Energy a protist gains from grazing a free virion — a small meal, and a brake on phage blooms.",
+      "min": 0.5,
+      "max": 50
+    },
+    "phage.greenCount": {
+      "default": 18,
+      "doc": "Free phages kept drifting in the water.",
+      "min": 1.8,
+      "max": 180,
+      "integer": true
+    },
+    "phage.radius": {
+      "default": 3.6,
+      "doc": "Phage size (px).",
+      "min": 0.36,
+      "max": 36
+    },
+    "phage.life.0": {
+      "default": 16,
+      "doc": "Seconds a free-floating phage survives before decaying. (Low end of the range.)",
+      "min": 1.6,
+      "max": 160
+    },
+    "phage.life.1": {
+      "default": 24,
+      "doc": "Seconds a free-floating phage survives before decaying. (High end of the range.)",
+      "min": 2.4,
+      "max": 240
+    },
+    "phage.diffuse": {
+      "default": 22,
+      "doc": "How fast phages diffuse through the water.",
+      "min": 2.2,
+      "max": 220
+    },
+    "phage.infectHalo": {
+      "default": 5,
+      "doc": "Extra reach beyond the cell body at which a phage can adsorb (px).",
+      "min": 0.5,
+      "max": 50
+    },
+    "phage.burst.0": {
+      "default": 4,
+      "doc": "How many new phages burst out when an infected cell lyses. (Low end of the range.)",
+      "min": 0.4,
+      "max": 40,
+      "integer": true
+    },
+    "phage.burst.1": {
+      "default": 8,
+      "doc": "How many new phages burst out when an infected cell lyses. (High end of the range.)",
+      "min": 0.8,
+      "max": 80,
+      "integer": true
+    },
+    "phage.latent.0": {
+      "default": 9,
+      "doc": "Seconds from infection to lysis — the latent period. (Low end of the range.)",
+      "min": 0.9,
+      "max": 90
+    },
+    "phage.latent.1": {
+      "default": 15,
+      "doc": "Seconds from infection to lysis — the latent period. (High end of the range.)",
+      "min": 1.5,
+      "max": 150
+    },
+    "phage.greenSeed.0": {
+      "default": 5,
+      "doc": "Seconds between reservoir top-ups, which keep phages tuned to a sampled lineage. (Low end of the range.)",
+      "min": 0.5,
+      "max": 50
+    },
+    "phage.greenSeed.1": {
+      "default": 9,
+      "doc": "Seconds between reservoir top-ups, which keep phages tuned to a sampled lineage. (High end of the range.)",
+      "min": 0.9,
+      "max": 90
+    },
+    "phage.greenFloor": {
+      "default": 27,
+      "doc": "Minimum phages kept matched to the sampled lineage's tier at each top-up.",
+      "min": 2.7,
+      "max": 270,
+      "integer": true
+    },
+    "phage.seedRatio": {
+      "default": 0.05,
+      "doc": "A tier's phage floor rises by this many phages per living cell near that tier — so viral pressure tracks host abundance instead of a flat trickle. 0 = the old fixed floor.",
+      "min": 0,
+      "max": 1
+    },
+    "phage.hostTolerance": {
+      "default": 2,
+      "doc": "Kill-the-winner window: how many adaptation tiers from its host a phage can still infect. Lower = upgrading shakes off your pursuers faster.",
+      "min": 0.2,
+      "max": 20,
+      "integer": true
+    },
+    "phage.adsorbBase": {
+      "default": 0.3,
+      "doc": "Probability a matched green phage adsorbs on ONE encounter (0-1). Each virus you contact is an independent chance, so a cloud of N gives ~1-(1-p)^N. Lower = brushing past a lone virus usually misses, but a dense cloud still almost always lands.",
+      "min": 0,
+      "max": 1
+    },
+    "phage.superinfDecay": {
+      "default": 0.7,
+      "doc": "Superinfection resistance (0-1): each virion already inside a cell multiplies the chance of the next one adsorbing by this. <1 makes heavy loads self-limiting; 1 disables it.",
+      "min": 0,
+      "max": 1
+    },
+    "phage.maxLoad": {
+      "default": 6,
+      "doc": "Most virions one cell can carry at once — the multiplicity-of-infection ceiling.",
+      "min": 0.6,
+      "max": 60,
+      "integer": true
+    },
+    "phage.burstPerLoad": {
+      "default": 1,
+      "doc": "Extra virions released at lysis for every virion above the first, so a heavily-loaded cell bursts far bigger. Raise this if bacteria outrun the plague.",
+      "min": 0.1,
+      "max": 10,
+      "integer": true
+    },
+    "phage.twitchAdsorbMult": {
+      "default": 2.2,
+      "doc": "Twitching pili ARE the phage receptor: multiplies a twitching cell's per-encounter adsorption probability. The risk half of twitching's risk/reward.",
+      "min": 0.22,
+      "max": 22
+    },
+    "phage.twitchHostBonus": {
+      "default": 1,
+      "doc": "Extra kill-the-winner tiers a green phage can span to infect a TWITCHING cell — so a twitching lineage can't outrun viruses by upgrading as easily.",
+      "min": 0.1,
+      "max": 10
+    },
+    "phage.goldLife.0": {
+      "default": 90,
+      "doc": "Seconds the rare GOLD phage (the HGT upgrade) lingers before vanishing. (Low end of the range.)",
+      "min": 9,
+      "max": 900
+    },
+    "phage.goldLife.1": {
+      "default": 140,
+      "doc": "Seconds the rare GOLD phage (the HGT upgrade) lingers before vanishing. (High end of the range.)",
+      "min": 14,
+      "max": 1400
+    },
+    "phage.goldCount": {
+      "default": 4,
+      "doc": "How many gold phages are kept on the board at once (desktop). Gold is the only thing that changes what you can do, so this is really 'how fast can you evolve'. 1 = scarce, a hunt.",
+      "min": 0.4,
+      "max": 40,
+      "integer": true
+    },
+    "phage.goldMinDist": {
+      "default": 650,
+      "doc": "How far from you a fresh gold phage is buried (px). Big = a real expedition.",
+      "min": 65,
+      "max": 6500
+    }
+  }
+}
