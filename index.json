@@ -8,7 +8,8 @@
       "date": "2026-07-18",
       "difficulty": "normal",
       "realWorldBasis": "Arctic spring under-ice phytoplankton bloom",
-      "file": "scenarios/arctic-bloom.json"
+      "file": "scenarios/arctic-bloom.json",
+      "doi": "10.1126/science.1215065"
     },
     {
       "id": "daily-2026-07-18",
@@ -72,7 +73,8 @@
       "date": "2026-07-18",
       "difficulty": "hard",
       "realWorldBasis": "Deepwater Horizon oil spill, Gulf of Mexico (2010)",
-      "file": "scenarios/deepwater-horizon.json"
+      "file": "scenarios/deepwater-horizon.json",
+      "doi": "10.1126/science.1195979"
     },
     {
       "id": "doi-10-1038-nature00917",
@@ -80,7 +82,8 @@
       "date": "2026-07-24",
       "difficulty": "hard",
       "realWorldBasis": "SAR11 clade cultivation from oligotrophic seawater via extinction dilution in low-nutrient media",
-      "file": "scenarios/doi-10-1038-nature00917.json"
+      "file": "scenarios/doi-10-1038-nature00917.json",
+      "doi": "10.1038/nature00917"
     },
     {
       "id": "doi-10-1038-s41579-019-0160-2",
@@ -88,7 +91,8 @@
       "date": "2026-07-18",
       "difficulty": "hard",
       "realWorldBasis": "Deep-sea hydrothermal vent chemosynthetic communities",
-      "file": "scenarios/doi-10-1038-s41579-019-0160-2.json"
+      "file": "scenarios/doi-10-1038-s41579-019-0160-2.json",
+      "doi": "10.1038/s41579-019-0160-2"
     },
     {
       "id": "doi-10-1111-1462-2920-70369",
@@ -96,7 +100,8 @@
       "date": "2026-07-18",
       "difficulty": "hard",
       "realWorldBasis": "First-order agricultural stream, southern Germany; AOB vs AOA nitrification kinetics",
-      "file": "scenarios/doi-10-1111-1462-2920-70369.json"
+      "file": "scenarios/doi-10-1111-1462-2920-70369.json",
+      "doi": "10.1111/1462-2920.70369"
     },
     {
       "id": "doi-10-1126-science-1261359",
@@ -104,7 +109,8 @@
       "date": "2026-07-18",
       "difficulty": "normal",
       "realWorldBasis": "Tara Oceans metagenomics: epipelagic vs mesopelagic vertical stratification driven by temperature",
-      "file": "scenarios/doi-10-1126-science-1261359.json"
+      "file": "scenarios/doi-10-1126-science-1261359.json",
+      "doi": "10.1126/science.1261359"
     },
     {
       "id": "hydrothermal-vent",
@@ -112,7 +118,8 @@
       "date": "2026-07-18",
       "difficulty": "hard",
       "realWorldBasis": "Deep-sea hydrothermal vent chemosynthetic community",
-      "file": "scenarios/hydrothermal-vent.json"
+      "file": "scenarios/hydrothermal-vent.json",
+      "doi": "10.1038/s41579-019-0160-2"
     },
     {
       "id": "lake-erie-bloom",
@@ -120,7 +127,8 @@
       "date": "2026-07-18",
       "difficulty": "normal",
       "realWorldBasis": "Lake Erie Microcystis bloom (2011)",
-      "file": "scenarios/lake-erie-bloom.json"
+      "file": "scenarios/lake-erie-bloom.json",
+      "doi": "10.1073/pnas.1216006110"
     },
     {
       "id": "oxygen-minimum-zone",
@@ -128,7 +136,8 @@
       "date": "2026-07-18",
       "difficulty": "hard",
       "realWorldBasis": "Eastern tropical Pacific oxygen minimum zone",
-      "file": "scenarios/oxygen-minimum-zone.json"
+      "file": "scenarios/oxygen-minimum-zone.json",
+      "doi": "10.1073/pnas.1205009109"
     }
   ]
 }

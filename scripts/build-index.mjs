@@ -19,6 +19,10 @@ export function buildIndex(repo) {
       // Carried into the index so the game's scenario list can show the credit without fetching
       // every scenario file. Omitted when anonymous, which is the default.
       if (typeof m.submittedBy === "string" && m.submittedBy.trim()) row.submittedBy = m.submittedBy.trim().slice(0, 40);
+      // The paper a level came from, pulled out of the citation, so the game can link a scenario (and
+      // a leaderboard row set in it) straight to the source without fetching every scenario file.
+      const doi = typeof m.citation === "string" && m.citation.match(/\b10\.\d{4,9}\/\S+/);
+      if (doi) row.doi = doi[0].replace(/[.,;)\]]+$/, "");
       scenarios.push(row);
     }
   }
