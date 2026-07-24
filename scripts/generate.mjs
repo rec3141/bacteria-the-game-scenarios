@@ -90,7 +90,10 @@ It must satisfy this schema (any unknown key, out-of-range value, or new "verb" 
         // so use these when the habitat has actual towers. Omit them for a flat mud or ice sheet.
         "spires": 0..1,        // how much of the width grows one (0 = none, 0.5 = about half)
         "spireHeight": 0..800, // how far they stand off the layer, in px
-        "spireWidth": 10..400 } ],  // girth: 40-70 is a slender chimney, 200 a broad pinnacle
+        "spireWidth": 10..400, // girth: 40-70 is a slender chimney, 200 a broad pinnacle
+        // ORGANIC WARP — bends the whole structure into veins and branches instead of round blobs.
+        // Turn it up (0.5-0.8) for coral, sponge, a reef, a microbial mat; leave 0 for rock, ice, mud.
+        "warp": 0..1 } ],
   "column": {   // OPTIONAL — a stratified water column. Include when depth matters (surface vs deep).
     "enabled": true|false,
     "layers": [ { "depth": num (ascending, >=0), "tempC": -10..50, "salinity": 0..60, "light": 0..1, "nutrient": 0..1 } ],
