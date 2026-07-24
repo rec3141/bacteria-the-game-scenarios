@@ -4,7 +4,10 @@ name: Player-submitted DOIs
 # server needs no GitHub credential at all -- see the header of scripts/queue.mjs.
 on:
   schedule:
-    - cron: '*/15 * * * *'
+    # Every minute while the terrain-seed feature is being tested (GitHub may coalesce these under
+    # load, so it is a ceiling, not a guarantee). For an instant build, use "Run workflow" below.
+    # Put this back to '*/15 * * * *' once testing settles.
+    - cron: '* * * * *'
   workflow_dispatch:
 permissions:
   contents: write
