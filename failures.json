@@ -1,0 +1,11 @@
+{
+  "schema": "bacteria-scenario-failures",
+  "version": 1,
+  "failures": {
+    "doi-10-1111-j-1462-2920-2010-02179-x": {
+      "doi": "10.1111/j.1462-2920.2010.02179.x",
+      "attempts": 1,
+      "reason": "generation failed validation twice: column layer tempC out of range"
+    }
+  }
+}
