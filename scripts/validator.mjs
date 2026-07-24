@@ -154,9 +154,12 @@
     /^touch/, /touchSpeedScale/, /Touch(\.|$)/, /^cell\.touch/,
     // the attract-mode dish, and the rendering grid — cosmetic/perf, not ecology
     /^demo\./, /^grid\./,
-    // the water column has its own authored block in the schema; setting it twice, two ways, would let
-    // a scenario contradict itself
-    /^column\./,
+    // The water column has its own authored block in the schema; setting its SHAPE twice, two ways,
+    // would let a scenario contradict itself. But chemRate and photoRate are not part of that block —
+    // they are rate constants that merely live under CFG.column, and how generous autotrophy is
+    // (a rich vent versus a marginal redox cline) is exactly a per-level design decision. Denying the
+    // whole namespace swept them up with the geometry.
+    /^column\.(?!chemRate$|photoRate$)/,
   ];
   function scEnvDenied(path) { return SCENARIO_ENV_DENY.some((re) => re.test(path)); }
   const SCENARIO_PRIMITIVES = new Set(["enzyme0", "enzyme1", "enzyme2", "chemotaxis", "antibiotic", "eps", "crispr", "twitching"]);

@@ -476,6 +476,18 @@
       "min": 0.32,
       "max": 32
     },
+    "column.chemRate": {
+      "default": 5,
+      "doc": "How well chemosynthesis pays: energy per second a chemolithotroph fixes at FULL chemical concentration, scaled by cell size. Raise it for a rich vent, lower it for a marginal redox cline. Keep it under cell.uptake or standing still beats hunting.",
+      "min": 0.5,
+      "max": 50
+    },
+    "column.photoRate": {
+      "default": 8,
+      "doc": "How well photosynthesis pays: energy per second a phototroph fixes in FULL light, scaled by cell size. Light also falls off with depth and dies at night, so this is usually set higher than chemRate. Keep it under cell.uptake.",
+      "min": 0.8,
+      "max": 80
+    },
     "cycle.reseedBacteria": {
       "default": 16,
       "doc": "Bacteria seeded in one go when a role-swap happens — the prey that drifts in the moment you become a grazer (and the founders if you ever revert).",
