@@ -35,8 +35,8 @@
     "cell.divideThreshold": 210,
     "phage.greenCount": 14,
     "phage.goldCount": 3,
-    "column.photoRate": 80,
-    "column.chemRate": 50
+    "column.photoRate": 10,
+    "column.chemRate": 10
   },
   "resources": [
     {
