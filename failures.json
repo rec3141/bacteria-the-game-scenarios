@@ -9,7 +9,7 @@
     },
     "doi-10-1371-journal-pone-0324466": {
       "doi": "doi-10-1371-journal-pone-0324466",
-      "attempts": 1,
+      "attempts": 2,
       "reason": "generation failed validation twice: unknown top-level field \"scenario\""
     }
   }
