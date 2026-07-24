@@ -1,9 +1,245 @@
 {
-  "day": { "lengthSec": 240, "startHour": 0, "latitude": 45, "dayOfYear": 172 },
-  "diel": { "tempBase": 20, "tempAmp": 6, "tempLag": 0.15, "foodFloor": 0.3, "grazeNight": 1, "twilight": 0.1, "q10": 2, "q10RefC": 20, "waterNight": [5, 20, 30], "waterDay": [40, 120, 150] },
-  "substrate": { "count": 80, "sizeMin": 20, "sizeMax": 60, "lifeMin": 30, "lifeMax": 90 },
-  "predator": { "count": 4, "senseRange": 170, "chaseSpeed": 42.5, "wanderSpeed": 25, "mealEnergy": 58, "metabolism": 10, "resistStep": 0.12, "resistMax": 0.85, "reproEnergy": 320, "reproCooldown": 11, "safetyMax": 300 },
-  "phage": { "greenCount": 18, "goldCount": 4, "hostTolerance": 2, "adsorbBase": 0.3, "maxCount": 2500, "life": [16, 24], "latent": [9, 15], "burst": [4, 8] },
-  "cell": { "startEnergy": 100, "divideThreshold": 200, "maxEnergy": 260 },
-  "enzyme": { "life": 6, "maxRadius": 40 }, "toxin": { "life": 4.5, "maxRadius": 40 }, "eps": { "lifePerLevel": 4, "radius": 24 }
+  "cell": {
+    "radius": 5,
+    "baseHalf": 9,
+    "maxHalf": 22,
+    "lenBaseEnergy": 55,
+    "elongK": 0.11,
+    "thrust": 21270,
+    "dragRate": 60,
+    "cystDragRate": 2.2,
+    "maxSpeed": 240,
+    "twitchSpeedScale": 0.5,
+    "uptake": 14,
+    "startEnergy": 110,
+    "maxEnergy": 230,
+    "divideThreshold": 175,
+    "driftOnUpgrade": 1,
+    "driftGainChance": 0.5,
+    "swimCost": 1.2,
+    "enzymeCost": 4,
+    "antibioticCost": 6,
+    "invulnTime": 2.2,
+    "runMin": 1.8,
+    "runMax": 3.4,
+    "tumbleDur": 0.4,
+    "tumbleTurn": 7,
+    "playerTumbleTurn": 2.2,
+    "enzymeCooldown": [
+      1,
+      2
+    ],
+    "cystBelow": 14,
+    "cystWake": 45,
+    "cystMetab": 0.035,
+    "cystReviveEnergy": 40,
+    "crisprEnergy": 9,
+    "cystDiffuse": 55,
+    "chemoRange0": 300,
+    "chemoRangePer": 140,
+    "chemoBias": 0.9,
+    "fedLinger": 2.2,
+    "maxCells": 10000,
+    "startUpgrades": 0,
+    "genomeUpkeep": 0.05,
+    "touchLatchSecs": 0.25,
+    "touchRunSecs": 2
+  },
+  "respirationBase": 0.9,
+  "touchSpeedScale": 0.625,
+  "demo": {
+    "food": 4,
+    "foodScale": 0.42,
+    "dishPad": 30,
+    "rimFade": 1.8,
+    "driftRate": 0.75,
+    "nearWindow": 0.9,
+    "panSpeed": 340,
+    "panHold": 2.2,
+    "openCells": 26,
+    "openProtists": 6,
+    "openPhages": 30,
+    "openFood": 26
+  },
+  "touch": {
+    "zoom": 1.2,
+    "autoEnzyme": 1,
+    "autoEnzymeEvery": 0.45
+  },
+  "grid": {
+    "cs": 7
+  },
+  "substrate": {
+    "count": 60,
+    "moteEnergy": 7,
+    "bloomEvery": 0.5,
+    "sizeMin": 30,
+    "sizeMax": 200,
+    "sizeExp": 1.6,
+    "carveRate": 4.5,
+    "lifeMin": 130,
+    "lifeMax": 300,
+    "dissolveTime": 9,
+    "driftMin": 9,
+    "driftMax": 20,
+    "minPerRes": 2,
+    "grainStrength": 1,
+    "grainRim": 1.16,
+    "grainFalloff": 0.2,
+    "grainFloor": 0.1
+  },
+  "enzyme": {
+    "life": 5,
+    "maxRadius": 24,
+    "growTime": 0.4
+  },
+  "toxin": {
+    "life": 4.5,
+    "maxRadius": 40,
+    "growTime": 0.4,
+    "dose": 55,
+    "potency": 18,
+    "radiusPer": 0.34,
+    "crossDist": 3,
+    "crossFactor": 1
+  },
+  "eps": {
+    "lifePerLevel": 4,
+    "radius": 24,
+    "growTime": 0.3,
+    "cost": 4,
+    "maxCount": 240,
+    "cooldown": [
+      12,
+      18
+    ],
+    "threatRange": 95
+  },
+  "nutrient": {
+    "life": 16,
+    "radius": 3.2,
+    "maxCount": 600
+  },
+  "column": {
+    "sink": 9,
+    "buoyEps": 7,
+    "deadSink": 22,
+    "particleSink": 6,
+    "bufferFrac": 0.25,
+    "edgeMinSpeed": 0.12,
+    "chemRate": 20
+  },
+  "cycle": {
+    "reseedBacteria": 16,
+    "reseedProtists": 4,
+    "protistThrust": 240,
+    "protistEatScore": 30,
+    "preyFloor": 20,
+    "preyEvery": 5,
+    "turboSecs": 0.25,
+    "turboMult": 2.6,
+    "turboCost": 7,
+    "turboGoldBonus": 0.12,
+    "turboMaxSecs": 1.5
+  },
+  "day": {
+    "lengthSec": 240,
+    "startHour": 0,
+    "latitude": 45,
+    "dayOfYear": 172
+  },
+  "diel": {
+    "tempBase": 17,
+    "tempAmp": 5,
+    "tempLag": 0.05,
+    "foodFloor": 0.35,
+    "grazeNight": 1,
+    "lightGamma": 1.8,
+    "twilight": 0.21,
+    "waterNight": [
+      2,
+      9,
+      22
+    ],
+    "waterDay": [
+      18,
+      78,
+      92
+    ],
+    "goldTint": 0.16,
+    "q10": 2,
+    "q10RefC": 20
+  },
+  "predator": {
+    "count": 4,
+    "radius": 22,
+    "wanderSpeed": 25,
+    "chaseSpeed": 42.5,
+    "senseRange": 170,
+    "satiatedTime": 1,
+    "startEnergy": 100,
+    "mealEnergy": 58,
+    "metabolism": 10,
+    "maturity": 8,
+    "reproEnergy": 320,
+    "reproCooldown": 11,
+    "safetyMax": 300,
+    "minCount": 2,
+    "immigrateEvery": 8,
+    "immigratePerPrey": 0.04,
+    "immigrateCap": 150,
+    "immigrateMax": 14,
+    "respawnFloor": 0.5,
+    "resistStep": 0.12,
+    "resistMax": 0.85,
+    "cystMealFactor": 0.45,
+    "cystEatChance": 0.45,
+    "killMotes": 8,
+    "virusEnergy": 5
+  },
+  "phage": {
+    "greenCount": 18,
+    "radius": 3.6,
+    "life": [
+      16,
+      24
+    ],
+    "maxCount": 2500,
+    "diffuse": 22,
+    "infectHalo": 5,
+    "burst": [
+      4,
+      8
+    ],
+    "latent": [
+      9,
+      15
+    ],
+    "greenSeed": [
+      5,
+      9
+    ],
+    "greenFloor": 27,
+    "seedBatch": 3,
+    "seedPerCell": 400,
+    "seedRoundsMax": 30,
+    "seedRatio": 0.05,
+    "greenFloorMax": 400,
+    "hostTolerance": 2,
+    "adsorbBase": 0.3,
+    "superinfDecay": 0.7,
+    "maxLoad": 6,
+    "burstPerLoad": 1,
+    "twitchAdsorbMult": 2.2,
+    "twitchHostBonus": 1,
+    "goldLife": [
+      90,
+      140
+    ],
+    "goldCount": 4,
+    "goldCountTouch": 3,
+    "goldMinDist": 650,
+    "goldMinDistTouch": 300,
+    "goldGrabTouch": 3
+  }
 }

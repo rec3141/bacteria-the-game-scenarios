@@ -35,6 +35,16 @@ const ENV_WHITELIST = [
   "phage.life.{0,1}", "phage.latent.{0,1}", "phage.burst.{0,1}",
   "cell.startEnergy", "cell.divideThreshold", "enzyme.life", "enzyme.maxRadius", "toxin.life", "toxin.maxRadius", "eps.lifePerLevel", "eps.radius",
 ];
+// Read a default out of defaults.json by dotted path, for quoting to the model. The guide used to
+// hardcode these numbers in prose and 17 of them had drifted from the game's real CFG — it was telling
+// the model substrate.sizeMax defaults to 60 when the game uses 200, so even a scenario that followed
+// the guide perfectly built a board with a fraction of the intended food. Deriving them means the
+// prompt cannot say something the validator disagrees with.
+function D(path) {
+  const v = path.split(".").reduce((o, k) => (o && typeof o === "object") ? o[k] : undefined, defaults);
+  if (v === undefined) throw new Error(`no default for "${path}" — defaults.json is out of date with game.js`);
+  return v;
+}
 function schemaSpec() {
   return `Output ONE JSON object, no prose, no markdown fences. It is DATA ONLY — it cannot contain code.
 It must satisfy this schema (any unknown key, out-of-range value, or new "verb" makes it INVALID):
@@ -73,12 +83,13 @@ distinct feel via env + a re-skinned enzyme; a mini-lesson that teaches the scie
 and real events. The date field must be exactly "${today}".
 
 PARAMETER GUIDE — what the numbers do (defaults in [brackets]; deviate only with a reason):
-- day.lengthSec [240] s/day. day.latitude [45] (use the SITE's real latitude; higher = stronger seasonal light). day.dayOfYear [172] = season. day.startHour [0].
-- diel.tempBase [20] = mean water temperature °C (use the site's real temperature). diel.tempAmp [6] = day/night swing. diel.foodFloor [0.3] = night food as a fraction of noon (keep >= 0.2). diel.q10 [2].
-- substrate.count [80] = HOW MANY food particles exist. This is the single biggest control on playability. KEEP IT 60-130. Even for a nutrient-poor (oligotrophic) real habitat, do NOT go below ~55. A near-empty sea is not fun and not the goal.
-- substrate.sizeMin [20] and substrate.sizeMax [60] = particle radius in SCREEN PIXELS. These are NOT micrometres and NOT real cell dimensions — a playable particle is tens of pixels across, and a bacterium is drawn about 8 pixels wide. Writing a real microbial size here (0.4, 3, 9) produces food too small to see or eat and the level is dead on arrival. Keep sizeMin >= 15 and sizeMax >= 45 unless you have a specific reason, and never let the pair fall below 10/30.
+- day.lengthSec [${D("day.lengthSec")}] s/day. day.latitude [${D("day.latitude")}] (use the SITE's real latitude; higher = stronger seasonal light). day.dayOfYear [${D("day.dayOfYear")}] = season. day.startHour [${D("day.startHour")}].
+- diel.tempBase [${D("diel.tempBase")}] = mean water temperature °C (use the site's real temperature). diel.tempAmp [${D("diel.tempAmp")}] = day/night swing. diel.foodFloor [${D("diel.foodFloor")}] = night food as a fraction of noon (keep >= 0.2). diel.q10 [${D("diel.q10")}].
+- substrate.count [${D("substrate.count")}] = HOW MANY food particles exist. This is the single biggest control on playability. Stay within roughly half to double the default, and never below ${Math.round(D("substrate.count") * 0.7)}. A near-empty sea is not fun and not the goal.
+- substrate.sizeMin [${D("substrate.sizeMin")}] and substrate.sizeMax [${D("substrate.sizeMax")}] = particle radius in SCREEN PIXELS. These are NOT micrometres and NOT real cell dimensions — a bacterium is drawn about 8 pixels wide, so a particle is TENS TO HUNDREDS of pixels across. Writing a real microbial size here (0.4, 3, 9) makes food too small to see or eat and the level is dead on arrival. Keep sizeMin >= ${Math.round(D("substrate.sizeMin") * 0.7)} and sizeMax >= ${Math.round(D("substrate.sizeMax") * 0.5)}.
+- The board must hold roughly the default amount of food. Food scales with count x (mean particle radius)^2, so halving the sizes cuts it to a QUARTER even if the count is unchanged. If you shrink the particles, raise the count to compensate.
 - To convey a nutrient-poor habitat, do NOT shrink the particles and do NOT starve the board. Use diel.foodFloor, substrate.lifeMin/lifeMax (food that vanishes sooner), tougher grazing (predator.count, predator.senseRange), or a founder that must work harder for the dominant resource class.
-- predator.count [4] grazers. phage.greenCount [18], phage.goldCount [4]. cell.startEnergy [100], cell.divideThreshold [200] (<= 230).
+- predator.count [${D("predator.count")}] grazers. phage.greenCount [${D("phage.greenCount")}], phage.goldCount [${D("phage.goldCount")}]. cell.startEnergy [${D("cell.startEnergy")}], cell.divideThreshold [${D("cell.divideThreshold")}].
 
 FEEDING — the founder MUST be able to eat, or the level is dead on arrival:
 - There are exactly 3 food classes: index 0 = lipid/fatty, 1 = protein, 2 = carbohydrate — each digested by its own enzyme (enzyme0/enzyme1/enzyme2). A "novel enzyme" is a re-skin of one of these on its class.
