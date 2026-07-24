@@ -252,9 +252,10 @@
       "color": "#cfe4f2",
       "label": "platelet ice",
       "roughness": 0.55,
-      "porosity": 0.45,
-      "poreSize": 18,
-      "featureSize": 300
+      "porosity": 0.5,
+      "poreSize": 16,
+      "featureSize": 300,
+      "warp": 0.45
     }
   ]
 }

@@ -60,7 +60,8 @@
     "toxin.life": 10,
     "toxin.maxRadius": 1.5,
     "eps.lifePerLevel": 6,
-    "eps.radius": 1.8
+    "eps.radius": 1.8,
+    "column.photoRate": 6
   },
   "resources": [
     {
@@ -179,7 +180,8 @@
           "antibiotic": 0,
           "eps": 1,
           "crispr": true,
-          "twitching": false
+          "twitching": false,
+          "phototroph": true
         },
         "immigrateWeight": 8
       },
@@ -197,7 +199,8 @@
           "antibiotic": 0,
           "eps": 2,
           "crispr": true,
-          "twitching": false
+          "twitching": false,
+          "phototroph": true
         },
         "immigrateWeight": 6
       },

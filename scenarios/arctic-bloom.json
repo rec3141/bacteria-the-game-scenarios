@@ -28,7 +28,8 @@
         150,
         190
       ]
-    }
+    },
+    "column.photoRate": 9
   },
   "resources": [
     {
@@ -76,8 +77,50 @@
       "label": "sea ice",
       "roughness": 0.5,
       "porosity": 0.45,
-      "poreSize": 18,
-      "featureSize": 300
+      "poreSize": 14,
+      "featureSize": 300,
+      "warp": 0.35
     }
-  ]
+  ],
+  "organisms": {
+    "cells": [
+      {
+        "id": "ice_diatom",
+        "label": "Ice-associated diatom",
+        "color": "#7fc47f",
+        "genome": {
+          "enzLvl": [
+            1,
+            0,
+            0
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false,
+          "phototroph": true
+        },
+        "immigrateWeight": 5
+      },
+      {
+        "id": "psychrophile",
+        "label": "Psychrophilic heterotroph",
+        "color": "#6f93b8",
+        "genome": {
+          "enzLvl": [
+            2,
+            2,
+            1
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 4
+      }
+    ]
+  }
 }

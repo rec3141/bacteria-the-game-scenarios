@@ -220,7 +220,11 @@
       "roughness": 0.7,
       "porosity": 0.4,
       "poreSize": 24,
-      "featureSize": 260
+      "featureSize": 260,
+      "warp": 0.55,
+      "spires": 0.3,
+      "spireHeight": 90,
+      "spireWidth": 70
     }
   ]
 }

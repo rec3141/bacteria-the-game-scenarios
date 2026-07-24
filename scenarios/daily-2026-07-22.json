@@ -244,7 +244,8 @@
       "roughness": 0.35,
       "porosity": 0.45,
       "poreSize": 30,
-      "featureSize": 400
+      "featureSize": 400,
+      "warp": 0.2
     }
   ]
 }

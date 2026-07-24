@@ -42,7 +42,8 @@
     "enzyme.life": 14,
     "enzyme.maxRadius": 28,
     "eps.lifePerLevel": 10,
-    "eps.radius": 16
+    "eps.radius": 16,
+    "column.chemRate": 8
   },
   "resources": [
     {
@@ -161,7 +162,8 @@
           "antibiotic": 1,
           "eps": 2,
           "crispr": false,
-          "twitching": 3
+          "twitching": 3,
+          "chemolithotroph": true
         },
         "immigrateWeight": 3
       },
@@ -179,7 +181,8 @@
           "antibiotic": 1,
           "eps": 2,
           "crispr": false,
-          "twitching": 4
+          "twitching": 4,
+          "chemolithotroph": true
         },
         "immigrateWeight": 3
       },
@@ -197,7 +200,8 @@
           "antibiotic": 0,
           "eps": 3,
           "crispr": true,
-          "twitching": 1
+          "twitching": 1,
+          "chemolithotroph": true
         },
         "immigrateWeight": 8
       },
@@ -256,6 +260,12 @@
     "thermocline": {
       "depth": 10,
       "sharpness": 0.4
+    },
+    "chemical": {
+      "peakDepth": 0.8,
+      "spread": 0.2,
+      "strength": 0.85,
+      "color": "#9fd4e8"
     }
   },
   "terrain": [
@@ -265,9 +275,10 @@
       "color": "#6a6152",
       "label": "streambed gravel",
       "roughness": 0.55,
-      "porosity": 0.5,
-      "poreSize": 32,
-      "featureSize": 320
+      "porosity": 0.55,
+      "poreSize": 14,
+      "featureSize": 150,
+      "warp": 0.25
     }
   ]
 }

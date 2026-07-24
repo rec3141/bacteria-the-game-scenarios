@@ -35,7 +35,8 @@
     },
     "predator": {
       "count": 4
-    }
+    },
+    "column.chemRate": 7
   },
   "resources": [
     {
@@ -93,7 +94,8 @@
             1,
             1
           ],
-          "eps": 1
+          "eps": 1,
+          "chemolithotroph": true
         },
         "immigrateWeight": 0.9
       }
@@ -127,6 +129,12 @@
     "thermocline": {
       "depth": 12,
       "sharpness": 0.85
+    },
+    "chemical": {
+      "peakDepth": 0.55,
+      "spread": 0.16,
+      "strength": 0.8,
+      "color": "#8fe0c0"
     }
   }
 }

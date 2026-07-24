@@ -34,7 +34,8 @@
     },
     "predator": {
       "count": 3
-    }
+    },
+    "column.chemRate": 12
   },
   "resources": [
     {
@@ -124,7 +125,7 @@
       "sharpness": 0.9
     },
     "chemical": {
-      "peakDepth": 0.92,
+      "peakDepth": 0.7,
       "spread": 0.13,
       "strength": 0.95,
       "color": "#e6c84a"
@@ -142,7 +143,8 @@
       "featureSize": 220,
       "spires": 0.55,
       "spireHeight": 300,
-      "spireWidth": 52
+      "spireWidth": 45,
+      "warp": 0.32
     }
   ]
 }

@@ -35,7 +35,8 @@
     },
     "predator": {
       "count": 4
-    }
+    },
+    "column.photoRate": 12
   },
   "resources": [
     {
@@ -75,7 +76,8 @@
             2
           ],
           "eps": 2,
-          "antibiotic": 1
+          "antibiotic": 1,
+          "phototroph": true
         },
         "immigrateWeight": 1.6,
         "bloom": true
@@ -89,7 +91,8 @@
             1,
             0,
             1
-          ]
+          ],
+          "phototroph": true
         },
         "immigrateWeight": 1
       }
@@ -134,7 +137,8 @@
       "roughness": 0.3,
       "porosity": 0.4,
       "poreSize": 30,
-      "featureSize": 450
+      "featureSize": 320,
+      "warp": 0.2
     }
   ]
 }

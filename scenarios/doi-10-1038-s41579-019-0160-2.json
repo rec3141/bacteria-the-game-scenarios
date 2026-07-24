@@ -34,7 +34,8 @@
     },
     "predator": {
       "count": 3
-    }
+    },
+    "column.chemRate": 10
   },
   "resources": [
     {
@@ -79,7 +80,8 @@
             1
           ],
           "chemoLevel": 2,
-          "eps": 1
+          "eps": 1,
+          "chemolithotroph": true
         },
         "immigrateWeight": 1.6,
         "bloom": false
@@ -95,7 +97,8 @@
             1
           ],
           "chemoLevel": 1,
-          "eps": 3
+          "eps": 3,
+          "chemolithotroph": true
         },
         "immigrateWeight": 1,
         "bloom": true
@@ -130,6 +133,12 @@
     "thermocline": {
       "depth": 30,
       "sharpness": 0.9
+    },
+    "chemical": {
+      "peakDepth": 0.7,
+      "spread": 0.13,
+      "strength": 0.95,
+      "color": "#e8d24a"
     }
   },
   "terrain": [
@@ -144,7 +153,8 @@
       "featureSize": 220,
       "spires": 0.55,
       "spireHeight": 300,
-      "spireWidth": 52
+      "spireWidth": 45,
+      "warp": 0.32
     }
   ]
 }

@@ -168,6 +168,49 @@
     ]
   },
   "column": {
-    "enabled": false
-  }
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 29,
+        "salinity": 35,
+        "light": 1,
+        "nutrient": 0.25
+      },
+      {
+        "depth": 0.5,
+        "tempC": 29,
+        "salinity": 35,
+        "light": 0.65,
+        "nutrient": 0.45
+      },
+      {
+        "depth": 1,
+        "tempC": 28,
+        "salinity": 35,
+        "light": 0.3,
+        "nutrient": 0.6
+      }
+    ],
+    "thermocline": {
+      "depth": 0.7,
+      "sharpness": 0.2
+    }
+  },
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 200,
+      "color": "#d8a08a",
+      "label": "coral surface",
+      "roughness": 0.5,
+      "porosity": 0.35,
+      "poreSize": 20,
+      "featureSize": 300,
+      "spires": 0.25,
+      "spireHeight": 70,
+      "spireWidth": 80,
+      "warp": 0.6
+    }
+  ]
 }

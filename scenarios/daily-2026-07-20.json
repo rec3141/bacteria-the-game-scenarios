@@ -36,7 +36,9 @@
     "phage.greenCount": 14,
     "phage.goldCount": 3,
     "cell.startEnergy": 100,
-    "cell.divideThreshold": 200
+    "cell.divideThreshold": 200,
+    "column.photoRate": 10,
+    "column.chemRate": 10
   },
   "resources": [
     {
@@ -222,7 +224,8 @@
       "roughness": 0.35,
       "porosity": 0.45,
       "poreSize": 30,
-      "featureSize": 400
+      "featureSize": 400,
+      "warp": 0.2
     }
   ]
 }

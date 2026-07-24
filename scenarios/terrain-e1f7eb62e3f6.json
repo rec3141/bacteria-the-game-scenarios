@@ -61,7 +61,8 @@
     "phage.latent.0": 14,
     "phage.latent.1": 22,
     "phage.goldCount": 3,
-    "phage.goldMinDist": 700
+    "phage.goldMinDist": 700,
+    "column.chemRate": 9
   },
   "resources": [
     {
@@ -176,7 +177,8 @@
           "antibiotic": 0,
           "eps": 1,
           "crispr": false,
-          "twitching": false
+          "twitching": false,
+          "chemolithotroph": true
         },
         "immigrateWeight": 8
       },
@@ -194,7 +196,8 @@
           "antibiotic": 1,
           "eps": 2,
           "crispr": false,
-          "twitching": false
+          "twitching": false,
+          "chemolithotroph": true
         },
         "immigrateWeight": 4
       },
@@ -253,6 +256,12 @@
     "thermocline": {
       "depth": 0.45,
       "sharpness": 0.4
+    },
+    "chemical": {
+      "peakDepth": 0.85,
+      "spread": 0.17,
+      "strength": 0.9,
+      "color": "#b8a0d8"
     }
   },
   "terrain": [
@@ -260,7 +269,11 @@
       "at": "bottom",
       "thickness": 180,
       "color": "#4a4530",
-      "porosity": 0.4
+      "porosity": 0.45,
+      "roughness": 0.3,
+      "warp": 0.3,
+      "poreSize": 30,
+      "featureSize": 380
     }
   ]
 }
