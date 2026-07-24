@@ -59,6 +59,14 @@
       "file": "scenarios/daily-2026-07-23.json"
     },
     {
+      "id": "daily-2026-07-24",
+      "title": "Antarctic Ice Algae: Phaeocystis and the Krill-Larvae Race",
+      "date": "2026-07-24",
+      "difficulty": "hard",
+      "realWorldBasis": "Antarctic land-fast sea ice, platelet ice layer, McMurdo Sound, Phaeocystis antarctica / diatom community",
+      "file": "scenarios/daily-2026-07-24.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
