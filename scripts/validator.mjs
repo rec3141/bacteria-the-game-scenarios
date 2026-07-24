@@ -156,7 +156,7 @@
   function scEnvAllowed(path) { return SCENARIO_ENV_WHITELIST.has(path) || /^diel\.water(?:Night|Day)\.[0-2]$/.test(path); }
   function scStr(v, max) {
     if (typeof v !== "string") return null;
-    const clean = v.replace(/[ -<>]/g, "");
+    const clean = v.replace(/[\u0000-\u001f<>]/g, "");
     return clean.length > max ? clean.slice(0, max) : clean;
   }
   const scColor = (v) => (typeof v === "string" && /^#[0-9a-fA-F]{6}$/.test(v)) ? v : null;
@@ -196,7 +196,7 @@
     // ---- meta (required) ----
     const m = raw.meta;
     if (!m || typeof m !== "object") return scReject("missing meta");
-    const metaErr = scOnlyKeys(m, new Set(["title", "date", "lesson", "citation", "difficulty", "realWorldBasis", "authorNote"]), "meta");
+    const metaErr = scOnlyKeys(m, new Set(["title", "date", "lesson", "citation", "difficulty", "realWorldBasis", "authorNote", "submittedBy"]), "meta");
     if (metaErr) return scReject(metaErr);
     const title = scStr(m.title, 80), lesson = scStr(m.lesson, 1200);
     if (!title) return scReject("meta.title required");
@@ -205,7 +205,10 @@
     if (m.difficulty != null && !SCENARIO_DIFFICULTY.has(m.difficulty)) return scReject("meta.difficulty invalid");
     const meta = { title, date: m.date, lesson,
       citation: scStr(m.citation, 300) || "", difficulty: m.difficulty || "normal",
-      realWorldBasis: scStr(m.realWorldBasis, 120) || "", authorNote: scStr(m.authorNote, 300) || "" };
+      realWorldBasis: scStr(m.realWorldBasis, 120) || "", authorNote: scStr(m.authorNote, 300) || "",
+      // Credit for the player whose paper this was. A name typed by a stranger, so it goes through
+      // scStr like everything else — control characters and angle brackets stripped, length capped.
+      submittedBy: scStr(m.submittedBy, 40) || "" };
 
     // ---- env → CFG candidate (clamped, then validateTuningConfig has the final word) ----
     const cfg = scClone(defaults);

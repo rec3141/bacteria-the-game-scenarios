@@ -24,13 +24,15 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
           node scripts/queue.mjs > pending.tsv
-          while IFS=$'\t' read -r doi id; do
+          while IFS=$'\t' read -r doi id credit; do
             [ -n "$doi" ] || continue
             echo "::group::$id"
             # Per DOI, not per run: one paper Crossref cannot resolve must not strand everyone
             # queued behind it. A failure writes nothing, so the entry simply stays pending and
             # is retried next poll until queue.mjs ages it out.
-            if node scripts/generate.mjs --mode doi --doi "$doi" && node scripts/validate-all.mjs; then
+            # --credit is the optional name the submitter asked to be credited under; it is data,
+            # passed as an argv element, and never reaches a shell.
+            if node scripts/generate.mjs --mode doi --doi "$doi" --credit "$credit" && node scripts/validate-all.mjs; then
               scripts/publish.sh "Scenario from a player-submitted paper" "$id"
             else
               echo "::warning::could not build a scenario from $doi"

@@ -208,6 +208,11 @@ async function generateOnce(prompt) {
 
   if (!existsSync(scenDir)) mkdirSync(scenDir, { recursive: true });
   const id = slug(idHint);
+  // Credit is OURS to stamp, never the model's to invent: it comes from the person who submitted the
+  // paper, and it is stamped after validation passed so it cannot be what makes a scenario fail. The
+  // hard sanitising happens in the endpoint that collected it and again in the game's validator.
+  const credit = (arg("credit") || "").replace(/[\u0000-\u001f<>]/g, "").trim().slice(0, 40);
+  if (credit) { raw.meta = { ...raw.meta, submittedBy: credit }; }
   writeFileSync(join(scenDir, `${id}.json`), JSON.stringify(raw, null, 2) + "\n");
   buildIndex(repo);   // rebuild index.json from the files on disk — never accumulates stale/duplicate rows
 

@@ -63,9 +63,13 @@ for (const r of requests.slice().sort((a, b) => (a.ts || 0) - (b.ts || 0))) {
   const id = doiScenarioId(doi);
   if (built.has(id) || seen.has(id)) continue;           // already a level, or asked for twice in one queue
   seen.add(id);
-  pending.push({ doi, id });
+  // The optional credit name the submitter typed. Scrubbed by the endpoint before it ever reached
+  // this file and scrubbed again by the scenario validator; this pass only stops a tab from
+  // breaking the TSV the workflow reads.
+  const name = typeof r.name === "string" ? r.name.replace(/[\t\r\n]+/g, " ").trim().slice(0, 40) : "";
+  pending.push({ doi, id, name });
   if (pending.length >= MAX_PER_RUN) break;
 }
 
 console.error(`[queue] ${requests.length} request(s) on file, ${pending.length} to build`);
-for (const p of pending) console.log(`${p.doi}\t${p.id}`);
+for (const p of pending) console.log(`${p.doi}\t${p.id}\t${p.name}`);

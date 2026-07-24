@@ -54,7 +54,8 @@ const repo = join(here, "..");
   const now = Date.now();
   const queue = { schema: "bacteria-scenario-queue", version: 1, requests: [
     { doi: "10.1126/science.1261359", ts: now - 1000 },              // already in scenarios/ -> skip
-    { doi: "https://doi.org/10.1038/nature12352", ts: now - 500 },   // new -> build
+    // credited, with a tab and newline in the name — those would split the TSV the workflow reads
+    { doi: "https://doi.org/10.1038/nature12352", ts: now - 500, name: "Ada\tLovelace\n" },
     { doi: "not-a-doi", ts: now - 400 },                             // malformed -> skip
     { doi: "10.9999/ancient.1", ts: now - 48 * 3600 * 1000 },        // aged out -> skip
     { doi: "10.1128/AEM.00001-20", ts: now - 200 },                  // new -> build
@@ -64,12 +65,17 @@ const repo = join(here, "..");
   const url = "data:application/json," + encodeURIComponent(JSON.stringify(queue));
   const out = execFileSync("node", [join(here, "queue.mjs")], {
     env: { ...process.env, SCENARIO_QUEUE_URL: url, SCENARIO_MAX_PER_RUN: "2" }, encoding: "utf8",
-  }).trim().split("\n").filter(Boolean).map((l) => l.split("\t"));
+    // NOT .trim() on the whole output: an anonymous request ends its line with an empty third
+    // column, and trimming would silently eat the last row's trailing tab.
+  }).split("\n").filter(Boolean).map((l) => l.split("\t"));
 
   assert.deepEqual(out, [
-    ["10.1038/nature12352", "doi-10-1038-nature12352"],
-    ["10.1128/AEM.00001-20", "doi-10-1128-aem-00001-20"],
-  ], "queue must emit oldest-first, deduped, capped, and never re-emit a built scenario");
+    // third column is the optional credit; the tab/newline are flattened to spaces so one submitter's
+    // name can never shift another row's columns, and an anonymous request emits an empty field
+    ["10.1038/nature12352", "doi-10-1038-nature12352", "Ada Lovelace"],
+    ["10.1128/AEM.00001-20", "doi-10-1128-aem-00001-20", ""],
+  ], "queue must emit oldest-first, deduped, capped, credited, and never re-emit a built scenario");
+  for (const row of out) assert.equal(row.length, 3, "every row must have exactly three columns");
 }
 
 // ---- an absent queue is the normal state of a site nobody has submitted to ------------------------
