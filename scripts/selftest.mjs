@@ -103,6 +103,14 @@ const repo = join(here, "..");
   assert.match(q, /giveUp\.has\(id\)/, "the poller must skip papers it has given up on");
   assert.match(q, /SCENARIO_MAX_ATTEMPTS/, "the attempt ceiling must be configurable");
 
+  // The record's "doi" must be the DOI, not the id again. The poller reads only `attempts` so this
+  // never broke anything, but it is the only trace of a paper we have stopped paying to build, and a
+  // slug in a field named doi cannot tell you what to resubmit.
+  const qy = readFileSync(join(repo, ".github/workflows/queue.yml"), "utf8");
+  assert.match(qy, /record-failure\.mjs "\$failkey" "\$id"/, "the failure record must be keyed by the DOI, not the id twice");
+  assert.match(qy, /failkey="\$payload"/, "a paper's failkey is its DOI");
+  assert.match(qy, /failkey="\$id"/, "a terrain has no DOI, so it falls back to the id");
+
   // publish.sh must carry failures.json across its hard reset, or the record written moments earlier
   // in the same job is thrown away and the poller retries forever anyway
   const pub = readFileSync(join(here, "publish.sh"), "utf8");

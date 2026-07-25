@@ -6,11 +6,6 @@
       "doi": "10.1111/j.1462-2920.2010.02179.x",
       "attempts": 2,
       "reason": "generation failed validation twice: column layer tempC out of range"
-    },
-    "doi-10-1371-journal-pone-0324466": {
-      "doi": "doi-10-1371-journal-pone-0324466",
-      "attempts": 2,
-      "reason": "generation failed validation twice: unknown top-level field \"scenario\""
     }
   }
 }

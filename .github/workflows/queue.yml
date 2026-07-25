@@ -35,12 +35,19 @@ jobs:
             # queued behind it. A failure writes nothing, so the entry simply stays pending and is
             # retried next poll until queue.mjs ages it out. Everything below is passed as an argv
             # element (never interpolated into the shell): a DOI, a base64 terrain, a credit name.
+            # failkey is what gets stored as the failure record's "doi". For a paper that is the DOI
+            # itself, so the record says which paper to resubmit; a terrain has no DOI, so it falls
+            # back to the id. This used to pass "$id" twice, which stored the slug in a field named
+            # doi -- harmless to the poller (it reads only attempts, keyed by id) but it meant a
+            # recorded failure could not tell you what had failed.
             if [ "$mode" = "terrain" ]; then
               gen=(node scripts/generate.mjs --mode terrain --terrain-b64 "$payload" --id "$id" --credit "$credit")
               subject="Scenario built around a designed terrain"
+              failkey="$id"
             else
               gen=(node scripts/generate.mjs --mode doi --doi "$payload" --credit "$credit")
               subject="Scenario from a player-submitted paper"
+              failkey="$payload"
             fi
             if "${gen[@]}" 2> >(tee /tmp/gen.err >&2) && node scripts/validate-all.mjs; then
               scripts/publish.sh "$subject" "$id"
@@ -50,7 +57,7 @@ jobs:
               # calls. Two strikes and the poller leaves it alone. Keyed by id, so terrain and DOI
               # failures both land in failures.json the same way.
               echo "::warning::could not build $id"
-              node scripts/record-failure.mjs "$id" "$id" "$(tail -1 /tmp/gen.err 2>/dev/null)"
+              node scripts/record-failure.mjs "$failkey" "$id" "$(tail -1 /tmp/gen.err 2>/dev/null)"
               scripts/publish.sh "Record a request that could not be built"
             fi
             echo "::endgroup::"
