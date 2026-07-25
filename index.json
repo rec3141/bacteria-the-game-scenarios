@@ -121,6 +121,15 @@
       "doi": "10.1126/science.1261359"
     },
     {
+      "id": "doi-10-1371-journal-pone-0324466",
+      "title": "Gyre Edge: Prochlorococcus Meets the Nutrient Front",
+      "date": "2026-07-25",
+      "difficulty": "normal",
+      "realWorldBasis": "North Pacific Subtropical Gyre boundary transects, underway flow cytometry 2016-2021",
+      "file": "scenarios/doi-10-1371-journal-pone-0324466.json",
+      "doi": "10.1371/journal.pone.0324466"
+    },
+    {
       "id": "hydrothermal-vent",
       "title": "Hydrothermal vent: life without sunlight",
       "date": "2026-07-18",
