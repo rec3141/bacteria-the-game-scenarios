@@ -11,6 +11,7 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { execFileSync } from "node:child_process";
 import { DOI_RE, cleanDoi, slug, doiScenarioId } from "./doi-id.mjs";
+import { unwrapEnvelope, TOP_LEVEL, META_KEYS, SCENARIO_TOOL_SCHEMA } from "./generate.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const repo = join(here, "..");
@@ -177,6 +178,63 @@ const repo = join(here, "..");
     assert.ok(s.column && s.column.enabled === true,
       `${f} declares terrain but is not a column scenario — terrain would never be built`);
   }
+}
+
+// ---- the envelope must survive a model that boxes its answer wrong --------------------------------
+// On 2026-07-24 and -25 both daily crons died identically: the model returned {"scenario": {...}}, the
+// retry was told only `unknown top-level field "scenario"`, unwrapped one level too many and hoisted
+// the meta fields to the top level, and the run failed twice. A player-submitted DOI died the same way
+// (it is still in failures.json). Nothing in this repo had changed -- the tool's input_schema was
+// `{type:"object", additionalProperties:true}`, so the ONLY statement of the envelope was prose 300
+// lines up a 34KB prompt. These pin the repair, and the boundary of it.
+{
+  const scenario = {
+    meta: { title: "Test", date: "2026-01-01", lesson: "A lesson." },
+    env: { "diel.tempBase": 4 },
+    organisms: { cells: [{ id: "a", label: "A", genome: { enzLvl: [1, 1, 1] } }] },
+  };
+  // deepEqual, not JSON string equality: lifting meta back out of the top level rebuilds the object,
+  // and where "meta" lands in the key order is not something worth asserting.
+  const same = (a, b) => { try { assert.deepEqual(a, b); return true; } catch { return false; } };
+
+  // 1. a wrapper of the model's own invention, under any name, at any depth
+  for (const key of ["scenario", "result", "output"]) {
+    assert.ok(same(unwrapEnvelope({ [key]: scenario }), scenario), `a {"${key}": {...}} wrapper must be unboxed`);
+  }
+  assert.ok(same(unwrapEnvelope({ response: { scenario } }), scenario), "nested wrappers must unbox all the way");
+
+  // 2. meta flattened into the top level — what the retry produced both days
+  const flat = { ...scenario.meta, env: scenario.env, organisms: scenario.organisms };
+  assert.ok(same(unwrapEnvelope(flat), scenario), "top-level meta fields must be lifted back into meta");
+  assert.ok(same(unwrapEnvelope({ scenario: flat }), scenario), "both mistakes at once must still repair");
+
+  // 3. the boundary. Re-boxing is ours; content is the model's, and a wrong parameter must still fail.
+  assert.ok(same(unwrapEnvelope(scenario), scenario), "a correct scenario must pass through untouched");
+  assert.ok(same(unwrapEnvelope({ meta: scenario.meta }), { meta: scenario.meta }),
+    "a single key that IS a top-level key is the scenario, not a wrapper around one");
+  const withMeta = { ...scenario, title: "stray" };
+  assert.ok(same(unwrapEnvelope(withMeta), withMeta),
+    "with meta already present, a stray top-level title is a hallucination to reject, not to absorb");
+  assert.equal(unwrapEnvelope(null), null);
+  assert.ok(same(unwrapEnvelope([scenario]), [scenario]), "an array is not an envelope to unwrap");
+
+  // 4. and the schema the model is actually handed must name the envelope, not accept anything
+  assert.equal(SCENARIO_TOOL_SCHEMA.additionalProperties, false,
+    "an open tool schema states nothing; the whole failure was the envelope going unstated");
+  for (const k of TOP_LEVEL) assert.ok(SCENARIO_TOOL_SCHEMA.properties[k], `${k} must be a named property`);
+  for (const k of META_KEYS) assert.ok(!SCENARIO_TOOL_SCHEMA.properties[k], `${k} belongs inside meta, not at the top level`);
+
+  const gen = readFileSync(join(here, "generate.mjs"), "utf8");
+  assert.match(gen, /unwrapEnvelope\(got\)[\s\S]{0,80}schema: "bacteria-scenario"/,
+    "the repair must run BEFORE the schema/version stamp — stamping first gives a wrapper three keys " +
+    "and hides it from the single-key test");
+  assert.match(gen, /mode === "daily" && existsSync\(/,
+    "a daily run on a day that already has a scenario must be a no-op, not an overwrite — this is what " +
+    "lets daily.yml carry a fallback cron");
+  const daily = readFileSync(join(repo, ".github/workflows/daily.yml"), "utf8");
+  assert.equal((daily.match(/- cron:/g) || []).length, 2, "the daily must have a fallback cron behind the midday one");
+  assert.match(daily, /if: steps\.gen\.outputs\.scenario_id != ''/,
+    "publish must be skipped when generate wrote nothing, or the no-op run hands publish.sh an empty id and exits 1");
 }
 
 // ---- publish.sh must not have regrown a PR step ---------------------------------------------------

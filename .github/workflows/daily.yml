@@ -2,6 +2,12 @@ name: Daily scenario
 on:
   schedule:
     - cron: '17 12 * * *'   # 12:17 UTC daily
+    # A fallback six hours later. Generation can fail for reasons that have nothing to do
+    # with this repo -- on 2026-07-24 and -25 the model started boxing its answer inside a
+    # wrapper object and both days' scenarios were simply missing, unnoticed until someone
+    # went looking. generate.mjs exits early if today's file already exists, so on a normal
+    # day this run does nothing at all; it only spends a model call when the midday one lost.
+    - cron: '17 18 * * *'   # 18:17 UTC, only if the midday run produced nothing
   workflow_dispatch:
 permissions:
   contents: write
@@ -28,5 +34,9 @@ jobs:
         run: node scripts/validate-all.mjs
       # Straight to main -- no PR. The validate step above is the gate, and it runs the
       # same validator the game itself runs. See the header of scripts/publish.sh.
+      # Skipped when generate wrote nothing because today's scenario already existed. Without
+      # this the fallback run would hand publish.sh an empty id, which it treats as a missing
+      # file and exits 1 -- a red X on a day that went perfectly well.
       - name: Publish
+        if: steps.gen.outputs.scenario_id != ''
         run: scripts/publish.sh "Daily scenario ($(date +%Y-%m-%d))" "${{ steps.gen.outputs.scenario_id }}"
