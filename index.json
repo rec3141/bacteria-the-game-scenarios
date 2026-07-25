@@ -68,6 +68,14 @@
       "file": "scenarios/daily-2026-07-24.json"
     },
     {
+      "id": "daily-2026-07-25",
+      "title": "Baltic Sea Ice: Cyanobacteria in the Brine Channels",
+      "date": "2026-07-25",
+      "difficulty": "hard",
+      "realWorldBasis": "Baltic Sea land-fast ice brine channel microbial communities",
+      "file": "scenarios/daily-2026-07-25.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",

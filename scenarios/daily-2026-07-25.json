@@ -1,0 +1,273 @@
+{
+  "meta": {
+    "title": "Baltic Sea Ice: Cyanobacteria in the Brine Channels",
+    "date": "2026-07-25",
+    "lesson": "Sea ice is not a solid wall but a porous habitat. As seawater freezes, salt is excluded into a network of brine channels that thread through the ice, creating a cold, hypersaline, but liquid microhabitat. Psychrophilic cyanobacteria and diatoms colonize these channels, harvesting the weak light filtering through the ice above while relying on nutrients trapped in the brine. Growth is slow (Q10 effects at sub-zero temperatures), the channels offer refuge from grazers but also confine the population, and the freeze-concentrated brine makes salinity punishing near the ice while more moderate in the water below. This scenario asks the player to exploit chemotaxis to find and stay within nutrient-rich brine pockets, balancing photosynthetic gain against the metabolic cost of the cold.",
+    "citation": "Thomas & Dieckmann (2002) Antarctic Sea Ice - a Habitat for Extremophiles; Baltic Sea ice microbial communities",
+    "difficulty": "hard",
+    "realWorldBasis": "Baltic Sea land-fast ice brine channel microbial communities"
+  },
+  "env": {
+    "day.lengthSec": 260,
+    "day.latitude": 60,
+    "day.dayOfYear": 60,
+    "day.startHour": 9,
+    "diel.tempBase": -1.5,
+    "diel.tempAmp": 1.2,
+    "diel.tempLag": 0.08,
+    "diel.foodFloor": 0.45,
+    "diel.grazeNight": 0.6,
+    "diel.lightGamma": 2.4,
+    "diel.twilight": 0.3,
+    "diel.q10": 2.4,
+    "diel.q10RefC": 20,
+    "diel.waterNight.0": 4,
+    "diel.waterNight.1": 14,
+    "diel.waterNight.2": 28,
+    "diel.waterDay.0": 40,
+    "diel.waterDay.1": 95,
+    "diel.waterDay.2": 110,
+    "diel.goldTint": 0.1,
+    "respirationBase": 0.55,
+    "cell.thrust": 12000,
+    "cell.dragRate": 70,
+    "cell.maxSpeed": 130,
+    "cell.swimCost": 0.8,
+    "cell.startEnergy": 130,
+    "cell.divideThreshold": 190,
+    "cell.cystBelow": 20,
+    "cell.cystWake": 55,
+    "cell.cystMetab": 0.02,
+    "cell.chemoRange0": 380,
+    "cell.chemoRangePer": 170,
+    "cell.chemoBias": 1.3,
+    "cell.fedLinger": 3.2,
+    "cell.runMin": 2.4,
+    "cell.runMax": 4.2,
+    "substrate.count": 78,
+    "substrate.sizeMin": 34,
+    "substrate.sizeMax": 160,
+    "substrate.lifeMin": 200,
+    "substrate.lifeMax": 420,
+    "substrate.driftMin": 4,
+    "substrate.driftMax": 10,
+    "substrate.moteEnergy": 8,
+    "column.photoRate": 9,
+    "predator.count": 2,
+    "predator.wanderSpeed": 14,
+    "predator.chaseSpeed": 22,
+    "predator.senseRange": 110,
+    "predator.metabolism": 7,
+    "predator.minCount": 1,
+    "phage.greenCount": 10,
+    "phage.goldCount": 3,
+    "phage.goldMinDist": 500
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid droplets (algal exudate)",
+      "enzymeLabel": "Lipase",
+      "color": "#8fbfe0"
+    },
+    {
+      "index": 1,
+      "label": "Diatom protein detritus",
+      "enzymeLabel": "Protease",
+      "color": "#d9c27a"
+    },
+    {
+      "index": 2,
+      "label": "EPS carbohydrate gel",
+      "enzymeLabel": "Glycosidase",
+      "color": "#bfe8d0"
+    }
+  ],
+  "particles": {
+    "brine_floc": {
+      "label": "Brine channel floc",
+      "mix": [
+        0.2,
+        0.3,
+        0.5
+      ],
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 6
+    },
+    "diatom_frag": {
+      "label": "Diatom fragment",
+      "mix": [
+        0.15,
+        0.55,
+        0.3
+      ],
+      "shape": "shard",
+      "squash": 0.7,
+      "weight": 4
+    },
+    "eps_gel": {
+      "label": "EPS gel matrix",
+      "mix": [
+        0.1,
+        0.1,
+        0.8
+      ],
+      "shape": "ellipse",
+      "squash": 0.5,
+      "weight": 5
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase burst",
+      "color": "#8fbfe0",
+      "weight": 4
+    },
+    "enzyme1": {
+      "label": "Protease burst",
+      "color": "#d9c27a",
+      "weight": 5
+    },
+    "enzyme2": {
+      "label": "Glycosidase burst",
+      "color": "#bfe8d0",
+      "weight": 6
+    },
+    "chemotaxis": {
+      "label": "Brine-seeking taxis",
+      "color": "#ffffff",
+      "weight": 8
+    },
+    "antibiotic": {
+      "label": "Bacteriocin release",
+      "color": "#c78fd6",
+      "weight": 3
+    },
+    "eps": {
+      "label": "Cryoprotectant EPS",
+      "color": "#e8f4f8",
+      "weight": 7
+    },
+    "crispr": {
+      "label": "CRISPR immunity",
+      "color": "#7ad1e8",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Channel-wall twitching",
+      "color": "#e0a35c",
+      "weight": 4
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "cyanophyte_ice",
+        "label": "Ice cyanobacterium",
+        "color": "#5fbf8f",
+        "genome": {
+          "enzLvl": [
+            1,
+            2,
+            2
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 3,
+          "crispr": false,
+          "twitching": false,
+          "phototroph": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "psychro_hetero",
+        "label": "Psychrophilic heterotroph",
+        "color": "#a3d9c9",
+        "genome": {
+          "enzLvl": [
+            2,
+            2,
+            1
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 2,
+          "crispr": true,
+          "twitching": true
+        },
+        "immigrateWeight": 3
+      }
+    ]
+  },
+  "terrain": [
+    {
+      "at": "top",
+      "thickness": 260,
+      "color": "#dceef5",
+      "label": "Land-fast sea ice",
+      "roughness": 0.55,
+      "porosity": 0.45,
+      "poreSize": 24,
+      "featureSize": 300,
+      "spires": 0.15,
+      "spireHeight": 180,
+      "spireWidth": 60,
+      "warp": 0.2
+    },
+    {
+      "at": "bottom",
+      "thickness": 60,
+      "color": "#173042",
+      "label": "Cold seawater below ice",
+      "roughness": 0.2,
+      "porosity": 0.1,
+      "poreSize": 10,
+      "featureSize": 200,
+      "spires": 0,
+      "spireHeight": 0,
+      "spireWidth": 10,
+      "warp": 0
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": -1.8,
+        "salinity": 45,
+        "light": 0.55,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 0.3,
+        "tempC": -1.6,
+        "salinity": 38,
+        "light": 0.35,
+        "nutrient": 0.5
+      },
+      {
+        "depth": 0.6,
+        "tempC": -1.2,
+        "salinity": 25,
+        "light": 0.15,
+        "nutrient": 0.4
+      },
+      {
+        "depth": 1,
+        "tempC": -0.5,
+        "salinity": 10,
+        "light": 0.03,
+        "nutrient": 0.3
+      }
+    ],
+    "thermocline": {
+      "depth": 0.5,
+      "sharpness": 0.4
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}
