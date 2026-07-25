@@ -225,9 +225,14 @@ const repo = join(here, "..");
   for (const k of META_KEYS) assert.ok(!SCENARIO_TOOL_SCHEMA.properties[k], `${k} belongs inside meta, not at the top level`);
 
   const gen = readFileSync(join(here, "generate.mjs"), "utf8");
-  assert.match(gen, /unwrapEnvelope\(got\)[\s\S]{0,80}schema: "bacteria-scenario"/,
-    "the repair must run BEFORE the schema/version stamp — stamping first gives a wrapper three keys " +
-    "and hides it from the single-key test");
+  assert.match(gen, /repaired the envelope/,
+    "a silent repair is how this drift stays invisible — a repaired run must say so in the log");
+  // Pinned as two exact statements rather than one span-matching regex: the ORDER is the contract, and
+  // a "these are near each other" match quietly loosens every time a line lands between them.
+  assert.match(gen, /const boxed = unwrapEnvelope\(got\);/, "the model's object must be re-boxed first");
+  assert.match(gen, /const raw = \{ \.\.\.boxed, schema: "bacteria-scenario", version: 1 \};/,
+    "the stamp must go on the REPAIRED object — stamping first gives a wrapper three keys and hides " +
+    "it from the single-key test");
   assert.match(gen, /mode === "daily" && existsSync\(/,
     "a daily run on a day that already has a scenario must be a no-op, not an overwrite — this is what " +
     "lets daily.yml carry a fallback cron");

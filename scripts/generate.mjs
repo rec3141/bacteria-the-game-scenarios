@@ -347,7 +347,11 @@ async function generateOnce(prompt) {
   // Re-box first, then stamp: the schema/version discriminators are OUR fixed envelope, not the model's
   // to get right, and stamping BEFORE the unwrap would give a {"scenario": {...}} wrapper three keys
   // and hide it from the single-key test. Both paths go through this, so --mock exercises the repair.
-  const raw = { ...unwrapEnvelope(got), schema: "bacteria-scenario", version: 1 };
+  const boxed = unwrapEnvelope(got);
+  // Say so when the repair fires. A silent repair is how a drift like this stays invisible: the run
+  // goes green and nobody learns the model has started boxing its answers again.
+  if (boxed !== got) console.warn(`[generate] repaired the envelope — model sent top-level keys: ${Object.keys(got).join(", ")}`);
+  const raw = { ...boxed, schema: "bacteria-scenario", version: 1 };
   const result = validateScenario(raw, defaults);
   return { raw, result };
 }
