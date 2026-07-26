@@ -76,6 +76,14 @@
       "file": "scenarios/daily-2026-07-25.json"
     },
     {
+      "id": "daily-2026-07-26",
+      "title": "Anammox in the Dark: Black Sea Redoxcline Nitrogen Loss",
+      "date": "2026-07-26",
+      "difficulty": "hard",
+      "realWorldBasis": "Black Sea redoxcline anammox (Candidatus Scalindua), ~80-120m depth",
+      "file": "scenarios/daily-2026-07-26.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
