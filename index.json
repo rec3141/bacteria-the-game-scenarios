@@ -84,6 +84,14 @@
       "file": "scenarios/daily-2026-07-26.json"
     },
     {
+      "id": "daily-2026-07-27",
+      "title": "Phage Wars in a Sea of Chitin: Squid Beak Falls and Vibrio Ecology",
+      "date": "2026-07-27",
+      "difficulty": "hard",
+      "realWorldBasis": "Gulf of California squid falls; chitin-particle colonization by copiotrophic Vibrio/Pseudoalteromonas and phage-driven bloom collapse",
+      "file": "scenarios/daily-2026-07-27.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",

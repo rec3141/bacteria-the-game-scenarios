@@ -1,0 +1,258 @@
+{
+  "meta": {
+    "title": "Phage Wars in a Sea of Chitin: Squid Beak Falls and Vibrio Ecology",
+    "date": "2026-07-27",
+    "lesson": "When a jumbo squid dies off Guaymas Basin its chitinous beak, pen and egg cases sink and become instant nutrient islands. Vibrio and Pseudoalteromonas swarm the falling debris, secreting chitinase to strip the carbohydrate polymer down to usable sugars, dividing fast enough to bloom within hours. That very speed makes them ideal phage hosts: dense, chitin-tethered colonies feed lytic phages that can wipe out over 90% of a bloom in days, recycling the carbon back to dissolved form (the 'kill the winner' dynamic). This level rewards fast carbohydrate digestion and chemotaxis toward falling carcasses, but punishes runaway population density with heavy phage pressure - a lesson in why marine bacteria stay genomically diverse instead of all converging on one super-strain.",
+    "citation": "Datta et al. 2016, Nature Comm.; Weitz & Wilhelm 2012 kill-the-winner phage dynamics",
+    "difficulty": "hard",
+    "realWorldBasis": "Gulf of California squid falls; chitin-particle colonization by copiotrophic Vibrio/Pseudoalteromonas and phage-driven bloom collapse"
+  },
+  "env": {
+    "day.lengthSec": 260,
+    "day.latitude": 27,
+    "day.dayOfYear": 200,
+    "diel.tempBase": 22,
+    "diel.tempAmp": 3,
+    "diel.foodFloor": 0.5,
+    "diel.q10": 2.3,
+    "diel.waterNight.0": 3,
+    "diel.waterNight.1": 12,
+    "diel.waterNight.2": 18,
+    "diel.waterDay.0": 22,
+    "diel.waterDay.1": 60,
+    "diel.waterDay.2": 55,
+    "substrate.count": 80,
+    "substrate.sizeMin": 60,
+    "substrate.sizeMax": 220,
+    "substrate.sizeExp": 1.2,
+    "substrate.lifeMin": 90,
+    "substrate.lifeMax": 200,
+    "substrate.minPerRes": 3,
+    "substrate.driftMin": 5,
+    "substrate.driftMax": 12,
+    "cell.chemoRange0": 380,
+    "cell.chemoRangePer": 170,
+    "cell.chemoBias": 1.3,
+    "cell.uptake": 18,
+    "cell.startEnergy": 120,
+    "cell.divideThreshold": 160,
+    "cell.swimCost": 1.4,
+    "cell.enzymeCost": 3.5,
+    "respirationBase": 1.05,
+    "phage.greenCount": 30,
+    "phage.goldCount": 3,
+    "phage.burst.0": 6,
+    "phage.burst.1": 14,
+    "phage.latent.0": 7,
+    "phage.latent.1": 11,
+    "phage.adsorbBase": 0.38,
+    "phage.hostTolerance": 2,
+    "phage.seedRatio": 0.08,
+    "phage.greenFloor": 32,
+    "predator.count": 3,
+    "predator.senseRange": 150,
+    "predator.metabolism": 9
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Squid lipid tissue",
+      "enzymeLabel": "Lipase",
+      "color": "#d99a4e"
+    },
+    {
+      "index": 1,
+      "label": "Beak protein matrix",
+      "enzymeLabel": "Protease",
+      "color": "#c15b5b"
+    },
+    {
+      "index": 2,
+      "label": "Chitin shell fragments",
+      "enzymeLabel": "Chitinase",
+      "color": "#e8dca0"
+    }
+  ],
+  "particles": {
+    "beakFall": {
+      "label": "Sinking squid beak",
+      "mix": [
+        10,
+        20,
+        70
+      ],
+      "shape": "shard",
+      "weight": 6
+    },
+    "penFragment": {
+      "label": "Chitinous pen fragment",
+      "mix": [
+        5,
+        10,
+        85
+      ],
+      "shape": "shard",
+      "weight": 5
+    },
+    "eggCase": {
+      "label": "Egg case membrane",
+      "mix": [
+        15,
+        55,
+        30
+      ],
+      "shape": "ellipse",
+      "squash": 0.6,
+      "weight": 3
+    },
+    "tissueClump": {
+      "label": "Mantle tissue clump",
+      "mix": [
+        45,
+        45,
+        10
+      ],
+      "shape": "aggregate",
+      "weight": 2
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase burst",
+      "color": "#d99a4e",
+      "weight": 3
+    },
+    "enzyme1": {
+      "label": "Protease burst",
+      "color": "#c15b5b",
+      "weight": 4
+    },
+    "enzyme2": {
+      "label": "Chitinase burst",
+      "color": "#e8dca0",
+      "weight": 8
+    },
+    "chemotaxis": {
+      "label": "Carcass tracking",
+      "color": "#7fd1c4",
+      "weight": 7
+    },
+    "antibiotic": {
+      "label": "Vibriocin release",
+      "color": "#8e5bd9",
+      "weight": 4
+    },
+    "eps": {
+      "label": "Chitin-adherent biofilm",
+      "color": "#4e8c6a",
+      "weight": 5
+    },
+    "crispr": {
+      "label": "CRISPR immunity",
+      "color": "#5b9bd9",
+      "weight": 5
+    },
+    "twitching": {
+      "label": "Pilus twitching onto shell",
+      "color": "#d9c15b",
+      "weight": 3
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "vibrio_founder",
+        "label": "Vibrio splendidus (chitin colonizer)",
+        "color": "#e6b84a",
+        "genome": {
+          "enzLvl": [
+            1,
+            2,
+            4
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 1,
+          "eps": 1,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "pseudoalt_rival",
+        "label": "Pseudoalteromonas sp. (fast-swarming rival)",
+        "color": "#7ec7c1",
+        "genome": {
+          "enzLvl": [
+            2,
+            1,
+            3
+          ],
+          "chemoLevel": 3,
+          "antibiotic": 3,
+          "eps": 0,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 4
+      },
+      {
+        "id": "crispr_lineage",
+        "label": "Phage-resistant Vibrio strain",
+        "color": "#c98bd9",
+        "genome": {
+          "enzLvl": [
+            1,
+            1,
+            3
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 2,
+          "crispr": true,
+          "twitching": false
+        },
+        "immigrateWeight": 2
+      }
+    ]
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 26,
+        "salinity": 35,
+        "light": 1,
+        "nutrient": 0.3
+      },
+      {
+        "depth": 0.3,
+        "tempC": 23,
+        "salinity": 35.5,
+        "light": 0.55,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 0.6,
+        "tempC": 19,
+        "salinity": 36,
+        "light": 0.15,
+        "nutrient": 0.9
+      },
+      {
+        "depth": 1,
+        "tempC": 14,
+        "salinity": 36.2,
+        "light": 0.02,
+        "nutrient": 1
+      }
+    ],
+    "thermocline": {
+      "depth": 0.45,
+      "sharpness": 0.6
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}
