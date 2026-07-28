@@ -92,6 +92,14 @@
       "file": "scenarios/daily-2026-07-27.json"
     },
     {
+      "id": "daily-2026-07-28",
+      "title": "Iron Snow: Rusticles on the Titanic's Hull",
+      "date": "2026-07-28",
+      "difficulty": "hard",
+      "realWorldBasis": "RMS Titanic wreck, North Atlantic, 3800m depth - Halomonas titanicae iron-oxidizing rusticle colonies",
+      "file": "scenarios/daily-2026-07-28.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
