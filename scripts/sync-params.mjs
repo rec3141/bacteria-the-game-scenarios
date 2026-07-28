@@ -19,15 +19,39 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
 const repo = join(dirname(fileURLToPath(import.meta.url)), "..");
-const GAME_URL = process.env.GAME_JS_URL ||
-  "https://raw.githubusercontent.com/rec3141/bacteria-the-game/main/game.js";
+const GAME_REPO = process.env.GAME_REPO || "rec3141/bacteria-the-game";
+const GAME_URL = process.env.GAME_JS_URL || null;
 
 const arg = (n) => { const i = process.argv.indexOf(`--${n}`); return i >= 0 ? process.argv[i + 1] : null; };
 const check = process.argv.includes("--check");
 
+// Fetch game.js by resolved COMMIT SHA, never by branch name.
+//
+// raw.githubusercontent.com caches a branch URL, and that cache can serve bytes older than the push
+// you are checking against. It bit us for real: a game.js change was pushed, `--check` reported the
+// derived files out of date, and regenerating "fixed" it by writing back the OLD content -- so the
+// check disagreed with the repository and the fix made it worse. CI failed on the same stale copy,
+// which is what ruled out a local cache. Cache-Control and cache:"no-store" are both ignored (still
+// x-cache: HIT); a SHA URL is immutable, so it is the only one that cannot be stale by construction.
+async function fetchGame() {
+  if (GAME_URL) {   // an explicit override is taken at face value
+    const r = await fetch(GAME_URL);
+    if (!r.ok) throw new Error(`GET game.js ${r.status}`);
+    return r.text();
+  }
+  const head = await fetch(`https://api.github.com/repos/${GAME_REPO}/commits/main`,
+    { headers: { accept: "application/vnd.github.sha" } });
+  if (!head.ok) throw new Error(`resolve ${GAME_REPO}@main: ${head.status}`);
+  const sha = (await head.text()).trim();
+  if (!/^[0-9a-f]{40}$/.test(sha)) throw new Error(`not a commit sha: ${sha.slice(0, 60)}`);
+  const r = await fetch(`https://raw.githubusercontent.com/${GAME_REPO}/${sha}/game.js`);
+  if (!r.ok) throw new Error(`GET game.js@${sha.slice(0, 8)} ${r.status}`);
+  console.error(`[sync-params] game.js @ ${sha.slice(0, 8)}`);
+  return r.text();
+}
+
 const gamePath = arg("game");
-const game = gamePath ? readFileSync(gamePath, "utf8")
-  : await fetch(GAME_URL).then((r) => { if (!r.ok) throw new Error(`GET game.js ${r.status}`); return r.text(); });
+const game = gamePath ? readFileSync(gamePath, "utf8") : await fetchGame();
 
 // Brace-match an object literal, skipping strings and comments so a brace inside either cannot end it.
 function sliceObject(src, marker) {
