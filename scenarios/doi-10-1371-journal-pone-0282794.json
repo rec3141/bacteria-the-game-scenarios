@@ -1,0 +1,247 @@
+{
+  "meta": {
+    "title": "Domoic Acid on the Shelf: Pseudo-nitzschia Across the Bering-Chukchi-Beaufort Seas",
+    "date": "2026-07-28",
+    "lesson": "Pseudo-nitzschia is a genus of diatoms found from the equator to the poles, and some species make the neurotoxin domoic acid (DA), which accumulates in shellfish and fish and can sicken the animals and people who eat them. In Arctic waters spanning the Bering, Chukchi, and Beaufort seas, different Pseudo-nitzschia species dominate different water masses depending on temperature, salinity, and season, and toxin-producing blooms show up in different places at different times of year rather than as one uniform bloom. This level asks you to survive as a diatom-associated bacterium riding the shift between a summer, strait-influenced water mass and a fall, shelf-influenced one: food chemistry and temperature both change under you, mirroring how species assemblages and toxin production tracked the physical gradients of the region rather than staying fixed in one spot.",
+    "citation": "Hubbard, Villac, Chadwick (2023). Spatiotemporal transitions in Pseudo-nitzschia species assemblages and domoic acid along the Alaska coast. doi:10.1371/journal.pone.0282794",
+    "difficulty": "normal",
+    "realWorldBasis": "Pseudo-nitzschia assemblages and domoic acid across Bering/Chukchi/Beaufort water masses, 2018 DBO/AON surveys"
+  },
+  "env": {
+    "diel.tempBase": 2.5,
+    "diel.tempAmp": 4,
+    "diel.q10": 2,
+    "diel.q10RefC": 20,
+    "diel.foodFloor": 0.4,
+    "diel.waterNight.0": 4,
+    "diel.waterNight.1": 14,
+    "diel.waterNight.2": 26,
+    "diel.waterDay.0": 22,
+    "diel.waterDay.1": 68,
+    "diel.waterDay.2": 74,
+    "day.latitude": 68,
+    "day.dayOfYear": 240,
+    "day.lengthSec": 300,
+    "substrate.count": 78,
+    "substrate.sizeMin": 34,
+    "substrate.sizeMax": 170,
+    "substrate.lifeMin": 150,
+    "substrate.lifeMax": 320,
+    "substrate.driftMin": 6,
+    "substrate.driftMax": 14,
+    "substrate.minPerRes": 3,
+    "cell.thrust": 17000,
+    "cell.dragRate": 55,
+    "cell.maxSpeed": 200,
+    "cell.uptake": 12,
+    "cell.startEnergy": 105,
+    "cell.divideThreshold": 180,
+    "cell.chemoRange0": 260,
+    "cell.chemoBias": 1.1,
+    "respirationBase": 0.75,
+    "toxin.dose": 65,
+    "toxin.potency": 22,
+    "toxin.life": 5.5,
+    "predator.count": 4,
+    "predator.wanderSpeed": 18,
+    "predator.chaseSpeed": 30,
+    "predator.senseRange": 150,
+    "predator.metabolism": 8,
+    "phage.greenCount": 14,
+    "phage.goldCount": 3
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Diatom lipid droplets",
+      "enzymeLabel": "Lipase",
+      "color": "#c9a24b"
+    },
+    {
+      "index": 1,
+      "label": "Diatom protein / DA precursor pool",
+      "enzymeLabel": "Protease",
+      "color": "#7fae6f"
+    },
+    {
+      "index": 2,
+      "label": "Diatom frustule exudate (carbohydrate)",
+      "enzymeLabel": "Glycosidase",
+      "color": "#9fd3d8"
+    }
+  ],
+  "particles": {
+    "p0": {
+      "label": "Pseudo-nitzschia chain fragment (summer, strait water)",
+      "mix": [
+        2,
+        5,
+        3
+      ],
+      "shape": "shard",
+      "squash": 0.6,
+      "weight": 6
+    },
+    "p1": {
+      "label": "Pseudo-nitzschia chain fragment (fall, shelf water)",
+      "mix": [
+        1,
+        6,
+        2
+      ],
+      "shape": "shard",
+      "squash": 0.55,
+      "weight": 6
+    },
+    "p2": {
+      "label": "Mixed diatom/Fragilariopsis detritus",
+      "mix": [
+        2,
+        3,
+        5
+      ],
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 4
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase",
+      "color": "#c9a24b",
+      "weight": 4
+    },
+    "enzyme1": {
+      "label": "Protease (DA-precursor breakdown)",
+      "color": "#7fae6f",
+      "weight": 7
+    },
+    "enzyme2": {
+      "label": "Glycosidase",
+      "color": "#9fd3d8",
+      "weight": 5
+    },
+    "chemotaxis": {
+      "label": "Water-mass tracking",
+      "color": "#5599cc",
+      "weight": 6
+    },
+    "antibiotic": {
+      "label": "Domoic-acid-linked toxin release",
+      "color": "#b23a9e",
+      "weight": 5
+    },
+    "eps": {
+      "label": "Mucilage sheath",
+      "color": "#88ccbb",
+      "weight": 4
+    },
+    "crispr": {
+      "label": "CRISPR immunity",
+      "color": "#ddaa33",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Twitching motility",
+      "color": "#997755",
+      "weight": 2
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "founder",
+        "label": "Diatom-associated bacterium (Pseudo-nitzschia phycosphere)",
+        "color": "#7fae6f",
+        "genome": {
+          "enzLvl": [
+            1,
+            3,
+            2
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 1,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 5
+      },
+      {
+        "id": "summer_specialist",
+        "label": "P. obtusa-associated strain (Bering Strait / Chukchi)",
+        "color": "#c9a24b",
+        "genome": {
+          "enzLvl": [
+            2,
+            2,
+            1
+          ],
+          "chemoLevel": 3,
+          "antibiotic": 1,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      },
+      {
+        "id": "fall_specialist",
+        "label": "P. seriata-associated strain (Beaufort shelf)",
+        "color": "#b23a9e",
+        "genome": {
+          "enzLvl": [
+            1,
+            3,
+            2
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 2,
+          "eps": 2,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      }
+    ]
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 6,
+        "salinity": 26,
+        "light": 0.9,
+        "nutrient": 0.5
+      },
+      {
+        "depth": 0.3,
+        "tempC": 3,
+        "salinity": 28,
+        "light": 0.6,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 0.6,
+        "tempC": 0,
+        "salinity": 30,
+        "light": 0.3,
+        "nutrient": 0.7
+      },
+      {
+        "depth": 1,
+        "tempC": -1.5,
+        "salinity": 32.5,
+        "light": 0.1,
+        "nutrient": 0.8
+      }
+    ],
+    "thermocline": {
+      "depth": 0.45,
+      "sharpness": 0.6
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}

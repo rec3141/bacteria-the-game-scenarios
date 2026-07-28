@@ -145,6 +145,15 @@
       "doi": "10.1126/science.1261359"
     },
     {
+      "id": "doi-10-1371-journal-pone-0282794",
+      "title": "Domoic Acid on the Shelf: Pseudo-nitzschia Across the Bering-Chukchi-Beaufort Seas",
+      "date": "2026-07-28",
+      "difficulty": "normal",
+      "realWorldBasis": "Pseudo-nitzschia assemblages and domoic acid across Bering/Chukchi/Beaufort water masses, 2018 DBO/AON surveys",
+      "file": "scenarios/doi-10-1371-journal-pone-0282794.json",
+      "doi": "10.1371/journal.pone.0282794"
+    },
+    {
       "id": "doi-10-1371-journal-pone-0324466",
       "title": "Gyre Edge: Prochlorococcus Meets the Nutrient Front",
       "date": "2026-07-25",
