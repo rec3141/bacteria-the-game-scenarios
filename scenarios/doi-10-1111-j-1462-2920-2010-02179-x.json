@@ -1,0 +1,273 @@
+{
+  "meta": {
+    "title": "Persistence of bacterial and archaeal communities in sea ice through an Arctic winter",
+    "date": "2026-07-28",
+    "lesson": "In Franklin Bay, first-year Arctic sea ice was sampled weekly through the winter darkness of January-March, as brine temperatures fell from -9C to -26C. Despite this severe cold and a significant drop in microbial abundance, the bacterial and archaeal community's richness and composition stayed remarkably stable through the winter. Ice and under-ice seawater alike stayed dominated by SAR11 Alphaproteobacteria and Marine Group I Crenarchaeota, plus oligotrophic Gammaproteobacteria and the sea-ice specialist Polaribacter - none of the genera typical of later-season ice. This suggests that neither selective entrapment during autumn freeze-up nor winter die-off strongly reshapes the community: the distinctive spring/summer sea-ice assemblage must instead arise later, through succession after winter's end. The lesson: survival in brine channels through months of extreme cold and darkness is less about who dies and more about who simply persists.",
+    "citation": "Collins, Rocap, Deming (2010). Persistence of bacterial and archaeal communities in sea ice through an Arctic winter. doi:10.1111/j.1462-2920.2010.02179.x",
+    "difficulty": "hard",
+    "realWorldBasis": "Franklin Bay, Western Arctic, first-year winter sea ice, Jan-Mar 2004"
+  },
+  "env": {
+    "day.lengthSec": 300,
+    "day.latitude": 70,
+    "day.dayOfYear": 45,
+    "day.startHour": 10,
+    "diel.tempBase": -10,
+    "diel.tempAmp": 6,
+    "diel.foodFloor": 0.22,
+    "diel.q10": 2.4,
+    "diel.q10RefC": 20,
+    "diel.grazeNight": 0.6,
+    "diel.lightGamma": 3.5,
+    "diel.twilight": 0.6,
+    "diel.waterNight.0": 3,
+    "diel.waterNight.1": 10,
+    "diel.waterNight.2": 24,
+    "diel.waterDay.0": 40,
+    "diel.waterDay.1": 62,
+    "diel.waterDay.2": 78,
+    "respirationBase": 0.4,
+    "cell.swimCost": 0.6,
+    "cell.uptake": 8,
+    "cell.startEnergy": 90,
+    "cell.divideThreshold": 200,
+    "cell.cystBelow": 22,
+    "cell.cystWake": 55,
+    "cell.cystMetab": 0.02,
+    "cell.cystDiffuse": 30,
+    "cell.runMin": 2.6,
+    "cell.runMax": 5,
+    "cell.thrust": 14000,
+    "cell.dragRate": 70,
+    "substrate.count": 46,
+    "substrate.sizeMin": 26,
+    "substrate.sizeMax": 150,
+    "substrate.lifeMin": 260,
+    "substrate.lifeMax": 600,
+    "substrate.driftMin": 3,
+    "substrate.driftMax": 8,
+    "substrate.bloomEvery": 1.2,
+    "predator.count": 2,
+    "predator.wanderSpeed": 12,
+    "predator.chaseSpeed": 20,
+    "predator.senseRange": 110,
+    "predator.metabolism": 6,
+    "predator.minCount": 1,
+    "phage.greenCount": 8,
+    "phage.goldCount": 2,
+    "phage.life.0": 22,
+    "phage.life.1": 34
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid-rich brine exudate",
+      "enzymeLabel": "Lipase",
+      "color": "#7fb3c9"
+    },
+    {
+      "index": 1,
+      "label": "Oligotrophic protein detritus",
+      "enzymeLabel": "Protease",
+      "color": "#c9a67f"
+    },
+    {
+      "index": 2,
+      "label": "Brine-channel carbohydrate film",
+      "enzymeLabel": "Glycosidase",
+      "color": "#e8f4f8"
+    }
+  ],
+  "particles": {
+    "brineFlake": {
+      "label": "Brine channel particulate",
+      "mix": [
+        0.3,
+        0.3,
+        0.4
+      ],
+      "shape": "shard",
+      "squash": 0.6,
+      "weight": 6
+    },
+    "seaIceSnow": {
+      "label": "Sea-ice marine snow",
+      "mix": [
+        0.2,
+        0.5,
+        0.3
+      ],
+      "shape": "aggregate",
+      "weight": 4
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase",
+      "color": "#7fb3c9",
+      "weight": 5
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#c9a67f",
+      "weight": 5
+    },
+    "enzyme2": {
+      "label": "Glycosidase",
+      "color": "#e8f4f8",
+      "weight": 6
+    },
+    "chemotaxis": {
+      "label": "Brine channel seeking",
+      "color": "#a0d8ef",
+      "weight": 5
+    },
+    "antibiotic": {
+      "label": "Bacteriocin",
+      "color": "#d97878",
+      "weight": 2
+    },
+    "eps": {
+      "label": "Cryoprotective EPS",
+      "color": "#f0f8ff",
+      "weight": 7
+    },
+    "crispr": {
+      "label": "CRISPR immunity",
+      "color": "#9b8fd4",
+      "weight": 4
+    },
+    "twitching": {
+      "label": "Twitching motility",
+      "color": "#7fc97f",
+      "weight": 2
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "sar11",
+        "label": "SAR11-like Alphaproteobacterium",
+        "color": "#8fb8d4",
+        "genome": {
+          "enzLvl": [
+            2,
+            2,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 3,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "polaribacter",
+        "label": "Polaribacter sp.",
+        "color": "#d4c88f",
+        "genome": {
+          "enzLvl": [
+            1,
+            2,
+            3
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 4,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 4
+      },
+      {
+        "id": "mgi",
+        "label": "Marine Group I Crenarchaeote",
+        "color": "#a89fd4",
+        "genome": {
+          "enzLvl": [
+            1,
+            1,
+            2
+          ],
+          "chemoLevel": 0,
+          "antibiotic": 0,
+          "eps": 2,
+          "crispr": true,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      }
+    ]
+  },
+  "terrain": [
+    {
+      "at": "top",
+      "thickness": 260,
+      "color": "#dceef5",
+      "label": "First-year winter sea ice",
+      "roughness": 0.4,
+      "porosity": 0.45,
+      "poreSize": 18,
+      "featureSize": 300,
+      "spires": 0.1,
+      "spireHeight": 100,
+      "spireWidth": 40,
+      "warp": 0.15
+    },
+    {
+      "at": "bottom",
+      "thickness": 60,
+      "color": "#0d1f2b",
+      "label": "Under-ice seawater floor",
+      "roughness": 0.15,
+      "porosity": 0.1,
+      "poreSize": 10,
+      "featureSize": 200,
+      "spires": 0,
+      "spireHeight": 0,
+      "spireWidth": 10,
+      "warp": 0
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": -12,
+        "salinity": 45,
+        "light": 0.15,
+        "nutrient": 0.4
+      },
+      {
+        "depth": 0.4,
+        "tempC": -15,
+        "salinity": 55,
+        "light": 0.05,
+        "nutrient": 0.35
+      },
+      {
+        "depth": 0.8,
+        "tempC": -18,
+        "salinity": 60,
+        "light": 0.01,
+        "nutrient": 0.3
+      },
+      {
+        "depth": 1,
+        "tempC": -2,
+        "salinity": 34,
+        "light": 0.02,
+        "nutrient": 0.5
+      }
+    ],
+    "thermocline": {
+      "depth": 0.6,
+      "sharpness": 0.7
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}

@@ -136,6 +136,15 @@
       "doi": "10.1111/1462-2920.70369"
     },
     {
+      "id": "doi-10-1111-j-1462-2920-2010-02179-x",
+      "title": "Persistence of bacterial and archaeal communities in sea ice through an Arctic winter",
+      "date": "2026-07-28",
+      "difficulty": "hard",
+      "realWorldBasis": "Franklin Bay, Western Arctic, first-year winter sea ice, Jan-Mar 2004",
+      "file": "scenarios/doi-10-1111-j-1462-2920-2010-02179-x.json",
+      "doi": "10.1111/j.1462-2920.2010.02179.x"
+    },
+    {
       "id": "doi-10-1126-science-1261359",
       "title": "Ocean Microbiome: Vertical Stratification Epi to Mesopelagic",
       "date": "2026-07-18",
