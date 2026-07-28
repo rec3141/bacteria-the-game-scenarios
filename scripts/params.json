@@ -585,7 +585,7 @@
     "diel.tempBase": {
       "default": 17,
       "doc": "Mean water temperature across the day (°C).",
-      "min": -10,
+      "min": -30,
       "max": 50
     },
     "diel.tempAmp": {

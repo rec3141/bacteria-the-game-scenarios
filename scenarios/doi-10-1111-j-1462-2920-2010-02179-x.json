@@ -12,7 +12,7 @@
     "day.latitude": 70,
     "day.dayOfYear": 45,
     "day.startHour": 10,
-    "diel.tempBase": -10,
+    "diel.tempBase": -18,
     "diel.tempAmp": 6,
     "diel.foodFloor": 0.22,
     "diel.q10": 2.4,
