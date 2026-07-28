@@ -103,7 +103,9 @@ It must satisfy this schema (any unknown key, out-of-range value, or new "verb" 
         "warp": 0..1 } ],
   "column": {   // OPTIONAL — a stratified water column. Include when depth matters (surface vs deep).
     "enabled": true|false,
-    "layers": [ { "depth": num (ascending, >=0), "tempC": -10..50, "salinity": 0..60, "light": 0..1, "nutrient": 0..1 } ],
+    "layers": [ { "depth": num (ascending, >=0), "tempC": -30..50, "salinity": 0..60, "light": 0..1, "nutrient": 0..1 } ],
+      // tempC goes down to -30 so polar habitats can state their real temperature: sea-ice brine runs
+      // -10 to -20 through winter. Use the site's actual temperature rather than rounding up to 0.
     "thermocline": { "depth": num, "sharpness": 0..1 }
   }
 }
@@ -341,6 +343,29 @@ async function buildPrompt() {
 // --mock <file> feeds a canned model response instead of calling the API, so the WHOLE pipeline
 // (resolve → prompt → parse → validate → write → index) is exercisable in CI without a paid key.
 const mockFile = arg("mock");
+// The game CLAMPS an out-of-range env value; it never refuses one. That is right for the game, which
+// must keep loading every scenario ever published, and wrong here. A clamped value is a level that
+// plays differently from the one that was designed, with nothing anywhere saying so.
+//
+// It is not hypothetical. Every scenario built before the prompt carried the full parameter table was
+// authoring predator speeds in the wrong UNITS -- chaseSpeed 1.2 against a default of 42.5, wanderSpeed
+// 0.5 against 25, both an order of magnitude under the floor. All of them clamped to exactly the
+// minimum, and six daily levels shipped with protists that barely move. Nine scenarios carried 37 of
+// these between them and not one line of output ever mentioned it.
+//
+// So: strict writer, tolerant reader. The generator refuses what the game would quietly bend, and the
+// retry names the parameter, its range, and what the model actually wrote.
+function envRangeErrors(raw) {
+  const out = [];
+  for (const [k, v] of Object.entries((raw && raw.env) || {})) {
+    const p = PARAMS[k];
+    if (!p || typeof v !== "number" || !Number.isFinite(v)) continue;   // validateScenario owns those
+    if (v < p.min) out.push(`${k}=${v} is below the minimum ${p.min} (default ${p.default})`);
+    else if (v > p.max) out.push(`${k}=${v} is above the maximum ${p.max} (default ${p.default})`);
+  }
+  return out;
+}
+
 async function generateOnce(prompt) {
   // mock mode reads a canned text reply (for hermetic CI); live mode gets a parsed object via tool use.
   const got = mockFile ? extractJson(readFileSync(mockFile, "utf8")) : await modelScenario(prompt);
@@ -352,7 +377,14 @@ async function generateOnce(prompt) {
   // goes green and nobody learns the model has started boxing its answers again.
   if (boxed !== got) console.warn(`[generate] repaired the envelope — model sent top-level keys: ${Object.keys(got).join(", ")}`);
   const raw = { ...boxed, schema: "bacteria-scenario", version: 1 };
-  const result = validateScenario(raw, defaults);
+  let result = validateScenario(raw, defaults);
+  if (result.ok) {
+    const ranges = envRangeErrors(raw);
+    if (ranges.length) {
+      result = { ok: false, reason: `env values outside their authoring range (the game would clamp these, ` +
+        `so the level would not play as designed): ${ranges.join("; ")}` };
+    }
+  }
   return { raw, result };
 }
 

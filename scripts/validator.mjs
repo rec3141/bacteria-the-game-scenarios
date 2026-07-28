@@ -410,7 +410,9 @@
           if (!Number.isFinite(L.depth) || L.depth < 0 || L.depth <= prevDepth) return scReject("column layer depths must be ascending and >= 0");
           prevDepth = L.depth;
           const band = (v, lo, hi, name) => v == null || (Number.isFinite(v) && v >= lo && v <= hi) ? null : `column layer ${name} out of range`;
-          for (const chk of [band(L.tempC, -10, 50, "tempC"), band(L.salinity, 0, 60, "salinity"), band(L.light, 0, 1, "light"), band(L.nutrient, 0, 1, "nutrient")]) if (chk) return scReject(chk);
+          // -30, not -10: polar sea-ice brine is colder than the old floor, which rejected the honest
+          // temperature for a whole class of habitat. Mirrors game.js -- see the note there.
+          for (const chk of [band(L.tempC, -30, 50, "tempC"), band(L.salinity, 0, 60, "salinity"), band(L.light, 0, 1, "light"), band(L.nutrient, 0, 1, "nutrient")]) if (chk) return scReject(chk);
         }
       }
       column = scClone(col); column.enabled = col.enabled === true;

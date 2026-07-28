@@ -250,6 +250,31 @@ const repo = join(here, "..");
     "publish must be skipped when generate wrote nothing, or the no-op run hands publish.sh an empty id and exits 1");
 }
 
+// ---- no published scenario may carry a value the game will silently clamp -------------------------
+// The game clamps an out-of-range env value and says nothing -- correct for the game, which has to keep
+// loading everything ever published, and invisible to everyone else. Nine scenarios shipped with 37 of
+// these: predator.chaseSpeed authored at 1.2 against a default of 42.5 and a floor of 4.25, so six
+// daily levels ran with protists pinned to the minimum speed and nothing anywhere said so. The
+// generator now refuses them; this stops one arriving by hand.
+{
+  const params = JSON.parse(readFileSync(join(repo, "scripts/params.json"), "utf8")).params;
+  const bad = [];
+  for (const f of readdirSync(join(repo, "scenarios")).filter((f) => f.endsWith(".json"))) {
+    const s = JSON.parse(readFileSync(join(repo, "scenarios", f), "utf8"));
+    for (const [k, v] of Object.entries(s.env || {})) {
+      const p = params[k];
+      if (!p || typeof v !== "number") continue;
+      if (v < p.min || v > p.max) bad.push(`${f}: ${k}=${v} outside ${p.min}..${p.max}`);
+    }
+  }
+  assert.deepEqual(bad, [], "scenarios must not carry values the game would silently clamp");
+
+  const gen = readFileSync(join(here, "generate.mjs"), "utf8");
+  assert.match(gen, /function envRangeErrors/, "the generator must check env values against their range");
+  assert.match(gen, /const ranges = envRangeErrors\(raw\);/,
+    "and must actually run that check on every generation, not merely define it");
+}
+
 // ---- publish.sh must not have regrown a PR step ---------------------------------------------------
 {
   const pub = readFileSync(join(here, "publish.sh"), "utf8");
