@@ -410,8 +410,14 @@
           if (!Number.isFinite(L.depth) || L.depth < 0 || L.depth <= prevDepth) return scReject("column layer depths must be ascending and >= 0");
           prevDepth = L.depth;
           const band = (v, lo, hi, name) => v == null || (Number.isFinite(v) && v >= lo && v <= hi) ? null : `column layer ${name} out of range`;
-          // -30, not -10: polar sea-ice brine is colder than the old floor, which rejected the honest
-          // temperature for a whole class of habitat. Mirrors game.js -- see the note there.
+          // tempC floor is -30, not -10: sea-ice brine runs -10 to -20 through a polar winter and the
+          // ice surface goes below -30, so the old floor rejected the honest temperature for an entire
+          // class of real habitat. It cost us a paper -- an Arctic winter sea-ice study failed
+          // generation twice on "tempC out of range" and was written off. NOTE the water model flattens
+          // out well before this: diffusivity is (tempC+5)/25 clamped at 0.3, so everything below about
+          // -2.5C behaves identically. A -25C layer validates and plays, it just does not feel colder
+          // than -5C. Widening the bound is honest about the habitat; making the cold MEAN something
+          // further down is a separate change to that curve.
           for (const chk of [band(L.tempC, -30, 50, "tempC"), band(L.salinity, 0, 60, "salinity"), band(L.light, 0, 1, "light"), band(L.nutrient, 0, 1, "nutrient")]) if (chk) return scReject(chk);
         }
       }
