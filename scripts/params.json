@@ -899,16 +899,16 @@
       "max": 8
     },
     "diatom.grazeChance": {
-      "default": 0.22,
+      "default": 0.6,
       "doc": "Odds a grazer gets through a 20um frustule on one contact, divided by the cell's size. The frustule is armour — this is why big chain-formers survive grazing that wipes out naked cells.",
-      "min": 0.022,
-      "max": 2.2
+      "min": 0.06,
+      "max": 6
     },
     "diatom.grazeEvery": {
-      "default": 0.5,
+      "default": 0.25,
       "doc": "Seconds between a grazer's bite attempts on a diatom — without it, contact means sixty rolls a second.",
-      "min": 0.05,
-      "max": 5
+      "min": 0.025,
+      "max": 2.5
     },
     "diatom.killMotes": {
       "default": 10,
