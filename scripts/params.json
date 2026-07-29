@@ -892,6 +892,12 @@
       "min": 0.08,
       "max": 8
     },
+    "diatom.grazeChance": {
+      "default": 0.22,
+      "doc": "Odds a grazer gets through a 20um frustule on one contact, divided by the cell's size. The frustule is armour — this is why big chain-formers survive grazing that wipes out naked cells.",
+      "min": 0.022,
+      "max": 2.2
+    },
     "diatom.killMotes": {
       "default": 10,
       "doc": "Food motes released per frustule when a diatom cell dies, at 20um — scales with the cell's size.",

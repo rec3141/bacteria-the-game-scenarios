@@ -214,6 +214,7 @@
     "exudateFrac": 0.22,
     "exudateMote": 26,
     "grazeToxinDose": 0.8,
+    "grazeChance": 0.22,
     "killMotes": 10,
     "immigrateEvery": 14
   },
