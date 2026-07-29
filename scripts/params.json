@@ -904,6 +904,12 @@
       "min": 0.022,
       "max": 2.2
     },
+    "diatom.grazeEvery": {
+      "default": 0.5,
+      "doc": "Seconds between a grazer's bite attempts on a diatom — without it, contact means sixty rolls a second.",
+      "min": 0.05,
+      "max": 5
+    },
     "diatom.killMotes": {
       "default": 10,
       "doc": "Food motes released per frustule when a diatom cell dies, at 20um — scales with the cell's size.",
