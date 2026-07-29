@@ -211,6 +211,9 @@
     "glideSpeed": 16,
     "glideTurn": 1.1,
     "chainDrift": 0.5,
+    "exudateFrac": 0.22,
+    "exudateMote": 26,
+    "grazeToxinDose": 0.8,
     "killMotes": 10,
     "immigrateEvery": 14
   },

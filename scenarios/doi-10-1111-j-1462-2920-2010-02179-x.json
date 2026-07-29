@@ -2,7 +2,7 @@
   "meta": {
     "title": "Persistence of bacterial and archaeal communities in sea ice through an Arctic winter",
     "date": "2026-07-28",
-    "lesson": "In Franklin Bay, first-year Arctic sea ice was sampled weekly through the winter darkness of January-March, as brine temperatures fell from -9C to -26C. Despite this severe cold and a significant drop in microbial abundance, the bacterial and archaeal community's richness and composition stayed remarkably stable through the winter. Ice and under-ice seawater alike stayed dominated by SAR11 Alphaproteobacteria and Marine Group I Crenarchaeota, plus oligotrophic Gammaproteobacteria and the sea-ice specialist Polaribacter - none of the genera typical of later-season ice. This suggests that neither selective entrapment during autumn freeze-up nor winter die-off strongly reshapes the community: the distinctive spring/summer sea-ice assemblage must instead arise later, through succession after winter's end. The lesson: survival in brine channels through months of extreme cold and darkness is less about who dies and more about who simply persists.",
+    "lesson": "In Franklin Bay, first-year Arctic sea ice was sampled weekly through the winter darkness of January-March, as brine temperatures fell from -9C to -26C. Despite this severe cold and a significant drop in microbial abundance, the bacterial and archaeal community's richness and composition stayed remarkably stable through the winter. Ice and under-ice seawater alike stayed dominated by SAR11 Alphaproteobacteria and Marine Group I Crenarchaeota, plus oligotrophic Gammaproteobacteria and the sea-ice specialist Polaribacter - none of the genera typical of later-season ice. This suggests that neither selective entrapment during autumn freeze-up nor winter die-off strongly reshapes the community: the distinctive spring/summer sea-ice assemblage must instead arise later, through succession after winter's end. The lesson: survival in brine channels through months of extreme cold and darkness is less about who dies and more about who simply persists. The ice itself is the habitat here, not the ceiling: winter sea ice is threaded through with brine channels, and the community that persists through the dark months lives INSIDE that matrix rather than in the water beneath it. Swim up into the ice and work through it.",
     "citation": "Collins, Rocap, Deming (2010). Persistence of bacterial and archaeal communities in sea ice through an Arctic winter. doi:10.1111/j.1462-2920.2010.02179.x",
     "difficulty": "hard",
     "realWorldBasis": "Franklin Bay, Western Arctic, first-year winter sea ice, Jan-Mar 2004"
@@ -204,17 +204,17 @@
   "terrain": [
     {
       "at": "top",
-      "thickness": 260,
+      "thickness": 800,
       "color": "#dceef5",
       "label": "First-year winter sea ice",
-      "roughness": 0.4,
-      "porosity": 0.45,
-      "poreSize": 18,
-      "featureSize": 300,
-      "spires": 0.1,
-      "spireHeight": 100,
-      "spireWidth": 40,
-      "warp": 0.15
+      "roughness": 0.5,
+      "porosity": 0.68,
+      "poreSize": 30,
+      "featureSize": 260,
+      "spires": 0.35,
+      "spireHeight": 180,
+      "spireWidth": 55,
+      "warp": 0.85
     },
     {
       "at": "bottom",

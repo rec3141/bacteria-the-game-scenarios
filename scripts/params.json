@@ -874,9 +874,27 @@
       "min": 0.05,
       "max": 5
     },
+    "diatom.exudateFrac": {
+      "default": 0.22,
+      "doc": "Share of what a diatom fixes that leaks out as dissolved carbon. This is what feeds the phycosphere while the bloom is ALIVE.",
+      "min": 0.022,
+      "max": 2.2
+    },
+    "diatom.exudateMote": {
+      "default": 26,
+      "doc": "How much leaked carbon makes one edible mote. Lower = a finer, steadier drizzle of food around every chain.",
+      "min": 2.6,
+      "max": 260
+    },
+    "diatom.grazeToxinDose": {
+      "default": 0.8,
+      "doc": "Fraction of a toxic frustule's potency a grazer takes as a one-off dose when it eats one. This is how domoic acid actually travels: it is eaten, not fired.",
+      "min": 0.08,
+      "max": 8
+    },
     "diatom.killMotes": {
       "default": 10,
-      "doc": "Food motes released when a diatom dies — a big parcel of biomass.",
+      "doc": "Food motes released per frustule when a diatom cell dies, at 20um — scales with the cell's size.",
       "min": 1,
       "max": 100
     },
