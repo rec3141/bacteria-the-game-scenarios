@@ -100,6 +100,14 @@
       "file": "scenarios/daily-2026-07-28.json"
     },
     {
+      "id": "daily-2026-07-29",
+      "title": "Ice Shelf Cavity: Life Under the Ross Ice Shelf",
+      "date": "2026-07-29",
+      "difficulty": "hard",
+      "realWorldBasis": "Sub-ice-shelf water column, Ross Ice Shelf, Antarctica (WISSARD borehole observations)",
+      "file": "scenarios/daily-2026-07-29.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
@@ -155,9 +163,9 @@
     },
     {
       "id": "doi-10-1371-journal-pone-0282794",
-      "title": "Domoic Acid on the Shelf: Pseudo-nitzschia Across the Bering-Chukchi-Beaufort Seas",
+      "title": "Domoic Acid on the Shelf: Pseudo-nitzschia Across the Bering–Chukchi–Beaufort",
       "date": "2026-07-28",
-      "difficulty": "normal",
+      "difficulty": "hard",
       "realWorldBasis": "Pseudo-nitzschia assemblages and domoic acid across Bering/Chukchi/Beaufort water masses, 2018 DBO/AON surveys",
       "file": "scenarios/doi-10-1371-journal-pone-0282794.json",
       "doi": "10.1371/journal.pone.0282794"

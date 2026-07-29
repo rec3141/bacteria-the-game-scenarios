@@ -1,0 +1,245 @@
+{
+  "meta": {
+    "title": "Ice Shelf Cavity: Life Under the Ross Ice Shelf",
+    "date": "2026-07-29",
+    "lesson": "Beneath the Ross Ice Shelf, sunlight never reaches the water column - yet microbial life persists on marine snow and chemical energy sources trickling in from beneath the ice and from the seafloor below. With no phototrophs possible, heterotrophic bacteria depend entirely on slowly sinking organic aggregates and on the rare chemical plume seeping from sub-ice sediments. Metabolism runs extremely slow in the near-freezing brine, temperatures barely swing across a whole day because there is no day - light never arrives at all. This scenario models an ecosystem run on famine economics: sparse food, ultra-slow degradation, and cells that must be able to encyst and wait rather than constantly hunt.",
+    "citation": "Vick-Majors et al. 2016, marine cavity biogeochemistry beneath the Ross Ice Shelf (WISSARD project)",
+    "difficulty": "hard",
+    "realWorldBasis": "Sub-ice-shelf water column, Ross Ice Shelf, Antarctica (WISSARD borehole observations)"
+  },
+  "env": {
+    "day.lengthSec": 400,
+    "day.latitude": -80,
+    "day.dayOfYear": 355,
+    "diel.tempBase": -1.9,
+    "diel.tempAmp": 0.5,
+    "diel.foodFloor": 0.85,
+    "diel.q10": 2.5,
+    "diel.q10RefC": 20,
+    "diel.lightGamma": 0.3,
+    "diel.waterNight.0": 3,
+    "diel.waterNight.1": 6,
+    "diel.waterNight.2": 12,
+    "diel.waterDay.0": 5,
+    "diel.waterDay.1": 10,
+    "diel.waterDay.2": 18,
+    "diel.goldTint": 0.02,
+    "respirationBase": 0.4,
+    "substrate.count": 46,
+    "substrate.moteEnergy": 10,
+    "substrate.bloomEvery": 1.4,
+    "substrate.sizeMin": 26,
+    "substrate.sizeMax": 150,
+    "substrate.lifeMin": 260,
+    "substrate.lifeMax": 700,
+    "substrate.dissolveTime": 22,
+    "substrate.driftMin": 3,
+    "substrate.driftMax": 8,
+    "substrate.minPerRes": 2,
+    "cell.startEnergy": 95,
+    "cell.divideThreshold": 200,
+    "cell.maxEnergy": 260,
+    "cell.uptake": 9,
+    "cell.swimCost": 0.7,
+    "cell.cystBelow": 22,
+    "cell.cystWake": 55,
+    "cell.cystMetab": 0.02,
+    "cell.cystDiffuse": 30,
+    "cell.runMin": 2.5,
+    "cell.runMax": 5,
+    "predator.count": 2,
+    "predator.wanderSpeed": 12,
+    "predator.chaseSpeed": 20,
+    "predator.senseRange": 110,
+    "predator.metabolism": 6,
+    "predator.mealEnergy": 65,
+    "phage.greenCount": 8,
+    "phage.goldCount": 2,
+    "phage.goldMinDist": 900
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid marine snow",
+      "enzymeLabel": "Cold-active lipase",
+      "color": "#8fb8c9"
+    },
+    {
+      "index": 1,
+      "label": "Sinking protein detritus",
+      "enzymeLabel": "Psychrophilic protease",
+      "color": "#c9d8df"
+    },
+    {
+      "index": 2,
+      "label": "Refractory glycan floc",
+      "enzymeLabel": "Cold glycosidase",
+      "color": "#e8f2f5"
+    }
+  ],
+  "particles": {
+    "snowAggregate": {
+      "label": "Ice-shelf marine snow",
+      "mix": [
+        0.3,
+        0.3,
+        0.4
+      ],
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 8
+    },
+    "brineFloc": {
+      "label": "Brine-rejection floc",
+      "mix": [
+        0.2,
+        0.5,
+        0.3
+      ],
+      "shape": "shard",
+      "squash": 1,
+      "weight": 3
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Cold-active lipase",
+      "color": "#8fb8c9",
+      "weight": 5
+    },
+    "enzyme1": {
+      "label": "Psychrophilic protease",
+      "color": "#c9d8df",
+      "weight": 5
+    },
+    "enzyme2": {
+      "label": "Cold glycosidase",
+      "color": "#e8f2f5",
+      "weight": 5
+    },
+    "chemotaxis": {
+      "label": "Gradient sensing",
+      "color": "#5fa3c4",
+      "weight": 4
+    },
+    "antibiotic": {
+      "label": "Bacteriocin release",
+      "color": "#b06fb0",
+      "weight": 2
+    },
+    "eps": {
+      "label": "Cryoprotectant EPS",
+      "color": "#d5e8ee",
+      "weight": 6
+    },
+    "crispr": {
+      "label": "CRISPR immunity",
+      "color": "#8b8bd8",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Twitching motility",
+      "color": "#c48f5f",
+      "weight": 2
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "psychrobacter",
+        "label": "Psychrobacter sp. (sub-ice founder)",
+        "color": "#a8d0e0",
+        "genome": {
+          "enzLvl": [
+            2,
+            2,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 2,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "colwellia",
+        "label": "Colwellia sp. (cold specialist)",
+        "color": "#7fa8bb",
+        "genome": {
+          "enzLvl": [
+            1,
+            2,
+            1
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 3,
+          "crispr": true,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      }
+    ]
+  },
+  "terrain": [
+    {
+      "at": "top",
+      "thickness": 500,
+      "color": "#dceef5",
+      "label": "Ross Ice Shelf underside",
+      "roughness": 0.6,
+      "porosity": 0.35,
+      "poreSize": 40,
+      "featureSize": 300,
+      "spires": 0.2,
+      "spireHeight": 200,
+      "spireWidth": 80,
+      "warp": 0.1
+    },
+    {
+      "at": "bottom",
+      "thickness": 120,
+      "color": "#4a4238",
+      "label": "Sub-ice-shelf sediment",
+      "roughness": 0.4,
+      "porosity": 0.25,
+      "poreSize": 30,
+      "featureSize": 200,
+      "warp": 0
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": -1.9,
+        "salinity": 34.5,
+        "light": 0,
+        "nutrient": 0.15
+      },
+      {
+        "depth": 0.5,
+        "tempC": -1.9,
+        "salinity": 34.7,
+        "light": 0,
+        "nutrient": 0.2
+      },
+      {
+        "depth": 1,
+        "tempC": -1.8,
+        "salinity": 34.9,
+        "light": 0,
+        "nutrient": 0.3
+      }
+    ],
+    "thermocline": {
+      "depth": 0.5,
+      "sharpness": 0.05
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}
