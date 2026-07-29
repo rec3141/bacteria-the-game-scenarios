@@ -49,7 +49,8 @@
     "predator.metabolism": 8,
     "phage.greenCount": 14,
     "phage.goldCount": 3,
-    "column.photoRate": 10
+    "column.photoRate": 10,
+    "day.startHour": 8
   },
   "resources": [
     {
