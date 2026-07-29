@@ -100,6 +100,7 @@
     "dose": 55,
     "potency": 18,
     "radiusPer": 0.34,
+    "maxCount": 400,
     "crossDist": 3,
     "crossFactor": 1
   },
@@ -197,6 +198,21 @@
     "cystEatChance": 0.45,
     "killMotes": 8,
     "virusEnergy": 5
+  },
+  "diatom": {
+    "pxPerUm": 1.6,
+    "maxCount": 400,
+    "photoRate": 9,
+    "metabolism": 1.6,
+    "startEnergy": 60,
+    "maxEnergy": 260,
+    "divideEnergy": 190,
+    "sinkSpeed": 5,
+    "glideSpeed": 16,
+    "glideTurn": 1.1,
+    "chainDrift": 0.5,
+    "killMotes": 10,
+    "immigrateEvery": 14
   },
   "phage": {
     "greenCount": 18,

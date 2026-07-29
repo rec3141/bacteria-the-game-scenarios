@@ -81,7 +81,32 @@ It must satisfy this schema (any unknown key, out-of-range value, or new "verb" 
       // A "novel enzyme" is delivered by re-skinning enzyme0/1/2 (e.g. alkane hydroxylase on the lipid class).
   "organisms": { "cells": [ { "id": str, "label": str, "color": "#rrggbb",
       "genome": { "enzLvl": [int,int,int] 0..12, "chemoLevel": int, "antibiotic": int, "eps": int, "crispr": bool, "twitching": bool },
-      "immigrateWeight": 0..10 } ] },
+      "immigrateWeight": 0..10 } ],
+    // DIATOMS — optional, up to 4 types. A third organism class, NOT a bacterium with phototroph set:
+    // eukaryotic algae in a glass frustule, tens of times bigger than a bacterium, and strict
+    // phototrophs (no enzymes, no chemistry — light is their only income, so they live and die by depth
+    // and the day/night cycle). They sink, they collide like the living things they are, and when they
+    // die they release their biomass as food. Use them wherever the real community has them, which in
+    // the sunlit ocean is very nearly everywhere: blooms, sea ice, upwelling, a coastal shelf.
+    "diatoms": [ { "id": str, "label": str, "color": "#rrggbb",
+      "form": "centric"|"pennate",   // centric = a radially symmetric disc (Coscinodiscus,
+                                     // Thalassiosira). pennate = a long bilateral boat (Navicula,
+                                     // Pseudo-nitzschia, Fragilaria). ONLY a pennate can move: it
+                                     // glides on its raphe, and only where it has a surface to grip,
+                                     // so pennates belong on sediment, ice and particles.
+      "sizeUm": 5..100,              // the real cell's long axis in MICROMETRES. Use the organism's
+                                     // actual size — that is what makes a Coscinodiscus feel like a
+                                     // Coscinodiscus next to a bacterium.
+      "chain": 1..12,                // frustules per chain. Most bloom-formers chain: Chaetoceros and
+                                     // Fragilaria strongly, Pseudo-nitzschia in stepped ribbons. 1 = solitary.
+      "count": 0..200,               // how many are kept in the water — this IS the bloom's density
+      "toxin": {                     // OPTIONAL. Released where the cell DIES, not fired by a living
+                                     // one: a harmful alga is harmless until something kills it, and
+                                     // the water where a bloom died is the dangerous part. It drains
+                                     // GRAZERS (it does not harm bacteria), which is who the real
+                                     // toxins harm. Use for Pseudo-nitzschia (domoic acid), Alexandrium
+                                     // (saxitoxin), Karenia (brevetoxin).
+        "label": str, "color": "#rrggbb", "radius": 4..400, "potency": 0..200, "life": 0.5..60 } } ] },
   "terrain": [  // OPTIONAL, column scenarios only — solid, fixed scenery bounding the water.
       // Sea ice overhead, sediment or a vent floor underfoot. It is NOT food: it cannot be digested,
       // it just gets in the way, which is the point. Up to 4 layers.
@@ -155,6 +180,12 @@ CHEMOSYNTHESIS / CHEMOLITHOTROPHY (hydrothermal vents, cold seeps, sulfur/ammoni
 - set "chemolithotroph": true inside the genome of the chemosynthetic organism(s);
 - set column.enabled=true and add column.chemical: { "peakDepth": 0..1 (fraction of the column where the chemical is richest — a vent floor ~0.9, a redox/oxycline ~0.5), "spread": 0.05..0.3, "strength": 0.6..1, "color": "#rrggbb" }.
 A chemolithotroph draws energy from the field at its depth and must stay in the plume — it needs no particle enzyme (keep its enzLvl low, e.g. [0,0,1]).
+
+DIATOMS vs a phototrophic bacterium — pick the right one. organisms.cells with "phototroph": true is a
+photosynthetic BACTERIUM (Prochlorococcus, Synechococcus, a cyanobacterial mat) and is what the player
+can be. organisms.diatoms is a eukaryotic alga: much bigger, chain-forming, sinking, and not playable.
+A diatom bloom is scenery and food and competition, not a genome the player steers. Most real sunlit
+communities want both.
 
 PHOTOSYNTHESIS — set "phototroph": true in a genome. A phototroph fixes carbon from LIGHT, which falls off with depth through the photic zone AND follows the day/night cycle: it earns nothing at night, so it must bank energy by day or wait the dark out as a cyst. Use it for cyanobacteria, algae, and any photosynthetic mat or bloom. In a column, light is strongest at the surface, so a phototroph lives high and a chemolithotroph lives deep.
 

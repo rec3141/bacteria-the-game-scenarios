@@ -820,6 +820,72 @@
       "min": 0.5,
       "max": 50
     },
+    "diatom.photoRate": {
+      "default": 9,
+      "doc": "Energy per second a typical (20um, single) diatom fixes at full light. Scales with the cell's area.",
+      "min": 0.9,
+      "max": 90
+    },
+    "diatom.metabolism": {
+      "default": 1.6,
+      "doc": "Energy per second a typical diatom burns. Scales with area too, so a big cell needs more light.",
+      "min": 0.16,
+      "max": 16
+    },
+    "diatom.startEnergy": {
+      "default": 60,
+      "doc": "Energy a diatom drifts in with.",
+      "min": 6,
+      "max": 600
+    },
+    "diatom.maxEnergy": {
+      "default": 260,
+      "doc": "Most energy a diatom can bank.",
+      "min": 26,
+      "max": 2600
+    },
+    "diatom.divideEnergy": {
+      "default": 190,
+      "doc": "Energy at which a diatom divides. Size never changes — a frustule cannot expand, so growth goes into z.",
+      "min": 19,
+      "max": 1900
+    },
+    "diatom.sinkSpeed": {
+      "default": 5,
+      "doc": "How fast a 20um diatom sinks (px/s). Scales with size: a big frustule falls faster.",
+      "min": 0.5,
+      "max": 50
+    },
+    "diatom.glideSpeed": {
+      "default": 16,
+      "doc": "How fast a PENNATE glides along a surface. Centrics have no raphe and never move under their own power.",
+      "min": 1.6,
+      "max": 160
+    },
+    "diatom.glideTurn": {
+      "default": 1.1,
+      "doc": "How sharply a gliding pennate can change direction.",
+      "min": 0.11,
+      "max": 11
+    },
+    "diatom.chainDrift": {
+      "default": 0.5,
+      "doc": "How much a sinking chain sways about its long axis.",
+      "min": 0.05,
+      "max": 5
+    },
+    "diatom.killMotes": {
+      "default": 10,
+      "doc": "Food motes released when a diatom dies — a big parcel of biomass.",
+      "min": 1,
+      "max": 100
+    },
+    "diatom.immigrateEvery": {
+      "default": 14,
+      "doc": "Seconds between diatoms drifting in while the bloom is below its authored count.",
+      "min": 1.4,
+      "max": 140
+    },
     "phage.greenCount": {
       "default": 18,
       "doc": "Free phages kept drifting in the water.",

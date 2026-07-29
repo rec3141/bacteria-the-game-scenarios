@@ -157,6 +157,9 @@
     /^touch/, /touchSpeedScale/, /Touch(\.|$)/, /^cell\.touch/,
     // the attract-mode dish, and the rendering grid — cosmetic/perf, not ecology
     /^demo\./, /^grid\./,
+    // diatom ceilings and the pixel convention: a scenario authors its diatoms in the organisms block,
+    // in micrometres. maxCount is a frame-time bound and pxPerUm is how the engine draws, not ecology.
+    /^diatom\.(maxCount|pxPerUm)$/, /^toxin\.maxCount$/,
     // The water column has its own authored block in the schema; setting its SHAPE twice, two ways,
     // would let a scenario contradict itself. But chemRate and photoRate are not part of that block —
     // they are rate constants that merely live under CFG.column, and how generous autotrophy is
@@ -354,7 +357,7 @@
       // v1 applies cells + blooms (immigrant/founder genome bundles). Grazer/phage tuning is done through
       // env.predator.* / env.phage.* (already whitelisted), so a dedicated grazers/phages block is not yet
       // a thing — reject it rather than accept-and-ignore, which would be a silent lie to the author.
-      const oErr = scOnlyKeys(raw.organisms, new Set(["cells", "blooms"]), "organisms");
+      const oErr = scOnlyKeys(raw.organisms, new Set(["cells", "blooms", "diatoms"]), "organisms");
       if (oErr) return scReject(oErr);
       const cellList = [].concat(raw.organisms.cells || [], (raw.organisms.blooms || []).map((b) => Object.assign({ bloom: true }, b)));
       const ids = new Set();
@@ -381,6 +384,54 @@
           genome: { enzLvl: [enz[0], enz[1], enz[2]], chemoLevel: g.chemoLevel|0, antibiotic: g.antibiotic|0,
             eps: g.eps|0, crispr: g.crispr === true, twitching: g.twitching === true, chemolithotroph: g.chemolithotroph === true, phototroph: g.phototroph === true },
           immigrateWeight: iw, bloom: c.bloom === true });
+      }
+
+      // ---- organisms.diatoms: a third organism class, not a bacterium with a flag ----
+      // Eukaryotic algae in a glass frustule: strict phototrophs, tens of times bigger than a
+      // bacterium, chain-forming, slowly sinking. Only pennates glide, because gliding needs a raphe.
+      // Size is authored in MICROMETRES because that is what a microbiologist knows about a diatom;
+      // the pixel convention is the engine's problem (CFG.diatom.pxPerUm).
+      if (raw.organisms.diatoms != null) {
+        if (!Array.isArray(raw.organisms.diatoms)) return scReject("organisms.diatoms must be an array");
+        if (raw.organisms.diatoms.length > 4) return scReject("at most 4 diatom types");
+        const dids = new Set();
+        for (const d of raw.organisms.diatoms) {
+          if (!d || typeof d !== "object") return scReject("diatom entry must be an object");
+          const dErr = scOnlyKeys(d, new Set(["id", "label", "color", "form", "sizeUm", "chain", "count", "toxin"]), "diatom");
+          if (dErr) return scReject(dErr);
+          const did = scStr(d.id, 40);
+          if (!did || dids.has(did)) return scReject("diatom id missing or duplicated");
+          dids.add(did);
+          if (d.form != null && d.form !== "pennate" && d.form !== "centric") return scReject('diatom.form must be "pennate" or "centric"');
+          if (d.sizeUm != null && (!Number.isFinite(d.sizeUm) || d.sizeUm < 5 || d.sizeUm > 100)) return scReject("diatom.sizeUm must be 5..100");
+          if (d.chain != null && (!Number.isInteger(d.chain) || d.chain < 1 || d.chain > 12)) return scReject("diatom.chain must be an integer 1..12");
+          if (d.count != null && (!Number.isInteger(d.count) || d.count < 0 || d.count > 200)) return scReject("diatom.count must be an integer 0..200");
+          const dcolor = d.color == null ? null : scColor(d.color);
+          if (d.color != null && !dcolor) return scReject("diatom color must be #rrggbb");
+          // An authored toxin, released where the cell DIES rather than fired by a living one.
+          let toxin = null;
+          if (d.toxin != null) {
+            const t = d.toxin;
+            if (!t || typeof t !== "object") return scReject("diatom.toxin must be an object");
+            const tErr = scOnlyKeys(t, new Set(["label", "color", "radius", "potency", "life"]), "diatom toxin");
+            if (tErr) return scReject(tErr);
+            if (t.radius != null && (!Number.isFinite(t.radius) || t.radius < 4 || t.radius > 400)) return scReject("toxin.radius must be 4..400");
+            if (t.potency != null && (!Number.isFinite(t.potency) || t.potency < 0 || t.potency > 200)) return scReject("toxin.potency must be 0..200");
+            if (t.life != null && (!Number.isFinite(t.life) || t.life < 0.5 || t.life > 60)) return scReject("toxin.life must be 0.5..60");
+            const tcolor = t.color == null ? null : scColor(t.color);
+            if (t.color != null && !tcolor) return scReject("toxin.color must be #rrggbb");
+            toxin = { label: scStr(t.label, 40) || "", color: tcolor,
+                      radius: Number.isFinite(t.radius) ? t.radius : null,
+                      potency: Number.isFinite(t.potency) ? t.potency : null,
+                      life: Number.isFinite(t.life) ? t.life : null };
+          }
+          organisms.diatoms = organisms.diatoms || [];
+          organisms.diatoms.push({ id: did, label: scStr(d.label, 40) || "", color: dcolor,
+            form: d.form === "pennate" ? "pennate" : "centric",
+            sizeUm: Number.isFinite(d.sizeUm) ? d.sizeUm : 20,
+            chain: Number.isInteger(d.chain) ? d.chain : 1,
+            count: Number.isInteger(d.count) ? d.count : 12, toxin });
+        }
       }
     }
 
