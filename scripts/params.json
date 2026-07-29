@@ -864,9 +864,15 @@
     },
     "diatom.glideTurn": {
       "default": 1.1,
-      "doc": "How sharply a gliding pennate can change direction.",
+      "doc": "How far a gliding pennate may swing its heading in one decision.",
       "min": 0.11,
       "max": 11
+    },
+    "diatom.glideTurnRate": {
+      "default": 0.5,
+      "doc": "How fast it turns to that heading (rad/s). Applying the swing in one frame is a snap, not a turn.",
+      "min": 0.05,
+      "max": 5
     },
     "diatom.chainDrift": {
       "default": 0.5,
