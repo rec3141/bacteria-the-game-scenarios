@@ -1,10 +1,10 @@
 {
   "meta": {
-    "title": "Domoic Acid on the Shelf: Pseudo-nitzschia Across the Bering-Chukchi-Beaufort Seas",
+    "title": "Domoic Acid on the Shelf: Pseudo-nitzschia Across the Bering–Chukchi–Beaufort",
     "date": "2026-07-28",
-    "lesson": "Pseudo-nitzschia is a genus of diatoms found from the equator to the poles, and some species make the neurotoxin domoic acid (DA), which accumulates in shellfish and fish and can sicken the animals and people who eat them. In Arctic waters spanning the Bering, Chukchi, and Beaufort seas, different Pseudo-nitzschia species dominate different water masses depending on temperature, salinity, and season, and toxin-producing blooms show up in different places at different times of year rather than as one uniform bloom. This level asks you to survive as a diatom-associated bacterium riding the shift between a summer, strait-influenced water mass and a fall, shelf-influenced one: food chemistry and temperature both change under you, mirroring how species assemblages and toxin production tracked the physical gradients of the region rather than staying fixed in one spot.",
+    "lesson": "Pseudo-nitzschia is a pennate diatom found from the equator to the poles, and only some of its species make the neurotoxin domoic acid. Along the Alaska coast the assemblage turns over as you move north and as the season runs on: smaller, warmer-water species through the Bering Strait and Chukchi in summer, and the large, strongly toxic P. seriata on the Beaufort shelf later in the year. Which species is present therefore decides whether a bloom is food or a poisoning event. Watch what happens here when a chain sinks out of the light. A diatom eats nothing but light, so below the photic zone it is on a clock; when it dies it releases its biomass, which is a windfall for you, and — if it was a toxic species — domoic acid into the water, which kills the grazers that were hunting you. The toxin is not a weapon the alga fires. It is what is left behind when it dies, which is exactly why a harmful bloom is most dangerous as it collapses.",
     "citation": "Hubbard, Villac, Chadwick (2023). Spatiotemporal transitions in Pseudo-nitzschia species assemblages and domoic acid along the Alaska coast. doi:10.1371/journal.pone.0282794",
-    "difficulty": "normal",
+    "difficulty": "hard",
     "realWorldBasis": "Pseudo-nitzschia assemblages and domoic acid across Bering/Chukchi/Beaufort water masses, 2018 DBO/AON surveys"
   },
   "env": {
@@ -22,7 +22,7 @@
     "day.latitude": 68,
     "day.dayOfYear": 240,
     "day.lengthSec": 300,
-    "substrate.count": 78,
+    "substrate.count": 58,
     "substrate.sizeMin": 34,
     "substrate.sizeMax": 170,
     "substrate.lifeMin": 150,
@@ -42,13 +42,14 @@
     "toxin.dose": 65,
     "toxin.potency": 22,
     "toxin.life": 5.5,
-    "predator.count": 4,
+    "predator.count": 6,
     "predator.wanderSpeed": 18,
     "predator.chaseSpeed": 30,
     "predator.senseRange": 150,
     "predator.metabolism": 8,
     "phage.greenCount": 14,
-    "phage.goldCount": 3
+    "phage.goldCount": 3,
+    "column.photoRate": 10
   },
   "resources": [
     {
@@ -151,7 +152,7 @@
     "cells": [
       {
         "id": "founder",
-        "label": "Diatom-associated bacterium (Pseudo-nitzschia phycosphere)",
+        "label": "Phycosphere heterotroph (attached to the chains)",
         "color": "#7fae6f",
         "genome": {
           "enzLvl": [
@@ -163,13 +164,13 @@
           "antibiotic": 1,
           "eps": 1,
           "crispr": false,
-          "twitching": false
+          "twitching": true
         },
         "immigrateWeight": 5
       },
       {
         "id": "summer_specialist",
-        "label": "P. obtusa-associated strain (Bering Strait / Chukchi)",
+        "label": "Bloom-collapse opportunist (Bering Strait / Chukchi)",
         "color": "#c9a24b",
         "genome": {
           "enzLvl": [
@@ -187,7 +188,7 @@
       },
       {
         "id": "fall_specialist",
-        "label": "P. seriata-associated strain (Beaufort shelf)",
+        "label": "Beaufort shelf specialist (autumn assemblage)",
         "color": "#b23a9e",
         "genome": {
           "enzLvl": [
@@ -203,6 +204,58 @@
         },
         "immigrateWeight": 3
       }
+    ],
+    "diatoms": [
+      {
+        "id": "p_obtusa",
+        "label": "Pseudo-nitzschia obtusa (summer, Bering–Chukchi)",
+        "color": "#b8d98a",
+        "form": "pennate",
+        "sizeUm": 42,
+        "chain": 4,
+        "count": 34,
+        "toxin": {
+          "label": "domoic acid (low)",
+          "color": "#e0a0d0",
+          "radius": 70,
+          "potency": 11,
+          "life": 7
+        }
+      },
+      {
+        "id": "p_seriata",
+        "label": "Pseudo-nitzschia seriata (autumn, Beaufort shelf)",
+        "color": "#8fbf6a",
+        "form": "pennate",
+        "sizeUm": 92,
+        "chain": 6,
+        "count": 22,
+        "toxin": {
+          "label": "domoic acid",
+          "color": "#e86ac0",
+          "radius": 150,
+          "potency": 24,
+          "life": 16
+        }
+      },
+      {
+        "id": "chaetoceros",
+        "label": "Chaetoceros (non-toxic background bloom)",
+        "color": "#9fd0e8",
+        "form": "centric",
+        "sizeUm": 15,
+        "chain": 8,
+        "count": 40
+      },
+      {
+        "id": "navicula",
+        "label": "Navicula (benthic pennate, glides on the sediment)",
+        "color": "#c8e0a8",
+        "form": "pennate",
+        "sizeUm": 30,
+        "chain": 1,
+        "count": 18
+      }
     ]
   },
   "column": {
@@ -212,29 +265,29 @@
         "depth": 0,
         "tempC": 6,
         "salinity": 26,
-        "light": 0.9,
-        "nutrient": 0.5
+        "light": 1,
+        "nutrient": 0.45
       },
       {
-        "depth": 0.3,
-        "tempC": 3,
+        "depth": 0.25,
+        "tempC": 4,
         "salinity": 28,
-        "light": 0.6,
+        "light": 0.34,
         "nutrient": 0.6
       },
       {
         "depth": 0.6,
         "tempC": 0,
-        "salinity": 30,
-        "light": 0.3,
-        "nutrient": 0.7
+        "salinity": 30.5,
+        "light": 0.07,
+        "nutrient": 0.75
       },
       {
         "depth": 1,
-        "tempC": -1.5,
+        "tempC": -1.6,
         "salinity": 32.5,
-        "light": 0.1,
-        "nutrient": 0.8
+        "light": 0.01,
+        "nutrient": 0.85
       }
     ],
     "thermocline": {
