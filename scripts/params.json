@@ -851,10 +851,10 @@
       "max": 1900
     },
     "diatom.sinkSpeed": {
-      "default": 5,
+      "default": 1.2,
       "doc": "How fast a 20um diatom sinks (px/s). Scales with size: a big frustule falls faster.",
-      "min": 0.5,
-      "max": 50
+      "min": 0.12,
+      "max": 12
     },
     "diatom.glideSpeed": {
       "default": 16,

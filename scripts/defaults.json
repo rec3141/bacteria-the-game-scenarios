@@ -207,7 +207,7 @@
     "startEnergy": 60,
     "maxEnergy": 260,
     "divideEnergy": 190,
-    "sinkSpeed": 5,
+    "sinkSpeed": 1.2,
     "glideSpeed": 16,
     "glideTurn": 1.1,
     "chainDrift": 0.5,
