@@ -182,6 +182,7 @@
     "startEnergy": 100,
     "mealEnergy": 58,
     "metabolism": 10,
+    "maxEnergy": 420,
     "maturity": 8,
     "reproEnergy": 320,
     "reproCooldown": 11,

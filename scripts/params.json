@@ -733,6 +733,12 @@
       "min": 1,
       "max": 100
     },
+    "predator.maxEnergy": {
+      "default": 420,
+      "doc": "Most energy a protist can bank. Without a ceiling a well-fed grazer stockpiles far past what it can spend, since reproduction is also gated on a cooldown.",
+      "min": 42,
+      "max": 4200
+    },
     "predator.maturity": {
       "default": 8,
       "doc": "Seconds before a protist is old enough to reproduce.",
