@@ -1,0 +1,238 @@
+{
+  "actions": {
+    "enzyme0": {
+      "label": "Alkane hydroxylase",
+      "color": "#d9a441",
+      "weight": 6
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#c1553f",
+      "weight": 3
+    },
+    "enzyme2": {
+      "label": "Chitinase-like glycosidase",
+      "color": "#4fae7a",
+      "weight": 3
+    },
+    "chemotaxis": {
+      "label": "Sulfide-taxis",
+      "color": "#88e0c0",
+      "weight": 6
+    },
+    "antibiotic": {
+      "label": "Bacteriocin",
+      "color": "#b04ecf",
+      "weight": 3
+    },
+    "eps": {
+      "label": "Mucoid sheath",
+      "color": "#7fa9c9",
+      "weight": 5
+    },
+    "crispr": {
+      "label": "CRISPR immunity",
+      "color": "#e0e0e0",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Twitching motility",
+      "color": "#e0c040",
+      "weight": 2
+    }
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 9,
+        "salinity": 34,
+        "light": 0.9,
+        "nutrient": 0.2
+      },
+      {
+        "depth": 0.3,
+        "tempC": 8,
+        "salinity": 34.5,
+        "light": 0.4,
+        "nutrient": 0.35
+      },
+      {
+        "depth": 0.6,
+        "tempC": 6,
+        "salinity": 35,
+        "light": 0.05,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 1,
+        "tempC": 4,
+        "salinity": 35.2,
+        "light": 0,
+        "nutrient": 0.95
+      }
+    ],
+    "thermocline": {
+      "depth": 0.55,
+      "sharpness": 0.7
+    },
+    "chemical": {
+      "peakDepth": 0.85,
+      "spread": 0.18,
+      "strength": 0.9,
+      "color": "#6fd08a"
+    }
+  },
+  "env": {
+    "day.latitude": 36,
+    "day.dayOfYear": 270,
+    "day.lengthSec": 300,
+    "diel.tempBase": 7,
+    "diel.tempAmp": 2,
+    "diel.foodFloor": 0.5,
+    "diel.q10": 2.4,
+    "diel.q10RefC": 10,
+    "diel.waterNight.0": 3,
+    "diel.waterNight.1": 14,
+    "diel.waterNight.2": 18,
+    "diel.waterDay.0": 22,
+    "diel.waterDay.1": 58,
+    "diel.waterDay.2": 50,
+    "substrate.count": 95,
+    "substrate.sizeMin": 34,
+    "substrate.sizeMax": 170,
+    "substrate.lifeMin": 160,
+    "substrate.lifeMax": 340,
+    "substrate.driftMin": 4,
+    "substrate.driftMax": 10,
+    "column.chemRate": 6.5,
+    "column.photoRate": 5,
+    "cell.chemoRange0": 420,
+    "cell.chemoRangePer": 180,
+    "cell.chemoBias": 1.3,
+    "cell.uptake": 11,
+    "cell.startEnergy": 95,
+    "cell.divideThreshold": 160,
+    "respirationBase": 0.7,
+    "predator.count": 3,
+    "predator.wanderSpeed": 14,
+    "predator.chaseSpeed": 24,
+    "predator.senseRange": 130,
+    "predator.metabolism": 6,
+    "phage.greenCount": 10,
+    "phage.goldCount": 3,
+    "phage.goldMinDist": 800
+  },
+  "meta": {
+    "title": "Cold Seep Mud: Methane Hydrate Cracks of the Gulf of Mexico Slope",
+    "date": "2026-07-31",
+    "lesson": "At Bush Hill and similar Gulf of Mexico cold seeps, methane and hydrogen sulfide leak from cracked hydrate deposits into cold, dark bottom water around 550m depth. Free-living sulfide-oxidizing bacteria (relatives of Beggiatoa and Sulfurovum) don't wait passively for chemical energy - they use chemotaxis to swim up sulfide gradients seeping from the seafloor, competing with mat-forming mussels' symbionts and methanotrophs for the thin, patchy plume. The water column here is a deep, cold, food-poor desert except for these chemical hotspots: light is absent below the photic zone, so the entire community runs on chemosynthesis. This level asks the player to hunt a faint, deep chemical plume in near-total darkness and cold, competing against slow grazers and viral pressure, rather than out-eating a rich food field.",
+    "citation": "Cordes et al. 2010, Lloyd et al. 2010 - cold seep chemosynthetic community structure, Gulf of Mexico",
+    "difficulty": "hard",
+    "realWorldBasis": "Gulf of Mexico cold seep methanotroph/thiotroph mats (e.g. Bush Hill, GC185), ~550m depth"
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "thiotroph",
+        "label": "Sulfide-oxidizing chemolithotroph",
+        "color": "#8fd9b0",
+        "genome": {
+          "enzLvl": [
+            0,
+            0,
+            1
+          ],
+          "chemoLevel": 3,
+          "antibiotic": 0,
+          "eps": 2,
+          "crispr": false,
+          "twitching": false,
+          "chemolithotroph": true
+        },
+        "immigrateWeight": 5
+      },
+      {
+        "id": "methanotroph",
+        "label": "Methane-oxidizing generalist",
+        "color": "#d9a441",
+        "genome": {
+          "enzLvl": [
+            2,
+            1,
+            1
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      }
+    ]
+  },
+  "particles": {
+    "oilFilm": {
+      "label": "Hydrocarbon film flake",
+      "mix": [
+        7,
+        1,
+        1
+      ],
+      "shape": "shard",
+      "squash": 0.6,
+      "weight": 6
+    },
+    "detritalFloc": {
+      "label": "Sunken detrital floc",
+      "mix": [
+        1,
+        2,
+        3
+      ],
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 4
+    }
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Hydrocarbon lipid",
+      "enzymeLabel": "Alkane hydroxylase",
+      "color": "#d9a441"
+    },
+    {
+      "index": 1,
+      "label": "Mussel-symbiont detritus",
+      "enzymeLabel": "Protease",
+      "color": "#c1553f"
+    },
+    {
+      "index": 2,
+      "label": "Chitinous floc",
+      "enzymeLabel": "Glycosidase",
+      "color": "#4fae7a"
+    }
+  ],
+  "schema": "bacteria-scenario",
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 260,
+      "color": "#4a3f38",
+      "label": "Cracked hydrate/carbonate seafloor",
+      "roughness": 0.55,
+      "porosity": 0.4,
+      "poreSize": 50,
+      "featureSize": 300,
+      "spires": 0.25,
+      "spireHeight": 180,
+      "spireWidth": 80,
+      "warp": 0.3
+    }
+  ],
+  "version": 1
+}
