@@ -1,0 +1,247 @@
+{
+  "meta": {
+    "title": "Guaymas Basin: Purple Bacteria in the Sulfide-Light Overlap",
+    "date": "2026-08-01",
+    "lesson": "In the Guaymas Basin hydrothermal field, hydrocarbon-rich sediments vent sulfide into a water column that still receives faint sunlight from above. Anoxygenic phototrophic sulfur bacteria exploit the narrow band where both resources overlap: too shallow and sulfide runs out, too deep and light fails. This scenario models that double dependency directly - the organism needs BOTH light and a dissolved chemical, and must hold station in the depth band where the two curves cross, exactly as a Winogradsky column stratifies into colored layers in nature.",
+    "citation": "Teske et al., Guaymas Basin hydrothermal sediment microbiology, ISME J.",
+    "difficulty": "hard",
+    "realWorldBasis": "Guaymas Basin hydrothermal vent field, Gulf of California, ~2000m depth, purple/green sulfur bacteria at the sulfide-light overlap"
+  },
+  "env": {
+    "day.lengthSec": 300,
+    "day.latitude": 27,
+    "day.dayOfYear": 172,
+    "diel.tempBase": 14,
+    "diel.tempAmp": 3,
+    "diel.foodFloor": 0.3,
+    "diel.q10": 2.3,
+    "diel.waterNight.0": 4,
+    "diel.waterNight.1": 3,
+    "diel.waterNight.2": 10,
+    "diel.waterDay.0": 40,
+    "diel.waterDay.1": 20,
+    "diel.waterDay.2": 35,
+    "diel.lightGamma": 2.4,
+    "column.chemRate": 6.5,
+    "column.photoRate": 5,
+    "substrate.count": 70,
+    "substrate.sizeMin": 26,
+    "substrate.sizeMax": 160,
+    "substrate.lifeMin": 100,
+    "substrate.lifeMax": 240,
+    "substrate.driftMin": 5,
+    "substrate.driftMax": 12,
+    "predator.count": 3,
+    "predator.wanderSpeed": 18,
+    "predator.chaseSpeed": 30,
+    "predator.senseRange": 130,
+    "predator.metabolism": 8,
+    "cell.thrust": 15000,
+    "cell.dragRate": 70,
+    "cell.maxSpeed": 160,
+    "cell.uptake": 10,
+    "cell.startEnergy": 100,
+    "cell.divideThreshold": 190,
+    "cell.cystBelow": 18,
+    "cell.cystWake": 50,
+    "respirationBase": 0.75,
+    "phage.greenCount": 10,
+    "phage.goldCount": 3
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Hydrocarbon Droplets",
+      "enzymeLabel": "Alkane Hydroxylase",
+      "color": "#8a5a2b"
+    },
+    {
+      "index": 1,
+      "label": "Sediment Detritus",
+      "enzymeLabel": "Protease",
+      "color": "#6b7a5e"
+    },
+    {
+      "index": 2,
+      "label": "Microbial Mat Exudate",
+      "enzymeLabel": "Glycosidase",
+      "color": "#3f6b5e"
+    }
+  ],
+  "particles": {
+    "oilDroplet": {
+      "label": "Hydrocarbon Seep Droplet",
+      "mix": [
+        3,
+        1,
+        1
+      ],
+      "shape": "ellipse",
+      "squash": 0.7,
+      "weight": 6
+    },
+    "matFlake": {
+      "label": "Sediment Mat Flake",
+      "mix": [
+        1,
+        2,
+        3
+      ],
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 4
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Alkane Hydroxylase",
+      "color": "#c98a3f",
+      "weight": 5
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#8fae6b",
+      "weight": 4
+    },
+    "enzyme2": {
+      "label": "Glycosidase",
+      "color": "#3fae9e",
+      "weight": 4
+    },
+    "chemotaxis": {
+      "label": "Sulfide Taxis",
+      "color": "#e0d060",
+      "weight": 8
+    },
+    "antibiotic": {
+      "label": "Bacteriocin",
+      "color": "#c0405f",
+      "weight": 2
+    },
+    "eps": {
+      "label": "Mat Slime",
+      "color": "#556b4f",
+      "weight": 5
+    },
+    "crispr": {
+      "label": "CRISPR Immunity",
+      "color": "#7799cc",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Twitching Pili",
+      "color": "#aa88cc",
+      "weight": 2
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "purpleSulfur",
+        "label": "Purple Sulfur Bacterium",
+        "color": "#8a2e6b",
+        "genome": {
+          "enzLvl": [
+            1,
+            0,
+            1
+          ],
+          "chemoLevel": 3,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false,
+          "phototroph": true,
+          "chemolithotroph": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "heterotroph",
+        "label": "Sediment Heterotroph",
+        "color": "#7a6a3f",
+        "genome": {
+          "enzLvl": [
+            2,
+            1,
+            1
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 0,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      }
+    ]
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 18,
+        "salinity": 35,
+        "light": 0.35,
+        "nutrient": 0.15
+      },
+      {
+        "depth": 0.3,
+        "tempC": 16,
+        "salinity": 35,
+        "light": 0.18,
+        "nutrient": 0.3
+      },
+      {
+        "depth": 0.55,
+        "tempC": 15,
+        "salinity": 36,
+        "light": 0.06,
+        "nutrient": 0.55
+      },
+      {
+        "depth": 0.8,
+        "tempC": 14,
+        "salinity": 38,
+        "light": 0.01,
+        "nutrient": 0.8
+      },
+      {
+        "depth": 1,
+        "tempC": 13,
+        "salinity": 40,
+        "light": 0,
+        "nutrient": 1
+      }
+    ],
+    "thermocline": {
+      "depth": 0.5,
+      "sharpness": 0.6
+    },
+    "chemical": {
+      "peakDepth": 0.85,
+      "spread": 0.22,
+      "strength": 0.9,
+      "color": "#c9a23f"
+    }
+  },
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 180,
+      "color": "#3a2a1f",
+      "label": "Hydrothermal Sediment",
+      "roughness": 0.6,
+      "porosity": 0.4,
+      "poreSize": 30,
+      "featureSize": 200,
+      "spires": 0.3,
+      "spireHeight": 250,
+      "spireWidth": 60,
+      "warp": 0.5
+    }
+  ],
+  "schema": "bacteria-scenario",
+  "version": 1
+}

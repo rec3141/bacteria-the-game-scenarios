@@ -124,6 +124,14 @@
       "file": "scenarios/daily-2026-07-31.json"
     },
     {
+      "id": "daily-2026-08-01",
+      "title": "Guaymas Basin: Purple Bacteria in the Sulfide-Light Overlap",
+      "date": "2026-08-01",
+      "difficulty": "hard",
+      "realWorldBasis": "Guaymas Basin hydrothermal vent field, Gulf of California, ~2000m depth, purple/green sulfur bacteria at the sulfide-light overlap",
+      "file": "scenarios/daily-2026-08-01.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
