@@ -1,0 +1,270 @@
+{
+  "actions": {
+    "enzyme0": {
+      "label": "Chitinase",
+      "color": "#3fa9a0",
+      "weight": 6
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#c96f3e",
+      "weight": 4
+    },
+    "enzyme2": {
+      "label": "Agarase",
+      "color": "#8ac249",
+      "weight": 3
+    },
+    "chemotaxis": {
+      "label": "Marine snow tracking",
+      "color": "#dfe89a",
+      "weight": 6
+    },
+    "antibiotic": {
+      "label": "Bacteriocin burst",
+      "color": "#e34f4f",
+      "weight": 3
+    },
+    "eps": {
+      "label": "Capsule slime",
+      "color": "#a3d1e8",
+      "weight": 5
+    },
+    "crispr": {
+      "label": "CRISPR immunity",
+      "color": "#7d5ba6",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Pilus twitching",
+      "color": "#e0a13a",
+      "weight": 4
+    }
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 13,
+        "salinity": 22,
+        "light": 0.9,
+        "nutrient": 0.4
+      },
+      {
+        "depth": 15,
+        "tempC": 12,
+        "salinity": 24,
+        "light": 0.5,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 40,
+        "tempC": 10,
+        "salinity": 27,
+        "light": 0.15,
+        "nutrient": 0.8
+      },
+      {
+        "depth": 90,
+        "tempC": 8,
+        "salinity": 30,
+        "light": 0.02,
+        "nutrient": 0.9
+      }
+    ],
+    "thermocline": {
+      "depth": 30,
+      "sharpness": 0.55
+    }
+  },
+  "env": {
+    "day.lengthSec": 260,
+    "day.latitude": 22,
+    "day.dayOfYear": 260,
+    "diel.tempBase": 11,
+    "diel.tempAmp": 3,
+    "diel.foodFloor": 0.3,
+    "diel.q10": 2.2,
+    "diel.q10RefC": 15,
+    "substrate.count": 95,
+    "substrate.sizeMin": 34,
+    "substrate.sizeMax": 170,
+    "substrate.lifeMin": 90,
+    "substrate.lifeMax": 200,
+    "substrate.driftMin": 6,
+    "substrate.driftMax": 14,
+    "cell.chemoRange0": 380,
+    "cell.chemoRangePer": 170,
+    "cell.chemoBias": 1.2,
+    "cell.uptake": 16,
+    "cell.startEnergy": 100,
+    "cell.divideThreshold": 170,
+    "predator.count": 5,
+    "predator.senseRange": 190,
+    "predator.metabolism": 9,
+    "phage.greenCount": 22,
+    "phage.goldCount": 3,
+    "phage.goldMinDist": 700,
+    "phage.burst.0": 6,
+    "phage.burst.1": 12,
+    "phage.hostTolerance": 2,
+    "eps.threatRange": 110,
+    "diel.waterDay.0": 40,
+    "diel.waterDay.1": 90,
+    "diel.waterDay.2": 72,
+    "diel.waterNight.0": 6,
+    "diel.waterNight.1": 14,
+    "diel.waterNight.2": 18
+  },
+  "meta": {
+    "title": "Squid Fall Redux: Chitin Rush in the Gulf of California",
+    "lesson": "When a jumbo squid carcass or discarded beak sinks to the seafloor, it delivers a sudden pulse of chitin - the tough polysaccharide-protein composite of the beak and pen - into an otherwise food-poor deep sea. Copiotrophic bacteria like Vibrio and Pseudoalteromonas that can barely persist in open water swarm the fall within hours, using chitinases to crack the armor and proteases to strip the softer tissue beneath. The bloom is explosive but short-lived: as bacterial density spikes, so does phage predation, and a wave of lysis collapses the population within days, recycling the fall's carbon back into the water column. This level asks you to race the chitin clock - grow fast on a hard substrate, brace for the viral crash that always follows a big bacterial boom, and use CRISPR or capsule slime to buy your lineage a little more time.",
+    "citation": "Personius (2019, MBARI); Sison-Mangus et al., ISME J; Vibrio-phage boom-bust dynamics on organic falls",
+    "difficulty": "hard",
+    "realWorldBasis": "Gulf of California squid (Dosidicus gigas) beak/carcass falls and copiotrophic Vibrio/Pseudoalteromonas chitin colonization with phage-driven bloom collapse",
+    "date": "2026-08-02"
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "vibrio_chitin",
+        "label": "Vibrio sp. (chitin specialist)",
+        "color": "#3fa9a0",
+        "genome": {
+          "enzLvl": [
+            3,
+            2,
+            1
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "pseudoalt",
+        "label": "Pseudoalteromonas (opportunist)",
+        "color": "#c96f3e",
+        "genome": {
+          "enzLvl": [
+            1,
+            3,
+            1
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 4
+      },
+      {
+        "id": "crispr_vibrio",
+        "label": "Vibrio (CRISPR-armed strain)",
+        "color": "#7d5ba6",
+        "genome": {
+          "enzLvl": [
+            2,
+            2,
+            1
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 0,
+          "crispr": true,
+          "twitching": false
+        },
+        "immigrateWeight": 2
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "surface_diatom",
+        "label": "Coastal centric diatom",
+        "color": "#8fd6c9",
+        "form": "centric",
+        "sizeUm": 40,
+        "chain": 3,
+        "count": 30
+      }
+    ]
+  },
+  "particles": {
+    "beak": {
+      "label": "Squid beak fragment",
+      "mix": [
+        3,
+        1,
+        0.2
+      ],
+      "shape": "shard",
+      "squash": 1,
+      "weight": 6
+    },
+    "mantle": {
+      "label": "Mantle tissue shred",
+      "mix": [
+        0.5,
+        3,
+        0.5
+      ],
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 4
+    },
+    "pen": {
+      "label": "Chitinous pen sliver",
+      "mix": [
+        2.5,
+        0.5,
+        1
+      ],
+      "shape": "shard",
+      "squash": 0.7,
+      "weight": 3
+    }
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Chitin (beak/pen)",
+      "enzymeLabel": "Chitinase",
+      "color": "#3fa9a0"
+    },
+    {
+      "index": 1,
+      "label": "Mantle protein",
+      "enzymeLabel": "Protease",
+      "color": "#c96f3e"
+    },
+    {
+      "index": 2,
+      "label": "Connective carbohydrate",
+      "enzymeLabel": "Agarase",
+      "color": "#8ac249"
+    }
+  ],
+  "schema": "bacteria-scenario",
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 120,
+      "color": "#4a3a2f",
+      "label": "Canyon floor sediment around the fall",
+      "roughness": 0.6,
+      "porosity": 0.35,
+      "poreSize": 30,
+      "featureSize": 300,
+      "spires": 0.1,
+      "spireHeight": 150,
+      "spireWidth": 60,
+      "warp": 0.3
+    }
+  ],
+  "version": 1
+}

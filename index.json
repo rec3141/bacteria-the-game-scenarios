@@ -132,6 +132,14 @@
       "file": "scenarios/daily-2026-08-01.json"
     },
     {
+      "id": "daily-2026-08-02",
+      "title": "Squid Fall Redux: Chitin Rush in the Gulf of California",
+      "date": "2026-08-02",
+      "difficulty": "hard",
+      "realWorldBasis": "Gulf of California squid (Dosidicus gigas) beak/carcass falls and copiotrophic Vibrio/Pseudoalteromonas chitin colonization with phage-driven bloom collapse",
+      "file": "scenarios/daily-2026-08-02.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
