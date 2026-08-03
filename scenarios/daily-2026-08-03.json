@@ -1,0 +1,272 @@
+{
+  "meta": {
+    "title": "Sponge Loop: Microbial Recycling on a Caribbean Reef",
+    "date": "2026-08-03",
+    "lesson": "Caribbean reef sponges pump enormous volumes of seawater through their tissues, and the sponge microbiome converts dissolved organic carbon (DOC) that most bacteria cannot use directly into particulate detritus that reef life can eat - the 'sponge loop.' Symbiotic bacteria inside the sponge matrix are packed at high density, competing fiercely for the trickle of DOC-derived motes seeping from the sponge body, while free-living copiotrophs patrol the exhalent flow for scraps. EPS production matters here because the sponge's mesohyl is dense and cells that lock in gel-protected pockets resist both flushing and phage. Grazers are small and quick in this warm, well-lit, food-limited microhabitat, and gold-phage-driven adaptation is what lets a lineage exploit a novel sponge exudate class before the crowd catches up.",
+    "citation": "de Goeij et al. 2013, Science: 'Surviving in a Marginal Environment: The Sponge Loop Retains Resources Within Coral Reefs'",
+    "difficulty": "hard",
+    "realWorldBasis": "Caribbean reef sponge (e.g. Halisarca caerulea) mesohyl microbiome and the sponge loop of DOC recycling"
+  },
+  "env": {
+    "day.lengthSec": 260,
+    "day.latitude": 17,
+    "day.dayOfYear": 200,
+    "diel.tempBase": 27,
+    "diel.tempAmp": 2,
+    "diel.foodFloor": 0.5,
+    "diel.q10": 2.2,
+    "diel.q10RefC": 20,
+    "diel.waterDay.0": 20,
+    "diel.waterDay.1": 110,
+    "diel.waterDay.2": 120,
+    "diel.waterNight.0": 3,
+    "diel.waterNight.1": 20,
+    "diel.waterNight.2": 30,
+    "substrate.count": 100,
+    "substrate.sizeMin": 24,
+    "substrate.sizeMax": 110,
+    "substrate.sizeExp": 2.1,
+    "substrate.minPerRes": 3,
+    "substrate.lifeMin": 60,
+    "substrate.lifeMax": 140,
+    "substrate.bloomEvery": 0.3,
+    "substrate.driftMin": 14,
+    "substrate.driftMax": 32,
+    "cell.uptake": 11,
+    "cell.startEnergy": 95,
+    "cell.divideThreshold": 160,
+    "cell.swimCost": 1.5,
+    "cell.enzymeCost": 4.5,
+    "cell.cystBelow": 18,
+    "respirationBase": 1.1,
+    "eps.cost": 3.2,
+    "eps.lifePerLevel": 6,
+    "eps.threatRange": 80,
+    "eps.cooldown.0": 8,
+    "eps.cooldown.1": 13,
+    "predator.count": 6,
+    "predator.radius": 14,
+    "predator.wanderSpeed": 32,
+    "predator.chaseSpeed": 55,
+    "predator.senseRange": 130,
+    "predator.metabolism": 12,
+    "predator.mealEnergy": 45,
+    "predator.reproCooldown": 9,
+    "phage.greenCount": 22,
+    "phage.goldCount": 3,
+    "phage.hostTolerance": 2,
+    "phage.adsorbBase": 0.34
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Sponge Lipid Exudate",
+      "enzymeLabel": "Lipase (mesohyl)",
+      "color": "#e8c257"
+    },
+    {
+      "index": 1,
+      "label": "Collagen/Spongin Fragment",
+      "enzymeLabel": "Collagenase",
+      "color": "#c0698a"
+    },
+    {
+      "index": 2,
+      "label": "DOC-Derived Mucus Floc",
+      "enzymeLabel": "Glycanase",
+      "color": "#5fb8a8"
+    }
+  ],
+  "particles": {
+    "docFloc": {
+      "label": "Mucus-DOC Floc",
+      "mix": [
+        1,
+        1,
+        4
+      ],
+      "shape": "aggregate",
+      "weight": 6
+    },
+    "collagenShred": {
+      "label": "Spongin Fiber Shred",
+      "mix": [
+        1,
+        4,
+        1
+      ],
+      "shape": "shard",
+      "weight": 4
+    },
+    "lipidDroplet": {
+      "label": "Sponge Lipid Droplet",
+      "mix": [
+        4,
+        1,
+        1
+      ],
+      "shape": "ellipse",
+      "squash": 0.6,
+      "weight": 3
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase",
+      "color": "#e8c257",
+      "weight": 5
+    },
+    "enzyme1": {
+      "label": "Collagenase",
+      "color": "#c0698a",
+      "weight": 5
+    },
+    "enzyme2": {
+      "label": "Glycanase",
+      "color": "#5fb8a8",
+      "weight": 7
+    },
+    "chemotaxis": {
+      "label": "Flow Sensing",
+      "color": "#8fd3f4",
+      "weight": 6
+    },
+    "antibiotic": {
+      "label": "Bacteriocin",
+      "color": "#d94f4f",
+      "weight": 4
+    },
+    "eps": {
+      "label": "Mesohyl Gel Lock",
+      "color": "#a3e4a0",
+      "weight": 7
+    },
+    "crispr": {
+      "label": "CRISPR Immunity",
+      "color": "#f4a261",
+      "weight": 5
+    },
+    "twitching": {
+      "label": "Pilus Twitching",
+      "color": "#9b7fd4",
+      "weight": 3
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "founder",
+        "label": "Mesohyl Symbiont",
+        "color": "#5fb8a8",
+        "genome": {
+          "enzLvl": [
+            1,
+            1,
+            3
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 2,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "copiotroph",
+        "label": "Free-Living Copiotroph",
+        "color": "#e8c257",
+        "genome": {
+          "enzLvl": [
+            3,
+            2,
+            1
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 1,
+          "eps": 0,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 4
+      },
+      {
+        "id": "collagenolytic",
+        "label": "Collagenolytic Specialist",
+        "color": "#c0698a",
+        "genome": {
+          "enzLvl": [
+            1,
+            3,
+            1
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 3,
+          "crispr": true,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "epiphyte_pennate",
+        "label": "Epiphytic Navicula",
+        "color": "#8fbf8f",
+        "form": "pennate",
+        "sizeUm": 30,
+        "chain": 1,
+        "count": 20
+      }
+    ]
+  },
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 220,
+      "color": "#b08d6a",
+      "label": "Sponge Mesohyl / Reef Substrate",
+      "roughness": 0.65,
+      "porosity": 0.5,
+      "poreSize": 40,
+      "featureSize": 300,
+      "spires": 0.3,
+      "spireHeight": 200,
+      "spireWidth": 90,
+      "warp": 0.7
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 27.5,
+        "salinity": 36,
+        "light": 1,
+        "nutrient": 0.3
+      },
+      {
+        "depth": 0.5,
+        "tempC": 27,
+        "salinity": 36,
+        "light": 0.7,
+        "nutrient": 0.5
+      },
+      {
+        "depth": 1,
+        "tempC": 26.5,
+        "salinity": 36,
+        "light": 0.4,
+        "nutrient": 0.7
+      }
+    ],
+    "thermocline": {
+      "depth": 0.8,
+      "sharpness": 0.3
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}

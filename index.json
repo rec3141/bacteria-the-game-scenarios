@@ -140,6 +140,14 @@
       "file": "scenarios/daily-2026-08-02.json"
     },
     {
+      "id": "daily-2026-08-03",
+      "title": "Sponge Loop: Microbial Recycling on a Caribbean Reef",
+      "date": "2026-08-03",
+      "difficulty": "hard",
+      "realWorldBasis": "Caribbean reef sponge (e.g. Halisarca caerulea) mesohyl microbiome and the sponge loop of DOC recycling",
+      "file": "scenarios/daily-2026-08-03.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
