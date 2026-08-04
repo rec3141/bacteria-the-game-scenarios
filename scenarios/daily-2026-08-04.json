@@ -1,0 +1,233 @@
+{
+  "actions": {
+    "enzyme0": {
+      "label": "Chitinase",
+      "color": "#c9a24b",
+      "weight": 6
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#d9534f",
+      "weight": 4
+    },
+    "enzyme2": {
+      "label": "Agarase",
+      "color": "#5bc0de",
+      "weight": 3
+    },
+    "chemotaxis": {
+      "label": "Marine-snow tracking",
+      "color": "#88ff88",
+      "weight": 5
+    },
+    "antibiotic": {
+      "label": "Bacteriocin burst",
+      "color": "#ff66cc",
+      "weight": 3
+    },
+    "eps": {
+      "label": "Capsule slime",
+      "color": "#cccccc",
+      "weight": 3
+    },
+    "crispr": {
+      "label": "CRISPR immunity",
+      "color": "#66ccff",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Pilus twitching (raft grip)",
+      "color": "#ffaa33",
+      "weight": 4
+    }
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 24,
+        "salinity": 34,
+        "light": 1,
+        "nutrient": 0.3
+      },
+      {
+        "depth": 5,
+        "tempC": 23,
+        "salinity": 34,
+        "light": 0.75,
+        "nutrient": 0.5
+      },
+      {
+        "depth": 15,
+        "tempC": 21,
+        "salinity": 35,
+        "light": 0.3,
+        "nutrient": 0.8
+      },
+      {
+        "depth": 30,
+        "tempC": 19,
+        "salinity": 35,
+        "light": 0.05,
+        "nutrient": 0.95
+      }
+    ],
+    "thermocline": {
+      "depth": 12,
+      "sharpness": 0.5
+    }
+  },
+  "env": {
+    "day.lengthSec": 260,
+    "day.latitude": 8,
+    "day.dayOfYear": 200,
+    "diel.tempBase": 22,
+    "diel.tempAmp": 2,
+    "diel.foodFloor": 0.5,
+    "diel.q10": 2.2,
+    "diel.waterDay.0": 40,
+    "diel.waterDay.1": 95,
+    "diel.waterDay.2": 70,
+    "diel.waterNight.0": 3,
+    "diel.waterNight.1": 14,
+    "diel.waterNight.2": 18,
+    "substrate.count": 95,
+    "substrate.sizeMin": 45,
+    "substrate.sizeMax": 220,
+    "substrate.sizeExp": 1.3,
+    "substrate.lifeMin": 60,
+    "substrate.lifeMax": 150,
+    "substrate.dissolveTime": 6,
+    "substrate.driftMin": 4,
+    "substrate.driftMax": 12,
+    "substrate.minPerRes": 3,
+    "cell.chemoRange0": 380,
+    "cell.chemoRangePer": 180,
+    "cell.chemoBias": 1.1,
+    "cell.twitchSpeedScale": 0.7,
+    "cell.uptake": 17,
+    "cell.divideThreshold": 160,
+    "cell.enzymeCost": 3.2,
+    "cell.genomeUpkeep": 0.07,
+    "respirationBase": 1.05,
+    "predator.count": 3,
+    "predator.senseRange": 150,
+    "predator.metabolism": 12,
+    "predator.mealEnergy": 62,
+    "phage.greenCount": 26,
+    "phage.goldCount": 5,
+    "phage.burst.0": 6,
+    "phage.burst.1": 12,
+    "phage.latent.0": 7,
+    "phage.latent.1": 12,
+    "phage.adsorbBase": 0.35,
+    "phage.hostTolerance": 2,
+    "eps.threatRange": 110,
+    "eps.cooldown.0": 8,
+    "eps.cooldown.1": 14
+  },
+  "meta": {
+    "title": "Squid Fall Rush: Chitin Feast in the Twilight Zone",
+    "date": "2026-08-04",
+    "lesson": "When a jumbo squid carcass sinks into the Gulf of California's oxygen-depleted mid-water, its chitinous beak and pen become a sudden, concentrated island of carbon in an otherwise thin water column. Copiotrophic bacteria (modeled here by a chitinase-forward founder) race to colonize the falling particle, using chemotaxis to track the plume of dissolved chitin breakdown products before grazers and phages arrive. The lesson: particle falls are boom-bust hotspots — fast colonizers with strong enzyme investment and rapid division outcompete generalists, but the same density that fuels their bloom draws in phage predation and viral lysis, capping the bloom exactly as it peaks. This is 'kill-the-winner' ecology playing out in real time on a single sinking carcass.",
+    "citation": "De La Rocha et al., squid-fall microbial succession studies, Gulf of California; Vibrio/Pseudoalteromonas dynamics on chitin particles.",
+    "difficulty": "hard",
+    "realWorldBasis": "Gulf of California jumbo squid (Dosidicus gigas) carcass falls and chitinolytic bacterial succession"
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "founder",
+        "label": "Vibrio-like chitin colonizer",
+        "color": "#e0b04d",
+        "genome": {
+          "enzLvl": [
+            3,
+            1,
+            1
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "rival",
+        "label": "Pseudoalteromonas competitor",
+        "color": "#8fd0e0",
+        "genome": {
+          "enzLvl": [
+            2,
+            2,
+            1
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 2,
+          "eps": 0,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 4
+      }
+    ]
+  },
+  "particles": {
+    "beakFragment": {
+      "label": "Squid beak/pen chitin",
+      "mix": [
+        8,
+        1,
+        1
+      ],
+      "shape": "shard",
+      "weight": 7
+    },
+    "muscleTissue": {
+      "label": "Mantle tissue shred",
+      "mix": [
+        1,
+        7,
+        1
+      ],
+      "shape": "aggregate",
+      "weight": 5
+    },
+    "microbialFloc": {
+      "label": "Sinking microbial floc",
+      "mix": [
+        1,
+        1,
+        5
+      ],
+      "shape": "ellipse",
+      "squash": 0.6,
+      "weight": 3
+    }
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Chitin (beak/pen)",
+      "enzymeLabel": "Chitinase",
+      "color": "#c9a24b"
+    },
+    {
+      "index": 1,
+      "label": "Mantle protein",
+      "enzymeLabel": "Protease",
+      "color": "#d9534f"
+    },
+    {
+      "index": 2,
+      "label": "Microbial exudate",
+      "enzymeLabel": "Agarase",
+      "color": "#5bc0de"
+    }
+  ],
+  "schema": "bacteria-scenario",
+  "version": 1
+}
