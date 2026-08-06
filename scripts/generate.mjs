@@ -256,31 +256,64 @@ function unwrapEnvelope(obj) {
 // OpenRouter speaks the OpenAI chat-completions dialect, so the tool is a `function` whose `parameters`
 // hold the schema, and its arguments come back as a JSON *string* to parse — not the ready-made object
 // Anthropic's own API hands over in tool_use.input.
+// A rate limit or a provider hiccup is not a reason to fail the job: the model never saw the prompt, so
+// retrying here costs nothing but a wait, whereas failing costs the whole run. Only transient statuses
+// are retried — a 401 or a malformed request will say the same thing on the third attempt as the first.
+const TRIES = 3;
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const isTransient = (code) => code === 429 || (code >= 500 && code <= 599);
+
+async function postChat(body) {
+  let lastErr;
+  for (let attempt = 1; attempt <= TRIES; attempt++) {
+    let res = null;
+    try {
+      res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
+          "content-type": "application/json",
+          // Optional per OpenRouter, but it is what attributes the spend to this project in their dashboard.
+          "http-referer": "https://github.com/rec3141/bacteria-the-game-scenarios",
+          "x-title": "Bacteria! scenario generator",
+        },
+        body: JSON.stringify(body),
+      });
+    } catch (e) {
+      lastErr = new Error(`OpenRouter network error: ${e.message}`);   // DNS, reset, timeout — retryable
+    }
+    if (res) {
+      if (res.ok) {
+        const data = await res.json();
+        // OpenRouter reports upstream provider failures as an `error` object inside a 200 response, so a
+        // status check alone is not enough to know the call succeeded.
+        if (!data.error) return data;
+        lastErr = new Error(`OpenRouter error: ${data.error.message || JSON.stringify(data.error).slice(0, 300)}`);
+        if (!isTransient(Number(data.error.code))) throw lastErr;
+      } else {
+        lastErr = new Error(`OpenRouter API ${res.status}: ${(await res.text()).slice(0, 500)}`);
+        if (!isTransient(res.status)) throw lastErr;
+      }
+    }
+    if (attempt < TRIES) {
+      const wait = 2000 * 2 ** (attempt - 1);
+      console.warn(`[generate] ${lastErr.message} — retrying in ${wait / 1000}s (${attempt}/${TRIES - 1})`);
+      await sleep(wait);
+    }
+  }
+  throw lastErr;
+}
+
 async function modelScenario(prompt) {
-  const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
-      "content-type": "application/json",
-      // Optional per OpenRouter, but it is what attributes the spend to this project in their dashboard.
-      "http-referer": "https://github.com/rec3141/bacteria-the-game-scenarios",
-      "x-title": "Bacteria! scenario generator",
-    },
-    body: JSON.stringify({
-      model: MODEL, max_tokens: 8000,
-      messages: [
-        { role: "system", content: "You generate scenarios for a marine-microbiology game. Return the finished scenario by calling the emit_scenario tool with the JSON object as its input." },
-        { role: "user", content: prompt },
-      ],
-      tools: [{ type: "function", function: { name: "emit_scenario", description: "Emit the finished scenario as a single JSON object matching the schema in the prompt. The scenario object IS the tool input — do not nest it inside another object.", parameters: SCENARIO_TOOL_SCHEMA } }],
-      tool_choice: { type: "function", function: { name: "emit_scenario" } },
-    }),
+  const data = await postChat({
+    model: MODEL, max_tokens: 8000,
+    messages: [
+      { role: "system", content: "You generate scenarios for a marine-microbiology game. Return the finished scenario by calling the emit_scenario tool with the JSON object as its input." },
+      { role: "user", content: prompt },
+    ],
+    tools: [{ type: "function", function: { name: "emit_scenario", description: "Emit the finished scenario as a single JSON object matching the schema in the prompt. The scenario object IS the tool input — do not nest it inside another object.", parameters: SCENARIO_TOOL_SCHEMA } }],
+    tool_choice: { type: "function", function: { name: "emit_scenario" } },
   });
-  if (!res.ok) throw new Error(`OpenRouter API ${res.status}: ${(await res.text()).slice(0, 500)}`);
-  const data = await res.json();
-  // OpenRouter reports upstream provider failures as an `error` object inside a 200 response, so a
-  // status check alone is not enough to know the call succeeded.
-  if (data.error) throw new Error(`OpenRouter error: ${data.error.message || JSON.stringify(data.error).slice(0, 300)}`);
   const choice = data.choices?.[0] || {};
   const msg = choice.message || {};
   const calls = msg.tool_calls || [];

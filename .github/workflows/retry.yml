@@ -1,0 +1,57 @@
+name: Retry runner failures
+# Re-runs a run that failed WITHOUT EVER STARTING. On 2026-08-06 a GitHub Actions capacity outage
+# failed three runs with "The job was not acquired by Runner of type hosted even after multiple
+# attempts" -- nothing to do with this repo, and each one had to be re-run by hand.
+#
+# It deliberately does NOT retry a run whose steps actually executed. A scenario that failed
+# validation twice, a bad DOI, a missing key: those fail identically on the third attempt and each
+# retry spends real model calls. Daily scenario already carries an 18:17 fallback cron for those,
+# and a failed player submission stays pending in the queue and is retried on the next poll.
+#
+# workflow_dispatch: pass a run id to force a re-run of that run, bypassing the checks below.
+on:
+  workflow_run:
+    workflows: ["Daily scenario"]   # queue.yml self-heals every 5 minutes; see below
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: Run id to re-run unconditionally
+        required: true
+permissions:
+  actions: write
+jobs:
+  retry:
+    # run_attempt < 3 is the loop stop: a re-run raises the attempt count, and the re-run's own
+    # completion re-enters this workflow. Without it, an outage lasting hours would retry forever.
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run.conclusion == 'failure' &&
+       github.event.workflow_run.run_attempt < 3)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Re-run if the job never got a runner
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ github.event.inputs.run_id || github.event.workflow_run.id }}
+          ATTEMPT: ${{ github.event.workflow_run.run_attempt || 1 }}
+          FORCED: ${{ github.event_name == 'workflow_dispatch' }}
+        run: |
+          set -euo pipefail
+          if [ "$FORCED" != "true" ]; then
+            # A job that never got a runner reports an EMPTY steps array (and conclusion "cancelled");
+            # a job that ran lists every step, including the one that failed. That is the whole
+            # discriminator -- it needs no log scraping and no annotation-text matching.
+            stepless=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$RUN_ID/attempts/$ATTEMPT/jobs" \
+              --jq '[.jobs[] | select(.conclusion != "success") | select((.steps // []) | length == 0)] | length')
+            if [ "$stepless" -eq 0 ]; then
+              echo "Run $RUN_ID executed its steps and failed on merit — not retrying."
+              exit 0
+            fi
+            # Back off before retrying: these failures come from a runner shortage, and asking again
+            # immediately is how you get three identical failures in five minutes. Grows per attempt.
+            sleep $(( ATTEMPT * 300 ))
+          fi
+          echo "Re-running run $RUN_ID (attempt $ATTEMPT)"
+          gh api --method POST "repos/$GITHUB_REPOSITORY/actions/runs/$RUN_ID/rerun-failed-jobs" \
+            || gh api --method POST "repos/$GITHUB_REPOSITORY/actions/runs/$RUN_ID/rerun"
