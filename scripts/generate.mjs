@@ -1,9 +1,9 @@
-// Generate a Bacteria! scenario with Claude and validate it against the game schema before writing.
+// Generate a Bacteria! scenario with an LLM and validate it against the game schema before writing.
 //
 //   node scripts/generate.mjs --mode daily
 //   node scripts/generate.mjs --mode doi --doi 10.1126/science.1195979
 //
-// Needs ANTHROPIC_API_KEY in the environment (GitHub Secrets in CI). The generated JSON is validated
+// Needs OPENROUTER_API_KEY in the environment (GitHub Secrets in CI). The generated JSON is validated
 // with the SAME validator the game runs; an invalid generation is retried once, then fails the job so a
 // bad scenario never lands. Copyright/appropriateness is left to the model's own judgment by design.
 import { readFileSync, writeFileSync, readdirSync, existsSync, mkdirSync, appendFileSync } from "node:fs";
@@ -17,7 +17,8 @@ const here = dirname(fileURLToPath(import.meta.url));
 const repo = join(here, "..");
 const scenDir = join(repo, "scenarios");
 const defaults = JSON.parse(readFileSync(join(here, "defaults.json"), "utf8"));
-const MODEL = process.env.SCENARIO_MODEL || "claude-sonnet-5";
+// An OpenRouter model slug, not a bare Anthropic model ID — the provider prefix is part of the name.
+const MODEL = process.env.SCENARIO_MODEL || "anthropic/claude-sonnet-5";
 
 function arg(name) { const i = process.argv.indexOf(`--${name}`); return i >= 0 ? process.argv[i + 1] : null; }
 const mode = arg("mode") || "daily";
@@ -249,28 +250,60 @@ function unwrapEnvelope(obj) {
 }
 
 // Force the model to return a JSON object by making it call a tool (with tool_choice). This guarantees
-// structured output regardless of how chatty the model would otherwise be — no prose-parsing, no prefill
-// (which claude-sonnet-5 rejects). validateScenario does the real schema enforcement afterwards.
+// structured output regardless of how chatty the model would otherwise be — no prose-parsing, no prefill.
+// validateScenario does the real schema enforcement afterwards.
+//
+// OpenRouter speaks the OpenAI chat-completions dialect, so the tool is a `function` whose `parameters`
+// hold the schema, and its arguments come back as a JSON *string* to parse — not the ready-made object
+// Anthropic's own API hands over in tool_use.input.
 async function modelScenario(prompt) {
-  const res = await fetch("https://api.anthropic.com/v1/messages", {
+  const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
     method: "POST",
-    headers: { "x-api-key": process.env.ANTHROPIC_API_KEY, "anthropic-version": "2023-06-01", "content-type": "application/json" },
+    headers: {
+      authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
+      "content-type": "application/json",
+      // Optional per OpenRouter, but it is what attributes the spend to this project in their dashboard.
+      "http-referer": "https://github.com/rec3141/bacteria-the-game-scenarios",
+      "x-title": "Bacteria! scenario generator",
+    },
     body: JSON.stringify({
       model: MODEL, max_tokens: 8000,
-      system: "You generate scenarios for a marine-microbiology game. Return the finished scenario by calling the emit_scenario tool with the JSON object as its input.",
-      tools: [{ name: "emit_scenario", description: "Emit the finished scenario as a single JSON object matching the schema in the prompt. The scenario object IS the tool input — do not nest it inside another object.", input_schema: SCENARIO_TOOL_SCHEMA }],
-      tool_choice: { type: "tool", name: "emit_scenario" },
-      messages: [{ role: "user", content: prompt }],
+      messages: [
+        { role: "system", content: "You generate scenarios for a marine-microbiology game. Return the finished scenario by calling the emit_scenario tool with the JSON object as its input." },
+        { role: "user", content: prompt },
+      ],
+      tools: [{ type: "function", function: { name: "emit_scenario", description: "Emit the finished scenario as a single JSON object matching the schema in the prompt. The scenario object IS the tool input — do not nest it inside another object.", parameters: SCENARIO_TOOL_SCHEMA } }],
+      tool_choice: { type: "function", function: { name: "emit_scenario" } },
     }),
   });
-  if (!res.ok) throw new Error(`Anthropic API ${res.status}: ${(await res.text()).slice(0, 500)}`);
+  if (!res.ok) throw new Error(`OpenRouter API ${res.status}: ${(await res.text()).slice(0, 500)}`);
   const data = await res.json();
-  const tool = (data.content || []).find((b) => b.type === "tool_use");
-  if (!tool || !tool.input || typeof tool.input !== "object") {
-    console.error(`[generate] no scenario tool call. stop_reason=${data.stop_reason}; block types=${(data.content || []).map((b) => b.type).join(",")}`);
-    throw new Error("model did not emit a scenario object");
+  // OpenRouter reports upstream provider failures as an `error` object inside a 200 response, so a
+  // status check alone is not enough to know the call succeeded.
+  if (data.error) throw new Error(`OpenRouter error: ${data.error.message || JSON.stringify(data.error).slice(0, 300)}`);
+  const choice = data.choices?.[0] || {};
+  const msg = choice.message || {};
+  const calls = msg.tool_calls || [];
+  const call = calls.find((c) => c.function?.name === "emit_scenario") || calls[0];
+  if (call) {
+    const args = call.function?.arguments;
+    // Spec says string; some providers send the object already parsed. Accept either.
+    if (args && typeof args === "object") return args;
+    try {
+      const parsed = JSON.parse(args);
+      if (parsed && typeof parsed === "object") return parsed;
+    } catch (e) {
+      // Truncated arguments are the usual cause, and finish_reason says so — surface it either way.
+      throw new Error(`tool arguments were not valid JSON (finish_reason=${choice.finish_reason}): ${e.message}`);
+    }
   }
-  return tool.input;
+  // Not every model on OpenRouter honours tool_choice. If it answered in prose instead, take the JSON
+  // out of the message rather than burning the retry on a transport quirk.
+  if (typeof msg.content === "string" && msg.content.includes("{")) {
+    try { return extractJson(msg.content); } catch {}
+  }
+  console.error(`[generate] no scenario tool call. finish_reason=${choice.finish_reason}; tool_calls=${calls.length}; content=${String(msg.content || "").slice(0, 200)}`);
+  throw new Error("model did not emit a scenario object");
 }
 function extractJson(text) {
   const fence = text.match(/```(?:json)?\s*([\s\S]*?)```/);
@@ -435,7 +468,7 @@ const isMain = process.argv[1] && import.meta.url === pathToFileURL(process.argv
     process.stdout.write(prompt + "\n");
     return;
   }
-  if (!mockFile && !process.env.ANTHROPIC_API_KEY) { console.error("ANTHROPIC_API_KEY is not set"); process.exit(2); }
+  if (!mockFile && !process.env.OPENROUTER_API_KEY) { console.error("OPENROUTER_API_KEY is not set"); process.exit(2); }
 
   // A second daily run on a day that already has one is a no-op, not an overwrite. This is what lets
   // daily.yml carry a later fallback cron: the afternoon run does real work only if the midday one

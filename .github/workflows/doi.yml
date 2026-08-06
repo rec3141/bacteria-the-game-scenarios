@@ -47,7 +47,7 @@ jobs:
       - name: Resolve + generate from DOI
         id: gen
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           DOI: ${{ steps.doi.outputs.value }}
         run: node scripts/generate.mjs --mode doi --doi "$DOI"
       - name: Validate

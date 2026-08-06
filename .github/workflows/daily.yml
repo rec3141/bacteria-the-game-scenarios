@@ -28,7 +28,7 @@ jobs:
       - name: Generate today's scenario
         id: gen
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
         run: node scripts/generate.mjs --mode daily
       - name: Validate
         run: node scripts/validate-all.mjs
