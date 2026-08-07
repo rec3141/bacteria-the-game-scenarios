@@ -1,0 +1,276 @@
+{
+  "meta": {
+    "title": "Snow-Covered Ice: Antarctic Fast Ice in Deep Winter Twilight",
+    "date": "2026-08-07",
+    "lesson": "Beneath snow-covered Antarctic fast ice in mid-winter, sea-ice algae and bacteria survive months of near-total darkness inside brine channels. Temperatures sit around -8C to -12C, salinity in the brine is far above seawater as ice crystallizes out fresh water, and the tiny light that penetrates is blue-grey and barely flickers between a dim day and a slightly dimmer night. Metabolism crawls at these temperatures (Q10 effects mean everything runs a fraction of the summer rate), so cells lean on carbohydrate storage and slow, patient enzyme work rather than fast hunting. Pennate diatoms graze along the brine channel walls where they can grip ice, while centric diatoms drift passively in the channel water, both surviving on the barest trickle of light through snow and ice. This is a patient, cold, low-light survival scenario, not a frantic bloom.",
+    "citation": "Based on studies of bacterial and archaeal community persistence in first-year Arctic/Antarctic winter sea ice (e.g. Franklin Bay winter sea ice studies; McMurdo Sound platelet ice).",
+    "difficulty": "hard",
+    "realWorldBasis": "Antarctic fast ice brine channels in deep winter, McMurdo Sound region"
+  },
+  "env": {
+    "day.lengthSec": 300,
+    "day.latitude": -77,
+    "day.dayOfYear": 172,
+    "day.startHour": 11,
+    "diel.tempBase": -10,
+    "diel.tempAmp": 1.5,
+    "diel.foodFloor": 0.6,
+    "diel.q10": 2.3,
+    "diel.q10RefC": 20,
+    "diel.lightGamma": 3.5,
+    "diel.twilight": 0.6,
+    "diel.waterNight.0": 3,
+    "diel.waterNight.1": 10,
+    "diel.waterNight.2": 18,
+    "diel.waterDay.0": 30,
+    "diel.waterDay.1": 55,
+    "diel.waterDay.2": 68,
+    "diel.goldTint": 0.05,
+    "respirationBase": 0.5,
+    "substrate.count": 70,
+    "substrate.sizeMin": 26,
+    "substrate.sizeMax": 160,
+    "substrate.lifeMin": 220,
+    "substrate.lifeMax": 500,
+    "substrate.driftMin": 3,
+    "substrate.driftMax": 8,
+    "substrate.bloomEvery": 1.2,
+    "cell.thrust": 12000,
+    "cell.dragRate": 75,
+    "cell.maxSpeed": 140,
+    "cell.uptake": 9,
+    "cell.startEnergy": 100,
+    "cell.divideThreshold": 190,
+    "cell.swimCost": 0.7,
+    "cell.cystBelow": 22,
+    "cell.cystWake": 55,
+    "cell.cystMetab": 0.02,
+    "cell.runMin": 2.6,
+    "cell.runMax": 5.5,
+    "predator.count": 2,
+    "predator.wanderSpeed": 12,
+    "predator.chaseSpeed": 20,
+    "predator.senseRange": 110,
+    "predator.metabolism": 6,
+    "predator.mealEnergy": 45,
+    "phage.greenCount": 8,
+    "phage.goldCount": 2,
+    "column.photoRate": 1.2,
+    "column.chemRate": 3
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid Reserve Droplets",
+      "enzymeLabel": "Lipase (cold-adapted)",
+      "color": "#7fa8c9"
+    },
+    {
+      "index": 1,
+      "label": "Ice Diatom Protein Debris",
+      "enzymeLabel": "Protease (psychrophilic)",
+      "color": "#c9d8de"
+    },
+    {
+      "index": 2,
+      "label": "Brine EPS Carbohydrate",
+      "enzymeLabel": "Glycosidase",
+      "color": "#e8f2f5"
+    }
+  ],
+  "particles": {
+    "brineFloc": {
+      "label": "Brine Channel Floc",
+      "mix": [
+        0.2,
+        0.3,
+        0.5
+      ],
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 6
+    },
+    "iceDebris": {
+      "label": "Ice Algae Debris",
+      "mix": [
+        0.15,
+        0.55,
+        0.3
+      ],
+      "shape": "shard",
+      "squash": 0.7,
+      "weight": 4
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Cold Lipase",
+      "color": "#7fa8c9",
+      "weight": 4
+    },
+    "enzyme1": {
+      "label": "Cold Protease",
+      "color": "#c9d8de",
+      "weight": 5
+    },
+    "enzyme2": {
+      "label": "Cold Glycosidase",
+      "color": "#e8f2f5",
+      "weight": 6
+    },
+    "chemotaxis": {
+      "label": "Brine Seeking",
+      "color": "#9fd0e8",
+      "weight": 5
+    },
+    "antibiotic": {
+      "label": "Psychrophilic Bacteriocin",
+      "color": "#d97b7b",
+      "weight": 2
+    },
+    "eps": {
+      "label": "Cryoprotective EPS",
+      "color": "#f0f8fa",
+      "weight": 6
+    },
+    "crispr": {
+      "label": "CRISPR Immunity",
+      "color": "#b0e0d0",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Pilus Twitching",
+      "color": "#e0c060",
+      "weight": 2
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "psychro1",
+        "label": "Psychrobacter-like Brine Dweller",
+        "color": "#a8d0e0",
+        "genome": {
+          "enzLvl": [
+            1,
+            2,
+            3
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 3,
+          "crispr": true,
+          "twitching": false
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "colwellia1",
+        "label": "Colwellia Cold Specialist",
+        "color": "#7fa0b8",
+        "genome": {
+          "enzLvl": [
+            2,
+            2,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 2,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "navicula1",
+        "label": "Navicula (pennate, channel-gliding)",
+        "color": "#c8e0d8",
+        "form": "pennate",
+        "sizeUm": 35,
+        "chain": 1,
+        "count": 20,
+        "toxin": null
+      },
+      {
+        "id": "fragilariopsis1",
+        "label": "Fragilariopsis (pennate chain)",
+        "color": "#d0e8e0",
+        "form": "pennate",
+        "sizeUm": 25,
+        "chain": 5,
+        "count": 15
+      },
+      {
+        "id": "thalassiosira1",
+        "label": "Thalassiosira (centric, drifting)",
+        "color": "#b8d8e8",
+        "form": "centric",
+        "sizeUm": 20,
+        "chain": 1,
+        "count": 12
+      }
+    ]
+  },
+  "terrain": [
+    {
+      "at": "top",
+      "thickness": 380,
+      "color": "#e8f4f8",
+      "label": "Snow-Covered Fast Ice",
+      "roughness": 0.5,
+      "porosity": 0.45,
+      "poreSize": 30,
+      "featureSize": 300,
+      "spires": 0.15,
+      "spireHeight": 200,
+      "spireWidth": 60,
+      "warp": 0.2
+    },
+    {
+      "at": "bottom",
+      "thickness": 60,
+      "color": "#c8d8dc",
+      "label": "Platelet Ice Accumulation",
+      "roughness": 0.6,
+      "porosity": 0.35,
+      "poreSize": 25,
+      "featureSize": 200,
+      "warp": 0.1
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": -12,
+        "salinity": 45,
+        "light": 0.15,
+        "nutrient": 0.4
+      },
+      {
+        "depth": 0.4,
+        "tempC": -9,
+        "salinity": 38,
+        "light": 0.08,
+        "nutrient": 0.5
+      },
+      {
+        "depth": 1,
+        "tempC": -2,
+        "salinity": 34,
+        "light": 0.02,
+        "nutrient": 0.6
+      }
+    ],
+    "thermocline": {
+      "depth": 0.4,
+      "sharpness": 0.5
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}
