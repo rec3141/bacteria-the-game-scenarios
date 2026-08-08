@@ -1,0 +1,289 @@
+{
+  "meta": {
+    "title": "Mono Lake Blooms: Arsenic-Tolerant Purple Bacteria of an Alkaline Soda Lake",
+    "date": "2026-08-08",
+    "lesson": "Mono Lake, California is a hypersaline, highly alkaline (pH ~9.8) soda lake with naturally high dissolved arsenic. Its meromictic water column stratifies: a thin oxygenated, sunlit surface sits atop a deep anoxic monimolimnion rich in sulfide and arsenate. Purple sulfur bacteria (Ectothiorhodospira-like) exploit the narrow band where residual light still penetrates and sulfide first appears, running anoxygenic photosynthesis (light AND sulfide together). Above them, halotolerant heterotrophs graze organic falls from an Artemia/brine-fly-fed food web, while extreme salinity and alkalinity slow every process down and select hard for osmotic and chemical resistance. The lesson: extremophiles don't just survive harsh chemistry, several groups are metabolically built around it, and a habitat can be simultaneously food-poor, light-poor, and chemically brutal, forcing multiple stresses to overlap in one thin livable layer.",
+    "citation": "Oremland et al., Mono Lake microbial ecology and arsenic biogeochemistry studies (1990s-2010s)",
+    "difficulty": "hard",
+    "realWorldBasis": "Mono Lake, California — meromictic alkaline soda lake, purple sulfur bacteria at the chemocline, arsenic/sulfide biogeochemistry"
+  },
+  "env": {
+    "day.lengthSec": 260,
+    "day.latitude": 38,
+    "day.dayOfYear": 200,
+    "diel.tempBase": 14,
+    "diel.tempAmp": 8,
+    "diel.foodFloor": 0.22,
+    "diel.q10": 2.3,
+    "diel.waterDay.0": 40,
+    "diel.waterDay.1": 60,
+    "diel.waterDay.2": 48,
+    "diel.waterNight.0": 4,
+    "diel.waterNight.1": 10,
+    "diel.waterNight.2": 12,
+    "diel.grazeNight": 1.4,
+    "substrate.count": 50,
+    "substrate.sizeMin": 26,
+    "substrate.sizeMax": 170,
+    "substrate.lifeMin": 90,
+    "substrate.lifeMax": 220,
+    "substrate.driftMin": 5,
+    "substrate.driftMax": 12,
+    "substrate.minPerRes": 3,
+    "respirationBase": 1.25,
+    "cell.swimCost": 1.6,
+    "cell.uptake": 11,
+    "cell.startEnergy": 95,
+    "cell.divideThreshold": 190,
+    "cell.cystBelow": 20,
+    "cell.cystWake": 55,
+    "cell.genomeUpkeep": 0.08,
+    "toxin.dose": 70,
+    "toxin.potency": 24,
+    "toxin.crossDist": 4,
+    "toxin.crossFactor": 1.3,
+    "predator.count": 3,
+    "predator.wanderSpeed": 18,
+    "predator.chaseSpeed": 30,
+    "predator.metabolism": 12,
+    "predator.senseRange": 130,
+    "predator.resistStep": 0.16,
+    "column.chemRate": 4.2,
+    "column.photoRate": 6
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Brine Fly Larval Lipid Fall",
+      "enzymeLabel": "Alkaline Lipase",
+      "color": "#c9a94e"
+    },
+    {
+      "index": 1,
+      "label": "Artemia Detritus Protein",
+      "enzymeLabel": "Halo-Protease",
+      "color": "#8f7a5c"
+    },
+    {
+      "index": 2,
+      "label": "Algal Mat Carbohydrate",
+      "enzymeLabel": "Alkali-Glucanase",
+      "color": "#5c8f6e"
+    }
+  ],
+  "particles": {
+    "brineFall": {
+      "label": "Brine Fly Larval Fall",
+      "mix": [
+        5,
+        3,
+        2
+      ],
+      "shape": "aggregate",
+      "weight": 5
+    },
+    "artemiaBits": {
+      "label": "Artemia Molt Debris",
+      "mix": [
+        1,
+        6,
+        1
+      ],
+      "shape": "shard",
+      "weight": 4
+    },
+    "algalMatCrumb": {
+      "label": "Tufa Algal Mat Crumb",
+      "mix": [
+        1,
+        1,
+        4
+      ],
+      "shape": "ellipse",
+      "squash": 0.6,
+      "weight": 4
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Alkaline Lipase",
+      "color": "#c9a94e",
+      "weight": 5
+    },
+    "enzyme1": {
+      "label": "Halo-Protease",
+      "color": "#8f7a5c",
+      "weight": 5
+    },
+    "enzyme2": {
+      "label": "Alkali-Glucanase",
+      "color": "#5c8f6e",
+      "weight": 5
+    },
+    "chemotaxis": {
+      "label": "Sulfide-Seeking",
+      "color": "#b060c0",
+      "weight": 6
+    },
+    "antibiotic": {
+      "label": "Arsenite Efflux Burst",
+      "color": "#7fff9f",
+      "weight": 3
+    },
+    "eps": {
+      "label": "Alkaline-Stable Sheath",
+      "color": "#d8c9a0",
+      "weight": 5
+    },
+    "crispr": {
+      "label": "CRISPR Immunity",
+      "color": "#66ccff",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Twitching Motility",
+      "color": "#ff9966",
+      "weight": 2
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "ectothiorhodospira",
+        "label": "Ectothiorhodospira (purple sulfur bacterium)",
+        "color": "#a83e9e",
+        "genome": {
+          "enzLvl": [
+            0,
+            0,
+            1
+          ],
+          "chemoLevel": 3,
+          "antibiotic": 0,
+          "eps": 2,
+          "crispr": false,
+          "twitching": false,
+          "phototroph": true,
+          "chemolithotroph": true
+        },
+        "immigrateWeight": 5
+      },
+      {
+        "id": "halomonas_generalist",
+        "label": "Halomonas-like Halotolerant Heterotroph",
+        "color": "#cbb98a",
+        "genome": {
+          "enzLvl": [
+            2,
+            2,
+            1
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 2,
+          "eps": 3,
+          "crispr": true,
+          "twitching": false
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "arsenite_oxidizer",
+        "label": "Arsenite-Oxidizing Chemolithotroph",
+        "color": "#7fff9f",
+        "genome": {
+          "enzLvl": [
+            0,
+            1,
+            1
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 1,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false,
+          "chemolithotroph": true
+        },
+        "immigrateWeight": 3
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "alkaline_pennate",
+        "label": "Alkaliphilic Pennate Diatom (tufa mat)",
+        "color": "#7ea87e",
+        "form": "pennate",
+        "sizeUm": 35,
+        "chain": 2,
+        "count": 40
+      }
+    ]
+  },
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 140,
+      "color": "#5c5443",
+      "label": "Tufa Sediment & Carbonate Crust",
+      "roughness": 0.6,
+      "porosity": 0.4,
+      "poreSize": 40,
+      "featureSize": 300,
+      "spires": 0.3,
+      "spireHeight": 260,
+      "spireWidth": 90,
+      "warp": 0.2
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 18,
+        "salinity": 28,
+        "light": 1,
+        "nutrient": 0.3
+      },
+      {
+        "depth": 0.3,
+        "tempC": 15,
+        "salinity": 32,
+        "light": 0.55,
+        "nutrient": 0.4
+      },
+      {
+        "depth": 0.55,
+        "tempC": 12,
+        "salinity": 40,
+        "light": 0.22,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 0.75,
+        "tempC": 10,
+        "salinity": 55,
+        "light": 0.06,
+        "nutrient": 0.8
+      },
+      {
+        "depth": 1,
+        "tempC": 9,
+        "salinity": 60,
+        "light": 0.02,
+        "nutrient": 1
+      }
+    ],
+    "thermocline": {
+      "depth": 0.5,
+      "sharpness": 0.6
+    },
+    "chemical": {
+      "peakDepth": 0.7,
+      "spread": 0.18,
+      "strength": 0.85,
+      "color": "#c9a0d8"
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}

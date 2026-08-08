@@ -164,6 +164,14 @@
       "file": "scenarios/daily-2026-08-07.json"
     },
     {
+      "id": "daily-2026-08-08",
+      "title": "Mono Lake Blooms: Arsenic-Tolerant Purple Bacteria of an Alkaline Soda Lake",
+      "date": "2026-08-08",
+      "difficulty": "hard",
+      "realWorldBasis": "Mono Lake, California — meromictic alkaline soda lake, purple sulfur bacteria at the chemocline, arsenic/sulfide biogeochemistry",
+      "file": "scenarios/daily-2026-08-08.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
