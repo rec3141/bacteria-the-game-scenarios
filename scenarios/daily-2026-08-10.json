@@ -1,0 +1,279 @@
+{
+  "meta": {
+    "title": "Chesapeake Dead Zone: Cyanobacteria vs the Sulfide Wall",
+    "date": "2026-08-10",
+    "lesson": "Summer nutrient runoff into Chesapeake Bay drives a surface bloom of Microcystis-like cyanobacteria that shades and starves the water below it. When that biomass dies and sinks, heterotrophic bacteria respire it so fast that oxygen collapses in the bottom layer, and sulfate reducers turn the sediment into a sulfide-rich dead zone. This level stacks two hostile fronts: bright, warm, food-poor water at the surface where a phototroph competes for light, and a black, sulfidic, oxygen-starved bottom layer where only specialists can work. Players feel the squeeze of a shrinking livable band between the two, exactly as real estuarine hypoxia does every August.",
+    "citation": "Chesapeake Bay Program hypoxia monitoring; Kemp et al. 2005, Mar. Ecol. Prog. Ser. - eutrophication and hypoxia in Chesapeake Bay",
+    "difficulty": "hard",
+    "realWorldBasis": "Chesapeake Bay seasonal hypoxia and cyanobacterial bloom collapse, mid-Atlantic USA"
+  },
+  "env": {
+    "day.latitude": 37,
+    "day.dayOfYear": 210,
+    "day.lengthSec": 260,
+    "diel.tempBase": 28,
+    "diel.tempAmp": 4,
+    "diel.foodFloor": 0.25,
+    "diel.q10": 2.3,
+    "diel.waterDay.0": 40,
+    "diel.waterDay.1": 88,
+    "diel.waterDay.2": 55,
+    "diel.waterNight.0": 4,
+    "diel.waterNight.1": 14,
+    "diel.waterNight.2": 10,
+    "diel.grazeNight": 1.6,
+    "substrate.count": 78,
+    "substrate.sizeMin": 26,
+    "substrate.sizeMax": 170,
+    "substrate.lifeMin": 90,
+    "substrate.lifeMax": 220,
+    "substrate.driftMin": 6,
+    "substrate.driftMax": 14,
+    "respirationBase": 1.15,
+    "column.chemRate": 6.5,
+    "column.photoRate": 9,
+    "predator.count": 5,
+    "predator.senseRange": 150,
+    "predator.metabolism": 12,
+    "predator.mealEnergy": 50,
+    "cell.startEnergy": 100,
+    "cell.divideThreshold": 165,
+    "cell.chemoRange0": 260,
+    "cell.chemoBias": 1.1,
+    "phage.greenCount": 20,
+    "phage.goldCount": 3
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Dead Cyanobacteria Lipids",
+      "enzymeLabel": "Lipase",
+      "color": "#3f6b2e"
+    },
+    {
+      "index": 1,
+      "label": "Sinking Bloom Detritus",
+      "enzymeLabel": "Protease",
+      "color": "#8a7440"
+    },
+    {
+      "index": 2,
+      "label": "Algal Exudate Sugars",
+      "enzymeLabel": "Glycosidase",
+      "color": "#5fae5a"
+    }
+  ],
+  "particles": {
+    "bloomFlake": {
+      "label": "Microcystis Flake",
+      "mix": [
+        2,
+        1,
+        4
+      ],
+      "shape": "aggregate",
+      "weight": 6
+    },
+    "sinkingClump": {
+      "label": "Sinking Bloom Clump",
+      "mix": [
+        1,
+        3,
+        1
+      ],
+      "shape": "shard",
+      "weight": 4
+    },
+    "detritalFilm": {
+      "label": "Detrital Film",
+      "mix": [
+        1,
+        4,
+        1
+      ],
+      "shape": "ellipse",
+      "squash": 0.6,
+      "weight": 3
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase",
+      "color": "#4a7a33",
+      "weight": 5
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#96814a",
+      "weight": 6
+    },
+    "enzyme2": {
+      "label": "Glycosidase",
+      "color": "#63b85e",
+      "weight": 6
+    },
+    "chemotaxis": {
+      "label": "Oxygen-seeking",
+      "color": "#8fd3ff",
+      "weight": 6
+    },
+    "antibiotic": {
+      "label": "Sulfide-tolerant toxin",
+      "color": "#b5a24a",
+      "weight": 3
+    },
+    "eps": {
+      "label": "Mucus sheath",
+      "color": "#6b8f6b",
+      "weight": 4
+    },
+    "crispr": {
+      "label": "CRISPR",
+      "color": "#cccccc",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Twitching",
+      "color": "#dddddd",
+      "weight": 2
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "founder",
+        "label": "Cyanobacterial Detritivore",
+        "color": "#5aa848",
+        "genome": {
+          "enzLvl": [
+            1,
+            2,
+            3
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "sulfateReducer",
+        "label": "Sulfate-Reducing Bacterium",
+        "color": "#5a4a33",
+        "genome": {
+          "enzLvl": [
+            0,
+            1,
+            1
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 1,
+          "eps": 2,
+          "crispr": false,
+          "twitching": false,
+          "chemolithotroph": true
+        },
+        "immigrateWeight": 3
+      },
+      {
+        "id": "vibrioOpportunist",
+        "label": "Opportunistic Vibrio",
+        "color": "#a8763a",
+        "genome": {
+          "enzLvl": [
+            1,
+            3,
+            1
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 0,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 4
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "microcystisAnalog",
+        "label": "Bloom-forming Cyanobacterium Clump",
+        "color": "#6fae3a",
+        "form": "centric",
+        "sizeUm": 18,
+        "chain": 6,
+        "count": 70
+      }
+    ]
+  },
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 140,
+      "color": "#2b2318",
+      "label": "Anoxic Sulfidic Mud",
+      "roughness": 0.4,
+      "porosity": 0.4,
+      "poreSize": 30,
+      "featureSize": 300,
+      "spires": 0,
+      "spireHeight": 0,
+      "spireWidth": 10,
+      "warp": 0.2
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 29,
+        "salinity": 15,
+        "light": 1,
+        "nutrient": 0.3
+      },
+      {
+        "depth": 0.3,
+        "tempC": 27,
+        "salinity": 16,
+        "light": 0.6,
+        "nutrient": 0.4
+      },
+      {
+        "depth": 0.55,
+        "tempC": 22,
+        "salinity": 18,
+        "light": 0.15,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 0.75,
+        "tempC": 18,
+        "salinity": 20,
+        "light": 0.02,
+        "nutrient": 0.8
+      },
+      {
+        "depth": 1,
+        "tempC": 16,
+        "salinity": 22,
+        "light": 0,
+        "nutrient": 1
+      }
+    ],
+    "thermocline": {
+      "depth": 0.55,
+      "sharpness": 0.75
+    },
+    "chemical": {
+      "peakDepth": 0.9,
+      "spread": 0.18,
+      "strength": 0.85,
+      "color": "#5a4a2a"
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}

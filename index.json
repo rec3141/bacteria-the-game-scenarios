@@ -180,6 +180,14 @@
       "file": "scenarios/daily-2026-08-09.json"
     },
     {
+      "id": "daily-2026-08-10",
+      "title": "Chesapeake Dead Zone: Cyanobacteria vs the Sulfide Wall",
+      "date": "2026-08-10",
+      "difficulty": "hard",
+      "realWorldBasis": "Chesapeake Bay seasonal hypoxia and cyanobacterial bloom collapse, mid-Atlantic USA",
+      "file": "scenarios/daily-2026-08-10.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
