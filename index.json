@@ -188,6 +188,14 @@
       "file": "scenarios/daily-2026-08-10.json"
     },
     {
+      "id": "daily-2026-08-11",
+      "title": "Baltic Sponge Loop: Freshwater Reef Recyclers",
+      "date": "2026-08-11",
+      "difficulty": "normal",
+      "realWorldBasis": "Sponge mesohyl DOC recycling loop, cold temperate benthic zone",
+      "file": "scenarios/daily-2026-08-11.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
