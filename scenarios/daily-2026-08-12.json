@@ -1,0 +1,243 @@
+{
+  "meta": {
+    "title": "Red Tide Reckoning: Karenia brevis on the West Florida Shelf",
+    "date": "2026-08-12",
+    "lesson": "Karenia brevis blooms on the West Florida Shelf are fed by upwelled nutrients and stabilized by a warm, stratified water column. Karenia is a dinoflagellate, not a diatom, but it competes with diatoms for light and nutrients near the surface while producing brevetoxin. Unlike many toxins that are actively secreted, brevetoxin loading of the water column intensifies as bloom cells die and rupture, releasing toxin that stuns and kills fish and grazers rather than bacteria. Meanwhile copiotrophic bacteria (modeled here as your founder) ride the bloom's dissolved organic exudate and the carcasses it leaves behind, competing with grazers who are themselves being poisoned by the collapsing bloom. The lesson: a harmful algal bloom's danger zone is not the living bloom but the water left behind after it dies.",
+    "citation": "Vargo, G.A. (2009). A brief summary of the physiology and ecology of Karenia brevis. Harmful Algae 8(4).",
+    "difficulty": "hard",
+    "realWorldBasis": "West Florida Shelf, Gulf of Mexico - recurring Karenia brevis red tide blooms"
+  },
+  "env": {
+    "day.lengthSec": 260,
+    "day.latitude": 27,
+    "day.dayOfYear": 240,
+    "diel.tempBase": 29,
+    "diel.tempAmp": 3,
+    "diel.foodFloor": 0.45,
+    "diel.q10": 2.3,
+    "diel.waterDay.0": 40,
+    "diel.waterDay.1": 95,
+    "diel.waterDay.2": 70,
+    "diel.waterNight.0": 4,
+    "diel.waterNight.1": 14,
+    "diel.waterNight.2": 18,
+    "substrate.count": 85,
+    "substrate.sizeMin": 32,
+    "substrate.sizeMax": 190,
+    "substrate.lifeMin": 90,
+    "substrate.lifeMax": 220,
+    "substrate.driftMin": 6,
+    "substrate.driftMax": 16,
+    "predator.count": 6,
+    "predator.senseRange": 150,
+    "predator.metabolism": 13,
+    "predator.mealEnergy": 50,
+    "predator.resistStep": 0.08,
+    "cell.enzymeCost": 3.5,
+    "cell.chemoRange0": 260,
+    "cell.chemoBias": 1.1,
+    "respirationBase": 1.05,
+    "phage.greenCount": 14,
+    "phage.goldCount": 3
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Algal Lipid Exudate",
+      "enzymeLabel": "Lipase",
+      "color": "#c98a3d"
+    },
+    {
+      "index": 1,
+      "label": "Bloom Carcass Protein",
+      "enzymeLabel": "Protease",
+      "color": "#b5573f"
+    },
+    {
+      "index": 2,
+      "label": "Mucopolysaccharide Slime",
+      "enzymeLabel": "Glycosidase",
+      "color": "#7fae6e"
+    }
+  ],
+  "particles": {
+    "carcass": {
+      "label": "Karenia Carcass Debris",
+      "mix": [
+        3,
+        5,
+        1
+      ],
+      "shape": "aggregate",
+      "weight": 6
+    },
+    "exudate": {
+      "label": "Dissolved Algal Exudate",
+      "mix": [
+        4,
+        1,
+        2
+      ],
+      "shape": "ellipse",
+      "squash": 0.6,
+      "weight": 4
+    },
+    "slime": {
+      "label": "Mucilage Aggregate",
+      "mix": [
+        1,
+        1,
+        4
+      ],
+      "shape": "shard",
+      "weight": 3
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase Burst",
+      "color": "#c98a3d",
+      "weight": 6
+    },
+    "enzyme1": {
+      "label": "Protease Burst",
+      "color": "#b5573f",
+      "weight": 7
+    },
+    "enzyme2": {
+      "label": "Glycosidase Burst",
+      "color": "#7fae6e",
+      "weight": 4
+    },
+    "chemotaxis": {
+      "label": "Exudate Tracking",
+      "color": "#e0c060",
+      "weight": 6
+    },
+    "antibiotic": {
+      "label": "Bacteriocin Release",
+      "color": "#9040a0",
+      "weight": 3
+    },
+    "eps": {
+      "label": "Mucus Sheath",
+      "color": "#6faab5",
+      "weight": 5
+    },
+    "crispr": {
+      "label": "CRISPR Immunity",
+      "color": "#4488cc",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Surface Twitching",
+      "color": "#cc8844",
+      "weight": 2
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "founder",
+        "label": "Copiotrophic Alphaproteobacterium",
+        "color": "#d99a4e",
+        "genome": {
+          "enzLvl": [
+            1,
+            3,
+            1
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 8
+      },
+      {
+        "id": "rival",
+        "label": "Marinobacter Scavenger",
+        "color": "#a8785a",
+        "genome": {
+          "enzLvl": [
+            2,
+            2,
+            1
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 0,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "karenia_proxy",
+        "label": "Karenia brevis (bloom cell)",
+        "color": "#8e3d5a",
+        "form": "centric",
+        "sizeUm": 32,
+        "chain": 1,
+        "count": 140,
+        "toxin": {
+          "label": "Brevetoxin Slick",
+          "color": "#c85fa0",
+          "radius": 90,
+          "potency": 70,
+          "life": 22
+        }
+      },
+      {
+        "id": "shelf_diatom",
+        "label": "Shelf Diatom (Skeletonema)",
+        "color": "#6fae7f",
+        "form": "pennate",
+        "sizeUm": 18,
+        "chain": 4,
+        "count": 40
+      }
+    ]
+  },
+  "column": {
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 30,
+        "salinity": 34,
+        "light": 1,
+        "nutrient": 0.3
+      },
+      {
+        "depth": 8,
+        "tempC": 29,
+        "salinity": 34.5,
+        "light": 0.75,
+        "nutrient": 0.45
+      },
+      {
+        "depth": 18,
+        "tempC": 26,
+        "salinity": 35,
+        "light": 0.35,
+        "nutrient": 0.7
+      },
+      {
+        "depth": 30,
+        "tempC": 22,
+        "salinity": 35.5,
+        "light": 0.1,
+        "nutrient": 0.9
+      }
+    ],
+    "thermocline": {
+      "depth": 16,
+      "sharpness": 0.55
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}
