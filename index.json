@@ -212,6 +212,14 @@
       "file": "scenarios/daily-2026-08-15.json"
     },
     {
+      "id": "daily-2026-08-16",
+      "title": "Amazon River Plume: Diazotroph Blooms at the Salinity Front",
+      "date": "2026-08-16",
+      "difficulty": "normal",
+      "realWorldBasis": "Amazon River plume, western tropical Atlantic, diazotrophic cyanobacteria and diatom-symbiont blooms",
+      "file": "scenarios/daily-2026-08-16.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",

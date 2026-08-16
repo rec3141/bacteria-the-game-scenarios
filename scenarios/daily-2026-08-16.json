@@ -1,0 +1,243 @@
+{
+  "meta": {
+    "title": "Amazon River Plume: Diazotroph Blooms at the Salinity Front",
+    "date": "2026-08-16",
+    "lesson": "Where the Amazon River meets the Atlantic, a huge low-salinity plume spreads hundreds of kilometers offshore. Freshwater is nitrogen-poor but the plume's stratification and iron-rich sediment create ideal conditions for nitrogen-fixing cyanobacteria (diazotrophs like Trichodesmium) and their diatom symbionts (Hemiaulus, Rhizosolenia) to bloom explosively, fixing their own nitrogen from N2 gas rather than competing for scarce fixed nitrogen. This lets phototrophic bacteria thrive even in nutrient-poor surface water, feeding a rich microbial loop below. The lesson: nitrogen fixation is a way to bypass nutrient limitation, and it reshapes who wins in stratified, nutrient-poor surface water.",
+    "citation": "Subramaniam et al. 2008 PNAS; Foster et al. 2007 ISME J - Amazon River plume diazotroph blooms",
+    "difficulty": "normal",
+    "realWorldBasis": "Amazon River plume, western tropical Atlantic, diazotrophic cyanobacteria and diatom-symbiont blooms"
+  },
+  "env": {
+    "day.latitude": 5,
+    "day.dayOfYear": 172,
+    "day.lengthSec": 260,
+    "diel.tempBase": 28,
+    "diel.tempAmp": 2.5,
+    "diel.foodFloor": 0.5,
+    "diel.q10": 2,
+    "diel.q10RefC": 28,
+    "diel.waterDay.0": 40,
+    "diel.waterDay.1": 95,
+    "diel.waterDay.2": 80,
+    "diel.waterNight.0": 4,
+    "diel.waterNight.1": 14,
+    "diel.waterNight.2": 20,
+    "diel.lightGamma": 1.5,
+    "substrate.count": 75,
+    "substrate.sizeMin": 32,
+    "substrate.sizeMax": 180,
+    "substrate.lifeMin": 110,
+    "substrate.lifeMax": 260,
+    "substrate.driftMin": 6,
+    "substrate.driftMax": 14,
+    "cell.chemoRange0": 260,
+    "cell.chemoBias": 1.1,
+    "column.photoRate": 10,
+    "predator.count": 5,
+    "predator.senseRange": 160,
+    "predator.metabolism": 9,
+    "phage.greenCount": 14,
+    "phage.goldCount": 4,
+    "diatom.photoRate": 11,
+    "diatom.exudateFrac": 0.3,
+    "diatom.exudateMote": 20,
+    "diatom.immigrateEvery": 10
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid-rich detritus",
+      "enzymeLabel": "Lipase",
+      "color": "#c9a24b"
+    },
+    {
+      "index": 1,
+      "label": "Sinking protein floc",
+      "enzymeLabel": "Protease",
+      "color": "#7fae6a"
+    },
+    {
+      "index": 2,
+      "label": "River-borne carbohydrate silt",
+      "enzymeLabel": "Amylase",
+      "color": "#8a6d3b"
+    }
+  ],
+  "particles": {
+    "riverSilt": {
+      "label": "Fine sediment floc",
+      "mix": [
+        0.15,
+        0.2,
+        0.65
+      ],
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 6
+    },
+    "diatomDetritus": {
+      "label": "Diatom-symbiont debris",
+      "mix": [
+        0.25,
+        0.55,
+        0.2
+      ],
+      "shape": "shard",
+      "squash": 0.7,
+      "weight": 4
+    },
+    "planktonFloc": {
+      "label": "Marine snow floc",
+      "mix": [
+        0.3,
+        0.4,
+        0.3
+      ],
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 3
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase burst",
+      "color": "#c9a24b",
+      "weight": 3
+    },
+    "enzyme1": {
+      "label": "Protease burst",
+      "color": "#7fae6a",
+      "weight": 5
+    },
+    "enzyme2": {
+      "label": "Amylase burst",
+      "color": "#8a6d3b",
+      "weight": 6
+    },
+    "chemotaxis": {
+      "label": "Nutrient-front tracking",
+      "color": "#3fd0c9",
+      "weight": 6
+    },
+    "antibiotic": {
+      "label": "Bacteriocin release",
+      "color": "#d1495b",
+      "weight": 3
+    },
+    "eps": {
+      "label": "Mucilage sheath",
+      "color": "#e0c68a",
+      "weight": 4
+    },
+    "crispr": {
+      "label": "CRISPR immunity",
+      "color": "#9b5de5",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Pili twitching",
+      "color": "#f4a261",
+      "weight": 2
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "trichodesmium_like",
+        "label": "Nitrogen-fixing filament (Trichodesmium-like)",
+        "color": "#5ac8a8",
+        "genome": {
+          "enzLvl": [
+            1,
+            2,
+            2
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 2,
+          "crispr": false,
+          "twitching": false,
+          "phototroph": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "copiotroph_opportunist",
+        "label": "Plume copiotroph (Alteromonas-like)",
+        "color": "#c96f4a",
+        "genome": {
+          "enzLvl": [
+            2,
+            2,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 1,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 3
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "hemiaulus_symbiont",
+        "label": "Hemiaulus with cyanobacterial symbiont",
+        "color": "#4a9d7f",
+        "form": "centric",
+        "sizeUm": 45,
+        "chain": 6,
+        "count": 60
+      },
+      {
+        "id": "rhizosolenia_chain",
+        "label": "Rhizosolenia chain",
+        "color": "#7bbf9e",
+        "form": "pennate",
+        "sizeUm": 60,
+        "chain": 4,
+        "count": 30
+      }
+    ]
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 29,
+        "salinity": 8,
+        "light": 1,
+        "nutrient": 0.2
+      },
+      {
+        "depth": 10,
+        "tempC": 28.5,
+        "salinity": 18,
+        "light": 0.75,
+        "nutrient": 0.35
+      },
+      {
+        "depth": 25,
+        "tempC": 27,
+        "salinity": 30,
+        "light": 0.4,
+        "nutrient": 0.55
+      },
+      {
+        "depth": 50,
+        "tempC": 24,
+        "salinity": 36,
+        "light": 0.15,
+        "nutrient": 0.7
+      }
+    ],
+    "thermocline": {
+      "depth": 20,
+      "sharpness": 0.6
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}
