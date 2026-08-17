@@ -220,6 +220,14 @@
       "file": "scenarios/daily-2026-08-16.json"
     },
     {
+      "id": "daily-2026-08-17",
+      "title": "Fjord Ice Melt: Psychrophile Wake-Up in Kongsfjorden",
+      "date": "2026-08-17",
+      "difficulty": "hard",
+      "realWorldBasis": "Kongsfjorden, Svalbard: glacial meltwater plume microbial communities in early Arctic spring",
+      "file": "scenarios/daily-2026-08-17.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",

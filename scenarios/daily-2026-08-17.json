@@ -1,0 +1,278 @@
+{
+  "meta": {
+    "title": "Fjord Ice Melt: Psychrophile Wake-Up in Kongsfjorden",
+    "date": "2026-08-17",
+    "lesson": "Each Arctic spring, meltwater pulses off glacier fronts in Svalbard's Kongsfjorden inject a thin, cold, brackish lens over denser seawater. Sediment and organic debris scoured from the glacier bed ride this lens, and the psychrophilic (cold-loving) bacteria that overwintered as cysts in the dark must wake in water still near 0C, where every enzyme reaction runs at a crawl (Q10 penalty in full force). Diatoms trapped in the meltwater and sea-ice underside seed the base of the bloom, but the window to feed before winter darkness cost catches up is short and food is patchy in the cold, sluggish, sediment-laden water. This models the trade-off psychrophiles must make: divert scarce energy into cold-adapted (often lipid-rich, cryoprotective) enzymes versus staying dormant longer.",
+    "citation": "Kongsfjorden glacier-meltwater plume studies; Arctic sea-ice/glacier microbial ecology (e.g. Institute Polaire studies, Svalbard)",
+    "difficulty": "hard",
+    "realWorldBasis": "Kongsfjorden, Svalbard: glacial meltwater plume microbial communities in early Arctic spring"
+  },
+  "env": {
+    "day.lengthSec": 300,
+    "day.latitude": 79,
+    "day.dayOfYear": 110,
+    "day.startHour": 5,
+    "diel.tempBase": -1,
+    "diel.tempAmp": 1.5,
+    "diel.foodFloor": 0.25,
+    "diel.q10": 2.4,
+    "diel.q10RefC": 20,
+    "diel.waterNight.0": 3,
+    "diel.waterNight.1": 12,
+    "diel.waterNight.2": 25,
+    "diel.waterDay.0": 40,
+    "diel.waterDay.1": 70,
+    "diel.waterDay.2": 68,
+    "diel.lightGamma": 1.4,
+    "diel.twilight": 0.35,
+    "substrate.count": 72,
+    "substrate.sizeMin": 26,
+    "substrate.sizeMax": 170,
+    "substrate.sizeExp": 1.9,
+    "substrate.lifeMin": 90,
+    "substrate.lifeMax": 220,
+    "substrate.driftMin": 4,
+    "substrate.driftMax": 10,
+    "substrate.moteEnergy": 6,
+    "respirationBase": 0.6,
+    "cell.startEnergy": 95,
+    "cell.divideThreshold": 200,
+    "cell.swimCost": 0.9,
+    "cell.cystBelow": 20,
+    "cell.cystWake": 55,
+    "cell.cystMetab": 0.02,
+    "cell.cystReviveEnergy": 45,
+    "cell.runMin": 2.4,
+    "cell.runMax": 4.2,
+    "cell.chemoRange0": 260,
+    "cell.chemoBias": 1.1,
+    "predator.count": 3,
+    "predator.wanderSpeed": 16,
+    "predator.chaseSpeed": 28,
+    "predator.metabolism": 7,
+    "predator.senseRange": 130,
+    "phage.greenCount": 10,
+    "phage.goldCount": 3,
+    "phage.goldMinDist": 500,
+    "diatom.photoRate": 6,
+    "diatom.metabolism": 1.2,
+    "diatom.sinkSpeed": 0.8
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Glacial Lipid Detritus",
+      "enzymeLabel": "cold-active lipase",
+      "color": "#8fb6c9"
+    },
+    {
+      "index": 1,
+      "label": "Sediment-bound Protein Floc",
+      "enzymeLabel": "psychrophilic protease",
+      "color": "#7a6a5a"
+    },
+    {
+      "index": 2,
+      "label": "Diatom Exudate Carbohydrate",
+      "enzymeLabel": "cold glycosidase",
+      "color": "#c9e8e0"
+    }
+  ],
+  "particles": {
+    "meltFloc": {
+      "label": "Meltwater Sediment Floc",
+      "mix": [
+        3,
+        2,
+        1
+      ],
+      "shape": "aggregate",
+      "weight": 6
+    },
+    "iceAlgaeDebris": {
+      "label": "Ice-Algae Debris",
+      "mix": [
+        1,
+        1,
+        3
+      ],
+      "shape": "shard",
+      "weight": 4
+    },
+    "glacierParticulate": {
+      "label": "Glacier Flour Particle",
+      "mix": [
+        2,
+        1,
+        1
+      ],
+      "shape": "ellipse",
+      "squash": 0.6,
+      "weight": 3
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Cold-Active Lipase",
+      "color": "#8fb6c9",
+      "weight": 6
+    },
+    "enzyme1": {
+      "label": "Psychrophilic Protease",
+      "color": "#7a6a5a",
+      "weight": 4
+    },
+    "enzyme2": {
+      "label": "Cold Glycosidase",
+      "color": "#c9e8e0",
+      "weight": 5
+    },
+    "chemotaxis": {
+      "label": "Meltwater Plume Sensing",
+      "color": "#a0c8e0",
+      "weight": 5
+    },
+    "antibiotic": {
+      "label": "Cryo-bacteriocin",
+      "color": "#d9534f",
+      "weight": 2
+    },
+    "eps": {
+      "label": "Cryoprotective EPS",
+      "color": "#e8f4f8",
+      "weight": 5
+    },
+    "crispr": {
+      "label": "CRISPR Immunity",
+      "color": "#f0ad4e",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Sediment Grip Twitching",
+      "color": "#9b7653",
+      "weight": 3
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "psychro1",
+        "label": "Colwellia psychrerythraea",
+        "color": "#8fb6c9",
+        "genome": {
+          "enzLvl": [
+            3,
+            2,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 2,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "psychro2",
+        "label": "Polaribacter sp.",
+        "color": "#c9e8e0",
+        "genome": {
+          "enzLvl": [
+            1,
+            1,
+            3
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": true,
+          "twitching": false
+        },
+        "immigrateWeight": 4
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "iceAlgae1",
+        "label": "Melosira arctica",
+        "color": "#7fcdbb",
+        "form": "pennate",
+        "sizeUm": 45,
+        "chain": 8,
+        "count": 40
+      },
+      {
+        "id": "iceAlgae2",
+        "label": "Thalassiosira nordenskioeldii",
+        "color": "#a1d99b",
+        "form": "centric",
+        "sizeUm": 22,
+        "chain": 2,
+        "count": 25
+      }
+    ]
+  },
+  "terrain": [
+    {
+      "at": "top",
+      "thickness": 140,
+      "color": "#dceef5",
+      "label": "Glacier-Front Sea Ice",
+      "roughness": 0.55,
+      "porosity": 0.4,
+      "poreSize": 30,
+      "featureSize": 300,
+      "spires": 0.1,
+      "spireHeight": 200,
+      "spireWidth": 60,
+      "warp": 0.1
+    },
+    {
+      "at": "bottom",
+      "thickness": 100,
+      "color": "#6b5d4f",
+      "label": "Glacial Flour Sediment",
+      "roughness": 0.3,
+      "porosity": 0.25,
+      "poreSize": 15,
+      "featureSize": 200,
+      "spires": 0,
+      "spireHeight": 0,
+      "spireWidth": 40,
+      "warp": 0
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": -1.2,
+        "salinity": 18,
+        "light": 0.6,
+        "nutrient": 0.5
+      },
+      {
+        "depth": 15,
+        "tempC": -0.5,
+        "salinity": 28,
+        "light": 0.35,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 40,
+        "tempC": 1.5,
+        "salinity": 34,
+        "light": 0.1,
+        "nutrient": 0.4
+      }
+    ],
+    "thermocline": {
+      "depth": 15,
+      "sharpness": 0.6
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}
