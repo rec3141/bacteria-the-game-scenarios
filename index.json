@@ -228,6 +228,14 @@
       "file": "scenarios/daily-2026-08-17.json"
     },
     {
+      "id": "daily-2026-08-18",
+      "title": "Yellowstone Runoff: Thermophile Mats of the Alkaline Hot Spring Channel",
+      "date": "2026-08-18",
+      "difficulty": "hard",
+      "realWorldBasis": "Yellowstone National Park alkaline hot spring outflow channels, e.g. Mushroom Spring/Octopus Spring mat systems",
+      "file": "scenarios/daily-2026-08-18.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",

@@ -1,0 +1,197 @@
+{
+  "meta": {
+    "title": "Yellowstone Runoff: Thermophile Mats of the Alkaline Hot Spring Channel",
+    "date": "2026-08-18",
+    "lesson": "In the outflow channels of alkaline hot springs like Yellowstone's Grand Prismatic, temperature falls steeply from the vent to the cooler margins, and different thermophilic and photosynthetic lineages sort themselves along that gradient. Near the source, chemolithotrophic and heat-tolerant chemoheterotrophic bacteria dominate; a bit further down, filamentous cyanobacteria and thermophilic photosynthesizers form thick orange-green mats where light and warmth overlap. Carbohydrate-rich mat exopolysaccharide and lysed cyanobacterial biomass feed a dense community of thermophilic grazers and heterotrophs. This scenario asks the player to run a heat-tolerant chemoorganotroph founder digesting carbohydrate-dominant mat detritus, competing with phage pressure and grazers in a shallow, fast-flowing, brightly lit channel where temperature itself is the primary zonation axis.",
+    "citation": "Ward, D.M. et al. Yellowstone hot spring microbial mat studies; Brock, T.D. Thermophilic Microorganisms and Life at High Temperatures (1978).",
+    "difficulty": "hard",
+    "realWorldBasis": "Yellowstone National Park alkaline hot spring outflow channels, e.g. Mushroom Spring/Octopus Spring mat systems"
+  },
+  "env": {
+    "day.lengthSec": 240,
+    "day.latitude": 44,
+    "day.dayOfYear": 200,
+    "day.startHour": 9,
+    "diel.tempBase": 42,
+    "diel.tempAmp": 8,
+    "diel.foodFloor": 0.5,
+    "diel.q10": 2.6,
+    "diel.q10RefC": 40,
+    "diel.waterDay.0": 40,
+    "diel.waterDay.1": 95,
+    "diel.waterDay.2": 40,
+    "diel.waterNight.0": 5,
+    "diel.waterNight.1": 18,
+    "diel.waterNight.2": 10,
+    "diel.goldTint": 0.28,
+    "respirationBase": 1.3,
+    "substrate.count": 85,
+    "substrate.sizeMin": 26,
+    "substrate.sizeMax": 150,
+    "substrate.lifeMin": 80,
+    "substrate.lifeMax": 190,
+    "substrate.driftMin": 16,
+    "substrate.driftMax": 38,
+    "substrate.moteEnergy": 8,
+    "cell.uptake": 16,
+    "cell.startEnergy": 100,
+    "cell.divideThreshold": 165,
+    "cell.swimCost": 1.5,
+    "cell.runMin": 1.2,
+    "cell.runMax": 2.4,
+    "cell.chemoRange0": 260,
+    "cell.chemoBias": 1.1,
+    "predator.count": 6,
+    "predator.wanderSpeed": 34,
+    "predator.chaseSpeed": 55,
+    "predator.senseRange": 190,
+    "predator.metabolism": 12,
+    "phage.greenCount": 22,
+    "phage.goldCount": 3,
+    "phage.latent.0": 7,
+    "phage.latent.1": 12,
+    "phage.burst.0": 5,
+    "phage.burst.1": 10
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid-rich mat film",
+      "enzymeLabel": "Thermolipase",
+      "color": "#c96a1c"
+    },
+    {
+      "index": 1,
+      "label": "Cyanobacterial protein debris",
+      "enzymeLabel": "Thermoprotease",
+      "color": "#4f8a3d"
+    },
+    {
+      "index": 2,
+      "label": "EPS mat carbohydrate",
+      "enzymeLabel": "Thermo-glycosidase",
+      "color": "#e8c34a"
+    }
+  ],
+  "particles": {
+    "matChunk": {
+      "label": "Orange mat fragment",
+      "mix": [
+        1,
+        1,
+        5
+      ],
+      "shape": "aggregate",
+      "weight": 6
+    },
+    "filamentShard": {
+      "label": "Cyanobacterial filament shard",
+      "mix": [
+        0,
+        2,
+        3
+      ],
+      "shape": "shard",
+      "weight": 3
+    },
+    "biofilmDrop": {
+      "label": "EPS droplet",
+      "mix": [
+        0,
+        0,
+        6
+      ],
+      "shape": "ellipse",
+      "squash": 0.6,
+      "weight": 2
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Thermolipase burst",
+      "color": "#c96a1c",
+      "weight": 3
+    },
+    "enzyme1": {
+      "label": "Thermoprotease burst",
+      "color": "#4f8a3d",
+      "weight": 3
+    },
+    "enzyme2": {
+      "label": "Thermo-glycosidase burst",
+      "color": "#e8c34a",
+      "weight": 8
+    },
+    "chemotaxis": {
+      "label": "Thermal gradient sensing",
+      "color": "#ffd27f",
+      "weight": 6
+    },
+    "antibiotic": {
+      "label": "Thermostable bacteriocin",
+      "color": "#d1495b",
+      "weight": 4
+    },
+    "eps": {
+      "label": "Mat matrix secretion",
+      "color": "#f4a900",
+      "weight": 5
+    },
+    "crispr": {
+      "label": "Phage immunity",
+      "color": "#7ec4cf",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Filament gliding",
+      "color": "#a5d6a7",
+      "weight": 4
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "thermus_founder",
+        "label": "Thermus-like mat heterotroph",
+        "color": "#e8b23a",
+        "genome": {
+          "enzLvl": [
+            1,
+            1,
+            3
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 1,
+          "eps": 2,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "cyano_mat",
+        "label": "Synechococcus-like mat cyanobacterium",
+        "color": "#5fa85f",
+        "genome": {
+          "enzLvl": [
+            0,
+            1,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 3,
+          "crispr": false,
+          "twitching": false,
+          "phototroph": true
+        },
+        "immigrateWeight": 4
+      }
+    ]
+  },
+  "column": {
+    "enabled": false
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}
