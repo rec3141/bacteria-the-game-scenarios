@@ -1,0 +1,253 @@
+{
+  "meta": {
+    "title": "Nutrient Pulse: Diatoms of the California Upwelling Front",
+    "date": "2026-08-19",
+    "lesson": "When equatorward winds blow along the California coast, Ekman transport pushes surface water offshore and cold, nutrient-rich water wells up from ~100-200m to replace it. Within days, silica- and nitrate-starved diatoms like Chaetoceros and Skeletonema explode into dense chains, riding the front as it sharpens against warmer offshore water. Their exudates feed a fast-turnover copiotroph community (Alteromonas-like heterotrophs) that races phage and grazers for the bloom's carbon before the front relaxes and the bloom collapses. This level asks you to found a colony at the edge of a moving nutrient front: chase the upwelled plume, digest diatom-derived carbohydrate and protein exudate, and survive the grazer and phage pressure that a rich, ephemeral bloom always attracts.",
+    "citation": "Based on classic CalCOFI/California Current upwelling-front diatom bloom dynamics (e.g. Chaetoceros/Skeletonema blooms, Kudela & Chavez studies)",
+    "difficulty": "normal",
+    "realWorldBasis": "California Current System coastal upwelling front, spring/summer diatom bloom succession"
+  },
+  "env": {
+    "day.lengthSec": 260,
+    "day.latitude": 36,
+    "day.dayOfYear": 172,
+    "diel.tempBase": 13,
+    "diel.tempAmp": 3,
+    "diel.foodFloor": 0.4,
+    "diel.q10": 2,
+    "diel.waterDay.0": 20,
+    "diel.waterDay.1": 95,
+    "diel.waterDay.2": 80,
+    "diel.waterNight.0": 3,
+    "diel.waterNight.1": 14,
+    "diel.waterNight.2": 20,
+    "diel.grazeNight": 1.3,
+    "substrate.count": 105,
+    "substrate.sizeMin": 32,
+    "substrate.sizeMax": 190,
+    "substrate.sizeExp": 1.4,
+    "substrate.bloomEvery": 0.35,
+    "substrate.lifeMin": 90,
+    "substrate.lifeMax": 220,
+    "substrate.driftMin": 14,
+    "substrate.driftMax": 34,
+    "substrate.minPerRes": 3,
+    "enzyme.maxRadius": 28,
+    "enzyme.life": 6,
+    "cell.chemoRange0": 340,
+    "cell.chemoRangePer": 160,
+    "cell.chemoBias": 1.1,
+    "cell.uptake": 16,
+    "cell.swimCost": 1.3,
+    "predator.count": 6,
+    "predator.senseRange": 190,
+    "predator.chaseSpeed": 48,
+    "predator.metabolism": 11,
+    "phage.greenCount": 22,
+    "phage.goldCount": 4,
+    "phage.hostTolerance": 2,
+    "diatom.photoRate": 11,
+    "diatom.metabolism": 1.5,
+    "diatom.exudateFrac": 0.28,
+    "diatom.exudateMote": 22,
+    "diatom.sinkSpeed": 1.4,
+    "diatom.immigrateEvery": 10
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid droplet (diatom storage oil)",
+      "enzymeLabel": "Lipase",
+      "color": "#d9a441"
+    },
+    {
+      "index": 1,
+      "label": "Diatom exudate protein",
+      "enzymeLabel": "Protease",
+      "color": "#4f8fd1"
+    },
+    {
+      "index": 2,
+      "label": "Frustule-bound carbohydrate (chrysolaminarin)",
+      "enzymeLabel": "Glucanase",
+      "color": "#5fbf7a"
+    }
+  ],
+  "particles": {
+    "chain_debris": {
+      "label": "Broken diatom chain fragment",
+      "mix": [
+        1,
+        2,
+        5
+      ],
+      "shape": "shard",
+      "squash": 1,
+      "weight": 6
+    },
+    "exudate_cloud": {
+      "label": "Sticky exudate marine snow",
+      "mix": [
+        1,
+        4,
+        3
+      ],
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 5
+    },
+    "lipid_globule": {
+      "label": "Storage-oil globule",
+      "mix": [
+        5,
+        1,
+        1
+      ],
+      "shape": "ellipse",
+      "squash": 0.7,
+      "weight": 3
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase burst",
+      "color": "#d9a441",
+      "weight": 5
+    },
+    "enzyme1": {
+      "label": "Protease burst",
+      "color": "#4f8fd1",
+      "weight": 6
+    },
+    "enzyme2": {
+      "label": "Glucanase burst",
+      "color": "#5fbf7a",
+      "weight": 7
+    },
+    "chemotaxis": {
+      "label": "Front-tracking chemotaxis",
+      "color": "#7fd4e0",
+      "weight": 6
+    },
+    "antibiotic": {
+      "label": "Alteromonas-style antibiotic",
+      "color": "#c1466e",
+      "weight": 4
+    },
+    "eps": {
+      "label": "Mucoid EPS sheath",
+      "color": "#9ad1c8",
+      "weight": 4
+    },
+    "crispr": {
+      "label": "CRISPR immunity",
+      "color": "#b39ddb",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Pili twitching (particle grip)",
+      "color": "#f0c419",
+      "weight": 3
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "founder",
+        "label": "Alteromonas-like copiotroph",
+        "color": "#4f8fd1",
+        "genome": {
+          "enzLvl": [
+            1,
+            2,
+            3
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 1,
+          "eps": 1,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "rival",
+        "label": "Slow-growing generalist",
+        "color": "#8a8f98",
+        "genome": {
+          "enzLvl": [
+            1,
+            1,
+            1
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 0,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "chaetoceros",
+        "label": "Chaetoceros chain",
+        "color": "#5fbf7a",
+        "form": "pennate",
+        "sizeUm": 22,
+        "chain": 8,
+        "count": 70,
+        "toxin": null
+      },
+      {
+        "id": "skeletonema",
+        "label": "Skeletonema centric",
+        "color": "#7ecf9f",
+        "form": "centric",
+        "sizeUm": 14,
+        "chain": 4,
+        "count": 50
+      }
+    ]
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 14,
+        "salinity": 33.5,
+        "light": 1,
+        "nutrient": 0.3
+      },
+      {
+        "depth": 20,
+        "tempC": 12,
+        "salinity": 33.7,
+        "light": 0.7,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 45,
+        "tempC": 10,
+        "salinity": 34,
+        "light": 0.35,
+        "nutrient": 0.85
+      },
+      {
+        "depth": 80,
+        "tempC": 8.5,
+        "salinity": 34.1,
+        "light": 0.1,
+        "nutrient": 1
+      }
+    ],
+    "thermocline": {
+      "depth": 35,
+      "sharpness": 0.6
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}

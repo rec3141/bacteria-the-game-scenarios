@@ -236,6 +236,14 @@
       "file": "scenarios/daily-2026-08-18.json"
     },
     {
+      "id": "daily-2026-08-19",
+      "title": "Nutrient Pulse: Diatoms of the California Upwelling Front",
+      "date": "2026-08-19",
+      "difficulty": "normal",
+      "realWorldBasis": "California Current System coastal upwelling front, spring/summer diatom bloom succession",
+      "file": "scenarios/daily-2026-08-19.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
