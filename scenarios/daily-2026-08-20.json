@@ -1,0 +1,266 @@
+{
+  "meta": {
+    "title": "Dead Zone Nights: Sulfur Bacteria of the Peruvian Upwelling Shelf",
+    "date": "2026-08-20",
+    "lesson": "Off the coast of Peru, wind-driven upwelling brings nutrient-rich deep water to the surface, fueling huge phytoplankton blooms. When these blooms die and sink, bacterial decomposition strips the water of oxygen, creating one of the ocean's most intense oxygen minimum zones. In this suboxic water, chemolithotrophic sulfur bacteria such as Thioploca and Thiomargarita form dense mats and filaments that oxidize hydrogen sulfide seeping up from anoxic sediments, some even storing nitrate internally to survive when sulfide runs out. Meanwhile diatom blooms rain down as marine snow, feeding heterotrophs at the fringes of the low-oxygen water. This level asks the player to work the redox boundary: sulfide rises from below, oxygen and light arrive from above, and the profitable band where a purple sulfur bacterium can live is a narrow overlap the player must find and hold, exactly as real chemocline microbes do.",
+    "citation": "Based on studies of the Peru-Chile upwelling system and its oxygen minimum zone sulfur bacterial mats (e.g. Thioploca spp., Gallardo 1977 and later ETSP OMZ surveys).",
+    "difficulty": "hard",
+    "realWorldBasis": "Peru-Chile upwelling OMZ, Thioploca/Thiomargarita sulfur-oxidizing mats"
+  },
+  "env": {
+    "day.lengthSec": 300,
+    "day.latitude": -12,
+    "day.dayOfYear": 40,
+    "diel.tempBase": 15,
+    "diel.tempAmp": 3,
+    "diel.foodFloor": 0.3,
+    "diel.q10": 2.2,
+    "diel.waterNight.0": 3,
+    "diel.waterNight.1": 12,
+    "diel.waterNight.2": 10,
+    "diel.waterDay.0": 30,
+    "diel.waterDay.1": 70,
+    "diel.waterDay.2": 55,
+    "diel.grazeNight": 1.4,
+    "substrate.count": 85,
+    "substrate.sizeMin": 32,
+    "substrate.sizeMax": 190,
+    "substrate.lifeMin": 100,
+    "substrate.lifeMax": 260,
+    "substrate.driftMin": 6,
+    "substrate.driftMax": 14,
+    "column.chemRate": 6.5,
+    "column.photoRate": 7,
+    "predator.count": 5,
+    "predator.senseRange": 150,
+    "predator.metabolism": 12,
+    "cell.chemoRange0": 340,
+    "cell.chemoBias": 1.1,
+    "cell.cystBelow": 20,
+    "cell.cystMetab": 0.025,
+    "respirationBase": 0.75
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Diatom Lipid Snow",
+      "enzymeLabel": "Lipase",
+      "color": "#7a6a3e"
+    },
+    {
+      "index": 1,
+      "label": "Dead Zooplankton Protein",
+      "enzymeLabel": "Protease",
+      "color": "#8f5b4a"
+    },
+    {
+      "index": 2,
+      "label": "Diatom Frustule Carbohydrate",
+      "enzymeLabel": "Glycanase",
+      "color": "#5b7a5e"
+    }
+  ],
+  "particles": {
+    "snowClump": {
+      "label": "Sinking Marine Snow",
+      "mix": [
+        3,
+        3,
+        4
+      ],
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 6
+    },
+    "carcassShard": {
+      "label": "Zooplankton Carcass Shard",
+      "mix": [
+        1,
+        6,
+        1
+      ],
+      "shape": "shard",
+      "weight": 4
+    },
+    "frustuleFlake": {
+      "label": "Frustule Flake",
+      "mix": [
+        1,
+        1,
+        5
+      ],
+      "shape": "ellipse",
+      "squash": 0.6,
+      "weight": 3
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase",
+      "color": "#c9b25a",
+      "weight": 4
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#d17a5a",
+      "weight": 5
+    },
+    "enzyme2": {
+      "label": "Glycanase",
+      "color": "#6fae74",
+      "weight": 3
+    },
+    "chemotaxis": {
+      "label": "Sulfide-Seeking",
+      "color": "#b48ad1",
+      "weight": 8
+    },
+    "antibiotic": {
+      "label": "Sulfur Toxin Burst",
+      "color": "#e0d060",
+      "weight": 3
+    },
+    "eps": {
+      "label": "Sheath Formation",
+      "color": "#9a8a6a",
+      "weight": 5
+    },
+    "crispr": {
+      "label": "Phage Immunity",
+      "color": "#5aa0d1",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Filament Gliding",
+      "color": "#b0a070",
+      "weight": 4
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "thioploca",
+        "label": "Thioploca-like Sulfur Filament",
+        "color": "#c9b06a",
+        "genome": {
+          "enzLvl": [
+            0,
+            1,
+            1
+          ],
+          "chemoLevel": 3,
+          "antibiotic": 1,
+          "eps": 2,
+          "crispr": false,
+          "twitching": true,
+          "chemolithotroph": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "generalistHeterotroph",
+        "label": "OMZ-Fringe Heterotroph",
+        "color": "#8a7a5a",
+        "genome": {
+          "enzLvl": [
+            2,
+            2,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "upwellingDiatom",
+        "label": "Upwelling Chain Diatom",
+        "color": "#8ea86a",
+        "form": "centric",
+        "sizeUm": 40,
+        "chain": 6,
+        "count": 70
+      },
+      {
+        "id": "pseudoNitzschia",
+        "label": "Pseudo-nitzschia Ribbon",
+        "color": "#a6b878",
+        "form": "pennate",
+        "sizeUm": 30,
+        "chain": 8,
+        "count": 25,
+        "toxin": {
+          "label": "Domoic Acid Trace",
+          "color": "#c8d060",
+          "radius": 60,
+          "potency": 40,
+          "life": 20
+        }
+      }
+    ]
+  },
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 140,
+      "color": "#4a3b2e",
+      "label": "Anoxic Sulfidic Sediment",
+      "roughness": 0.5,
+      "porosity": 0.45,
+      "poreSize": 40,
+      "featureSize": 300,
+      "spires": 0,
+      "warp": 0.2
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 18,
+        "salinity": 35,
+        "light": 1,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 0.3,
+        "tempC": 16,
+        "salinity": 35,
+        "light": 0.5,
+        "nutrient": 0.75
+      },
+      {
+        "depth": 0.6,
+        "tempC": 14,
+        "salinity": 34.8,
+        "light": 0.1,
+        "nutrient": 0.9
+      },
+      {
+        "depth": 1,
+        "tempC": 13,
+        "salinity": 34.7,
+        "light": 0,
+        "nutrient": 1
+      }
+    ],
+    "thermocline": {
+      "depth": 0.35,
+      "sharpness": 0.6
+    },
+    "chemical": {
+      "peakDepth": 0.85,
+      "spread": 0.22,
+      "strength": 0.9,
+      "color": "#d8c860"
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}
