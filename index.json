@@ -252,6 +252,14 @@
       "file": "scenarios/daily-2026-08-20.json"
     },
     {
+      "id": "daily-2026-08-21",
+      "title": "Baikal Ice Riddle: Psychrophiles Beneath the Sworn Crystal",
+      "date": "2026-08-21",
+      "difficulty": "hard",
+      "realWorldBasis": "Lake Baikal, Siberia - winter ice-covered pelagic zone, under-ice Aulacoseira baicalensis diatom bloom",
+      "file": "scenarios/daily-2026-08-21.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
