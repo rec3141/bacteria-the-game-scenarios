@@ -1,0 +1,252 @@
+{
+  "meta": {
+    "title": "Salt Marsh Pannikin: Sulfate Reducers Under a Cordgrass Root Mat",
+    "date": "2026-08-22",
+    "lesson": "In a Spartina salt marsh, the anoxic mud beneath the cordgrass root mat is dominated not by oxygen breathers but by sulfate-reducing bacteria, which use the ocean's abundant sulfate as an electron acceptor to break down organic matter exuded by roots and buried detritus, releasing hydrogen sulfide that blackens the mud and smells of rotten eggs. These bacteria live in a labyrinth of fine root channels and burrows that structure the sediment into a real 3-D habitat, not a flat wall of mud. Above them, in the thin oxygenated skin of the mud, sulfide-oxidizing and heterotrophic bacteria intercept both the sulfide and the leaking root carbon before it reaches the water column. This scenario asks the player to feed on carbohydrate-rich root exudate and protein-rich detritus in a low-light, brackish, root-riddled world where energy is cheap belowground but oxygen and free food are scarce, and grazing pressure is comparatively gentle because most protists cannot follow prey into the fine burrows.",
+    "citation": "Howarth & Teal 1979; King 1988, salt marsh sulfate reduction studies",
+    "difficulty": "normal",
+    "realWorldBasis": "Spartina alterniflora salt marsh, anoxic root-zone sediment, sulfate-reducing bacteria (Desulfovibrio-type) and root exudate carbon flux"
+  },
+  "env": {
+    "day.lengthSec": 260,
+    "day.latitude": 37,
+    "day.dayOfYear": 200,
+    "diel.tempBase": 24,
+    "diel.tempAmp": 4,
+    "diel.foodFloor": 0.45,
+    "diel.q10": 2.1,
+    "diel.waterNight.0": 4,
+    "diel.waterNight.1": 10,
+    "diel.waterNight.2": 8,
+    "diel.waterDay.0": 40,
+    "diel.waterDay.1": 58,
+    "diel.waterDay.2": 40,
+    "diel.lightGamma": 2.4,
+    "substrate.count": 78,
+    "substrate.sizeMin": 26,
+    "substrate.sizeMax": 160,
+    "substrate.lifeMin": 150,
+    "substrate.lifeMax": 340,
+    "substrate.driftMin": 5,
+    "substrate.driftMax": 12,
+    "substrate.minPerRes": 3,
+    "respirationBase": 0.75,
+    "cell.uptake": 12,
+    "cell.chemoRange0": 250,
+    "cell.chemoBias": 1.1,
+    "predator.count": 3,
+    "predator.wanderSpeed": 18,
+    "predator.chaseSpeed": 30,
+    "predator.senseRange": 120,
+    "predator.metabolism": 8,
+    "phage.greenCount": 14,
+    "phage.goldCount": 3,
+    "column.chemRate": 3.5
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Root Lipid Droplet",
+      "enzymeLabel": "Lipase",
+      "color": "#8a6a3a"
+    },
+    {
+      "index": 1,
+      "label": "Detritus Protein Clump",
+      "enzymeLabel": "Protease",
+      "color": "#a0522d"
+    },
+    {
+      "index": 2,
+      "label": "Root Exudate Sugar",
+      "enzymeLabel": "Glycosidase",
+      "color": "#c9a84a"
+    }
+  ],
+  "particles": {
+    "exudate": {
+      "label": "Cordgrass Root Exudate",
+      "mix": [
+        0.1,
+        0.2,
+        0.7
+      ],
+      "shape": "aggregate",
+      "weight": 6,
+      "squash": 1
+    },
+    "detritus": {
+      "label": "Buried Marsh Detritus",
+      "mix": [
+        0.2,
+        0.6,
+        0.2
+      ],
+      "shape": "shard",
+      "weight": 4,
+      "squash": 1
+    },
+    "sulfideFloc": {
+      "label": "Sulfide Mineral Floc",
+      "mix": [
+        0.05,
+        0.1,
+        0.05
+      ],
+      "shape": "ellipse",
+      "weight": 2,
+      "squash": 0.6
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase",
+      "color": "#8a6a3a",
+      "weight": 3
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#a0522d",
+      "weight": 5
+    },
+    "enzyme2": {
+      "label": "Glycosidase",
+      "color": "#c9a84a",
+      "weight": 6
+    },
+    "chemotaxis": {
+      "label": "Root-Zone Sensing",
+      "color": "#7fbf7f",
+      "weight": 5
+    },
+    "antibiotic": {
+      "label": "Sulfide Toxicity Burst",
+      "color": "#556b2f",
+      "weight": 3
+    },
+    "eps": {
+      "label": "Mucoid Burrow Lining",
+      "color": "#6b4423",
+      "weight": 4
+    },
+    "crispr": {
+      "label": "Phage Immunity",
+      "color": "#4682b4",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Root-Channel Gliding",
+      "color": "#deb887",
+      "weight": 4
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "sulfoRed1",
+        "label": "Desulfovibrio-type Sulfate Reducer",
+        "color": "#a0522d",
+        "genome": {
+          "enzLvl": [
+            1,
+            2,
+            3
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 1,
+          "eps": 2,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "sulfOx1",
+        "label": "Sulfide-Oxidizing Mat Bacterium",
+        "color": "#dcd0a0",
+        "genome": {
+          "enzLvl": [
+            1,
+            1,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 2,
+          "eps": 1,
+          "crispr": true,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      }
+    ]
+  },
+  "terrain": [
+    {
+      "at": "top",
+      "thickness": 140,
+      "color": "#3d5a2f",
+      "label": "Spartina Root Mat",
+      "roughness": 0.55,
+      "porosity": 0.45,
+      "poreSize": 28,
+      "featureSize": 220,
+      "spires": 0,
+      "spireHeight": 0,
+      "spireWidth": 40,
+      "warp": 0.6
+    },
+    {
+      "at": "bottom",
+      "thickness": 260,
+      "color": "#241505",
+      "label": "Anoxic Sulfidic Mud",
+      "roughness": 0.4,
+      "porosity": 0.5,
+      "poreSize": 22,
+      "featureSize": 180,
+      "spires": 0,
+      "spireHeight": 0,
+      "spireWidth": 30,
+      "warp": 0.35
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 26,
+        "salinity": 22,
+        "light": 0.6,
+        "nutrient": 0.5
+      },
+      {
+        "depth": 0.3,
+        "tempC": 25,
+        "salinity": 24,
+        "light": 0.25,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 0.6,
+        "tempC": 24,
+        "salinity": 26,
+        "light": 0.05,
+        "nutrient": 0.8
+      },
+      {
+        "depth": 1,
+        "tempC": 23,
+        "salinity": 28,
+        "light": 0,
+        "nutrient": 1
+      }
+    ],
+    "thermocline": {
+      "depth": 0.5,
+      "sharpness": 0.3
+    }
+  },
+  "version": 1,
+  "schema": "bacteria-scenario"
+}

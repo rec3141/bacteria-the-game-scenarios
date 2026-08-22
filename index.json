@@ -260,6 +260,14 @@
       "file": "scenarios/daily-2026-08-21.json"
     },
     {
+      "id": "daily-2026-08-22",
+      "title": "Salt Marsh Pannikin: Sulfate Reducers Under a Cordgrass Root Mat",
+      "date": "2026-08-22",
+      "difficulty": "normal",
+      "realWorldBasis": "Spartina alterniflora salt marsh, anoxic root-zone sediment, sulfate-reducing bacteria (Desulfovibrio-type) and root exudate carbon flux",
+      "file": "scenarios/daily-2026-08-22.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
