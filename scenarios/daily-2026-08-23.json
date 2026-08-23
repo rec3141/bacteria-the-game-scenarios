@@ -1,0 +1,262 @@
+{
+  "actions": {
+    "enzyme0": {
+      "label": "Alginate Lyase",
+      "color": "#3fa796",
+      "weight": 6
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#c96a4e",
+      "weight": 3
+    },
+    "enzyme2": {
+      "label": "Laminarinase",
+      "color": "#e0b64a",
+      "weight": 5
+    },
+    "chemotaxis": {
+      "label": "Chemotaxis",
+      "color": "#8fd3ff",
+      "weight": 4
+    },
+    "antibiotic": {
+      "label": "Bacteriocin",
+      "color": "#b060d0",
+      "weight": 2
+    },
+    "eps": {
+      "label": "Biofilm EPS",
+      "color": "#7fdd8a",
+      "weight": 5
+    },
+    "crispr": {
+      "label": "CRISPR",
+      "color": "#dddddd",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Twitching Pili",
+      "color": "#f2a65a",
+      "weight": 6
+    }
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 14,
+        "salinity": 31,
+        "light": 1,
+        "nutrient": 0.3
+      },
+      {
+        "depth": 5,
+        "tempC": 13,
+        "salinity": 31,
+        "light": 0.7,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 15,
+        "tempC": 11,
+        "salinity": 32,
+        "light": 0.25,
+        "nutrient": 0.9
+      },
+      {
+        "depth": 30,
+        "tempC": 10,
+        "salinity": 33,
+        "light": 0.05,
+        "nutrient": 1
+      }
+    ],
+    "thermocline": {
+      "depth": 10,
+      "sharpness": 0.5
+    }
+  },
+  "env": {
+    "day.lengthSec": 260,
+    "day.latitude": 36,
+    "day.dayOfYear": 100,
+    "diel.tempBase": 12,
+    "diel.tempAmp": 3,
+    "diel.foodFloor": 0.45,
+    "diel.q10": 2,
+    "diel.q10RefC": 12,
+    "substrate.count": 95,
+    "substrate.sizeMin": 40,
+    "substrate.sizeMax": 220,
+    "substrate.minPerRes": 4,
+    "substrate.lifeMin": 150,
+    "substrate.lifeMax": 320,
+    "substrate.driftMin": 6,
+    "substrate.driftMax": 14,
+    "cell.chemoRange0": 260,
+    "cell.chemoRangePer": 150,
+    "cell.chemoBias": 1.1,
+    "cell.twitchSpeedScale": 0.65,
+    "cell.uptake": 15,
+    "cell.startEnergy": 115,
+    "cell.divideThreshold": 180,
+    "eps.threatRange": 110,
+    "eps.cooldown.0": 10,
+    "eps.cooldown.1": 16,
+    "predator.count": 5,
+    "predator.senseRange": 150,
+    "predator.wanderSpeed": 20,
+    "predator.chaseSpeed": 36,
+    "predator.metabolism": 9,
+    "phage.greenCount": 16,
+    "phage.goldCount": 3,
+    "phage.hostTolerance": 2,
+    "phage.twitchAdsorbMult": 2.4,
+    "phage.twitchHostBonus": 1.2,
+    "diatom.photoRate": 9.5,
+    "diatom.exudateFrac": 0.28,
+    "diatom.exudateMote": 22,
+    "diatom.sinkSpeed": 1
+  },
+  "meta": {
+    "title": "Kelp Forest Wrack: Alginate Grazers of the Giant Kelp Holdfast",
+    "date": "2026-08-23",
+    "lesson": "When giant kelp (Macrocystis pyrifera) fronds break off in a storm and drift down to the forest floor, they don't just sit there rotting passively -- they become a substrate war. Kelp cell walls are built from alginate and laminarin, algal polysaccharides that most marine bacteria can't touch. A specialized guild of copiotrophic bacteria (Alteromonas, Zobellia, Saccharicrinis-type Bacteroidetes) carries the rare alginate lyases and laminarinases needed to crack these polymers, releasing sugars that feed a much larger community of opportunists riding along on the wrack. This level asks you to be one of those specialists: your founder needs real alginate-lyase and laminarinase activity (carbohydrate class dominant) to break into a fresh frond, while protease helps you scavenge the fouling animal and epiphyte debris tangled in the blades. Kelp wrack sinks through a shallow, cool, turbulent kelp-forest water column with a diatom epiphyte community fouling the blades near the surface and heavier detritus persisting longer in the dim water below. Twitching motility matters here because kelp wrack is a physical raft you can grip and ride while you dig into it, rather than a diffuse cloud, so twitching is boosted; but gripping a particle also means a phage can find you more easily on it, which is why twitching hosts are extra exposed to viral hunters in the kelp-fall guild.",
+    "citation": "Kelp-fall decomposition and specialist polysaccharide-degrading bacterial guilds, e.g. Alteromonas/Zobellia alginolytic succession studies (temperate Pacific kelp forests).",
+    "difficulty": "normal",
+    "realWorldBasis": "Giant kelp (Macrocystis pyrifera) forest, detrital wrack decomposition, temperate Pacific coast (e.g. central California kelp forest floor, ~15-30m depth)"
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "founder",
+        "label": "Zobellia-like Alginolytic",
+        "color": "#3fa796",
+        "genome": {
+          "enzLvl": [
+            1,
+            1,
+            4
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "scavenger",
+        "label": "Alteromonas Opportunist",
+        "color": "#c96a4e",
+        "genome": {
+          "enzLvl": [
+            1,
+            3,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 0,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "epiphyte",
+        "label": "Blade-Fouling Pennate Diatom",
+        "color": "#8fd3ff",
+        "form": "pennate",
+        "sizeUm": 40,
+        "chain": 3,
+        "count": 45
+      },
+      {
+        "id": "driftcentric",
+        "label": "Sinking Centric Diatom",
+        "color": "#d8e8b0",
+        "form": "centric",
+        "sizeUm": 60,
+        "chain": 1,
+        "count": 25
+      }
+    ]
+  },
+  "particles": {
+    "kelpFrond": {
+      "label": "Alginate Kelp Blade Fragment",
+      "mix": [
+        0.15,
+        0.15,
+        0.7
+      ],
+      "shape": "aggregate",
+      "weight": 8
+    },
+    "epifaunaDebris": {
+      "label": "Fouled Epifauna Debris",
+      "mix": [
+        0.2,
+        0.6,
+        0.2
+      ],
+      "shape": "shard",
+      "weight": 3
+    },
+    "holdfastChunk": {
+      "label": "Holdfast Tissue Chunk",
+      "mix": [
+        0.1,
+        0.2,
+        0.7
+      ],
+      "shape": "aggregate",
+      "squash": 0.7,
+      "weight": 4
+    }
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid Residue",
+      "enzymeLabel": "Lipase",
+      "color": "#e8c07d"
+    },
+    {
+      "index": 1,
+      "label": "Fouling Protein",
+      "enzymeLabel": "Protease",
+      "color": "#c96a4e"
+    },
+    {
+      "index": 2,
+      "label": "Kelp Polysaccharide (Alginate/Laminarin)",
+      "enzymeLabel": "Alginate Lyase / Laminarinase",
+      "color": "#3fa796"
+    }
+  ],
+  "schema": "bacteria-scenario",
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 120,
+      "color": "#5a4632",
+      "label": "Kelp Forest Floor Sediment",
+      "roughness": 0.5,
+      "porosity": 0.35,
+      "poreSize": 30,
+      "featureSize": 300,
+      "spires": 0.15,
+      "spireHeight": 180,
+      "spireWidth": 60,
+      "warp": 0.4
+    }
+  ],
+  "version": 1
+}

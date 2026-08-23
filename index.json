@@ -268,6 +268,14 @@
       "file": "scenarios/daily-2026-08-22.json"
     },
     {
+      "id": "daily-2026-08-23",
+      "title": "Kelp Forest Wrack: Alginate Grazers of the Giant Kelp Holdfast",
+      "date": "2026-08-23",
+      "difficulty": "normal",
+      "realWorldBasis": "Giant kelp (Macrocystis pyrifera) forest, detrital wrack decomposition, temperate Pacific coast (e.g. central California kelp forest floor, ~15-30m depth)",
+      "file": "scenarios/daily-2026-08-23.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
