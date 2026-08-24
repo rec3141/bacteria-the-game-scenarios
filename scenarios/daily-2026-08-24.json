@@ -1,0 +1,232 @@
+{
+  "meta": {
+    "title": "Twilight Zone Nitrogen Thieves: Anammox in the Cariaco Basin",
+    "date": "2026-08-24",
+    "lesson": "The Cariaco Basin off Venezuela is one of the ocean's largest permanently anoxic water bodies. Below its oxycline, anammox bacteria (Candidatus Scalindua) combine ammonium and nitrite directly into nitrogen gas, bypassing denitrification and removing fixed nitrogen from the sea. They cannot eat particles: they chemosynthesize, drawing energy from a narrow chemical band that overlaps the base of the dim photic zone. Too shallow and there is no nitrite/ammonium; too deep and the chemical plume itself thins out. This level asks you to find and hold that band, the same way real anammox cells are trapped in a knife-edge redoxcline, while diatom carcasses raining down from above feed opportunists that compete for the same depths.",
+    "citation": "Ward et al. 2009, Nature - anammox and denitrification in the Arabian Sea/Cariaco Basin; Thamdrup & Dalsgaard 2002.",
+    "difficulty": "hard",
+    "realWorldBasis": "Cariaco Basin, Venezuela - permanently anoxic silled basin with anammox-dominated nitrogen loss at the oxic/anoxic interface, ~250-300m"
+  },
+  "env": {
+    "day.lengthSec": 280,
+    "day.latitude": 10,
+    "day.dayOfYear": 172,
+    "diel.tempBase": 17,
+    "diel.tempAmp": 2,
+    "diel.foodFloor": 0.5,
+    "diel.q10": 2.2,
+    "diel.waterNight.0": 1,
+    "diel.waterNight.1": 4,
+    "diel.waterNight.2": 10,
+    "diel.waterDay.0": 10,
+    "diel.waterDay.1": 38,
+    "diel.waterDay.2": 40,
+    "diel.lightGamma": 2.4,
+    "substrate.count": 80,
+    "substrate.sizeMin": 26,
+    "substrate.sizeMax": 150,
+    "substrate.lifeMin": 90,
+    "substrate.lifeMax": 220,
+    "substrate.driftMin": 5,
+    "substrate.driftMax": 12,
+    "substrate.minPerRes": 3,
+    "respirationBase": 0.6,
+    "cell.uptake": 10,
+    "cell.startEnergy": 95,
+    "cell.divideThreshold": 190,
+    "cell.cystBelow": 22,
+    "cell.cystWake": 55,
+    "cell.chemoRange0": 380,
+    "cell.chemoRangePer": 180,
+    "cell.chemoBias": 1.3,
+    "column.chemRate": 6.5,
+    "column.photoRate": 5,
+    "predator.count": 3,
+    "predator.senseRange": 140,
+    "predator.wanderSpeed": 18,
+    "predator.chaseSpeed": 30,
+    "predator.metabolism": 8,
+    "phage.greenCount": 10,
+    "phage.goldCount": 3,
+    "phage.goldMinDist": 700
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Sinking Diatom Lipid",
+      "enzymeLabel": "Lipase",
+      "color": "#8a6d3b"
+    },
+    {
+      "index": 1,
+      "label": "Detrital Protein Floc",
+      "enzymeLabel": "Protease",
+      "color": "#5b7a8c"
+    },
+    {
+      "index": 2,
+      "label": "Marine Snow Carbohydrate",
+      "enzymeLabel": "Glycosidase",
+      "color": "#3f5d4a"
+    }
+  ],
+  "particles": {
+    "snowFloc": {
+      "label": "Sinking Marine Snow",
+      "mix": [
+        0.4,
+        0.35,
+        0.25
+      ],
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 6
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase",
+      "color": "#c9a24a",
+      "weight": 3
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#6fa8c9",
+      "weight": 3
+    },
+    "enzyme2": {
+      "label": "Glycosidase",
+      "color": "#5a9b6b",
+      "weight": 4
+    },
+    "chemotaxis": {
+      "label": "Redoxcline Seeking",
+      "color": "#b06fd1",
+      "weight": 8
+    },
+    "antibiotic": {
+      "label": "Antibiotic",
+      "color": "#d1495b",
+      "weight": 2
+    },
+    "eps": {
+      "label": "EPS Sheath",
+      "color": "#9aa5ad",
+      "weight": 3
+    },
+    "crispr": {
+      "label": "CRISPR",
+      "color": "#e0c341",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Twitching",
+      "color": "#c76b3f",
+      "weight": 1
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "scalindua",
+        "label": "Candidatus Scalindua",
+        "color": "#b06fd1",
+        "genome": {
+          "enzLvl": [
+            0,
+            0,
+            1
+          ],
+          "chemoLevel": 3,
+          "antibiotic": 0,
+          "eps": 2,
+          "crispr": false,
+          "twitching": false,
+          "chemolithotroph": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "opportunist",
+        "label": "Heterotrophic Opportunist",
+        "color": "#7a9e7e",
+        "genome": {
+          "enzLvl": [
+            2,
+            2,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "dead_diatom_rain",
+        "label": "Senescent Diatom Rain",
+        "color": "#96896a",
+        "form": "centric",
+        "sizeUm": 40,
+        "chain": 3,
+        "count": 60,
+        "toxin": null
+      }
+    ]
+  },
+  "column": {
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 26,
+        "salinity": 36,
+        "light": 1,
+        "nutrient": 0.2
+      },
+      {
+        "depth": 0.3,
+        "tempC": 22,
+        "salinity": 36,
+        "light": 0.4,
+        "nutrient": 0.3
+      },
+      {
+        "depth": 0.55,
+        "tempC": 17,
+        "salinity": 36.2,
+        "light": 0.05,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 0.75,
+        "tempC": 15,
+        "salinity": 36.4,
+        "light": 0,
+        "nutrient": 0.9
+      },
+      {
+        "depth": 1,
+        "tempC": 13,
+        "salinity": 36.5,
+        "light": 0,
+        "nutrient": 0.5
+      }
+    ],
+    "thermocline": {
+      "depth": 0.55,
+      "sharpness": 0.75
+    },
+    "chemical": {
+      "peakDepth": 0.6,
+      "spread": 0.12,
+      "strength": 0.9,
+      "color": "#7d5aa3"
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}
