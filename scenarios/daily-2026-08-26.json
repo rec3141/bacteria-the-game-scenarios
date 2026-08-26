@@ -1,0 +1,251 @@
+{
+  "meta": {
+    "title": "Fjord Anoxia: Beggiatoa Mats of the Norwegian Sill Basin",
+    "date": "2026-08-26",
+    "lesson": "In silled fjords like those of western Norway, dense saltwater trapped behind a shallow sill barely exchanges with the open sea. Below the sill depth, oxygen is consumed faster than it can be resupplied, and the bottom water and sediment go anoxic and sulfidic. Thick white mats of the giant sulfur-oxidizing bacterium Beggiatoa carpet the mud, vacuoles full of nitrate letting them 'breathe' internally and migrate to whichever depth in the sediment offers the best sulfide-versus-oxidant balance. Meanwhile organic falls from the productive surface (dead phytoplankton, fish farm waste) rain down, feed heterotrophs, and get respired using up the last traces of oxygen, deepening the anoxia. This level asks you to survive as a chemolithotroph pinned to a narrow sulfide band above the sediment, competing with heterotrophic bacteria scavenging the falling organic snow, while grazers above are starved and sluggish in the cold, low-oxygen water.",
+    "citation": "Based on studies of Norwegian silled fjord basins (e.g. Framvaren, Nordasvatnet) and Beggiatoa mat ecology at sulfidic sediment-water interfaces.",
+    "difficulty": "hard",
+    "realWorldBasis": "Norwegian silled fjord anoxic basin, Beggiatoa sulfur-oxidizing mats"
+  },
+  "env": {
+    "day.lengthSec": 300,
+    "day.latitude": 61,
+    "day.dayOfYear": 300,
+    "diel.tempBase": 7,
+    "diel.tempAmp": 1.5,
+    "diel.foodFloor": 0.5,
+    "diel.q10": 2.2,
+    "diel.q10RefC": 8,
+    "diel.waterNight.0": 1,
+    "diel.waterNight.1": 4,
+    "diel.waterNight.2": 8,
+    "diel.waterDay.0": 10,
+    "diel.waterDay.1": 30,
+    "diel.waterDay.2": 34,
+    "diel.lightGamma": 2.4,
+    "substrate.count": 85,
+    "substrate.sizeMin": 34,
+    "substrate.sizeMax": 170,
+    "substrate.lifeMin": 100,
+    "substrate.lifeMax": 220,
+    "substrate.driftMin": 4,
+    "substrate.driftMax": 10,
+    "substrate.minPerRes": 3,
+    "respirationBase": 0.75,
+    "cell.startEnergy": 100,
+    "cell.divideThreshold": 165,
+    "cell.cystBelow": 20,
+    "cell.cystWake": 50,
+    "column.chemRate": 6.5,
+    "column.photoRate": 3,
+    "predator.count": 3,
+    "predator.wanderSpeed": 16,
+    "predator.chaseSpeed": 26,
+    "predator.senseRange": 120,
+    "predator.metabolism": 7,
+    "predator.mealEnergy": 50,
+    "predator.minCount": 1,
+    "phage.greenCount": 10,
+    "phage.goldCount": 3,
+    "phage.goldMinDist": 500
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Sinking Lipid Detritus",
+      "enzymeLabel": "Lipase",
+      "color": "#8a6d3b"
+    },
+    {
+      "index": 1,
+      "label": "Dead Plankton Protein",
+      "enzymeLabel": "Protease",
+      "color": "#c9a86a"
+    },
+    {
+      "index": 2,
+      "label": "Fish-Farm Waste Flocs",
+      "enzymeLabel": "Glycanase",
+      "color": "#a9895f"
+    }
+  ],
+  "particles": {
+    "organicFall": {
+      "label": "Organic Snow",
+      "mix": [
+        3,
+        4,
+        3
+      ],
+      "shape": "aggregate",
+      "weight": 6
+    },
+    "farmWaste": {
+      "label": "Aquaculture Floc",
+      "mix": [
+        2,
+        5,
+        3
+      ],
+      "shape": "shard",
+      "weight": 4
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase",
+      "color": "#c79a4b",
+      "weight": 5
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#d8b47a",
+      "weight": 6
+    },
+    "enzyme2": {
+      "label": "Glycanase",
+      "color": "#b98d55",
+      "weight": 5
+    },
+    "chemotaxis": {
+      "label": "Sulfide Seeking",
+      "color": "#e0e0a0",
+      "weight": 8
+    },
+    "antibiotic": {
+      "label": "Sulfur-Bacteriocin",
+      "color": "#f5f0c0",
+      "weight": 3
+    },
+    "eps": {
+      "label": "Mat Slime",
+      "color": "#eaeada",
+      "weight": 6
+    },
+    "crispr": {
+      "label": "Phage Resistance",
+      "color": "#889977",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Gliding Motility",
+      "color": "#c8c8a0",
+      "weight": 4
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "beggiatoa",
+        "label": "Beggiatoa sp. (sulfur mat)",
+        "color": "#f2f0e0",
+        "genome": {
+          "enzLvl": [
+            0,
+            0,
+            1
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 2,
+          "crispr": false,
+          "twitching": true,
+          "chemolithotroph": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "vibrio_scavenger",
+        "label": "Heterotrophic Scavenger (Vibrio-like)",
+        "color": "#7a8fae",
+        "genome": {
+          "enzLvl": [
+            2,
+            3,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 4
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "sinking_diatom",
+        "label": "Senescent Skeletonema",
+        "color": "#b9d3c0",
+        "form": "centric",
+        "sizeUm": 18,
+        "chain": 5,
+        "count": 40,
+        "toxin": null
+      }
+    ]
+  },
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 260,
+      "color": "#4a3f30",
+      "label": "Anoxic Sulfidic Mud",
+      "roughness": 0.4,
+      "porosity": 0.45,
+      "poreSize": 40,
+      "featureSize": 300,
+      "spires": 0,
+      "spireHeight": 0,
+      "spireWidth": 10,
+      "warp": 0.1
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 9,
+        "salinity": 28,
+        "light": 1,
+        "nutrient": 0.3
+      },
+      {
+        "depth": 0.3,
+        "tempC": 8,
+        "salinity": 31,
+        "light": 0.4,
+        "nutrient": 0.4
+      },
+      {
+        "depth": 0.55,
+        "tempC": 7,
+        "salinity": 33,
+        "light": 0.05,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 0.75,
+        "tempC": 6.5,
+        "salinity": 34,
+        "light": 0,
+        "nutrient": 0.8
+      },
+      {
+        "depth": 1,
+        "tempC": 6,
+        "salinity": 35,
+        "light": 0,
+        "nutrient": 1
+      }
+    ],
+    "thermocline": {
+      "depth": 0.3,
+      "sharpness": 0.6
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}

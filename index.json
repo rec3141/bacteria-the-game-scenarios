@@ -292,6 +292,14 @@
       "file": "scenarios/daily-2026-08-25.json"
     },
     {
+      "id": "daily-2026-08-26",
+      "title": "Fjord Anoxia: Beggiatoa Mats of the Norwegian Sill Basin",
+      "date": "2026-08-26",
+      "difficulty": "hard",
+      "realWorldBasis": "Norwegian silled fjord anoxic basin, Beggiatoa sulfur-oxidizing mats",
+      "file": "scenarios/daily-2026-08-26.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
