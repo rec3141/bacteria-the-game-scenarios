@@ -300,6 +300,14 @@
       "file": "scenarios/daily-2026-08-26.json"
     },
     {
+      "id": "daily-2026-08-27",
+      "title": "Iron Curtain: Zetaproteobacteria of the Loihi Seamount",
+      "date": "2026-08-27",
+      "difficulty": "hard",
+      "realWorldBasis": "Loihi Seamount diffuse hydrothermal iron-oxidizing microbial mats, Hawai'i, ~1000m depth",
+      "file": "scenarios/daily-2026-08-27.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",

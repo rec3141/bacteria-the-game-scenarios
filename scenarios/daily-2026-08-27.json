@@ -1,0 +1,238 @@
+{
+  "meta": {
+    "title": "Iron Curtain: Zetaproteobacteria of the Loihi Seamount",
+    "date": "2026-08-27",
+    "lesson": "At Loihi Seamount off Hawai'i, diffuse hydrothermal flow brings up water rich in dissolved ferrous iron (Fe2+). Where this iron-laden fluid meets seawater, chemolithotrophic Zetaproteobacteria (like Mariprofundus) oxidize the iron for energy, and the waste product - insoluble iron oxyhydroxide - precipitates into distinctive twisted stalks that build up as rust-orange mats and 'iron snow' over the vent rock. These microbes cannot photosynthesize or digest particles; they live entirely on the chemical energy in the iron plume, so they must stay within the narrow band where reduced iron is still present but not yet oxidized away. Any drifting organic snow that settles nearby is scavenged by heterotrophic opportunists, while grazing protists are scarce this deep. The lesson: chemosynthetic life is bound to a chemical gradient exactly as photosynthetic life is bound to light, and the physical structure it builds (the stalk mat) is itself geology in the making.",
+    "citation": "Emerson & Moyer 2002; Emerson et al. 2007, ISME J - Loihi Seamount Fe-oxidizing microbial mats",
+    "difficulty": "hard",
+    "realWorldBasis": "Loihi Seamount diffuse hydrothermal iron-oxidizing microbial mats, Hawai'i, ~1000m depth"
+  },
+  "env": {
+    "day.latitude": 19,
+    "day.dayOfYear": 172,
+    "diel.tempBase": 12,
+    "diel.tempAmp": 1.5,
+    "diel.foodFloor": 0.5,
+    "diel.q10": 2.2,
+    "diel.q10RefC": 12,
+    "diel.waterNight.0": 4,
+    "diel.waterNight.1": 6,
+    "diel.waterNight.2": 10,
+    "diel.waterDay.0": 40,
+    "diel.waterDay.1": 30,
+    "diel.waterDay.2": 22,
+    "substrate.count": 55,
+    "substrate.sizeMin": 26,
+    "substrate.sizeMax": 150,
+    "substrate.lifeMin": 160,
+    "substrate.lifeMax": 340,
+    "substrate.driftMin": 4,
+    "substrate.driftMax": 10,
+    "column.chemRate": 6.5,
+    "respirationBase": 0.75,
+    "predator.count": 2,
+    "predator.senseRange": 120,
+    "predator.metabolism": 8,
+    "predator.wanderSpeed": 15,
+    "predator.chaseSpeed": 28,
+    "phage.greenCount": 10,
+    "phage.goldCount": 3,
+    "phage.goldMinDist": 500,
+    "cell.chemoRange0": 380,
+    "cell.chemoRangePer": 180,
+    "cell.chemoBias": 1.1,
+    "cell.cystBelow": 20,
+    "cell.cystMetab": 0.02
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Waxy Vent Detritus",
+      "enzymeLabel": "Lipase (waxy detritus)",
+      "color": "#8a6b3f"
+    },
+    {
+      "index": 1,
+      "label": "Microbial Mat Fragments",
+      "enzymeLabel": "Protease (mat fragments)",
+      "color": "#b5563a"
+    },
+    {
+      "index": 2,
+      "label": "Organic Iron Snow",
+      "enzymeLabel": "Carbohydrase (iron snow floc)",
+      "color": "#c98a4a"
+    }
+  ],
+  "particles": {
+    "matFloc": {
+      "label": "Iron-Oxide Floc",
+      "mix": [
+        1,
+        2,
+        7
+      ],
+      "shape": "aggregate",
+      "weight": 6,
+      "squash": 1
+    },
+    "vestige": {
+      "label": "Detrital Wax Clump",
+      "mix": [
+        6,
+        1,
+        1
+      ],
+      "shape": "ellipse",
+      "squash": 0.7,
+      "weight": 2
+    },
+    "shard": {
+      "label": "Mat Fragment Shard",
+      "mix": [
+        1,
+        6,
+        1
+      ],
+      "shape": "shard",
+      "weight": 2
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase",
+      "color": "#8a6b3f",
+      "weight": 2
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#b5563a",
+      "weight": 3
+    },
+    "enzyme2": {
+      "label": "Carbohydrase",
+      "color": "#c98a4a",
+      "weight": 5
+    },
+    "chemotaxis": {
+      "label": "Iron Plume Tracking",
+      "color": "#e08a2e",
+      "weight": 8
+    },
+    "antibiotic": {
+      "label": "Antibiotic",
+      "color": "#7fdca0",
+      "weight": 2
+    },
+    "eps": {
+      "label": "Stalk Sheath (EPS)",
+      "color": "#d9863a",
+      "weight": 6
+    },
+    "crispr": {
+      "label": "CRISPR",
+      "color": "#4fa8d8",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Twitching",
+      "color": "#c2c2c2",
+      "weight": 1
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "mariprofundus",
+        "label": "Mariprofundus ferrooxydans",
+        "color": "#d9863a",
+        "genome": {
+          "enzLvl": [
+            0,
+            0,
+            1
+          ],
+          "chemoLevel": 3,
+          "antibiotic": 0,
+          "eps": 3,
+          "crispr": false,
+          "twitching": false,
+          "chemolithotroph": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "heterotroph_scavenger",
+        "label": "Opportunist Scavenger",
+        "color": "#b5563a",
+        "genome": {
+          "enzLvl": [
+            1,
+            2,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      }
+    ]
+  },
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 260,
+      "color": "#5b3a24",
+      "label": "Basalt Vent Rock with Iron-Stalk Mat",
+      "roughness": 0.75,
+      "porosity": 0.35,
+      "poreSize": 40,
+      "featureSize": 260,
+      "spires": 0.4,
+      "spireHeight": 320,
+      "spireWidth": 70,
+      "warp": 0.6
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 8,
+        "salinity": 34.6,
+        "light": 0,
+        "nutrient": 0.3
+      },
+      {
+        "depth": 0.5,
+        "tempC": 10,
+        "salinity": 34.7,
+        "light": 0,
+        "nutrient": 0.45
+      },
+      {
+        "depth": 1,
+        "tempC": 14,
+        "salinity": 34.8,
+        "light": 0,
+        "nutrient": 0.8
+      }
+    ],
+    "thermocline": {
+      "depth": 0.85,
+      "sharpness": 0.6
+    },
+    "chemical": {
+      "peakDepth": 0.92,
+      "spread": 0.16,
+      "strength": 0.95,
+      "color": "#e08a2e"
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}
