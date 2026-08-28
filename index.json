@@ -308,6 +308,14 @@
       "file": "scenarios/daily-2026-08-27.json"
     },
     {
+      "id": "daily-2026-08-28",
+      "title": "Ice Edge Diatom Bloom: Bering Sea Spring Retreat",
+      "date": "2026-08-28",
+      "difficulty": "normal",
+      "realWorldBasis": "Bering Sea ice-edge phytoplankton bloom and associated bacterial succession",
+      "file": "scenarios/daily-2026-08-28.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",

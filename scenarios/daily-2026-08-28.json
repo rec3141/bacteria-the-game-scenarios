@@ -1,0 +1,261 @@
+{
+  "meta": {
+    "title": "Ice Edge Diatom Bloom: Bering Sea Spring Retreat",
+    "date": "2026-08-28",
+    "lesson": "As Bering Sea pack ice retreats each spring, meltwater stabilizes a thin, brightly lit surface layer over deep, nutrient-rich water. Diatoms bloom explosively where light and nutrients briefly coexist, and their die-off feeds a wave of copiotrophic bacteria (like Pseudoalteromonas) that digest the polysaccharide-rich exudate and dead frustules. This scenario shows carbohydrate-dominated food (diatom exudate and cell walls) driving a bacterial succession right at the ice edge, while the bloom itself sinks, dies, and refuels the water column from above.",
+    "citation": "Based on Bering Sea shelf ice-edge bloom dynamics (e.g. BEST/BSIERP program observations).",
+    "difficulty": "normal",
+    "realWorldBasis": "Bering Sea ice-edge phytoplankton bloom and associated bacterial succession"
+  },
+  "env": {
+    "day.latitude": 60,
+    "day.dayOfYear": 110,
+    "day.lengthSec": 260,
+    "diel.tempBase": 1,
+    "diel.tempAmp": 1.5,
+    "diel.foodFloor": 0.3,
+    "diel.q10": 2.2,
+    "diel.q10RefC": 5,
+    "diel.waterNight.0": 3,
+    "diel.waterNight.1": 12,
+    "diel.waterNight.2": 20,
+    "diel.waterDay.0": 40,
+    "diel.waterDay.1": 110,
+    "diel.waterDay.2": 100,
+    "diel.lightGamma": 1.6,
+    "substrate.count": 95,
+    "substrate.sizeMin": 26,
+    "substrate.sizeMax": 170,
+    "substrate.lifeMin": 90,
+    "substrate.lifeMax": 220,
+    "substrate.driftMin": 6,
+    "substrate.driftMax": 14,
+    "substrate.minPerRes": 3,
+    "cell.uptake": 12,
+    "cell.startEnergy": 100,
+    "cell.divideThreshold": 165,
+    "respirationBase": 0.75,
+    "predator.count": 3,
+    "predator.wanderSpeed": 18,
+    "predator.chaseSpeed": 32,
+    "predator.senseRange": 150,
+    "diatom.photoRate": 10,
+    "diatom.metabolism": 1.4,
+    "diatom.sinkSpeed": 0.9,
+    "diatom.exudateFrac": 0.3,
+    "diatom.exudateMote": 20,
+    "diatom.killMotes": 14,
+    "diatom.immigrateEvery": 10,
+    "phage.greenCount": 14,
+    "phage.goldCount": 3
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid Droplet",
+      "enzymeLabel": "Lipase",
+      "color": "#d9a441"
+    },
+    {
+      "index": 1,
+      "label": "Protein Aggregate",
+      "enzymeLabel": "Protease",
+      "color": "#c15a5a"
+    },
+    {
+      "index": 2,
+      "label": "Diatom Exudate / Frustule Debris",
+      "enzymeLabel": "Glycosidase",
+      "color": "#7fd4c9"
+    }
+  ],
+  "particles": {
+    "exudateFloc": {
+      "label": "Diatom Exudate Floc",
+      "mix": [
+        0.1,
+        0.15,
+        0.75
+      ],
+      "shape": "aggregate",
+      "weight": 8
+    },
+    "frustuleDebris": {
+      "label": "Frustule Debris",
+      "mix": [
+        0.05,
+        0.1,
+        0.85
+      ],
+      "shape": "shard",
+      "weight": 6
+    },
+    "krillCastoff": {
+      "label": "Krill Molt Fragment",
+      "mix": [
+        0.2,
+        0.6,
+        0.2
+      ],
+      "shape": "shard",
+      "weight": 3
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase",
+      "color": "#d9a441",
+      "weight": 3
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#c15a5a",
+      "weight": 4
+    },
+    "enzyme2": {
+      "label": "Glycosidase",
+      "color": "#7fd4c9",
+      "weight": 8
+    },
+    "chemotaxis": {
+      "label": "Chemotaxis",
+      "color": "#88ccee",
+      "weight": 5
+    },
+    "antibiotic": {
+      "label": "Antibiotic",
+      "color": "#e05555",
+      "weight": 3
+    },
+    "eps": {
+      "label": "EPS Slime",
+      "color": "#bbeeaa",
+      "weight": 4
+    },
+    "crispr": {
+      "label": "CRISPR",
+      "color": "#f0f0a0",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Twitching Motility",
+      "color": "#dda0dd",
+      "weight": 3
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "founder",
+        "label": "Pseudoalteromonas sp.",
+        "color": "#7fd4c9",
+        "genome": {
+          "enzLvl": [
+            1,
+            1,
+            3
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 0,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "competitor",
+        "label": "SAR92 Clade Generalist",
+        "color": "#a0a0d0",
+        "genome": {
+          "enzLvl": [
+            1,
+            2,
+            1
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 0,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "thalassiosira",
+        "label": "Thalassiosira sp.",
+        "color": "#c9e8e0",
+        "form": "centric",
+        "sizeUm": 35,
+        "chain": 4,
+        "count": 90
+      },
+      {
+        "id": "fragilariopsis",
+        "label": "Fragilariopsis cylindrus",
+        "color": "#e0f0ee",
+        "form": "pennate",
+        "sizeUm": 25,
+        "chain": 8,
+        "count": 60
+      }
+    ]
+  },
+  "terrain": [
+    {
+      "at": "top",
+      "thickness": 140,
+      "color": "#e8f4f8",
+      "label": "Retreating Pack Ice",
+      "roughness": 0.5,
+      "porosity": 0.35,
+      "poreSize": 40,
+      "featureSize": 300,
+      "spires": 0.2,
+      "spireHeight": 200,
+      "spireWidth": 80,
+      "warp": 0.1
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 0.5,
+        "salinity": 28,
+        "light": 0.9,
+        "nutrient": 0.4
+      },
+      {
+        "depth": 15,
+        "tempC": 1,
+        "salinity": 30,
+        "light": 0.6,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 40,
+        "tempC": 1.5,
+        "salinity": 32,
+        "light": 0.2,
+        "nutrient": 0.85
+      },
+      {
+        "depth": 80,
+        "tempC": 2,
+        "salinity": 33,
+        "light": 0.05,
+        "nutrient": 1
+      }
+    ],
+    "thermocline": {
+      "depth": 20,
+      "sharpness": 0.5
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}
