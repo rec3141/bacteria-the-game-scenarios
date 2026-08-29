@@ -1,0 +1,201 @@
+{
+  "meta": {
+    "title": "Phaeocystis in the Wadden Sea: Foam Blooms and the Colony Wall",
+    "date": "2026-08-29",
+    "lesson": "In the shallow North Sea Wadden Sea, spring blooms of the colonial haptophyte Phaeocystis globosa build gelatinous mucus colonies that most grazers and bacteria cannot penetrate. Free-living single cells are easy prey, but as they aggregate into colonies bounded by a polysaccharide skin, they become a nutrient trap: bacteria must digest the colony's carbohydrate wall (not the cells inside) to reach the food, and grazers largely bounce off. When the bloom collapses, the colony matrix breaks apart and dumps its carbohydrate load into the water, driving the infamous North Sea foam events and a rapid pulse-feeding of copiotrophic bacteria. This level teaches carbohydrate-dominant substrate targeting, EPS as both a bacterial defense and an ecological parallel to the colony matrix, and how a bloom's death, not its life, is what feeds the community.",
+    "citation": "Rousseau et al. 2007, Biogeochemistry; Peperzak & Poelman 2008, J. Sea Res. — Phaeocystis globosa colony ecology, North Sea",
+    "difficulty": "normal",
+    "realWorldBasis": "Phaeocystis globosa spring blooms and mucilage colony collapse, Dutch Wadden Sea / southern North Sea"
+  },
+  "env": {
+    "day.lengthSec": 260,
+    "day.latitude": 53,
+    "day.dayOfYear": 110,
+    "diel.tempBase": 9,
+    "diel.tempAmp": 3,
+    "diel.foodFloor": 0.3,
+    "diel.q10": 2.2,
+    "diel.waterDay.0": 40,
+    "diel.waterDay.1": 92,
+    "diel.waterDay.2": 78,
+    "diel.waterNight.0": 4,
+    "diel.waterNight.1": 14,
+    "diel.waterNight.2": 18,
+    "substrate.count": 82,
+    "substrate.sizeMin": 40,
+    "substrate.sizeMax": 220,
+    "substrate.sizeExp": 1.3,
+    "substrate.minPerRes": 3,
+    "substrate.lifeMin": 90,
+    "substrate.lifeMax": 260,
+    "substrate.driftMin": 6,
+    "substrate.driftMax": 14,
+    "substrate.carveRate": 3.6,
+    "enzyme.maxRadius": 20,
+    "enzyme.life": 6,
+    "eps.radius": 30,
+    "eps.lifePerLevel": 5,
+    "eps.cost": 3.5,
+    "eps.threatRange": 110,
+    "predator.count": 5,
+    "predator.senseRange": 140,
+    "predator.wanderSpeed": 20,
+    "predator.chaseSpeed": 34,
+    "predator.metabolism": 8,
+    "predator.mealEnergy": 50,
+    "cell.startEnergy": 100,
+    "cell.divideThreshold": 165,
+    "cell.uptake": 12,
+    "cell.chemoRange0": 260,
+    "cell.chemoBias": 1.1,
+    "respirationBase": 0.85
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid droplets (senescent cells)",
+      "enzymeLabel": "Lipase",
+      "color": "#d9a441"
+    },
+    {
+      "index": 1,
+      "label": "Colony protein matrix",
+      "enzymeLabel": "Protease",
+      "color": "#b5566b"
+    },
+    {
+      "index": 2,
+      "label": "Mucilage carbohydrate wall",
+      "enzymeLabel": "Colony-wall glycanase",
+      "color": "#5fae7a"
+    }
+  ],
+  "particles": {
+    "colony": {
+      "label": "Phaeocystis mucilage colony",
+      "mix": [
+        1,
+        1,
+        6
+      ],
+      "shape": "aggregate",
+      "weight": 6
+    },
+    "freeCell": {
+      "label": "Free-living Phaeocystis cell",
+      "mix": [
+        2,
+        2,
+        1
+      ],
+      "shape": "ellipse",
+      "squash": 0.8,
+      "weight": 3
+    },
+    "detritus": {
+      "label": "Bloom collapse detritus",
+      "mix": [
+        2,
+        3,
+        3
+      ],
+      "shape": "shard",
+      "weight": 2
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase",
+      "color": "#d9a441",
+      "weight": 3
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#b5566b",
+      "weight": 4
+    },
+    "enzyme2": {
+      "label": "Colony-wall glycanase",
+      "color": "#5fae7a",
+      "weight": 9
+    },
+    "chemotaxis": {
+      "label": "Chemotaxis",
+      "color": "#7fd0e0",
+      "weight": 5
+    },
+    "antibiotic": {
+      "label": "Antibiotic",
+      "color": "#c94f4f",
+      "weight": 2
+    },
+    "eps": {
+      "label": "Mucoid capsule",
+      "color": "#8fce9a",
+      "weight": 6
+    },
+    "crispr": {
+      "label": "CRISPR immunity",
+      "color": "#9a7fce",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Twitching motility",
+      "color": "#e0c05a",
+      "weight": 2
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "founder",
+        "label": "Copiotroph colony-borer",
+        "color": "#5fae7a",
+        "genome": {
+          "enzLvl": [
+            1,
+            1,
+            3
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "opportunist",
+        "label": "Free-cell scavenger",
+        "color": "#b5566b",
+        "genome": {
+          "enzLvl": [
+            2,
+            3,
+            1
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 1,
+          "eps": 0,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "chaeto",
+        "label": "Chaetoceros (co-bloom diatom)",
+        "color": "#c9a34e",
+        "form": "centric",
+        "sizeUm": 22,
+        "chain": 6,
+        "count": 40
+      }
+    ]
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}

@@ -316,6 +316,14 @@
       "file": "scenarios/daily-2026-08-28.json"
     },
     {
+      "id": "daily-2026-08-29",
+      "title": "Phaeocystis in the Wadden Sea: Foam Blooms and the Colony Wall",
+      "date": "2026-08-29",
+      "difficulty": "normal",
+      "realWorldBasis": "Phaeocystis globosa spring blooms and mucilage colony collapse, Dutch Wadden Sea / southern North Sea",
+      "file": "scenarios/daily-2026-08-29.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
