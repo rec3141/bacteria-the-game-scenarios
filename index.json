@@ -324,6 +324,14 @@
       "file": "scenarios/daily-2026-08-29.json"
     },
     {
+      "id": "daily-2026-08-30",
+      "title": "Domoic Shadow: Pseudo-nitzschia Bloom Crash off Monterey",
+      "date": "2026-08-30",
+      "difficulty": "hard",
+      "realWorldBasis": "Pseudo-nitzschia domoic acid blooms, central California coastal upwelling (Monterey Bay)",
+      "file": "scenarios/daily-2026-08-30.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",

@@ -1,0 +1,246 @@
+{
+  "meta": {
+    "title": "Domoic Shadow: Pseudo-nitzschia Bloom Crash off Monterey",
+    "date": "2026-08-30",
+    "lesson": "Pseudo-nitzschia diatoms bloom explosively when upwelled nitrate reaches the sunlit shelf, but the toxin they carry (domoic acid) does nothing while the cells are alive. The danger appears only when the bloom dies and lyses, releasing the toxin into the water where it poisons grazers - not bacteria. Meanwhile bacterioplankton race to consume the diatoms' leaking exudate and, later, the bloom's collapse debris, in a tight coupling between phytoplankton carbon and the microbial loop.",
+    "citation": "Trainer et al. 2012 Harmful Algae; Bargu et al. 2012 domoic acid trophic transfer",
+    "difficulty": "hard",
+    "realWorldBasis": "Pseudo-nitzschia domoic acid blooms, central California coastal upwelling (Monterey Bay)"
+  },
+  "env": {
+    "day.latitude": 36,
+    "day.dayOfYear": 130,
+    "day.lengthSec": 260,
+    "diel.tempBase": 13,
+    "diel.tempAmp": 2.5,
+    "diel.foodFloor": 0.4,
+    "diel.q10": 2,
+    "diel.q10RefC": 13,
+    "diel.waterDay.0": 20,
+    "diel.waterDay.1": 95,
+    "diel.waterDay.2": 80,
+    "diel.waterNight.0": 3,
+    "diel.waterNight.1": 14,
+    "diel.waterNight.2": 20,
+    "substrate.count": 85,
+    "substrate.sizeMin": 26,
+    "substrate.sizeMax": 150,
+    "substrate.lifeMin": 90,
+    "substrate.lifeMax": 220,
+    "substrate.driftMin": 8,
+    "substrate.driftMax": 18,
+    "cell.startEnergy": 100,
+    "cell.divideThreshold": 170,
+    "cell.chemoRange0": 340,
+    "cell.chemoBias": 1.1,
+    "respirationBase": 0.95,
+    "predator.count": 6,
+    "predator.senseRange": 190,
+    "predator.metabolism": 11,
+    "predator.mealEnergy": 55,
+    "predator.reproEnergy": 300,
+    "predator.resistStep": 0.1,
+    "diatom.photoRate": 10,
+    "diatom.metabolism": 1.4,
+    "diatom.divideEnergy": 180,
+    "diatom.exudateFrac": 0.28,
+    "diatom.exudateMote": 22,
+    "diatom.grazeToxinDose": 1.1,
+    "diatom.grazeChance": 0.5,
+    "diatom.killMotes": 12,
+    "diatom.immigrateEvery": 10,
+    "column.chemRate": 3
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Diatom Lipid Droplets",
+      "enzymeLabel": "Lipase",
+      "color": "#c9b458"
+    },
+    {
+      "index": 1,
+      "label": "Diatom Protein Debris",
+      "enzymeLabel": "Protease",
+      "color": "#a85c4e"
+    },
+    {
+      "index": 2,
+      "label": "Exudate Carbohydrate Slick",
+      "enzymeLabel": "Glucanase",
+      "color": "#7fc9a0"
+    }
+  ],
+  "particles": {
+    "exudate": {
+      "label": "Diatom Exudate Slick",
+      "mix": [
+        1,
+        1,
+        4
+      ],
+      "shape": "aggregate",
+      "weight": 6,
+      "squash": 0.6
+    },
+    "debris": {
+      "label": "Bloom Collapse Debris",
+      "mix": [
+        2,
+        3,
+        1
+      ],
+      "shape": "shard",
+      "weight": 4,
+      "squash": 0.5
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase",
+      "color": "#c9b458",
+      "weight": 3
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#a85c4e",
+      "weight": 4
+    },
+    "enzyme2": {
+      "label": "Glucanase",
+      "color": "#7fc9a0",
+      "weight": 6
+    },
+    "chemotaxis": {
+      "label": "Exudate Tracking",
+      "color": "#5ec9c9",
+      "weight": 6
+    },
+    "antibiotic": {
+      "label": "Antibiotic",
+      "color": "#cc4466",
+      "weight": 2
+    },
+    "eps": {
+      "label": "Mucus Shield",
+      "color": "#88aa99",
+      "weight": 3
+    },
+    "crispr": {
+      "label": "CRISPR",
+      "color": "#9977cc",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Twitching",
+      "color": "#dd8844",
+      "weight": 1
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "shelf_copiotroph",
+        "label": "Shelf Copiotroph",
+        "color": "#66cc99",
+        "genome": {
+          "enzLvl": [
+            1,
+            1,
+            3
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "opportunist_vibrio",
+        "label": "Opportunist Colonizer",
+        "color": "#dd9944",
+        "genome": {
+          "enzLvl": [
+            2,
+            3,
+            1
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 0,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 3
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "pseudo_nitzschia",
+        "label": "Pseudo-nitzschia australis",
+        "color": "#b8e0d2",
+        "form": "pennate",
+        "sizeUm": 70,
+        "chain": 8,
+        "count": 90,
+        "toxin": {
+          "label": "Domoic Acid",
+          "color": "#e0d060",
+          "radius": 90,
+          "potency": 60,
+          "life": 20
+        }
+      },
+      {
+        "id": "chaetoceros_bg",
+        "label": "Chaetoceros sp.",
+        "color": "#9ecbe0",
+        "form": "centric",
+        "sizeUm": 25,
+        "chain": 5,
+        "count": 30
+      }
+    ]
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 13.5,
+        "salinity": 33.5,
+        "light": 1,
+        "nutrient": 0.75
+      },
+      {
+        "depth": 15,
+        "tempC": 12.5,
+        "salinity": 33.7,
+        "light": 0.6,
+        "nutrient": 0.85
+      },
+      {
+        "depth": 35,
+        "tempC": 10.5,
+        "salinity": 34,
+        "light": 0.25,
+        "nutrient": 0.95
+      },
+      {
+        "depth": 60,
+        "tempC": 9,
+        "salinity": 34.2,
+        "light": 0.05,
+        "nutrient": 1
+      }
+    ],
+    "thermocline": {
+      "depth": 25,
+      "sharpness": 0.6
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}
