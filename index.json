@@ -340,6 +340,14 @@
       "file": "scenarios/daily-2026-08-31.json"
     },
     {
+      "id": "daily-2026-09-01",
+      "title": "Nitrogen Thieves of the Peruvian Shelf: Thioploca's Nitrate Elevator",
+      "date": "2026-09-01",
+      "difficulty": "hard",
+      "realWorldBasis": "Peru-Chile upwelling oxygen minimum zone shelf sediments, Thioploca/Thiomargarita nitrate-sulfide vertical migration",
+      "file": "scenarios/daily-2026-09-01.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",

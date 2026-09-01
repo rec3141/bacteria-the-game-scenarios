@@ -1,0 +1,243 @@
+{
+  "meta": {
+    "title": "Nitrogen Thieves of the Peruvian Shelf: Thioploca's Nitrate Elevator",
+    "date": "2026-09-01",
+    "lesson": "Off Peru, the sulfate-reducing sediment beneath the upwelling shelf is rich in sulfide but has no oxygen. Vacuolate sulfur bacteria like Thioploca and Thiomargarita solve this by acting as walking (or gliding) batteries: they store nitrate they absorb near the sediment-water interface and haul it down into the sulfidic mud in vacuoles, using it in place of oxygen to oxidize sulfide. This scenario models that vertical commute as a chemosynthetic band that must straddle the overlap between a nitrate-rich upper layer and a sulfide-rich lower layer. Too shallow and there's no sulfide to burn; too deep and the nitrate runs out. Diatom blooms rain down from the productive surface above, feeding an ordinary heterotroph community, while the chemolithotrophs occupy the redox knife-edge below.",
+    "citation": "Fossing et al. 1995, Nature - Thioploca and nitrate storage in Peru shelf sediments",
+    "difficulty": "hard",
+    "realWorldBasis": "Peru-Chile upwelling oxygen minimum zone shelf sediments, Thioploca/Thiomargarita nitrate-sulfide vertical migration"
+  },
+  "env": {
+    "day.latitude": -12,
+    "day.dayOfYear": 355,
+    "diel.tempBase": 14,
+    "diel.tempAmp": 2,
+    "diel.foodFloor": 0.4,
+    "diel.q10": 2.2,
+    "diel.waterNight.0": 3,
+    "diel.waterNight.1": 12,
+    "diel.waterNight.2": 10,
+    "diel.waterDay.0": 20,
+    "diel.waterDay.1": 55,
+    "diel.waterDay.2": 45,
+    "substrate.count": 95,
+    "substrate.sizeMin": 26,
+    "substrate.sizeMax": 170,
+    "substrate.lifeMin": 100,
+    "substrate.lifeMax": 260,
+    "substrate.driftMin": 5,
+    "substrate.driftMax": 12,
+    "column.chemRate": 6.5,
+    "column.photoRate": 8,
+    "predator.count": 3,
+    "predator.senseRange": 130,
+    "predator.wanderSpeed": 16,
+    "predator.chaseSpeed": 30,
+    "cell.chemoRange0": 260,
+    "cell.chemoRangePer": 130,
+    "respirationBase": 0.75
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Diatom Lipid Detritus",
+      "enzymeLabel": "Lipase",
+      "color": "#c9a24a"
+    },
+    {
+      "index": 1,
+      "label": "Sinking Protein Floc",
+      "enzymeLabel": "Protease",
+      "color": "#8a6a9a"
+    },
+    {
+      "index": 2,
+      "label": "Diatom Frustule Exudate",
+      "enzymeLabel": "Glycanase",
+      "color": "#6fae8f"
+    }
+  ],
+  "particles": {
+    "marineSnow": {
+      "label": "Sinking Diatom Aggregate",
+      "mix": [
+        0.3,
+        0.3,
+        0.4
+      ],
+      "shape": "aggregate",
+      "weight": 6
+    },
+    "flocParticle": {
+      "label": "Protein-Rich Floc",
+      "mix": [
+        0.15,
+        0.65,
+        0.2
+      ],
+      "shape": "shard",
+      "weight": 4
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase",
+      "color": "#c9a24a",
+      "weight": 4
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#8a6a9a",
+      "weight": 5
+    },
+    "enzyme2": {
+      "label": "Glycanase",
+      "color": "#6fae8f",
+      "weight": 5
+    },
+    "chemotaxis": {
+      "label": "Nitrate/Sulfide Sensing",
+      "color": "#5aa0c8",
+      "weight": 8
+    },
+    "antibiotic": {
+      "label": "Antibiotic",
+      "color": "#c0392b",
+      "weight": 2
+    },
+    "eps": {
+      "label": "Sheath Mucus",
+      "color": "#d9d2b0",
+      "weight": 5
+    },
+    "crispr": {
+      "label": "CRISPR",
+      "color": "#7f8c8d",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Gliding",
+      "color": "#e67e22",
+      "weight": 6
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "thioploca",
+        "label": "Thioploca sp. (nitrate-sulfide commuter)",
+        "color": "#5aa0c8",
+        "genome": {
+          "enzLvl": [
+            0,
+            0,
+            1
+          ],
+          "chemoLevel": 3,
+          "antibiotic": 0,
+          "eps": 3,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "heterotroph",
+        "label": "Sediment Heterotroph",
+        "color": "#8a6a9a",
+        "genome": {
+          "enzLvl": [
+            1,
+            3,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 4
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "upwellDiatom",
+        "label": "Upwelling Diatom Bloom",
+        "color": "#7fae6a",
+        "form": "centric",
+        "sizeUm": 45,
+        "chain": 4,
+        "count": 60
+      }
+    ]
+  },
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 260,
+      "color": "#3d3226",
+      "label": "Sulfidic Shelf Mud",
+      "roughness": 0.4,
+      "porosity": 0.45,
+      "poreSize": 40,
+      "featureSize": 300,
+      "spires": 0,
+      "spireHeight": 0,
+      "spireWidth": 40,
+      "warp": 0.2
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 16,
+        "salinity": 35,
+        "light": 1,
+        "nutrient": 0.5
+      },
+      {
+        "depth": 0.3,
+        "tempC": 15,
+        "salinity": 35,
+        "light": 0.5,
+        "nutrient": 0.7
+      },
+      {
+        "depth": 0.6,
+        "tempC": 14,
+        "salinity": 34.8,
+        "light": 0.1,
+        "nutrient": 0.85
+      },
+      {
+        "depth": 0.85,
+        "tempC": 13.5,
+        "salinity": 34.5,
+        "light": 0.02,
+        "nutrient": 0.95
+      },
+      {
+        "depth": 1,
+        "tempC": 13,
+        "salinity": 34.5,
+        "light": 0,
+        "nutrient": 1
+      }
+    ],
+    "thermocline": {
+      "depth": 0.5,
+      "sharpness": 0.5
+    },
+    "chemical": {
+      "peakDepth": 0.85,
+      "spread": 0.18,
+      "strength": 0.9,
+      "color": "#4a7a5a"
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}
