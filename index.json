@@ -348,6 +348,14 @@
       "file": "scenarios/daily-2026-09-01.json"
     },
     {
+      "id": "daily-2026-09-02",
+      "title": "Bull Kelp Bust: Chitin Grazers on a Sinking Blade",
+      "date": "2026-09-02",
+      "difficulty": "normal",
+      "realWorldBasis": "Giant kelp (Macrocystis pyrifera) blade falls in temperate Pacific kelp forests, chitin flux from epifaunal crustacean molts/exoskeletons, and chitinolytic Vibrio/Pseudoalteromonas-type bacterial succession on sinking wrack.",
+      "file": "scenarios/daily-2026-09-02.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",

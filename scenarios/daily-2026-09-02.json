@@ -1,0 +1,220 @@
+{
+  "actions": {
+    "enzyme0": {
+      "label": "Chitinase",
+      "color": "#59c1a8",
+      "weight": 6
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#d97b5a",
+      "weight": 4
+    },
+    "enzyme2": {
+      "label": "Agarase",
+      "color": "#e0c33d",
+      "weight": 2
+    },
+    "chemotaxis": {
+      "label": "Agar-groove tracking",
+      "color": "#7fd9ff",
+      "weight": 5
+    },
+    "antibiotic": {
+      "label": "Agarocin",
+      "color": "#c15fd6",
+      "weight": 3
+    },
+    "eps": {
+      "label": "Capsule slime",
+      "color": "#8fae4a",
+      "weight": 3
+    },
+    "crispr": {
+      "label": "CRISPR immunity",
+      "color": "#5599ff",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Gliding motility",
+      "color": "#ffb347",
+      "weight": 4
+    }
+  },
+  "column": {
+    "enabled": false
+  },
+  "env": {
+    "diel.tempBase": 18,
+    "diel.tempAmp": 3,
+    "diel.foodFloor": 0.3,
+    "diel.q10": 2.3,
+    "diel.q10RefC": 18,
+    "diel.waterDay.0": 24,
+    "diel.waterDay.1": 92,
+    "diel.waterDay.2": 70,
+    "diel.waterNight.0": 3,
+    "diel.waterNight.1": 14,
+    "diel.waterNight.2": 18,
+    "substrate.count": 85,
+    "substrate.sizeMin": 34,
+    "substrate.sizeMax": 170,
+    "substrate.sizeExp": 1.3,
+    "substrate.lifeMin": 90,
+    "substrate.lifeMax": 220,
+    "substrate.driftMin": 4,
+    "substrate.driftMax": 10,
+    "substrate.minPerRes": 3,
+    "cell.chemoRange0": 260,
+    "cell.chemoRangePer": 150,
+    "cell.chemoBias": 1.1,
+    "cell.twitchSpeedScale": 0.75,
+    "cell.uptake": 16,
+    "cell.enzymeCost": 3.4,
+    "cell.swimCost": 1,
+    "predator.count": 3,
+    "predator.senseRange": 140,
+    "predator.wanderSpeed": 18,
+    "predator.chaseSpeed": 32,
+    "phage.greenCount": 22,
+    "phage.goldCount": 3,
+    "phage.hostTolerance": 2,
+    "phage.twitchAdsorbMult": 2.6,
+    "phage.twitchHostBonus": 1.3,
+    "day.latitude": 34,
+    "day.dayOfYear": 210,
+    "day.lengthSec": 220
+  },
+  "meta": {
+    "title": "Bull Kelp Bust: Chitin Grazers on a Sinking Blade",
+    "date": "2026-09-02",
+    "lesson": "When a giant kelp blade (a brown alga, not a diatom) breaks off and sinks, its wounded tissue and the tiny crustacean grazers still clinging to it become a sudden feast. The biggest resource isn't the algal polysaccharide itself but the chitin in the exoskeletons and molts of amphipods and copepods riding the wrack down. Chitinolytic bacteria that can twitch across the blade's ridged, fibrous surface (rather than just swim past it) reach those chitin-rich patches first and dominate the early bloom; agarolytic specialists pick up the algal cell-wall polysaccharide later as the tissue itself softens. Phage pressure builds fast in the dense biofilm that forms in kelp wrack grooves, and grazing protists hunting the debris cloud complete the classic boom-and-crash succession of a marine detritus fall.",
+    "citation": "Kelp wrack decomposition and epifaunal chitin flux studies, central California kelp forest floor (cf. Macrocystis pyrifera detrital ecology).",
+    "difficulty": "normal",
+    "realWorldBasis": "Giant kelp (Macrocystis pyrifera) blade falls in temperate Pacific kelp forests, chitin flux from epifaunal crustacean molts/exoskeletons, and chitinolytic Vibrio/Pseudoalteromonas-type bacterial succession on sinking wrack."
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "chitin_twitcher",
+        "label": "Pseudoalteromonas sp. (chitin-gliding pioneer)",
+        "color": "#59c1a8",
+        "genome": {
+          "enzLvl": [
+            2,
+            1,
+            1
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "agarolytic_follower",
+        "label": "Agarolytic Vibrio (blade softener)",
+        "color": "#e0c33d",
+        "genome": {
+          "enzLvl": [
+            1,
+            1,
+            3
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 0,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 4
+      },
+      {
+        "id": "protease_scavenger",
+        "label": "Protease scavenger",
+        "color": "#d97b5a",
+        "genome": {
+          "enzLvl": [
+            0,
+            3,
+            1
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 1,
+          "crispr": true,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      }
+    ]
+  },
+  "particles": {
+    "molt_flake": {
+      "label": "Amphipod molt flake",
+      "mix": [
+        85,
+        10,
+        5
+      ],
+      "shape": "shard",
+      "weight": 6
+    },
+    "copepod_carcass": {
+      "label": "Copepod carcass cluster",
+      "mix": [
+        70,
+        25,
+        5
+      ],
+      "shape": "aggregate",
+      "weight": 4
+    },
+    "kelp_blade_shred": {
+      "label": "Kelp blade shred",
+      "mix": [
+        5,
+        10,
+        85
+      ],
+      "shape": "ellipse",
+      "squash": 0.4,
+      "weight": 5
+    },
+    "soft_tissue_clump": {
+      "label": "Softened algal tissue clump",
+      "mix": [
+        10,
+        60,
+        30
+      ],
+      "shape": "aggregate",
+      "weight": 3
+    }
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Chitin (molts/exoskeletons)",
+      "enzymeLabel": "Chitinase",
+      "color": "#59c1a8"
+    },
+    {
+      "index": 1,
+      "label": "Crustacean protein tissue",
+      "enzymeLabel": "Protease",
+      "color": "#d97b5a"
+    },
+    {
+      "index": 2,
+      "label": "Algal cell-wall polysaccharide (agar/alginate)",
+      "enzymeLabel": "Agarase",
+      "color": "#e0c33d"
+    }
+  ],
+  "schema": "bacteria-scenario",
+  "terrain": [],
+  "version": 1
+}
