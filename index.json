@@ -356,6 +356,14 @@
       "file": "scenarios/daily-2026-09-02.json"
     },
     {
+      "id": "daily-2026-09-03",
+      "title": "Great Salt Lake: Halophile Bloom in the North Arm",
+      "date": "2026-09-03",
+      "difficulty": "hard",
+      "realWorldBasis": "Great Salt Lake North Arm, Utah - hypersaline halophile bloom (>27% salinity), red-pigmented Halobacteria/Salinibacter community",
+      "file": "scenarios/daily-2026-09-03.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",

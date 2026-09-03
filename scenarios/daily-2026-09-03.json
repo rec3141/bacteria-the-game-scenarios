@@ -1,0 +1,238 @@
+{
+  "meta": {
+    "title": "Great Salt Lake: Halophile Bloom in the North Arm",
+    "date": "2026-09-03",
+    "lesson": "The North Arm of Great Salt Lake sits above 27% salinity, past the point where nearly all life gives up. What thrives there is a narrow guild of extreme halophiles: Halobacteria (archaea) and Salinibacter-type bacteria that pack their cytoplasm with compatible solutes to keep from losing water to the brine, and pigment themselves red with bacterioruberin and carotenoids to shed excess light and repair UV/osmotic damage. Their color IS their survival strategy, which is why the lake famously turns crimson-pink in summer. Food is scarce and the community lives at the very edge of what respiration can afford, so growth is slow, energy budgets are tight, and every division is hard-won. Halotolerant Dunaliella algae add a photosynthetic base to the food web, and the whole system prizes efficient carbohydrate/protein salvage over any lipid-rich lifestyle.",
+    "citation": "Great Salt Lake North Arm hypersaline microbial ecology; Baxter, Post et al.",
+    "difficulty": "hard",
+    "realWorldBasis": "Great Salt Lake North Arm, Utah - hypersaline halophile bloom (>27% salinity), red-pigmented Halobacteria/Salinibacter community"
+  },
+  "env": {
+    "diel.tempBase": 24,
+    "diel.tempAmp": 9,
+    "diel.foodFloor": 0.28,
+    "diel.q10": 2.3,
+    "diel.q10RefC": 24,
+    "diel.waterDay.0": 120,
+    "diel.waterDay.1": 40,
+    "diel.waterDay.2": 55,
+    "diel.waterNight.0": 40,
+    "diel.waterNight.1": 8,
+    "diel.waterNight.2": 18,
+    "diel.goldTint": 0.3,
+    "day.latitude": 41,
+    "day.dayOfYear": 200,
+    "day.lengthSec": 260,
+    "respirationBase": 1.25,
+    "substrate.count": 46,
+    "substrate.sizeMin": 26,
+    "substrate.sizeMax": 150,
+    "substrate.lifeMin": 160,
+    "substrate.lifeMax": 340,
+    "substrate.driftMin": 5,
+    "substrate.driftMax": 12,
+    "substrate.minPerRes": 3,
+    "cell.uptake": 10,
+    "cell.startEnergy": 95,
+    "cell.divideThreshold": 200,
+    "cell.maxEnergy": 260,
+    "cell.swimCost": 1.6,
+    "cell.cystBelow": 20,
+    "cell.cystWake": 55,
+    "cell.cystMetab": 0.02,
+    "cell.dragRate": 80,
+    "cell.maxSpeed": 190,
+    "predator.count": 2,
+    "predator.metabolism": 13,
+    "predator.senseRange": 130,
+    "predator.wanderSpeed": 18,
+    "predator.chaseSpeed": 30,
+    "predator.minCount": 1,
+    "phage.greenCount": 10,
+    "phage.goldCount": 3,
+    "phage.goldMinDist": 700
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid film scum",
+      "enzymeLabel": "Lipase (rare)",
+      "color": "#b8860b"
+    },
+    {
+      "index": 1,
+      "label": "Dunaliella protein detritus",
+      "enzymeLabel": "Halo-protease",
+      "color": "#c2185b"
+    },
+    {
+      "index": 2,
+      "label": "Glycerol/carbohydrate exudate",
+      "enzymeLabel": "Glycerol-carbohydrase",
+      "color": "#e91e63"
+    }
+  ],
+  "particles": {
+    "algalDetritus": {
+      "label": "Dunaliella cell debris",
+      "mix": [
+        10,
+        55,
+        35
+      ],
+      "shape": "aggregate",
+      "weight": 6
+    },
+    "brineFloc": {
+      "label": "Brine mineral floc with organics",
+      "mix": [
+        5,
+        30,
+        65
+      ],
+      "shape": "shard",
+      "weight": 4
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase",
+      "color": "#b8860b",
+      "weight": 1
+    },
+    "enzyme1": {
+      "label": "Halo-protease",
+      "color": "#c2185b",
+      "weight": 6
+    },
+    "enzyme2": {
+      "label": "Glycerol-carbohydrase",
+      "color": "#e91e63",
+      "weight": 6
+    },
+    "chemotaxis": {
+      "label": "Osmotic gradient sensing",
+      "color": "#ff8fab",
+      "weight": 5
+    },
+    "antibiotic": {
+      "label": "Halocin release",
+      "color": "#8e0038",
+      "weight": 4
+    },
+    "eps": {
+      "label": "Bacterioruberin sheath",
+      "color": "#d81b60",
+      "weight": 5
+    },
+    "crispr": {
+      "label": "CRISPR immunity",
+      "color": "#880e4f",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Gas-vesicle drift twitch",
+      "color": "#ad1457",
+      "weight": 2
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "halobacterium",
+        "label": "Halobacterium salinarum",
+        "color": "#e0115f",
+        "genome": {
+          "enzLvl": [
+            1,
+            3,
+            2
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 1,
+          "eps": 2,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "salinibacter",
+        "label": "Salinibacter ruber",
+        "color": "#ff4d6d",
+        "genome": {
+          "enzLvl": [
+            1,
+            2,
+            3
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 3,
+          "crispr": true,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "dunaliella",
+        "label": "Dunaliella salina",
+        "color": "#ff6f61",
+        "form": "pennate",
+        "sizeUm": 14,
+        "chain": 1,
+        "count": 40
+      }
+    ]
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 27,
+        "salinity": 27,
+        "light": 1,
+        "nutrient": 0.25
+      },
+      {
+        "depth": 0.5,
+        "tempC": 24,
+        "salinity": 28,
+        "light": 0.7,
+        "nutrient": 0.35
+      },
+      {
+        "depth": 1,
+        "tempC": 21,
+        "salinity": 30,
+        "light": 0.35,
+        "nutrient": 0.4
+      }
+    ],
+    "thermocline": {
+      "depth": 0.6,
+      "sharpness": 0.4
+    }
+  },
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 90,
+      "color": "#c9a876",
+      "label": "Salt crust and mineral precipitate floor",
+      "roughness": 0.5,
+      "porosity": 0.2,
+      "poreSize": 20,
+      "featureSize": 200,
+      "spires": 0.1,
+      "spireHeight": 60,
+      "spireWidth": 50,
+      "warp": 0.1
+    }
+  ],
+  "schema": "bacteria-scenario",
+  "version": 1
+}
