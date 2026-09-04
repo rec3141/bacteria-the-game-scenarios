@@ -1,0 +1,243 @@
+{
+  "meta": {
+    "title": "Elkhorn Slough Estuary: Ammonia Oxidizers Under a Tidal Pulse",
+    "date": "2026-09-04",
+    "lesson": "Elkhorn Slough (California) is one of the most nutrient-enriched estuaries in North America, fed by agricultural runoff rich in ammonium. Twice a day the tide floods it with cold, clear ocean water and then drains it back into warm, turbid, nutrient-choked slough water. Ammonia-oxidizing bacteria living in the mudflat sediment ride out this swing: at low tide, warm still water and a surge of ammonium let them (and the diatom mats above them) bloom, but the returning tide dilutes their substrate and chills them. Here the founder is a nitrifier-like generalist gaining energy chiefly from protein-rich detritus (standing in for ammonium-bearing organic matter) in the porous mud, while pennate diatoms glide over the sediment surface, sinking and dying with the light and feeding their own bloom's exudate into the same food web. The lesson: estuarine chemistry does not sit still, it pulses with the tide, and the organisms that dominate are the ones whose physiology matches the rhythm, not just the average.",
+    "citation": "Based on Elkhorn Slough NERR long-term nutrient monitoring and estuarine nitrification studies",
+    "difficulty": "normal",
+    "realWorldBasis": "Elkhorn Slough, California - tidally-pulsed nutrient-enriched estuary, ammonia-oxidizing sediment bacteria"
+  },
+  "env": {
+    "day.lengthSec": 280,
+    "day.latitude": 36,
+    "day.dayOfYear": 200,
+    "diel.tempBase": 16,
+    "diel.tempAmp": 6,
+    "diel.foodFloor": 0.5,
+    "diel.q10": 2.3,
+    "diel.waterDay.0": 40,
+    "diel.waterDay.1": 70,
+    "diel.waterDay.2": 48,
+    "diel.waterNight.0": 4,
+    "diel.waterNight.1": 12,
+    "diel.waterNight.2": 14,
+    "substrate.count": 85,
+    "substrate.sizeMin": 26,
+    "substrate.sizeMax": 150,
+    "substrate.lifeMin": 90,
+    "substrate.lifeMax": 220,
+    "substrate.driftMin": 14,
+    "substrate.driftMax": 34,
+    "substrate.minPerRes": 3,
+    "respirationBase": 1.05,
+    "cell.uptake": 16,
+    "cell.startEnergy": 100,
+    "cell.divideThreshold": 165,
+    "cell.chemoRange0": 260,
+    "cell.chemoBias": 1.1,
+    "predator.count": 5,
+    "predator.senseRange": 150,
+    "predator.wanderSpeed": 22,
+    "predator.metabolism": 11,
+    "phage.greenCount": 20,
+    "phage.goldCount": 3,
+    "column.chemRate": 3.5
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Detrital Lipid Film",
+      "enzymeLabel": "Lipase",
+      "color": "#8a6d3b"
+    },
+    {
+      "index": 1,
+      "label": "Ammonium-Rich Detritus",
+      "enzymeLabel": "Protease (nitrifier-analog)",
+      "color": "#c9a227"
+    },
+    {
+      "index": 2,
+      "label": "Diatom Mucilage Carbohydrate",
+      "enzymeLabel": "Glycosidase",
+      "color": "#5fae6b"
+    }
+  ],
+  "particles": {
+    "detritusClump": {
+      "label": "Ammonium-Laden Organic Floc",
+      "mix": [
+        1,
+        6,
+        2
+      ],
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 6
+    },
+    "mudDetritus": {
+      "label": "Sediment Detrital Aggregate",
+      "mix": [
+        2,
+        4,
+        3
+      ],
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 5
+    },
+    "diatomExudate": {
+      "label": "Diatom Mucilage Strand",
+      "mix": [
+        1,
+        1,
+        5
+      ],
+      "shape": "shard",
+      "squash": 0.5,
+      "weight": 4
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase Burst",
+      "color": "#8a6d3b",
+      "weight": 3
+    },
+    "enzyme1": {
+      "label": "Ammonium Protease Burst",
+      "color": "#c9a227",
+      "weight": 8
+    },
+    "enzyme2": {
+      "label": "Glycosidase Burst",
+      "color": "#5fae6b",
+      "weight": 5
+    },
+    "chemotaxis": {
+      "label": "Nutrient-Seeking Glide",
+      "color": "#e0c674",
+      "weight": 6
+    },
+    "antibiotic": {
+      "label": "Sediment Antibiotic Volley",
+      "color": "#b03a2e",
+      "weight": 3
+    },
+    "eps": {
+      "label": "Mud Biofilm Matrix",
+      "color": "#7a5230",
+      "weight": 5
+    },
+    "crispr": {
+      "label": "Phage Immunity",
+      "color": "#4a90d9",
+      "weight": 4
+    },
+    "twitching": {
+      "label": "Sediment Twitching Crawl",
+      "color": "#d98e04",
+      "weight": 5
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "nitrifier_founder",
+        "label": "Estuarine Ammonia-Oxidizer Analog",
+        "color": "#c9a227",
+        "genome": {
+          "enzLvl": [
+            1,
+            3,
+            2
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "copiotroph_rival",
+        "label": "Fast-Growing Copiotroph",
+        "color": "#e07b39",
+        "genome": {
+          "enzLvl": [
+            2,
+            2,
+            3
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 0,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 4
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "navicula_mudflat",
+        "label": "Navicula Mudflat Pennate",
+        "color": "#3f7d5c",
+        "form": "pennate",
+        "sizeUm": 35,
+        "chain": 2,
+        "count": 60,
+        "toxin": null
+      }
+    ]
+  },
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 200,
+      "color": "#5c4530",
+      "label": "Estuarine Mudflat Sediment",
+      "roughness": 0.5,
+      "porosity": 0.45,
+      "poreSize": 30,
+      "featureSize": 300,
+      "spires": 0,
+      "spireHeight": 0,
+      "spireWidth": 40,
+      "warp": 0.2
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 18,
+        "salinity": 28,
+        "light": 0.9,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 0.5,
+        "tempC": 16,
+        "salinity": 30,
+        "light": 0.5,
+        "nutrient": 0.8
+      },
+      {
+        "depth": 1,
+        "tempC": 14,
+        "salinity": 32,
+        "light": 0.15,
+        "nutrient": 0.95
+      }
+    ],
+    "thermocline": {
+      "depth": 0.6,
+      "sharpness": 0.4
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}

@@ -364,6 +364,14 @@
       "file": "scenarios/daily-2026-09-03.json"
     },
     {
+      "id": "daily-2026-09-04",
+      "title": "Elkhorn Slough Estuary: Ammonia Oxidizers Under a Tidal Pulse",
+      "date": "2026-09-04",
+      "difficulty": "normal",
+      "realWorldBasis": "Elkhorn Slough, California - tidally-pulsed nutrient-enriched estuary, ammonia-oxidizing sediment bacteria",
+      "file": "scenarios/daily-2026-09-04.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
