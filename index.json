@@ -372,6 +372,14 @@
       "file": "scenarios/daily-2026-09-04.json"
     },
     {
+      "id": "daily-2026-09-05",
+      "title": "Cold-Water Carcass: Whale-Fall Chitin Rush in the Bathyal Pacific",
+      "date": "2026-09-05",
+      "difficulty": "hard",
+      "realWorldBasis": "Deep bathyal whale-fall and carcass-fall carbon pulses, ~1000-2000m depth, Pacific",
+      "file": "scenarios/daily-2026-09-05.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",

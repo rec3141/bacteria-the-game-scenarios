@@ -1,0 +1,238 @@
+{
+  "actions": {
+    "enzyme0": {
+      "label": "Chitobiase (chitin-shell hydrolase)",
+      "color": "#7fd8c9",
+      "weight": 6
+    },
+    "enzyme1": {
+      "label": "Collagenase",
+      "color": "#e0937a",
+      "weight": 4
+    },
+    "enzyme2": {
+      "label": "Amylase",
+      "color": "#d9c66b",
+      "weight": 2
+    },
+    "chemotaxis": {
+      "label": "Barotaxis toward carcass plume",
+      "weight": 5
+    },
+    "antibiotic": {
+      "label": "Bacteriocin volley",
+      "weight": 3
+    },
+    "eps": {
+      "label": "Biofilm slime",
+      "weight": 4
+    },
+    "crispr": {
+      "label": "CRISPR immunity",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Pilus twitching",
+      "weight": 3
+    }
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 6,
+        "salinity": 34,
+        "light": 0.35,
+        "nutrient": 0.3
+      },
+      {
+        "depth": 0.4,
+        "tempC": 4.5,
+        "salinity": 34.3,
+        "light": 0.08,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 1,
+        "tempC": 3.8,
+        "salinity": 34.5,
+        "light": 0,
+        "nutrient": 1
+      }
+    ],
+    "thermocline": {
+      "depth": 0.35,
+      "sharpness": 0.6
+    }
+  },
+  "env": {
+    "day.lengthSec": 260,
+    "day.latitude": 36,
+    "day.dayOfYear": 300,
+    "diel.tempBase": 4,
+    "diel.tempAmp": 1.5,
+    "diel.foodFloor": 0.5,
+    "diel.q10": 2.2,
+    "diel.q10RefC": 15,
+    "diel.waterNight.0": 2,
+    "diel.waterNight.1": 5,
+    "diel.waterNight.2": 14,
+    "diel.waterDay.0": 10,
+    "diel.waterDay.1": 28,
+    "diel.waterDay.2": 38,
+    "substrate.count": 115,
+    "substrate.sizeMin": 45,
+    "substrate.sizeMax": 260,
+    "substrate.sizeExp": 1.3,
+    "substrate.lifeMin": 90,
+    "substrate.lifeMax": 220,
+    "substrate.driftMin": 4,
+    "substrate.driftMax": 10,
+    "substrate.minPerRes": 3,
+    "substrate.moteEnergy": 9,
+    "substrate.carveRate": 5.5,
+    "enzyme.maxRadius": 30,
+    "enzyme.life": 6,
+    "cell.chemoRange0": 420,
+    "cell.chemoRangePer": 180,
+    "cell.chemoBias": 1.3,
+    "cell.uptake": 16,
+    "cell.startEnergy": 100,
+    "cell.divideThreshold": 180,
+    "respirationBase": 0.6,
+    "predator.count": 6,
+    "predator.senseRange": 220,
+    "predator.wanderSpeed": 18,
+    "predator.chaseSpeed": 34,
+    "predator.metabolism": 8,
+    "phage.greenCount": 26,
+    "phage.goldCount": 3,
+    "phage.burst.0": 5,
+    "phage.burst.1": 10,
+    "phage.latent.0": 8,
+    "phage.latent.1": 13,
+    "eps.threatRange": 110,
+    "eps.cooldown.0": 8,
+    "eps.cooldown.1": 14
+  },
+  "meta": {
+    "title": "Cold-Water Carcass: Whale-Fall Chitin Rush in the Bathyal Pacific",
+    "date": "2026-09-05",
+    "lesson": "When a whale carcass or a large deep-sea carcass fall lands on the seafloor, it delivers a colossal, localized pulse of organic carbon into an otherwise starved deep ocean. Bone lipids feed sulfophilic microbes over decades, but the FIRST wave of colonization is fast copiotrophic bacteria (Vibrio- and Pseudoalteromonas-type opportunists) exploiting soft tissue, collagen, and chitin-rich cartilage and exoskeleton fragments from scavenging amphipods. This level asks you to found a colony on that early carcass surface: chitin and collagen dominate the local food field, competition from fast phage lysis and grazing amphipod-mimicking protists is fierce, and the water column above is cold, dim, and stratified, with nutrients pooling near the seafloor. Success means matching your enzyme suite to the actual substrate (chitin > collagen > sugars) and using EPS and twitching to hold territory on the carcass surface against phage predation and grazing.",
+    "citation": "Smith & Baco (2003) Ecology of whale falls at the deep-sea floor; Goffredi et al. deep-sea carcass microbiology",
+    "difficulty": "hard",
+    "realWorldBasis": "Deep bathyal whale-fall and carcass-fall carbon pulses, ~1000-2000m depth, Pacific"
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "founder",
+        "label": "Colwellia-like chitin/collagen opportunist",
+        "color": "#8fd6c4",
+        "genome": {
+          "enzLvl": [
+            3,
+            2,
+            1
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 2,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "rival",
+        "label": "Photobacterium-type scavenger",
+        "color": "#c98f6a",
+        "genome": {
+          "enzLvl": [
+            2,
+            3,
+            1
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 4
+      }
+    ]
+  },
+  "particles": {
+    "chitinFrag": {
+      "label": "Amphipod exoskeleton fragment",
+      "mix": [
+        70,
+        10,
+        20
+      ],
+      "shape": "shard",
+      "weight": 6
+    },
+    "collagenBit": {
+      "label": "Blubber/collagen tissue clump",
+      "mix": [
+        15,
+        75,
+        10
+      ],
+      "shape": "aggregate",
+      "weight": 5
+    },
+    "boneOoze": {
+      "label": "Lipid-rich bone marrow ooze",
+      "mix": [
+        80,
+        10,
+        10
+      ],
+      "shape": "ellipse",
+      "squash": 0.6,
+      "weight": 3
+    }
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Bone lipid/marrow",
+      "enzymeLabel": "Lipase",
+      "color": "#e8c98a"
+    },
+    {
+      "index": 1,
+      "label": "Collagen/tissue protein",
+      "enzymeLabel": "Collagenase",
+      "color": "#e0937a"
+    },
+    {
+      "index": 2,
+      "label": "Chitin exoskeleton sugar",
+      "enzymeLabel": "Chitobiase",
+      "color": "#7fd8c9"
+    }
+  ],
+  "schema": "bacteria-scenario",
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 140,
+      "color": "#4a3f38",
+      "label": "Carcass and sediment floor",
+      "roughness": 0.55,
+      "porosity": 0.35,
+      "poreSize": 50,
+      "featureSize": 300,
+      "spires": 0.1,
+      "spireHeight": 90,
+      "spireWidth": 60,
+      "warp": 0.4
+    }
+  ],
+  "version": 1
+}
