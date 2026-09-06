@@ -380,6 +380,14 @@
       "file": "scenarios/daily-2026-09-05.json"
     },
     {
+      "id": "daily-2026-09-06",
+      "title": "Winter Twilight Photosynthesizers: Chlorobium in a Frozen Fjord",
+      "date": "2026-09-06",
+      "difficulty": "hard",
+      "realWorldBasis": "Green sulfur bacteria (Chlorobium/Chlorobiaceae) surviving at extreme low-light depths beneath sea ice in high-latitude fjords, at the overlap of a faint light gradient and a sulfide plume",
+      "file": "scenarios/daily-2026-09-06.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
