@@ -388,6 +388,14 @@
       "file": "scenarios/daily-2026-09-06.json"
     },
     {
+      "id": "daily-2026-09-07",
+      "title": "Slick City: Marine Oil-Snow Sinks After a Spill",
+      "date": "2026-09-07",
+      "difficulty": "hard",
+      "realWorldBasis": "2010 Deepwater Horizon spill, northern Gulf of Mexico - marine oil snow sedimentation and flocculent accumulation (MOSSFA) event",
+      "file": "scenarios/daily-2026-09-07.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",

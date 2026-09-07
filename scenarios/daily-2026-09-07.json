@@ -1,0 +1,250 @@
+{
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase (alkane esterase)",
+      "color": "#e0b84c",
+      "weight": 6
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#c15b5b",
+      "weight": 4
+    },
+    "enzyme2": {
+      "label": "Chitinase-glucanase",
+      "color": "#5ba8c1",
+      "weight": 3
+    },
+    "chemotaxis": {
+      "label": "Chemotaxis toward wax esters",
+      "color": "#7fd97f",
+      "weight": 6
+    },
+    "antibiotic": {
+      "label": "Bacteriocin burst",
+      "color": "#b06fd1",
+      "weight": 3
+    },
+    "eps": {
+      "label": "Mucoid capsule",
+      "color": "#8fbf9f",
+      "weight": 4
+    },
+    "crispr": {
+      "label": "CRISPR immunity",
+      "color": "#d1d15f",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Pilus twitching",
+      "color": "#d19a5f",
+      "weight": 2
+    }
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 24,
+        "salinity": 35,
+        "light": 1,
+        "nutrient": 0.15
+      },
+      {
+        "depth": 0.3,
+        "tempC": 22,
+        "salinity": 35,
+        "nutrient": 0.3,
+        "light": 0.55
+      },
+      {
+        "depth": 0.6,
+        "tempC": 18,
+        "salinity": 36,
+        "nutrient": 0.6,
+        "light": 0.15
+      },
+      {
+        "depth": 1,
+        "tempC": 15,
+        "salinity": 36,
+        "nutrient": 0.9,
+        "light": 0.02
+      }
+    ],
+    "thermocline": {
+      "depth": 0.4,
+      "sharpness": 0.6
+    }
+  },
+  "env": {
+    "day.latitude": 26,
+    "day.dayOfYear": 210,
+    "day.lengthSec": 260,
+    "diel.tempBase": 22,
+    "diel.tempAmp": 4,
+    "diel.foodFloor": 0.3,
+    "diel.q10": 2.4,
+    "diel.q10RefC": 22,
+    "diel.waterDay.0": 30,
+    "diel.waterDay.1": 70,
+    "diel.waterDay.2": 60,
+    "diel.waterNight.0": 3,
+    "diel.waterNight.1": 10,
+    "diel.waterNight.2": 14,
+    "substrate.count": 95,
+    "substrate.sizeMin": 34,
+    "substrate.sizeMax": 190,
+    "substrate.sizeExp": 1.4,
+    "substrate.lifeMin": 90,
+    "substrate.lifeMax": 220,
+    "substrate.driftMin": 6,
+    "substrate.driftMax": 14,
+    "substrate.minPerRes": 3,
+    "cell.chemoRange0": 340,
+    "cell.chemoRangePer": 160,
+    "cell.chemoBias": 1.1,
+    "cell.uptake": 16,
+    "cell.startEnergy": 100,
+    "cell.divideThreshold": 170,
+    "cell.swimCost": 1.4,
+    "respirationBase": 1,
+    "predator.count": 5,
+    "predator.senseRange": 190,
+    "predator.metabolism": 11,
+    "phage.greenCount": 22,
+    "phage.goldCount": 3,
+    "phage.hostTolerance": 2,
+    "eps.threatRange": 110
+  },
+  "meta": {
+    "title": "Slick City: Marine Oil-Snow Sinks After a Spill",
+    "date": "2026-09-07",
+    "lesson": "When crude oil disperses into the ocean, much of it doesn't stay at the surface - it aggregates with mucus, diatom exudate and clay into 'marine oil snow' that sinks through the water column, feeding a fast-changing bacterial succession as it falls. Alkane-degrading specialists (Alcanivorax-type lipid consumers) bloom first on the fresh, lipid-rich flocs near the surface; as the material ages and sinks into cooler, dimmer water, protein and chitin-degrading generalists take over deeper in the column. This level rewards chemotaxis toward lipid-rich particles near the surface and enzyme flexibility as the same falling floc gets tougher to digest with depth and cold.",
+    "citation": "Passow & Ziervogel (2016), Deepwater Horizon marine oil snow sinking and MOSSFA (Marine Oil Snow Sedimentation and Flocculent Accumulation) event studies",
+    "difficulty": "hard",
+    "realWorldBasis": "2010 Deepwater Horizon spill, northern Gulf of Mexico - marine oil snow sedimentation and flocculent accumulation (MOSSFA) event"
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "alcanivorax",
+        "label": "Alcanivorax-type oil-snow degrader",
+        "color": "#e0b84c",
+        "genome": {
+          "enzLvl": [
+            3,
+            1,
+            1
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "generalist",
+        "label": "Deep-floc generalist",
+        "color": "#8fa6c1",
+        "genome": {
+          "enzLvl": [
+            1,
+            2,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 2,
+          "crispr": true,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "floc_diatom",
+        "label": "Flocculating diatom (Chaetoceros-like)",
+        "color": "#7fbf7f",
+        "form": "centric",
+        "sizeUm": 22,
+        "chain": 4,
+        "count": 40
+      }
+    ]
+  },
+  "particles": {
+    "oilFloc": {
+      "label": "Oil-mucus marine snow",
+      "mix": [
+        6,
+        1,
+        1
+      ],
+      "shape": "aggregate",
+      "weight": 7
+    },
+    "proteinFloc": {
+      "label": "Aged protein-rich floc",
+      "mix": [
+        1,
+        4,
+        1
+      ],
+      "shape": "aggregate",
+      "weight": 3
+    },
+    "chitinBit": {
+      "label": "Copepod molt fragment",
+      "mix": [
+        0,
+        1,
+        3
+      ],
+      "shape": "shard",
+      "weight": 2
+    }
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Dispersed oil / lipid",
+      "enzymeLabel": "Alkane esterase",
+      "color": "#e0b84c"
+    },
+    {
+      "index": 1,
+      "label": "Protein / mucus matrix",
+      "enzymeLabel": "Protease",
+      "color": "#c15b5b"
+    },
+    {
+      "index": 2,
+      "label": "Chitin / exoskeleton debris",
+      "enzymeLabel": "Chitinase",
+      "color": "#5ba8c1"
+    }
+  ],
+  "schema": "bacteria-scenario",
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 140,
+      "color": "#4a3a2c",
+      "label": "Oiled sediment floor",
+      "roughness": 0.4,
+      "porosity": 0.35,
+      "poreSize": 40,
+      "featureSize": 300,
+      "spires": 0,
+      "spireHeight": 0,
+      "spireWidth": 40,
+      "warp": 0.1
+    }
+  ],
+  "version": 1
+}
