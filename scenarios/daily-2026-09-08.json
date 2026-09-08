@@ -1,0 +1,240 @@
+{
+  "actions": {
+    "enzyme0": {
+      "label": "Alkane Hydroxylase",
+      "color": "#c9a227",
+      "weight": 6
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#b5533c",
+      "weight": 3
+    },
+    "enzyme2": {
+      "label": "Glycosidase",
+      "color": "#4c8f6b",
+      "weight": 2
+    },
+    "chemotaxis": {
+      "label": "Chemotaxis",
+      "color": "#5aa9e6",
+      "weight": 4
+    },
+    "antibiotic": {
+      "label": "Antibiotic",
+      "color": "#8b3fa0",
+      "weight": 2
+    },
+    "eps": {
+      "label": "EPS Slime",
+      "color": "#7a7a5c",
+      "weight": 3
+    },
+    "crispr": {
+      "label": "CRISPR",
+      "color": "#3fa0a0",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Twitching",
+      "color": "#a05a3f",
+      "weight": 2
+    }
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 22,
+        "salinity": 36,
+        "light": 0.9,
+        "nutrient": 0.2
+      },
+      {
+        "depth": 0.3,
+        "tempC": 18,
+        "salinity": 36,
+        "light": 0.4,
+        "nutrient": 0.4
+      },
+      {
+        "depth": 0.6,
+        "tempC": 14,
+        "salinity": 36,
+        "light": 0.05,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 1,
+        "tempC": 10,
+        "salinity": 36,
+        "light": 0,
+        "nutrient": 0.9
+      }
+    ],
+    "thermocline": {
+      "depth": 0.4,
+      "sharpness": 0.6
+    },
+    "chemical": {
+      "peakDepth": 0.85,
+      "spread": 0.15,
+      "strength": 0.8,
+      "color": "#3a6b52"
+    }
+  },
+  "env": {
+    "day.lengthSec": 260,
+    "day.latitude": 27,
+    "day.dayOfYear": 220,
+    "diel.tempBase": 18,
+    "diel.tempAmp": 4,
+    "diel.foodFloor": 0.3,
+    "diel.q10": 2.1,
+    "substrate.count": 95,
+    "substrate.sizeMin": 34,
+    "substrate.sizeMax": 190,
+    "substrate.lifeMin": 110,
+    "substrate.lifeMax": 260,
+    "substrate.driftMin": 6,
+    "substrate.driftMax": 14,
+    "predator.count": 5,
+    "predator.senseRange": 150,
+    "predator.metabolism": 9,
+    "phage.greenCount": 16,
+    "phage.goldCount": 3,
+    "cell.startEnergy": 100,
+    "cell.divideThreshold": 170,
+    "cell.chemoRange0": 320,
+    "cell.chemoBias": 1.1,
+    "column.chemRate": 4.5,
+    "column.photoRate": 9,
+    "cell.uptake": 14,
+    "cell.swimCost": 1.3,
+    "respirationBase": 0.85
+  },
+  "meta": {
+    "title": "Oil Slick Overlap: Alkane Feeders Meet the Sulfide Plume",
+    "date": "2026-09-08",
+    "lesson": "After a subsea oil blowout, hydrocarbon droplets rise and disperse through the water column while a deeper sulfide-rich plume seeps from cracked seafloor sediments below. Alkane-degrading bacteria (like Alcanivorax and Oleispira) cluster at the oily surface layer where light and dissolved oxygen are high, using alkane hydroxylase to crack long hydrocarbon chains into usable carbon. Deeper down, chemolithotrophic sulfide-oxidizers exploit the seep plume where no light reaches. The narrow band where both a faint photic gradient and rising chemical plume overlap is where anoxygenic phototrophs -- needing both light AND reduced sulfur -- can eke out a living, exactly as in a Winogradsky column, but here forced open by a real spill site interacting with a natural seep below it. Players learn how a single water column can host two entirely different feeding economies stacked on top of each other, and how a pollution event reshapes which one wins.",
+    "citation": "Inspired by Deepwater Horizon-adjacent natural seep interactions in the Gulf of Mexico slope; sulfide-oxidizing mat ecology from Gulf cold seeps.",
+    "difficulty": "hard",
+    "realWorldBasis": "Gulf of Mexico slope: oil-degrading Alcanivorax/Oleispira blooms overlapping natural cold-seep sulfide plumes near Deepwater Horizon-area seafloor cracks."
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "alkanivorax",
+        "label": "Alcanivorax-like Oil Feeder",
+        "color": "#c9a227",
+        "genome": {
+          "enzLvl": [
+            3,
+            1,
+            1
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "sulfoxidizer",
+        "label": "Sulfide-Oxidizing Anoxygenic Phototroph",
+        "color": "#7a3f8b",
+        "genome": {
+          "enzLvl": [
+            0,
+            0,
+            1
+          ],
+          "chemoLevel": 0,
+          "antibiotic": 0,
+          "eps": 0,
+          "crispr": false,
+          "twitching": false,
+          "phototroph": true,
+          "chemolithotroph": true
+        },
+        "immigrateWeight": 3
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "shelf_diatom",
+        "label": "Shelf Diatom",
+        "color": "#8fae7a",
+        "form": "centric",
+        "sizeUm": 35,
+        "chain": 3,
+        "count": 40
+      }
+    ]
+  },
+  "particles": {
+    "oilDroplet": {
+      "label": "Oil Droplet",
+      "mix": [
+        0.85,
+        0.1,
+        0.05
+      ],
+      "shape": "aggregate",
+      "weight": 7,
+      "squash": 1
+    },
+    "marineSnow": {
+      "label": "Marine Snow Floc",
+      "mix": [
+        0.2,
+        0.4,
+        0.4
+      ],
+      "shape": "aggregate",
+      "weight": 3,
+      "squash": 1
+    }
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Crude Oil Hydrocarbons",
+      "enzymeLabel": "Alkane Hydroxylase",
+      "color": "#3a2e1a"
+    },
+    {
+      "index": 1,
+      "label": "Dissolved Protein",
+      "enzymeLabel": "Protease",
+      "color": "#b5533c"
+    },
+    {
+      "index": 2,
+      "label": "Detrital Carbohydrate",
+      "enzymeLabel": "Glycosidase",
+      "color": "#4c8f6b"
+    }
+  ],
+  "schema": "bacteria-scenario",
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 220,
+      "color": "#2e2a24",
+      "label": "Seep Sediment Floor",
+      "roughness": 0.6,
+      "porosity": 0.4,
+      "poreSize": 40,
+      "featureSize": 300,
+      "spires": 0.2,
+      "spireHeight": 180,
+      "spireWidth": 70,
+      "warp": 0.3
+    }
+  ],
+  "version": 1
+}

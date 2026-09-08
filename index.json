@@ -396,6 +396,14 @@
       "file": "scenarios/daily-2026-09-07.json"
     },
     {
+      "id": "daily-2026-09-08",
+      "title": "Oil Slick Overlap: Alkane Feeders Meet the Sulfide Plume",
+      "date": "2026-09-08",
+      "difficulty": "hard",
+      "realWorldBasis": "Gulf of Mexico slope: oil-degrading Alcanivorax/Oleispira blooms overlapping natural cold-seep sulfide plumes near Deepwater Horizon-area seafloor cracks.",
+      "file": "scenarios/daily-2026-09-08.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
