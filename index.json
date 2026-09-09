@@ -404,6 +404,14 @@
       "file": "scenarios/daily-2026-09-08.json"
     },
     {
+      "id": "daily-2026-09-09",
+      "title": "Icefish Reef: Nitrogen Fixers of a Tropical Lagoon Sandflat",
+      "date": "2026-09-09",
+      "difficulty": "normal",
+      "realWorldBasis": "Tropical lagoon sandflat cyanobacterial mat, diel nitrogen fixation cycle",
+      "file": "scenarios/daily-2026-09-09.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",

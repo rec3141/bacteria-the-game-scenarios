@@ -1,0 +1,245 @@
+{
+  "meta": {
+    "title": "Icefish Reef: Nitrogen Fixers of a Tropical Lagoon Sandflat",
+    "date": "2026-09-09",
+    "lesson": "On carbonate sandflats fringing tropical lagoons, sunlight penetrates shallow clear water and drives dense microbial mats dominated by nitrogen-fixing cyanobacteria (e.g. Lyngbya, Symploca) living alongside heterotrophic decomposers that break down trapped seagrass detritus. These mats form a tight day/night cycle: photosynthesis and nitrogen fixation peak at midday, while at night the mat's oxygen collapses and fermentative and sulfate-reducing bacteria take over the breakdown of protein- and carbohydrate-rich detritus. Grazing gastropods and small crustaceans graze the mat surface, kept in check by the mat's own EPS matrix, which the bacteria deploy to bind sand grains and resist being torn away by waves and grazers. This scenario captures the sharp day/night flip in metabolism and the constant tug-of-war between fast bloom growth in full tropical sun and the physical/biological pressure trying to erode the mat.",
+    "citation": "Based on studies of tropical carbonate sandflat cyanobacterial mats (e.g. Bahamas, Great Barrier Reef lagoon flats) and their diel N2-fixation cycles.",
+    "difficulty": "normal",
+    "realWorldBasis": "Tropical lagoon sandflat cyanobacterial mat, diel nitrogen fixation cycle"
+  },
+  "env": {
+    "day.lengthSec": 220,
+    "day.latitude": -18,
+    "day.dayOfYear": 355,
+    "diel.tempBase": 28,
+    "diel.tempAmp": 3,
+    "diel.foodFloor": 0.3,
+    "diel.q10": 2.2,
+    "diel.lightGamma": 2.2,
+    "diel.waterDay.0": 40,
+    "diel.waterDay.1": 130,
+    "diel.waterDay.2": 120,
+    "diel.waterNight.0": 4,
+    "diel.waterNight.1": 14,
+    "diel.waterNight.2": 26,
+    "diel.goldTint": 0.22,
+    "substrate.count": 75,
+    "substrate.sizeMin": 26,
+    "substrate.sizeMax": 150,
+    "substrate.lifeMin": 90,
+    "substrate.lifeMax": 220,
+    "substrate.driftMin": 6,
+    "substrate.driftMax": 14,
+    "cell.startEnergy": 120,
+    "cell.divideThreshold": 170,
+    "cell.chemoRange0": 260,
+    "cell.chemoBias": 1.1,
+    "eps.cost": 3.5,
+    "eps.maxCount": 300,
+    "eps.threatRange": 110,
+    "predator.count": 6,
+    "predator.senseRange": 150,
+    "predator.wanderSpeed": 30,
+    "predator.chaseSpeed": 55,
+    "predator.metabolism": 9,
+    "phage.greenCount": 14,
+    "phage.goldCount": 3,
+    "column.chemRate": 4,
+    "column.photoRate": 10
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid detritus flakes",
+      "enzymeLabel": "Lipase",
+      "color": "#d9a441"
+    },
+    {
+      "index": 1,
+      "label": "Seagrass protein wrack",
+      "enzymeLabel": "Protease",
+      "color": "#7fae5c"
+    },
+    {
+      "index": 2,
+      "label": "Carbohydrate mat exudate",
+      "enzymeLabel": "Glycanase",
+      "color": "#4fa3c4"
+    }
+  ],
+  "particles": {
+    "detritusFlake": {
+      "label": "Seagrass detritus flake",
+      "mix": [
+        0.2,
+        0.5,
+        0.3
+      ],
+      "shape": "shard",
+      "weight": 5
+    },
+    "matExudate": {
+      "label": "Cyanobacterial mat exudate clump",
+      "mix": [
+        0.1,
+        0.2,
+        0.7
+      ],
+      "shape": "aggregate",
+      "weight": 5
+    },
+    "sandGrainFilm": {
+      "label": "Sand-grain biofilm speck",
+      "mix": [
+        0.15,
+        0.25,
+        0.6
+      ],
+      "shape": "ellipse",
+      "squash": 0.6,
+      "weight": 3
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase burst",
+      "color": "#d9a441",
+      "weight": 4
+    },
+    "enzyme1": {
+      "label": "Protease burst",
+      "color": "#7fae5c",
+      "weight": 5
+    },
+    "enzyme2": {
+      "label": "Glycanase burst",
+      "color": "#4fa3c4",
+      "weight": 6
+    },
+    "chemotaxis": {
+      "label": "Light/nutrient sensing",
+      "color": "#f2e394",
+      "weight": 5
+    },
+    "antibiotic": {
+      "label": "Allelopathic toxin",
+      "color": "#c1446e",
+      "weight": 3
+    },
+    "eps": {
+      "label": "Sand-binding EPS mat",
+      "color": "#b8860b",
+      "weight": 6
+    },
+    "crispr": {
+      "label": "CRISPR immunity",
+      "color": "#8a8a8a",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Twitching motility",
+      "color": "#5f9ea0",
+      "weight": 3
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "founder",
+        "label": "Lyngbya-like mat cyanobacterium",
+        "color": "#2e8b57",
+        "genome": {
+          "enzLvl": [
+            1,
+            2,
+            2
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 3,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "decomposer",
+        "label": "Heterotrophic mat decomposer",
+        "color": "#a0522d",
+        "genome": {
+          "enzLvl": [
+            2,
+            3,
+            1
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 4
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "sandflatPennate",
+        "label": "Sandflat pennate diatom (Navicula)",
+        "color": "#c2b280",
+        "form": "pennate",
+        "sizeUm": 30,
+        "chain": 2,
+        "count": 40,
+        "toxin": null
+      }
+    ]
+  },
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 120,
+      "color": "#e8dcb5",
+      "label": "Carbonate sand and mat crust",
+      "roughness": 0.4,
+      "porosity": 0.35,
+      "poreSize": 20,
+      "featureSize": 300,
+      "spires": 0,
+      "spireHeight": 0,
+      "spireWidth": 10,
+      "warp": 0.3
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 29,
+        "salinity": 36,
+        "light": 1,
+        "nutrient": 0.5
+      },
+      {
+        "depth": 0.5,
+        "tempC": 28,
+        "salinity": 36,
+        "light": 0.85,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 1,
+        "tempC": 27,
+        "salinity": 37,
+        "light": 0.5,
+        "nutrient": 0.8
+      }
+    ],
+    "thermocline": {
+      "depth": 0.8,
+      "sharpness": 0.2
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}
