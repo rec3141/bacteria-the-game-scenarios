@@ -1,0 +1,259 @@
+{
+  "meta": {
+    "title": "Deep Chlorophyll Maximum: Diatom-Bacteria Coupling at the Nutricline",
+    "date": "2026-09-10",
+    "lesson": "In stratified subtropical waters, a thin layer called the deep chlorophyll maximum (DCM) forms where just enough light filters down to meet nutrients diffusing up from below the thermocline. Diatoms concentrate here, leaking dissolved organic carbon (exudate) that feeds heterotrophic bacteria clustered around each chain. This scenario asks you to play a copiotrophic bacterium exploiting that exudate halo, competing with grazers drawn to the same rich layer, while diatom cells above and below you sink slowly out of the light they need. The lesson: primary production and bacterial heterotrophy are tightly spatially coupled at sharp gradients, not spread evenly through the water column.",
+    "citation": "Cullen, J.J. (2015). Subsurface Chlorophyll Maximum Layers: Enduring Enigma or Mature Science? Annual Review of Marine Science.",
+    "difficulty": "normal",
+    "realWorldBasis": "Deep chlorophyll maximum layers in stratified oligotrophic seas (e.g. subtropical gyres, Mediterranean)"
+  },
+  "env": {
+    "day.lengthSec": 300,
+    "day.latitude": 32,
+    "day.dayOfYear": 200,
+    "diel.tempBase": 21,
+    "diel.tempAmp": 3,
+    "diel.foodFloor": 0.3,
+    "diel.q10": 2.1,
+    "diel.waterDay.0": 20,
+    "diel.waterDay.1": 90,
+    "diel.waterDay.2": 100,
+    "diel.waterNight.0": 3,
+    "diel.waterNight.1": 12,
+    "diel.waterNight.2": 28,
+    "substrate.count": 85,
+    "substrate.sizeMin": 26,
+    "substrate.sizeMax": 150,
+    "substrate.lifeMin": 90,
+    "substrate.lifeMax": 220,
+    "substrate.driftMin": 6,
+    "substrate.driftMax": 14,
+    "substrate.minPerRes": 3,
+    "cell.chemoRange0": 340,
+    "cell.chemoRangePer": 160,
+    "cell.chemoBias": 1.1,
+    "cell.uptake": 16,
+    "cell.startEnergy": 100,
+    "cell.divideThreshold": 165,
+    "respirationBase": 0.85,
+    "predator.count": 5,
+    "predator.senseRange": 190,
+    "predator.wanderSpeed": 22,
+    "predator.chaseSpeed": 40,
+    "predator.metabolism": 9,
+    "phage.greenCount": 16,
+    "phage.goldCount": 3,
+    "column.chemRate": 3,
+    "column.photoRate": 9
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Diatom Exudate Lipids",
+      "enzymeLabel": "Lipase",
+      "color": "#c9a227"
+    },
+    {
+      "index": 1,
+      "label": "Sinking Protein Aggregates",
+      "enzymeLabel": "Protease",
+      "color": "#7fa8d9"
+    },
+    {
+      "index": 2,
+      "label": "Exuded Glycan Carbon",
+      "enzymeLabel": "Glycanase",
+      "color": "#6fbf73"
+    }
+  ],
+  "particles": {
+    "exudateFloc": {
+      "label": "DOC Exudate Floc",
+      "mix": [
+        1,
+        1,
+        3
+      ],
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 6
+    },
+    "sinkingAggregate": {
+      "label": "Sinking Diatom Aggregate",
+      "mix": [
+        2,
+        2,
+        1
+      ],
+      "shape": "shard",
+      "squash": 0.6,
+      "weight": 4
+    },
+    "cellDebris": {
+      "label": "Frustule-Adjacent Debris",
+      "mix": [
+        1,
+        3,
+        2
+      ],
+      "shape": "ellipse",
+      "squash": 0.5,
+      "weight": 3
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase Burst",
+      "color": "#c9a227",
+      "weight": 5
+    },
+    "enzyme1": {
+      "label": "Protease Burst",
+      "color": "#7fa8d9",
+      "weight": 5
+    },
+    "enzyme2": {
+      "label": "Glycanase Burst",
+      "color": "#6fbf73",
+      "weight": 7
+    },
+    "chemotaxis": {
+      "label": "Gradient Tracking",
+      "color": "#ffffff",
+      "weight": 6
+    },
+    "antibiotic": {
+      "label": "Antibiotic Release",
+      "color": "#d9534f",
+      "weight": 3
+    },
+    "eps": {
+      "label": "EPS Shield",
+      "color": "#a488c9",
+      "weight": 4
+    },
+    "crispr": {
+      "label": "CRISPR Immunity",
+      "color": "#5bc0de",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Twitching Motility",
+      "color": "#f0ad4e",
+      "weight": 2
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "copiotroph1",
+        "label": "Alteromonas-like Exudate Specialist",
+        "color": "#4fae6e",
+        "genome": {
+          "enzLvl": [
+            1,
+            1,
+            3
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "generalist1",
+        "label": "Roseobacter-like Generalist",
+        "color": "#7fa8d9",
+        "genome": {
+          "enzLvl": [
+            2,
+            2,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "dcm_diatom1",
+        "label": "Chaetoceros sp. (DCM chain)",
+        "color": "#c9915c",
+        "form": "centric",
+        "sizeUm": 30,
+        "chain": 6,
+        "count": 45
+      },
+      {
+        "id": "dcm_pennate1",
+        "label": "Pseudo-nitzschia sp. (ribbon)",
+        "color": "#b58a4a",
+        "form": "pennate",
+        "sizeUm": 45,
+        "chain": 5,
+        "count": 20,
+        "toxin": {
+          "label": "Domoic Acid Release",
+          "color": "#e0c060",
+          "radius": 60,
+          "potency": 40,
+          "life": 8
+        }
+      }
+    ]
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 24,
+        "salinity": 36,
+        "light": 1,
+        "nutrient": 0.1
+      },
+      {
+        "depth": 0.3,
+        "tempC": 22,
+        "salinity": 36,
+        "light": 0.6,
+        "nutrient": 0.25
+      },
+      {
+        "depth": 0.55,
+        "tempC": 20,
+        "salinity": 36.2,
+        "light": 0.3,
+        "nutrient": 0.55
+      },
+      {
+        "depth": 0.75,
+        "tempC": 16,
+        "salinity": 36.4,
+        "light": 0.12,
+        "nutrient": 0.8
+      },
+      {
+        "depth": 1,
+        "tempC": 12,
+        "salinity": 36.6,
+        "light": 0.03,
+        "nutrient": 1
+      }
+    ],
+    "thermocline": {
+      "depth": 0.55,
+      "sharpness": 0.7
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}
