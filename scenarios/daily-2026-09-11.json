@@ -1,0 +1,249 @@
+{
+  "meta": {
+    "title": "Fever Reef: Zooxanthellae Expulsion on the Flat",
+    "date": "2026-09-11",
+    "lesson": "When reef water gets too hot, corals expel their symbiotic algae and go pale and stressed. This is not the end of the story - it is the opening for opportunists. On the newly bare, mucus-slick coral surface, copiotrophic bacteria that were minor residents suddenly find an unguarded buffet of exuded lipid and protein. This level puts you inside that mucus layer during the first hours of a bleaching event: warm, lit, food-rich near the coral surface, but crawling with grazers drawn in by the smell of a reef in trouble, and seeded with phage ready to crash whichever lineage blooms fastest. Success means feeding fast on the lipid-rich mucus without drawing the pack, and knowing when to hide in EPS versus outrun the grazers.",
+    "citation": "Great Barrier Reef 2016/2017 mass bleaching; opportunistic Vibrio spp. bloom on stressed coral mucus (Bourne et al., Glasser et al.)",
+    "difficulty": "hard",
+    "realWorldBasis": "Shallow reef flat during a marine heatwave bleaching event, Great Barrier Reef"
+  },
+  "env": {
+    "day.latitude": -18,
+    "day.dayOfYear": 15,
+    "day.lengthSec": 260,
+    "diel.tempBase": 31,
+    "diel.tempAmp": 2.5,
+    "diel.foodFloor": 0.5,
+    "diel.q10": 2.4,
+    "diel.q10RefC": 20,
+    "diel.waterDay.0": 40,
+    "diel.waterDay.1": 120,
+    "diel.waterDay.2": 110,
+    "diel.waterNight.0": 4,
+    "diel.waterNight.1": 20,
+    "diel.waterNight.2": 26,
+    "diel.grazeNight": 1.4,
+    "substrate.count": 78,
+    "substrate.sizeMin": 26,
+    "substrate.sizeMax": 150,
+    "substrate.lifeMin": 60,
+    "substrate.lifeMax": 150,
+    "substrate.bloomEvery": 0.35,
+    "substrate.driftMin": 4,
+    "substrate.driftMax": 12,
+    "respirationBase": 1.05,
+    "cell.startEnergy": 100,
+    "cell.divideThreshold": 165,
+    "cell.uptake": 16,
+    "cell.swimCost": 1.35,
+    "predator.count": 7,
+    "predator.senseRange": 210,
+    "predator.chaseSpeed": 50,
+    "predator.wanderSpeed": 30,
+    "predator.mealEnergy": 62,
+    "predator.metabolism": 11,
+    "predator.minCount": 4,
+    "predator.immigratePerPrey": 0.06,
+    "phage.greenCount": 24,
+    "phage.goldCount": 3,
+    "phage.hostTolerance": 2,
+    "phage.adsorbBase": 0.32,
+    "eps.threatRange": 110,
+    "eps.cost": 3.5,
+    "eps.lifePerLevel": 5
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Coral Mucus Lipid",
+      "enzymeLabel": "Lipase (mucopolysaccharide-lipid)",
+      "color": "#e8b86d"
+    },
+    {
+      "index": 1,
+      "label": "Sloughed Tissue Protein",
+      "enzymeLabel": "Protease",
+      "color": "#d9705a"
+    },
+    {
+      "index": 2,
+      "label": "Algal Exudate Sugar",
+      "enzymeLabel": "Glycosidase",
+      "color": "#8fd3c0"
+    }
+  ],
+  "particles": {
+    "mucusGlob": {
+      "label": "Bleached Mucus Glob",
+      "mix": [
+        70,
+        25,
+        5
+      ],
+      "shape": "aggregate",
+      "weight": 6
+    },
+    "tissueShred": {
+      "label": "Sloughed Tissue Shred",
+      "mix": [
+        15,
+        70,
+        15
+      ],
+      "shape": "shard",
+      "weight": 3
+    },
+    "algalDebris": {
+      "label": "Expelled Zooxanthellae Debris",
+      "mix": [
+        10,
+        10,
+        80
+      ],
+      "shape": "ellipse",
+      "squash": 0.6,
+      "weight": 2
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Mucus Lipase",
+      "color": "#e8b86d",
+      "weight": 8
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#d9705a",
+      "weight": 5
+    },
+    "enzyme2": {
+      "label": "Glycosidase",
+      "color": "#8fd3c0",
+      "weight": 3
+    },
+    "chemotaxis": {
+      "label": "Mucus-Gradient Sensing",
+      "color": "#f2f2f2",
+      "weight": 6
+    },
+    "antibiotic": {
+      "label": "Vibriocin",
+      "color": "#b23a48",
+      "weight": 4
+    },
+    "eps": {
+      "label": "Biofilm Slick",
+      "color": "#5c8a72",
+      "weight": 6
+    },
+    "crispr": {
+      "label": "CRISPR Immunity",
+      "color": "#4477aa",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Pilus Twitching",
+      "color": "#aa77cc",
+      "weight": 3
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "vibrio_op",
+        "label": "Opportunistic Vibrio",
+        "color": "#e07a3e",
+        "genome": {
+          "enzLvl": [
+            3,
+            2,
+            1
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 1,
+          "eps": 2,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "resident_commensal",
+        "label": "Resident Commensal",
+        "color": "#6fa89c",
+        "genome": {
+          "enzLvl": [
+            1,
+            1,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": true,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "expelled_symbiont",
+        "label": "Expelled Zooxanthella (dying symbiont)",
+        "color": "#c99a3a",
+        "form": "centric",
+        "sizeUm": 10,
+        "chain": 1,
+        "count": 40
+      }
+    ]
+  },
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 140,
+      "color": "#d8c9a5",
+      "label": "Bleached Coral Skeleton",
+      "roughness": 0.6,
+      "porosity": 0.35,
+      "poreSize": 40,
+      "featureSize": 220,
+      "spires": 0.3,
+      "spireHeight": 200,
+      "spireWidth": 70,
+      "warp": 0.65
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 31.5,
+        "salinity": 35,
+        "light": 1,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 0.5,
+        "tempC": 31,
+        "salinity": 35,
+        "light": 0.85,
+        "nutrient": 0.7
+      },
+      {
+        "depth": 1,
+        "tempC": 30.5,
+        "salinity": 35.5,
+        "light": 0.6,
+        "nutrient": 0.8
+      }
+    ],
+    "thermocline": {
+      "depth": 0.8,
+      "sharpness": 0.2
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}
