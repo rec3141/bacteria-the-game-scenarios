@@ -428,6 +428,14 @@
       "file": "scenarios/daily-2026-09-11.json"
     },
     {
+      "id": "daily-2026-09-12",
+      "title": "Ice Shelf Polynya: Diatom Bloom Over an Antarctic Sponge Ground",
+      "date": "2026-09-12",
+      "difficulty": "normal",
+      "realWorldBasis": "Antarctic coastal polynya spring diatom bloom and benthic-pelagic carbon coupling",
+      "file": "scenarios/daily-2026-09-12.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",

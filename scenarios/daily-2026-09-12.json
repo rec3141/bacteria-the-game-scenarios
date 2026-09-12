@@ -1,0 +1,274 @@
+{
+  "meta": {
+    "title": "Ice Shelf Polynya: Diatom Bloom Over an Antarctic Sponge Ground",
+    "date": "2026-09-12",
+    "lesson": "A coastal Antarctic polynya opens each spring when wind pushes sea ice offshore, letting light flood a water column that has been dark all winter. Diatoms bloom explosively in the surface layer while their sinking cells and exudates feed a bacterial community below, including chitin- and glycan-degrading heterotrophs that make a living decomposing frustules and detritus. Deeper still, near the seafloor, sponge-associated and free-living bacteria scavenge whatever settles past the bloom. This level asks you to survive as a heterotrophic decomposer riding the pulse of carbohydrate-rich diatom fallout, in cold water where every metabolic step is slowed by Q10, while pennate diatoms glide over the sediment surface and centric diatoms sink past you in chains.",
+    "citation": "Cape Bathurst / McMurdo Sound polynya spring bloom studies; Antarctic benthic-pelagic coupling literature.",
+    "difficulty": "normal",
+    "realWorldBasis": "Antarctic coastal polynya spring diatom bloom and benthic-pelagic carbon coupling"
+  },
+  "env": {
+    "day.lengthSec": 300,
+    "day.latitude": -75,
+    "day.dayOfYear": 300,
+    "day.startHour": 8,
+    "diel.tempBase": -1.5,
+    "diel.tempAmp": 1.5,
+    "diel.foodFloor": 0.5,
+    "diel.q10": 2.2,
+    "diel.q10RefC": 0,
+    "diel.waterNight.0": 3,
+    "diel.waterNight.1": 12,
+    "diel.waterNight.2": 28,
+    "diel.waterDay.0": 40,
+    "diel.waterDay.1": 110,
+    "diel.waterDay.2": 120,
+    "diel.lightGamma": 1.4,
+    "diel.twilight": 0.3,
+    "respirationBase": 0.6,
+    "substrate.count": 95,
+    "substrate.sizeMin": 26,
+    "substrate.sizeMax": 170,
+    "substrate.lifeMin": 160,
+    "substrate.lifeMax": 340,
+    "substrate.driftMin": 5,
+    "substrate.driftMax": 12,
+    "substrate.moteEnergy": 8,
+    "cell.thrust": 15000,
+    "cell.dragRate": 55,
+    "cell.maxSpeed": 180,
+    "cell.uptake": 12,
+    "cell.startEnergy": 100,
+    "cell.divideThreshold": 165,
+    "cell.cystBelow": 18,
+    "cell.cystWake": 50,
+    "predator.count": 3,
+    "predator.wanderSpeed": 16,
+    "predator.chaseSpeed": 28,
+    "predator.metabolism": 7,
+    "phage.greenCount": 12,
+    "phage.goldCount": 3
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Diatom lipid droplets",
+      "enzymeLabel": "Lipase",
+      "color": "#8fae7a"
+    },
+    {
+      "index": 1,
+      "label": "Sponge mesohyl protein detritus",
+      "enzymeLabel": "Protease",
+      "color": "#c98f6a"
+    },
+    {
+      "index": 2,
+      "label": "Frustule glycan / chrysolaminarin",
+      "enzymeLabel": "Glycanase",
+      "color": "#d8e6c0"
+    }
+  ],
+  "particles": {
+    "diatomFallout": {
+      "label": "Sinking diatom aggregate",
+      "mix": [
+        1,
+        1,
+        5
+      ],
+      "shape": "aggregate",
+      "weight": 6
+    },
+    "spongeDetritus": {
+      "label": "Sponge mesohyl fragment",
+      "mix": [
+        1,
+        4,
+        1
+      ],
+      "shape": "shard",
+      "weight": 3
+    },
+    "frustuleFragment": {
+      "label": "Broken frustule shard",
+      "mix": [
+        0,
+        1,
+        4
+      ],
+      "shape": "shard",
+      "squash": 0.4,
+      "weight": 4
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase burst",
+      "color": "#8fae7a",
+      "weight": 4
+    },
+    "enzyme1": {
+      "label": "Protease burst",
+      "color": "#c98f6a",
+      "weight": 4
+    },
+    "enzyme2": {
+      "label": "Glycanase burst",
+      "color": "#d8e6c0",
+      "weight": 7
+    },
+    "chemotaxis": {
+      "label": "Glycan taxis",
+      "color": "#a0d0ff",
+      "weight": 5
+    },
+    "eps": {
+      "label": "Cold-adapted EPS sheath",
+      "color": "#e0f0ff",
+      "weight": 4
+    },
+    "twitching": {
+      "label": "Sediment twitching",
+      "color": "#c0c0c0",
+      "weight": 3
+    },
+    "antibiotic": {
+      "label": "Bacteriocin",
+      "color": "#ff8080",
+      "weight": 2
+    },
+    "crispr": {
+      "label": "CRISPR immunity",
+      "color": "#ffe080",
+      "weight": 2
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "founder",
+        "label": "Polaribacter-like glycan decomposer",
+        "color": "#d8e6c0",
+        "genome": {
+          "enzLvl": [
+            1,
+            1,
+            3
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "protein_scavenger",
+        "label": "Sponge-detritus protease specialist",
+        "color": "#c98f6a",
+        "genome": {
+          "enzLvl": [
+            1,
+            3,
+            1
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "centric_bloomer",
+        "label": "Thalassiosira sp. (centric)",
+        "color": "#bfe3d0",
+        "form": "centric",
+        "sizeUm": 40,
+        "chain": 6,
+        "count": 90
+      },
+      {
+        "id": "pennate_grazer",
+        "label": "Fragilariopsis sp. (pennate)",
+        "color": "#e8f2d8",
+        "form": "pennate",
+        "sizeUm": 25,
+        "chain": 4,
+        "count": 55
+      }
+    ]
+  },
+  "terrain": [
+    {
+      "at": "top",
+      "thickness": 90,
+      "color": "#dceaf0",
+      "label": "Polynya-thinned pack ice",
+      "roughness": 0.5,
+      "porosity": 0.25,
+      "poreSize": 30,
+      "featureSize": 300,
+      "spires": 0,
+      "warp": 0
+    },
+    {
+      "at": "bottom",
+      "thickness": 140,
+      "color": "#4a4038",
+      "label": "Sediment / sponge ground",
+      "roughness": 0.6,
+      "porosity": 0.4,
+      "poreSize": 40,
+      "featureSize": 250,
+      "spires": 0.15,
+      "spireHeight": 120,
+      "spireWidth": 60,
+      "warp": 0.3
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": -1.7,
+        "salinity": 34,
+        "light": 1,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 0.3,
+        "tempC": -1.8,
+        "salinity": 34.2,
+        "light": 0.55,
+        "nutrient": 0.7
+      },
+      {
+        "depth": 0.6,
+        "tempC": -1.9,
+        "salinity": 34.4,
+        "light": 0.15,
+        "nutrient": 0.85
+      },
+      {
+        "depth": 1,
+        "tempC": -1.9,
+        "salinity": 34.5,
+        "light": 0.02,
+        "nutrient": 1
+      }
+    ],
+    "thermocline": {
+      "depth": 0.4,
+      "sharpness": 0.3
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}
