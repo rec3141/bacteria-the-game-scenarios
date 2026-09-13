@@ -436,6 +436,14 @@
       "file": "scenarios/daily-2026-09-12.json"
     },
     {
+      "id": "daily-2026-09-13",
+      "title": "Punta Gorda Estuary: Nitrogen Fixers of a Mangrove Peat Bank",
+      "date": "2026-09-13",
+      "difficulty": "normal",
+      "realWorldBasis": "Mangrove peat sediment diazotrophic bacteria, Caribbean/tropical estuary root zones",
+      "file": "scenarios/daily-2026-09-13.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",

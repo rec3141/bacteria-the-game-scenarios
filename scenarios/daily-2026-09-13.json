@@ -1,0 +1,241 @@
+{
+  "meta": {
+    "title": "Punta Gorda Estuary: Nitrogen Fixers of a Mangrove Peat Bank",
+    "date": "2026-09-13",
+    "lesson": "In tropical mangrove estuaries, oxygen-starved peat sediments host diazotrophic bacteria that fix atmospheric nitrogen to compensate for the system's chronic nitrogen limitation. These sediments are rich in decaying mangrove leaf litter (mostly structural carbohydrate - cellulose and lignin-derived polysaccharide) with only modest protein and lipid content from associated microfauna. Tidal pulses flood the peat twice daily, briefly reoxygenating the surface while the bulk stays anoxic and porous with root and crab burrows. This level asks a diazotroph-like generalist to specialize on carbohydrate-rich peat litter while contending with slow diffusion, tidal food pulses, and burrow-dwelling protist grazers hiding in the sediment's own porosity.",
+    "citation": "Based on studies of mangrove peat nitrogen fixation and root-zone microbial ecology, e.g. Belize/Florida mangrove sediment diazotroph surveys.",
+    "difficulty": "normal",
+    "realWorldBasis": "Mangrove peat sediment diazotrophic bacteria, Caribbean/tropical estuary root zones"
+  },
+  "env": {
+    "day.latitude": 17,
+    "day.dayOfYear": 200,
+    "day.lengthSec": 300,
+    "diel.tempBase": 27,
+    "diel.tempAmp": 3,
+    "diel.foodFloor": 0.45,
+    "diel.q10": 2.1,
+    "diel.q10RefC": 27,
+    "diel.waterDay.0": 40,
+    "diel.waterDay.1": 70,
+    "diel.waterDay.2": 55,
+    "diel.waterNight.0": 4,
+    "diel.waterNight.1": 12,
+    "diel.waterNight.2": 10,
+    "substrate.count": 78,
+    "substrate.sizeMin": 34,
+    "substrate.sizeMax": 170,
+    "substrate.lifeMin": 100,
+    "substrate.lifeMax": 240,
+    "substrate.driftMin": 5,
+    "substrate.driftMax": 12,
+    "substrate.minPerRes": 3,
+    "respirationBase": 0.75,
+    "cell.uptake": 12,
+    "cell.chemoRange0": 250,
+    "cell.chemoBias": 1.1,
+    "cell.runMin": 2.2,
+    "cell.runMax": 4,
+    "predator.count": 5,
+    "predator.wanderSpeed": 18,
+    "predator.chaseSpeed": 32,
+    "predator.senseRange": 140,
+    "predator.metabolism": 8,
+    "eps.threatRange": 110,
+    "eps.cost": 3.5,
+    "phage.greenCount": 14,
+    "phage.goldCount": 3
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Crab-molt lipid film",
+      "enzymeLabel": "lipase",
+      "color": "#c9a86a"
+    },
+    {
+      "index": 1,
+      "label": "Root exudate protein",
+      "enzymeLabel": "protease",
+      "color": "#b06d6d"
+    },
+    {
+      "index": 2,
+      "label": "Mangrove leaf peat",
+      "enzymeLabel": "cellulase",
+      "color": "#7a5c2e"
+    }
+  ],
+  "particles": {
+    "peatLitter": {
+      "label": "Decaying mangrove leaf fragment",
+      "mix": [
+        1,
+        1,
+        8
+      ],
+      "shape": "shard",
+      "squash": 1,
+      "weight": 7
+    },
+    "rootExudate": {
+      "label": "Root exudate clump",
+      "mix": [
+        1,
+        5,
+        2
+      ],
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 2
+    },
+    "crabMolt": {
+      "label": "Crab molt fragment",
+      "mix": [
+        4,
+        3,
+        1
+      ],
+      "shape": "shard",
+      "squash": 0.6,
+      "weight": 1
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase burst",
+      "color": "#c9a86a",
+      "weight": 2
+    },
+    "enzyme1": {
+      "label": "Protease burst",
+      "color": "#b06d6d",
+      "weight": 3
+    },
+    "enzyme2": {
+      "label": "Cellulase burst",
+      "color": "#7a5c2e",
+      "weight": 8
+    },
+    "chemotaxis": {
+      "label": "Peat-litter tracking",
+      "color": "#4d7a3a",
+      "weight": 6
+    },
+    "antibiotic": {
+      "label": "Antimicrobial exudate",
+      "color": "#8e44ad",
+      "weight": 3
+    },
+    "eps": {
+      "label": "Peat biofilm matrix",
+      "color": "#5b4636",
+      "weight": 5
+    },
+    "crispr": {
+      "label": "Phage immunity",
+      "color": "#2e86c1",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Burrow-wall pili crawl",
+      "color": "#d4ac0d",
+      "weight": 4
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "diazotroph_founder",
+        "label": "Peat diazotroph",
+        "color": "#7a5c2e",
+        "genome": {
+          "enzLvl": [
+            1,
+            1,
+            3
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 1,
+          "eps": 2,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "sulfate_competitor",
+        "label": "Sulfate-reducing rival",
+        "color": "#555555",
+        "genome": {
+          "enzLvl": [
+            0,
+            2,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 2,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 2
+      }
+    ]
+  },
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 260,
+      "color": "#4a3520",
+      "label": "Mangrove peat bank",
+      "roughness": 0.6,
+      "porosity": 0.45,
+      "poreSize": 40,
+      "featureSize": 300,
+      "spires": 0.1,
+      "spireHeight": 120,
+      "spireWidth": 60,
+      "warp": 0.55
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 29,
+        "salinity": 22,
+        "light": 0.9,
+        "nutrient": 0.3
+      },
+      {
+        "depth": 0.4,
+        "tempC": 28,
+        "salinity": 24,
+        "light": 0.5,
+        "nutrient": 0.5
+      },
+      {
+        "depth": 0.8,
+        "tempC": 27,
+        "salinity": 26,
+        "light": 0.15,
+        "nutrient": 0.8
+      },
+      {
+        "depth": 1,
+        "tempC": 26,
+        "salinity": 27,
+        "light": 0.05,
+        "nutrient": 0.95
+      }
+    ],
+    "thermocline": {
+      "depth": 0.6,
+      "sharpness": 0.4
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}
