@@ -1,0 +1,247 @@
+{
+  "meta": {
+    "title": "Firefly Sea: Bioluminescent Bacteria of the Puerto Rico Bioluminescent Bay",
+    "date": "2026-09-14",
+    "lesson": "Mosquito Bay in Vieques, Puerto Rico, glows at night because of a dense standing population of the dinoflagellate Pyrodinium bahamense, whose light-flashes (a predator-startling defense) are amplified by symbiotic and free-living luminous bacteria (Vibrio-type) living in the same warm, mangrove-fringed, restricted-circulation lagoon. Red mangrove leaf litter leaches tannins and carbohydrate-rich detritus that feed a copiotrophic bacterial community, while the narrow channel to the sea keeps nutrients trapped and the water warm and still. This level asks you to survive as one of those bacteria: carbohydrate-dominated leaf-litter detritus is your main food, night is not a famine (the bay stays productive because it is so enclosed and shallow), but grazing dinoflagellates and their sudden luminous flashes make the water a place where being caught is highly visible. Chitin fragments from tiny crustaceans add a protein pulse. The lesson: bioluminescence is fundamentally an ecological arms race over visibility, and a shallow, poorly-flushed tropical lagoon can concentrate both nutrients and life to extraordinary densities compared to the open sea.",
+    "citation": "Seliger et al. 1971, 'Bioluminescence and phytoplankton successions in Bahia Fosforescente'; Vieques Mosquito Bay ecology studies",
+    "difficulty": "normal",
+    "realWorldBasis": "Mosquito Bay / Bahía Fosforescente, Vieques, Puerto Rico - bioluminescent lagoon ecosystem"
+  },
+  "env": {
+    "day.lengthSec": 240,
+    "day.latitude": 18,
+    "day.dayOfYear": 200,
+    "diel.tempBase": 28,
+    "diel.tempAmp": 2.5,
+    "diel.foodFloor": 0.6,
+    "diel.q10": 2,
+    "diel.q10RefC": 20,
+    "diel.waterNight.0": 5,
+    "diel.waterNight.1": 26,
+    "diel.waterNight.2": 34,
+    "diel.waterDay.0": 22,
+    "diel.waterDay.1": 96,
+    "diel.waterDay.2": 88,
+    "diel.goldTint": 0.22,
+    "substrate.count": 82,
+    "substrate.sizeMin": 26,
+    "substrate.sizeMax": 150,
+    "substrate.lifeMin": 100,
+    "substrate.lifeMax": 220,
+    "substrate.driftMin": 6,
+    "substrate.driftMax": 14,
+    "predator.count": 7,
+    "predator.wanderSpeed": 30,
+    "predator.chaseSpeed": 50,
+    "predator.senseRange": 210,
+    "predator.mealEnergy": 50,
+    "predator.metabolism": 9,
+    "predator.minCount": 4,
+    "predator.immigratePerPrey": 0.06,
+    "toxin.dose": 40,
+    "toxin.maxRadius": 46,
+    "cell.startEnergy": 100,
+    "cell.divideThreshold": 160,
+    "cell.uptake": 15,
+    "respirationBase": 0.85,
+    "phage.greenCount": 20,
+    "phage.goldCount": 4
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Mangrove Tannin Droplets",
+      "enzymeLabel": "Lipase (tannin-lipid breakdown)",
+      "color": "#7a5230"
+    },
+    {
+      "index": 1,
+      "label": "Crustacean Chitin Flecks",
+      "enzymeLabel": "Chitinase",
+      "color": "#c9a86a"
+    },
+    {
+      "index": 2,
+      "label": "Leaf-Litter Detritus",
+      "enzymeLabel": "Cellulase/Amylase",
+      "color": "#3f7a4a"
+    }
+  ],
+  "particles": {
+    "leafLitter": {
+      "label": "Red Mangrove Leaf Fragment",
+      "mix": [
+        0.15,
+        0.15,
+        0.7
+      ],
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 6
+    },
+    "chitinFleck": {
+      "label": "Copepod Molt Fleck",
+      "mix": [
+        0.1,
+        0.75,
+        0.15
+      ],
+      "shape": "shard",
+      "squash": 1,
+      "weight": 3
+    },
+    "tanninDrop": {
+      "label": "Tannin-Lipid Droplet",
+      "mix": [
+        0.65,
+        0.15,
+        0.2
+      ],
+      "shape": "ellipse",
+      "squash": 0.6,
+      "weight": 2
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase Burst",
+      "color": "#a67c3d",
+      "weight": 4
+    },
+    "enzyme1": {
+      "label": "Chitinase Burst",
+      "color": "#d9c07a",
+      "weight": 5
+    },
+    "enzyme2": {
+      "label": "Cellulase Burst",
+      "color": "#4caf50",
+      "weight": 7
+    },
+    "chemotaxis": {
+      "label": "Glow-Sense",
+      "color": "#66ffee",
+      "weight": 6
+    },
+    "antibiotic": {
+      "label": "Luciferin-Toxin Spray",
+      "color": "#33ffcc",
+      "weight": 3
+    },
+    "eps": {
+      "label": "Mucilage Sheath",
+      "color": "#2e8b57",
+      "weight": 4
+    },
+    "crispr": {
+      "label": "CRISPR Immunity",
+      "color": "#8888ff",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Litter-Surface Twitching",
+      "color": "#ccaa66",
+      "weight": 4
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "founder",
+        "label": "Luminous Vibrio-type Bacterium",
+        "color": "#33ffcc",
+        "genome": {
+          "enzLvl": [
+            1,
+            2,
+            3
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "rival",
+        "label": "Fast-Grazing Competitor Strain",
+        "color": "#88ccaa",
+        "genome": {
+          "enzLvl": [
+            0,
+            1,
+            2
+          ],
+          "chemoLevel": 0,
+          "antibiotic": 1,
+          "eps": 0,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "pennateDetritus",
+        "label": "Litter-Bound Navicula",
+        "color": "#7fae6a",
+        "form": "pennate",
+        "sizeUm": 35,
+        "chain": 2,
+        "count": 30,
+        "toxin": null
+      }
+    ]
+  },
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 140,
+      "color": "#3b2a1a",
+      "label": "Mangrove Peat & Leaf Litter Floor",
+      "roughness": 0.55,
+      "porosity": 0.4,
+      "poreSize": 30,
+      "featureSize": 220,
+      "spires": 0,
+      "spireHeight": 0,
+      "spireWidth": 10,
+      "warp": 0.35
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 28.5,
+        "salinity": 36,
+        "light": 1,
+        "nutrient": 0.7
+      },
+      {
+        "depth": 0.5,
+        "tempC": 28,
+        "salinity": 37,
+        "light": 0.5,
+        "nutrient": 0.85
+      },
+      {
+        "depth": 1,
+        "tempC": 27.5,
+        "salinity": 38,
+        "light": 0.15,
+        "nutrient": 1
+      }
+    ],
+    "thermocline": {
+      "depth": 0.6,
+      "sharpness": 0.3
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}

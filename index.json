@@ -444,6 +444,14 @@
       "file": "scenarios/daily-2026-09-13.json"
     },
     {
+      "id": "daily-2026-09-14",
+      "title": "Firefly Sea: Bioluminescent Bacteria of the Puerto Rico Bioluminescent Bay",
+      "date": "2026-09-14",
+      "difficulty": "normal",
+      "realWorldBasis": "Mosquito Bay / Bahía Fosforescente, Vieques, Puerto Rico - bioluminescent lagoon ecosystem",
+      "file": "scenarios/daily-2026-09-14.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
