@@ -1,0 +1,235 @@
+{
+  "meta": {
+    "title": "Lake Vostok Accretion Ice: Subglacial Relics 4km Down",
+    "date": "2026-09-15",
+    "lesson": "Lake Vostok lies buried under nearly 4km of Antarctic ice, sealed off from the surface for perhaps 15-25 million years. The accretion ice that freezes onto the base of the ice sheet from lake water traps a sparse, cold-adapted microbial community: chemoheterotrophs surviving on trace organic carbon released as ancient lake water refreezes, at temperatures around -3C and crushing pressure with essentially no light. Cell densities are astonishingly low compared to surface seas, division is glacial, and energy budgets are razor-thin. This level asks: can a lineage sustain itself on almost nothing, for a very long time, in total dark, in a sealed world with no allochthonous input beyond what the freezing front itself squeezes out of the water?",
+    "citation": "Christner et al. 2006 PNAS; Bulat 2016 Phil Trans R Soc B (Lake Vostok accretion ice microbiology)",
+    "difficulty": "hard",
+    "realWorldBasis": "Lake Vostok subglacial lake, East Antarctica, accretion ice zone ~3750m depth"
+  },
+  "env": {
+    "day.lengthSec": 300,
+    "day.latitude": -77,
+    "day.dayOfYear": 355,
+    "diel.tempBase": -3,
+    "diel.tempAmp": 0.5,
+    "diel.foodFloor": 0.6,
+    "diel.q10": 2.2,
+    "diel.q10RefC": 20,
+    "diel.waterNight.0": 3,
+    "diel.waterNight.1": 6,
+    "diel.waterNight.2": 14,
+    "diel.waterDay.0": 5,
+    "diel.waterDay.1": 12,
+    "diel.waterDay.2": 22,
+    "diel.lightGamma": 4,
+    "diel.twilight": 0.05,
+    "respirationBase": 0.4,
+    "cell.startEnergy": 90,
+    "cell.divideThreshold": 220,
+    "cell.maxEnergy": 280,
+    "cell.swimCost": 0.5,
+    "cell.dragRate": 40,
+    "cell.thrust": 12000,
+    "cell.maxSpeed": 140,
+    "cell.runMin": 3,
+    "cell.runMax": 6,
+    "cell.tumbleDur": 0.6,
+    "cell.cystBelow": 22,
+    "cell.cystWake": 55,
+    "cell.cystMetab": 0.012,
+    "cell.genomeUpkeep": 0.03,
+    "substrate.count": 44,
+    "substrate.moteEnergy": 10,
+    "substrate.sizeMin": 26,
+    "substrate.sizeMax": 130,
+    "substrate.sizeExp": 2.4,
+    "substrate.lifeMin": 260,
+    "substrate.lifeMax": 600,
+    "substrate.driftMin": 3,
+    "substrate.driftMax": 8,
+    "substrate.bloomEvery": 1.2,
+    "enzyme.life": 7,
+    "enzyme.maxRadius": 20,
+    "predator.count": 1,
+    "predator.wanderSpeed": 10,
+    "predator.chaseSpeed": 18,
+    "predator.senseRange": 90,
+    "predator.metabolism": 5,
+    "predator.minCount": 1,
+    "predator.immigrateEvery": 25,
+    "phage.greenCount": 3,
+    "phage.goldCount": 1,
+    "phage.goldMinDist": 900,
+    "phage.life.0": 30,
+    "phage.life.1": 50
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid remnants (ancient membrane debris)",
+      "enzymeLabel": "cryolipase",
+      "color": "#8fa8b8"
+    },
+    {
+      "index": 1,
+      "label": "Relic protein flecks",
+      "enzymeLabel": "psychroprotease",
+      "color": "#b7c9d6"
+    },
+    {
+      "index": 2,
+      "label": "Trace carbohydrate film",
+      "enzymeLabel": "glacio-amylase",
+      "color": "#d8e8ee"
+    }
+  ],
+  "particles": {
+    "reliefloc": {
+      "label": "Refreeze flocs",
+      "mix": [
+        3,
+        5,
+        2
+      ],
+      "shape": "aggregate",
+      "weight": 6
+    },
+    "brineshard": {
+      "label": "Brine-pocket shard",
+      "mix": [
+        1,
+        2,
+        6
+      ],
+      "shape": "shard",
+      "weight": 3
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Cryolipase",
+      "color": "#7f9db0",
+      "weight": 3
+    },
+    "enzyme1": {
+      "label": "Psychroprotease",
+      "color": "#a9bfce",
+      "weight": 4
+    },
+    "enzyme2": {
+      "label": "Glacio-amylase",
+      "color": "#cfe3ea",
+      "weight": 5
+    },
+    "chemotaxis": {
+      "label": "Cold-seek",
+      "color": "#5f7d8f",
+      "weight": 3
+    },
+    "antibiotic": {
+      "label": "Bacteriocin",
+      "color": "#4a4a55",
+      "weight": 1
+    },
+    "eps": {
+      "label": "Cryoprotective slime",
+      "color": "#c8dae0",
+      "weight": 5
+    },
+    "crispr": {
+      "label": "CRISPR immunity",
+      "color": "#ffffff",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Twitching",
+      "color": "#88a0aa",
+      "weight": 0
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "relic1",
+        "label": "Vostok Relic Psychrophile",
+        "color": "#c9dde6",
+        "genome": {
+          "enzLvl": [
+            1,
+            2,
+            3
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 2,
+          "crispr": true,
+          "twitching": false
+        },
+        "immigrateWeight": 5
+      }
+    ]
+  },
+  "terrain": [
+    {
+      "at": "top",
+      "thickness": 500,
+      "color": "#dbeaf0",
+      "label": "Accretion ice ceiling",
+      "roughness": 0.4,
+      "porosity": 0.35,
+      "poreSize": 20,
+      "featureSize": 300,
+      "spires": 0.15,
+      "spireHeight": 180,
+      "spireWidth": 60,
+      "warp": 0.1
+    },
+    {
+      "at": "bottom",
+      "thickness": 300,
+      "color": "#9fb4c0",
+      "label": "Lake water / ice interface sediment",
+      "roughness": 0.3,
+      "porosity": 0.4,
+      "poreSize": 18,
+      "featureSize": 250,
+      "spires": 0,
+      "spireHeight": 0,
+      "spireWidth": 10,
+      "warp": 0.05
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": -3,
+        "salinity": 2,
+        "light": 0,
+        "nutrient": 0.15
+      },
+      {
+        "depth": 0.5,
+        "tempC": -3,
+        "salinity": 2,
+        "light": 0,
+        "nutrient": 0.2
+      },
+      {
+        "depth": 1,
+        "tempC": -2.5,
+        "salinity": 3,
+        "light": 0,
+        "nutrient": 0.25
+      }
+    ],
+    "thermocline": {
+      "depth": 0.5,
+      "sharpness": 0.1
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}

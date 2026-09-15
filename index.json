@@ -452,6 +452,14 @@
       "file": "scenarios/daily-2026-09-14.json"
     },
     {
+      "id": "daily-2026-09-15",
+      "title": "Lake Vostok Accretion Ice: Subglacial Relics 4km Down",
+      "date": "2026-09-15",
+      "difficulty": "hard",
+      "realWorldBasis": "Lake Vostok subglacial lake, East Antarctica, accretion ice zone ~3750m depth",
+      "file": "scenarios/daily-2026-09-15.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
