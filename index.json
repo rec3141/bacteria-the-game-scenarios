@@ -460,6 +460,14 @@
       "file": "scenarios/daily-2026-09-15.json"
     },
     {
+      "id": "daily-2026-09-16",
+      "title": "Fire and Ice: Yellowstone Lake's Sublacustrine Vent Field",
+      "date": "2026-09-16",
+      "difficulty": "hard",
+      "realWorldBasis": "Yellowstone Lake West Thumb sublacustrine hydrothermal vent field, ~5-8C ambient lake water",
+      "file": "scenarios/daily-2026-09-16.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",

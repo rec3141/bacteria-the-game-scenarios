@@ -1,0 +1,235 @@
+{
+  "meta": {
+    "title": "Fire and Ice: Yellowstone Lake's Sublacustrine Vent Field",
+    "date": "2026-09-16",
+    "lesson": "At West Thumb, Yellowstone Lake sits atop its own caldera, and hydrothermal vents erupt from the lake floor beneath 5-10C water year-round. Chemolithotrophic bacteria there fix carbon from dissolved hydrogen sulfide and hydrogen gas seeping through cracks in the lake bed, just like their deep-ocean cousins at black smokers, except this plume rises into cold, sunlit freshwater instead of the crushing dark. Above the vent, diatoms drift in a cold, dim photic zone that never gets very bright even at noon (Yellowstone's high elevation and long winters keep light and heat both marginal). The lesson is about overlap: the vent chemical plume is confined to a narrow band near the floor, while any photosynthesis is confined to a narrow band near the surface, and freshwater chemolithotrophs occupy the vent band exclusively, unable to use light at all. This is the mirror image of a purple-sulfur Winogradsky column: here the two energy sources never overlap, so nothing exploits both, and the vent community is a closed, chemosynthesis-only world with a diatom bloom drifting obliviously overhead.",
+    "citation": "Cuhel & Aguilar, sublacustrine hydrothermal vents of Yellowstone Lake; Yellowstone Center for Resources geothermal reports",
+    "difficulty": "hard",
+    "realWorldBasis": "Yellowstone Lake West Thumb sublacustrine hydrothermal vent field, ~5-8C ambient lake water"
+  },
+  "env": {
+    "day.latitude": 44,
+    "day.dayOfYear": 300,
+    "day.lengthSec": 260,
+    "diel.tempBase": 6,
+    "diel.tempAmp": 1.5,
+    "diel.foodFloor": 0.4,
+    "diel.q10": 2.3,
+    "diel.q10RefC": 6,
+    "diel.waterNight.0": 3,
+    "diel.waterNight.1": 10,
+    "diel.waterNight.2": 18,
+    "diel.waterDay.0": 22,
+    "diel.waterDay.1": 60,
+    "diel.waterDay.2": 58,
+    "diel.lightGamma": 2.4,
+    "substrate.count": 70,
+    "substrate.sizeMin": 26,
+    "substrate.sizeMax": 150,
+    "substrate.lifeMin": 100,
+    "substrate.lifeMax": 220,
+    "substrate.driftMin": 6,
+    "substrate.driftMax": 14,
+    "cell.uptake": 12,
+    "cell.swimCost": 1,
+    "respirationBase": 0.7,
+    "column.chemRate": 6.5,
+    "column.photoRate": 5,
+    "predator.count": 3,
+    "predator.senseRange": 140,
+    "predator.metabolism": 9,
+    "phage.greenCount": 10,
+    "phage.goldCount": 3
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid Detritus",
+      "enzymeLabel": "Lipase",
+      "color": "#8a7a5a"
+    },
+    {
+      "index": 1,
+      "label": "Microbial Mat Protein",
+      "enzymeLabel": "Protease",
+      "color": "#a05a4a"
+    },
+    {
+      "index": 2,
+      "label": "Diatom Exudate Sugars",
+      "enzymeLabel": "Glycosidase",
+      "color": "#5aa0a0"
+    }
+  ],
+  "particles": {
+    "detritalFloc": {
+      "label": "Sunken Detrital Floc",
+      "mix": [
+        0.3,
+        0.4,
+        0.3
+      ],
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 6
+    },
+    "matFragment": {
+      "label": "Sulfur-Mat Fragment",
+      "mix": [
+        0.1,
+        0.7,
+        0.2
+      ],
+      "shape": "shard",
+      "weight": 4
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase",
+      "color": "#8a7a5a",
+      "weight": 3
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#a05a4a",
+      "weight": 4
+    },
+    "enzyme2": {
+      "label": "Glycosidase",
+      "color": "#5aa0a0",
+      "weight": 4
+    },
+    "chemotaxis": {
+      "label": "Sulfide Taxis",
+      "color": "#c9a227",
+      "weight": 6
+    },
+    "antibiotic": {
+      "label": "Bacteriocin",
+      "color": "#b03060",
+      "weight": 2
+    },
+    "eps": {
+      "label": "Sheath EPS",
+      "color": "#6f8f9f",
+      "weight": 3
+    },
+    "crispr": {
+      "label": "CRISPR Immunity",
+      "color": "#4477aa",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Twitching Pili",
+      "color": "#88aa44",
+      "weight": 1
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "vent_chemolith",
+        "label": "Sulfurihydrogenibium sp.",
+        "color": "#d4a72c",
+        "genome": {
+          "enzLvl": [
+            0,
+            0,
+            1
+          ],
+          "chemoLevel": 3,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false,
+          "chemolithotroph": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "mat_heterotroph",
+        "label": "Detritus-Grazing Heterotroph",
+        "color": "#a05a4a",
+        "genome": {
+          "enzLvl": [
+            1,
+            3,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 4
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "cold_centric",
+        "label": "Cold-Lake Centric Diatom",
+        "color": "#7fbfbf",
+        "form": "centric",
+        "sizeUm": 30,
+        "chain": 2,
+        "count": 40
+      }
+    ]
+  },
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 220,
+      "color": "#4a4038",
+      "label": "Vent Floor Rubble",
+      "roughness": 0.6,
+      "porosity": 0.35,
+      "poreSize": 40,
+      "featureSize": 300,
+      "spires": 0.3,
+      "spireHeight": 260,
+      "spireWidth": 60,
+      "warp": 0.2
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 6,
+        "salinity": 0.1,
+        "light": 0.35,
+        "nutrient": 0.3
+      },
+      {
+        "depth": 0.5,
+        "tempC": 6,
+        "salinity": 0.1,
+        "light": 0.12,
+        "nutrient": 0.4
+      },
+      {
+        "depth": 1,
+        "tempC": 7,
+        "salinity": 0.1,
+        "light": 0.01,
+        "nutrient": 0.9
+      }
+    ],
+    "thermocline": {
+      "depth": 0.7,
+      "sharpness": 0.3
+    },
+    "chemical": {
+      "peakDepth": 0.92,
+      "spread": 0.12,
+      "strength": 0.9,
+      "color": "#d4a72c"
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}
