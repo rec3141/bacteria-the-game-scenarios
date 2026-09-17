@@ -1,0 +1,251 @@
+{
+  "meta": {
+    "title": "Baltic Cyanobacteria Bloom: Nitrogen Fixers of the Summer Slick",
+    "date": "2026-09-17",
+    "lesson": "Every July-August the brackish central Baltic Sea turns pea-green as filamentous cyanobacteria (Nodularia spumigena, Aphanizomenon) bloom across a warm, stratified surface layer. They fix their own nitrogen straight from dissolved N2, so unlike diatoms below them they are not limited by nitrate - only by phosphorus and light. Buoyant gas vesicles keep them pinned in the top few metres where the sun is strongest, forming windrows and surface scums that die back hard at night and self-shade at noon. This scenario asks the player to grow a phototrophic diazotroph in that thin, brightly lit, phosphorus-starved skin of water, competing with pennate diatoms clinging to sinking detritus below, while copiotrophic heterotrophs scavenge the toxin-laced organic matter the bloom sheds when it collapses.",
+    "citation": "Finnish Environment Institute (SYKE) Baltic Sea bloom monitoring; Mazur-Marzec et al. on Nodularia toxin ecology",
+    "difficulty": "normal",
+    "realWorldBasis": "Central Baltic Sea summer Nodularia spumigena / Aphanizomenon flos-aquae surface cyanobacterial blooms"
+  },
+  "env": {
+    "day.lengthSec": 260,
+    "day.latitude": 59,
+    "day.dayOfYear": 205,
+    "diel.tempBase": 18,
+    "diel.tempAmp": 4,
+    "diel.foodFloor": 0.28,
+    "diel.q10": 2.2,
+    "diel.lightGamma": 1.5,
+    "diel.twilight": 0.3,
+    "diel.waterDay.0": 40,
+    "diel.waterDay.1": 90,
+    "diel.waterDay.2": 55,
+    "diel.waterNight.0": 3,
+    "diel.waterNight.1": 12,
+    "diel.waterNight.2": 14,
+    "diel.goldTint": 0.22,
+    "column.photoRate": 11,
+    "substrate.count": 70,
+    "substrate.sizeMin": 26,
+    "substrate.sizeMax": 170,
+    "substrate.lifeMin": 90,
+    "substrate.lifeMax": 220,
+    "substrate.driftMin": 6,
+    "substrate.driftMax": 16,
+    "cell.startEnergy": 100,
+    "cell.divideThreshold": 165,
+    "cell.uptake": 12,
+    "respirationBase": 0.85,
+    "predator.count": 5,
+    "predator.senseRange": 160,
+    "predator.metabolism": 9,
+    "phage.greenCount": 16,
+    "phage.goldCount": 3,
+    "toxin.dose": 40,
+    "toxin.potency": 14,
+    "toxin.radiusPer": 0.4
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid detritus",
+      "enzymeLabel": "Lipase",
+      "color": "#a08a3c"
+    },
+    {
+      "index": 1,
+      "label": "Bloom protein scum",
+      "enzymeLabel": "Protease",
+      "color": "#5aa85a"
+    },
+    {
+      "index": 2,
+      "label": "Exopolysaccharide mucilage",
+      "enzymeLabel": "Glycanase",
+      "color": "#3fae8e"
+    }
+  ],
+  "particles": {
+    "scumClump": {
+      "label": "Cyanobacterial scum clump",
+      "mix": [
+        1,
+        2,
+        7
+      ],
+      "shape": "aggregate",
+      "weight": 6
+    },
+    "deadFilament": {
+      "label": "Dead Nodularia filament",
+      "mix": [
+        1,
+        5,
+        2
+      ],
+      "shape": "shard",
+      "weight": 5
+    },
+    "diatomOoze": {
+      "label": "Diatom frustule ooze",
+      "mix": [
+        2,
+        3,
+        3
+      ],
+      "shape": "ellipse",
+      "squash": 0.5,
+      "weight": 4
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase",
+      "color": "#a08a3c",
+      "weight": 3
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#5aa85a",
+      "weight": 5
+    },
+    "enzyme2": {
+      "label": "Glycanase",
+      "color": "#3fae8e",
+      "weight": 6
+    },
+    "chemotaxis": {
+      "label": "Gas-vesicle buoyancy steering",
+      "color": "#cde27a",
+      "weight": 6
+    },
+    "antibiotic": {
+      "label": "Nodularin toxin release",
+      "color": "#b23a6e",
+      "weight": 4
+    },
+    "eps": {
+      "label": "Mucilage sheath",
+      "color": "#2fae8e",
+      "weight": 5
+    },
+    "crispr": {
+      "label": "CRISPR immunity",
+      "color": "#8888ff",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Twitching motility",
+      "color": "#cc9944",
+      "weight": 0
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "nodularia",
+        "label": "Nodularia spumigena",
+        "color": "#7fbf3f",
+        "genome": {
+          "enzLvl": [
+            1,
+            2,
+            3
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 2,
+          "eps": 3,
+          "crispr": false,
+          "twitching": false,
+          "phototroph": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "vibrioScavenger",
+        "label": "Pseudoalteromonas scavenger",
+        "color": "#d98c3d",
+        "genome": {
+          "enzLvl": [
+            2,
+            3,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 4
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "navicula",
+        "label": "Navicula (benthic pennate)",
+        "color": "#c2b280",
+        "form": "pennate",
+        "sizeUm": 35,
+        "chain": 2,
+        "count": 40
+      },
+      {
+        "id": "aphanizomenonChain",
+        "label": "Aphanizomenon filament (co-bloomer)",
+        "color": "#9fd45a",
+        "form": "pennate",
+        "sizeUm": 60,
+        "chain": 8,
+        "count": 30,
+        "toxin": {
+          "label": "Anatoxin trace",
+          "color": "#c95a9a",
+          "radius": 60,
+          "potency": 40,
+          "life": 12
+        }
+      }
+    ]
+  },
+  "terrain": [],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 19,
+        "salinity": 7,
+        "light": 1,
+        "nutrient": 0.25
+      },
+      {
+        "depth": 3,
+        "tempC": 17,
+        "salinity": 7.2,
+        "light": 0.7,
+        "nutrient": 0.35
+      },
+      {
+        "depth": 8,
+        "tempC": 10,
+        "salinity": 8,
+        "light": 0.25,
+        "nutrient": 0.55
+      },
+      {
+        "depth": 20,
+        "tempC": 6,
+        "salinity": 10,
+        "light": 0.05,
+        "nutrient": 0.75
+      }
+    ],
+    "thermocline": {
+      "depth": 6,
+      "sharpness": 0.7
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}
