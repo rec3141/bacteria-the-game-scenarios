@@ -476,6 +476,14 @@
       "file": "scenarios/daily-2026-09-17.json"
     },
     {
+      "id": "daily-2026-09-18",
+      "title": "Frost Flowers: Halophiles of the Arctic Sea-Ice Surface",
+      "date": "2026-09-18",
+      "difficulty": "hard",
+      "realWorldBasis": "Frost flower brine microbial communities on new Arctic sea ice, Beaufort/Chukchi region",
+      "file": "scenarios/daily-2026-09-18.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
