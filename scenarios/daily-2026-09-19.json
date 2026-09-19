@@ -1,0 +1,203 @@
+{
+  "actions": {
+    "enzyme0": {
+      "label": "Chitinase-A",
+      "color": "#4fb8a6",
+      "weight": 6
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#c97a4a",
+      "weight": 3
+    },
+    "enzyme2": {
+      "label": "Glycosidase",
+      "color": "#e8d24a",
+      "weight": 3
+    },
+    "chemotaxis": {
+      "label": "Chitin-taxis",
+      "color": "#8ee8d0",
+      "weight": 6
+    },
+    "antibiotic": {
+      "label": "Bacteriocin burst",
+      "color": "#e0507a",
+      "weight": 4
+    },
+    "eps": {
+      "label": "Capsule slime",
+      "color": "#9fd88a",
+      "weight": 3
+    },
+    "crispr": {
+      "label": "CRISPR immunity",
+      "color": "#c9c9c9",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Pilus twitching",
+      "color": "#f0a94a",
+      "weight": 4
+    }
+  },
+  "column": {
+    "enabled": false
+  },
+  "env": {
+    "day.lengthSec": 260,
+    "day.latitude": 27,
+    "day.dayOfYear": 210,
+    "diel.tempBase": 26,
+    "diel.tempAmp": 2,
+    "diel.foodFloor": 0.55,
+    "diel.q10": 2.2,
+    "diel.q10RefC": 20,
+    "diel.waterDay.0": 30,
+    "diel.waterDay.1": 70,
+    "diel.waterDay.2": 60,
+    "diel.waterNight.0": 3,
+    "diel.waterNight.1": 10,
+    "diel.waterNight.2": 14,
+    "substrate.count": 100,
+    "substrate.sizeMin": 40,
+    "substrate.sizeMax": 220,
+    "substrate.lifeMin": 70,
+    "substrate.lifeMax": 160,
+    "substrate.dissolveTime": 6,
+    "substrate.carveRate": 6.5,
+    "substrate.driftMin": 6,
+    "substrate.driftMax": 14,
+    "substrate.minPerRes": 3,
+    "enzyme.maxRadius": 30,
+    "enzyme.life": 6,
+    "cell.chemoRange0": 360,
+    "cell.chemoRangePer": 160,
+    "cell.chemoBias": 1.1,
+    "cell.uptake": 17,
+    "cell.startEnergy": 100,
+    "cell.divideThreshold": 165,
+    "cell.swimCost": 1.35,
+    "respirationBase": 1.05,
+    "phage.greenCount": 26,
+    "phage.goldCount": 3,
+    "phage.burst.0": 6,
+    "phage.burst.1": 12,
+    "phage.latent.0": 6,
+    "phage.latent.1": 10,
+    "phage.adsorbBase": 0.38,
+    "phage.hostTolerance": 2,
+    "predator.count": 6,
+    "predator.senseRange": 190,
+    "predator.chaseSpeed": 50,
+    "predator.metabolism": 11,
+    "predator.mealEnergy": 52,
+    "eps.threatRange": 110,
+    "eps.cost": 4.5
+  },
+  "meta": {
+    "title": "Squid Beak Rush: The Chitin Gold Rush of the Gulf",
+    "date": "2026-09-19",
+    "lesson": "When a jumbo squid (Dosidicus gigas) dies and sinks off the Gulf of California, its chitinous beak and mantle hit the seafloor as a sudden, concentrated pulse of an otherwise scarce polymer. Copiotrophic bacteria such as Vibrio and Pseudoalteromonas that can barely persist in open water carry chitinases specifically to exploit these rare bonanzas: they sense the leaking N-acetylglucosamine breakdown products from meters away, race in, and bloom explosively for days. That very success is their undoing - dense, fast-dividing clonal patches are the perfect target for lysis, and bacteriophage populations tuned to the winning lineage crash the bloom within a week, releasing the leftover carbon for the next opportunist. This level asks you to win the chitin race with chemotaxis and a chitin-specialized enzyme, then survive the phage bloom your own success invites.",
+    "citation": "Pasulka et al. (2013) 'Interrogating marine virus-host interactions and elemental transfer with BONCAT and nanoSIMS'; De Alteris & Pasulka squid-fall microbial succession studies, Gulf of California.",
+    "difficulty": "hard",
+    "realWorldBasis": "Gulf of California jumbo squid (Dosidicus gigas) carcass/beak falls and chitinolytic Vibrio/Pseudoalteromonas bloom-and-phage-crash succession"
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "founder",
+        "label": "Vibrio chitinivorans",
+        "color": "#4fb8a6",
+        "genome": {
+          "enzLvl": [
+            3,
+            1,
+            1
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "rival",
+        "label": "Pseudoalteromonas sp.",
+        "color": "#e0a94a",
+        "genome": {
+          "enzLvl": [
+            2,
+            2,
+            1
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 0,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 4
+      }
+    ]
+  },
+  "particles": {
+    "beak": {
+      "label": "Squid beak fragment",
+      "mix": [
+        8.5,
+        1,
+        0.5
+      ],
+      "shape": "shard",
+      "squash": 0.7,
+      "weight": 8
+    },
+    "mantle": {
+      "label": "Mantle tissue shred",
+      "mix": [
+        1,
+        7,
+        2
+      ],
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 4
+    },
+    "eggcase": {
+      "label": "Egg-case chitin flake",
+      "mix": [
+        7,
+        0.5,
+        2.5
+      ],
+      "shape": "shard",
+      "squash": 0.85,
+      "weight": 3
+    }
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Chitin (beak/mantle polymer)",
+      "enzymeLabel": "Chitinase-A",
+      "color": "#4fb8a6"
+    },
+    {
+      "index": 1,
+      "label": "Muscle protein",
+      "enzymeLabel": "Protease",
+      "color": "#c97a4a"
+    },
+    {
+      "index": 2,
+      "label": "Glycogen/sugars",
+      "enzymeLabel": "Glycosidase",
+      "color": "#e8d24a"
+    }
+  ],
+  "schema": "bacteria-scenario",
+  "version": 1
+}

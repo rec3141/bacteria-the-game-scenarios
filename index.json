@@ -484,6 +484,14 @@
       "file": "scenarios/daily-2026-09-18.json"
     },
     {
+      "id": "daily-2026-09-19",
+      "title": "Squid Beak Rush: The Chitin Gold Rush of the Gulf",
+      "date": "2026-09-19",
+      "difficulty": "hard",
+      "realWorldBasis": "Gulf of California jumbo squid (Dosidicus gigas) carcass/beak falls and chitinolytic Vibrio/Pseudoalteromonas bloom-and-phage-crash succession",
+      "file": "scenarios/daily-2026-09-19.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
