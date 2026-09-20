@@ -492,6 +492,14 @@
       "file": "scenarios/daily-2026-09-19.json"
     },
     {
+      "id": "daily-2026-09-20",
+      "title": "Squid Fall at 2000m: Chitin Rush of the Gulf of California",
+      "date": "2026-09-20",
+      "difficulty": "hard",
+      "realWorldBasis": "Jumbo squid (Dosidicus gigas) carcass falls in the Gulf of California mesopelagic, chitinolytic Vibrio/Pseudoalteromonas colonization and phage-driven bloom collapse",
+      "file": "scenarios/daily-2026-09-20.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
