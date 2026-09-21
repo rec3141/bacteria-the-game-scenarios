@@ -1,0 +1,257 @@
+{
+  "actions": {
+    "enzyme0": {
+      "label": "Alkane hydroxylase",
+      "color": "#e8b84b",
+      "weight": 6
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#d6604d",
+      "weight": 3
+    },
+    "enzyme2": {
+      "label": "Carbohydrase",
+      "color": "#4393c3",
+      "weight": 4
+    },
+    "chemotaxis": {
+      "label": "Sulfide/Light Taxis",
+      "color": "#b39ddb",
+      "weight": 5
+    },
+    "antibiotic": {
+      "label": "Bacteriocin",
+      "color": "#f4a582",
+      "weight": 2
+    },
+    "eps": {
+      "label": "Mat Slime",
+      "color": "#8c96c6",
+      "weight": 4
+    },
+    "crispr": {
+      "weight": 3
+    },
+    "twitching": {
+      "weight": 2
+    }
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 8,
+        "salinity": 34,
+        "light": 0.85,
+        "nutrient": 0.2
+      },
+      {
+        "depth": 0.3,
+        "tempC": 7,
+        "salinity": 34.5,
+        "light": 0.35,
+        "nutrient": 0.4
+      },
+      {
+        "depth": 0.6,
+        "tempC": 6.5,
+        "salinity": 35,
+        "light": 0.08,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 1,
+        "tempC": 6,
+        "salinity": 35.5,
+        "light": 0.01,
+        "nutrient": 0.9
+      }
+    ],
+    "thermocline": {
+      "depth": 0.45,
+      "sharpness": 0.6
+    },
+    "chemical": {
+      "peakDepth": 0.65,
+      "spread": 0.18,
+      "strength": 0.85,
+      "color": "#7a5c3e"
+    }
+  },
+  "env": {
+    "day.lengthSec": 260,
+    "day.latitude": 27,
+    "day.dayOfYear": 205,
+    "diel.tempBase": 7,
+    "diel.tempAmp": 1.5,
+    "diel.foodFloor": 0.5,
+    "diel.q10": 2.3,
+    "diel.q10RefC": 10,
+    "diel.lightGamma": 2.4,
+    "diel.waterDay.0": 22,
+    "diel.waterDay.1": 60,
+    "diel.waterDay.2": 58,
+    "diel.waterNight.0": 3,
+    "diel.waterNight.1": 7,
+    "diel.waterNight.2": 10,
+    "substrate.count": 80,
+    "substrate.sizeMin": 32,
+    "substrate.sizeMax": 180,
+    "substrate.lifeMin": 150,
+    "substrate.lifeMax": 320,
+    "substrate.driftMin": 6,
+    "substrate.driftMax": 14,
+    "column.chemRate": 6.5,
+    "column.photoRate": 7,
+    "cell.startEnergy": 100,
+    "cell.divideThreshold": 170,
+    "cell.uptake": 13,
+    "respirationBase": 0.75,
+    "predator.count": 3,
+    "predator.senseRange": 150,
+    "predator.metabolism": 8,
+    "phage.greenCount": 14,
+    "phage.goldCount": 3
+  },
+  "meta": {
+    "title": "Overlap Zone: Purple Bacteria at the Oil Slope's Sulfide Seam",
+    "date": "2026-09-21",
+    "lesson": "On the northern Gulf of Mexico slope, natural oil and gas seeps sit close enough to the photic zone that a narrow band exists where dim sunlight from above and sulfide seeping up from cracked seafloor rock overlap. Anoxygenic phototrophic bacteria exploit this seam: like purple and green sulfur bacteria, they photosynthesize using light for energy but oxidize sulfide (not water) as their electron donor, so they need BOTH resources at once and are confined to the thin depth band where neither runs out. Meanwhile alkanotrophic bacteria higher in the water column, adapted from the region's long history of natural oil seepage, digest the lipid-rich oil-droplet particles drifting down from surface slicks. This level asks you to survive in that overlap: bank light energy while sulfide holds, use chemotaxis to track the plume depth, and manage grazers and phage while the two energy sources drift in and out of alignment with the day/night cycle and diffusion.",
+    "citation": "Inspired by natural seep studies (Gulf of Mexico slope, e.g. near Deepwater Horizon-area cracks) documenting anoxygenic phototroph-sulfide overlap zones and Alcanivorax/Oleispira oil-seep bacterial communities.",
+    "difficulty": "hard",
+    "realWorldBasis": "Gulf of Mexico continental slope natural oil/gas seep sites where a sulfide plume reaches within the photic zone, ~150-300m"
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "purple_seep",
+        "label": "Anoxygenic Purple Sulfur Bacterium",
+        "color": "#7e57c2",
+        "genome": {
+          "enzLvl": [
+            1,
+            0,
+            1
+          ],
+          "chemoLevel": 3,
+          "antibiotic": 0,
+          "eps": 2,
+          "crispr": false,
+          "twitching": false,
+          "phototroph": true,
+          "chemolithotroph": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "alkane_feeder",
+        "label": "Alcanivorax-type Oil Degrader",
+        "color": "#e8b84b",
+        "genome": {
+          "enzLvl": [
+            3,
+            1,
+            1
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 1,
+          "crispr": true,
+          "twitching": false
+        },
+        "immigrateWeight": 4
+      },
+      {
+        "id": "generalist",
+        "label": "Generalist Heterotroph",
+        "color": "#78909c",
+        "genome": {
+          "enzLvl": [
+            1,
+            1,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 3
+      }
+    ]
+  },
+  "particles": {
+    "oilDroplet": {
+      "label": "Seep Oil Droplet",
+      "mix": [
+        0.85,
+        0.05,
+        0.1
+      ],
+      "shape": "aggregate",
+      "weight": 6
+    },
+    "marineSnow": {
+      "label": "Sinking Marine Snow",
+      "mix": [
+        0.15,
+        0.35,
+        0.5
+      ],
+      "shape": "shard",
+      "weight": 4
+    },
+    "detritalFloc": {
+      "label": "Detrital Floc",
+      "mix": [
+        0.3,
+        0.4,
+        0.3
+      ],
+      "shape": "ellipse",
+      "squash": 0.6,
+      "weight": 3
+    }
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Seep Oil Lipids",
+      "enzymeLabel": "Alkane hydroxylase",
+      "color": "#e8b84b"
+    },
+    {
+      "index": 1,
+      "label": "Detrital Protein",
+      "enzymeLabel": "Protease",
+      "color": "#d6604d"
+    },
+    {
+      "index": 2,
+      "label": "Marine Snow Carbohydrate",
+      "enzymeLabel": "Carbohydrase",
+      "color": "#4393c3"
+    }
+  ],
+  "schema": "bacteria-scenario",
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 220,
+      "color": "#5c4a3a",
+      "label": "Cracked Seep Rock Floor",
+      "roughness": 0.7,
+      "porosity": 0.4,
+      "poreSize": 50,
+      "featureSize": 300,
+      "spires": 0.35,
+      "spireHeight": 260,
+      "spireWidth": 90,
+      "warp": 0.3
+    }
+  ],
+  "version": 1
+}
