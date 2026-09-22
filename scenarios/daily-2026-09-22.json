@@ -1,0 +1,242 @@
+{
+  "meta": {
+    "title": "Ice Worm Reef: Chemosynthesis on a Frozen Methane Hill",
+    "date": "2026-09-22",
+    "lesson": "In the Gulf of Mexico, methane hydrate outcrops sometimes breach the seafloor as pale, ice-like mounds. Where hydrate cracks and seeps sulfide-rich fluid, thiotrophic bacterial mats bloom directly on the frozen hydrate surface, and Hesiopsis ice worms graze the mat. This level puts a sulfide-oxidizing chemolithotroph on a hydrate outcrop terrain: it earns no energy from digesting particles, only from sitting in the sulfide plume that seeps from cracks near the bottom of the water column. The lesson is that chemosynthesis anchors life to a narrow chemical band, exactly as photosynthesis anchors it to a narrow light band, and that hydrate itself is habitat -- porous, riddled with crack-conduits -- not sterile ice.",
+    "citation": "MacDonald et al. 1994; Bush Hill/GC185 gas hydrate outcrop studies, Gulf of Mexico",
+    "difficulty": "hard",
+    "realWorldBasis": "Gulf of Mexico gas-hydrate outcrops (e.g. Bush Hill) hosting sulfide-oxidizing mats and Hesiocaeca methanicola ice worms"
+  },
+  "env": {
+    "diel.tempBase": 4,
+    "diel.tempAmp": 0.5,
+    "diel.q10": 1.3,
+    "diel.q10RefC": 4,
+    "diel.waterNight.0": 1,
+    "diel.waterNight.1": 4,
+    "diel.waterNight.2": 10,
+    "diel.waterDay.0": 6,
+    "diel.waterDay.1": 20,
+    "diel.waterDay.2": 30,
+    "diel.foodFloor": 0.7,
+    "day.latitude": 27,
+    "day.dayOfYear": 172,
+    "column.chemRate": 7,
+    "respirationBase": 0.55,
+    "substrate.count": 70,
+    "substrate.sizeMin": 32,
+    "substrate.sizeMax": 190,
+    "substrate.lifeMin": 200,
+    "substrate.lifeMax": 420,
+    "substrate.driftMin": 4,
+    "substrate.driftMax": 10,
+    "cell.startEnergy": 100,
+    "cell.divideThreshold": 190,
+    "cell.uptake": 12,
+    "cell.cystBelow": 20,
+    "cell.cystWake": 55,
+    "cell.cystMetab": 0.02,
+    "cell.chemoRange0": 260,
+    "cell.chemoRangePer": 130,
+    "predator.count": 3,
+    "predator.wanderSpeed": 14,
+    "predator.chaseSpeed": 24,
+    "predator.senseRange": 130,
+    "predator.metabolism": 6,
+    "phage.greenCount": 10,
+    "phage.goldCount": 3,
+    "phage.goldMinDist": 500
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Hydrate Lipid Ooze",
+      "enzymeLabel": "Lipase Seep",
+      "color": "#c9d8dd"
+    },
+    {
+      "index": 1,
+      "label": "Worm Tissue Debris",
+      "enzymeLabel": "Protease",
+      "color": "#a97e6d"
+    },
+    {
+      "index": 2,
+      "label": "Mat Detritus",
+      "enzymeLabel": "Glycosidase",
+      "color": "#8fae8a"
+    }
+  ],
+  "particles": {
+    "hydrateFlake": {
+      "label": "Hydrate Ice Flake",
+      "mix": [
+        3,
+        1,
+        1
+      ],
+      "shape": "shard",
+      "squash": 1,
+      "weight": 6
+    },
+    "wormCast": {
+      "label": "Ice Worm Cast",
+      "mix": [
+        1,
+        3,
+        1
+      ],
+      "shape": "aggregate",
+      "weight": 4
+    },
+    "matShred": {
+      "label": "Mat Shred",
+      "mix": [
+        1,
+        1,
+        3
+      ],
+      "shape": "ellipse",
+      "squash": 0.6,
+      "weight": 3
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase Seep",
+      "color": "#d8e6ea",
+      "weight": 3
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#c98b6b",
+      "weight": 3
+    },
+    "enzyme2": {
+      "label": "Glycosidase",
+      "color": "#7fae7a",
+      "weight": 3
+    },
+    "chemotaxis": {
+      "label": "Sulfide Sensing",
+      "color": "#e3c76b",
+      "weight": 8
+    },
+    "antibiotic": {
+      "label": "Bacteriocin",
+      "color": "#b23a3a",
+      "weight": 2
+    },
+    "eps": {
+      "label": "Mat Slime",
+      "color": "#7d9e8c",
+      "weight": 6
+    },
+    "crispr": {
+      "label": "CRISPR Immunity",
+      "color": "#5a7fae",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Twitching Pili",
+      "color": "#9a6bbf",
+      "weight": 5
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "thiomat",
+        "label": "Sulfide-Oxidizing Mat Bacterium",
+        "color": "#e8d98a",
+        "genome": {
+          "enzLvl": [
+            0,
+            0,
+            1
+          ],
+          "chemoLevel": 3,
+          "antibiotic": 0,
+          "eps": 2,
+          "crispr": false,
+          "twitching": false,
+          "chemolithotroph": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "hydratescavenger",
+        "label": "Hydrate Flake Scavenger",
+        "color": "#c9d8dd",
+        "genome": {
+          "enzLvl": [
+            3,
+            1,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 4
+      }
+    ],
+    "diatoms": []
+  },
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 260,
+      "color": "#dfe9ec",
+      "label": "Methane Hydrate Outcrop",
+      "roughness": 0.6,
+      "porosity": 0.4,
+      "poreSize": 30,
+      "featureSize": 300,
+      "spires": 0.25,
+      "spireHeight": 180,
+      "spireWidth": 70,
+      "warp": 0.15
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 8,
+        "salinity": 35,
+        "light": 0.05,
+        "nutrient": 0.3
+      },
+      {
+        "depth": 0.5,
+        "tempC": 5,
+        "salinity": 35,
+        "light": 0,
+        "nutrient": 0.4
+      },
+      {
+        "depth": 1,
+        "tempC": 4,
+        "salinity": 35.5,
+        "light": 0,
+        "nutrient": 0.8
+      }
+    ],
+    "thermocline": {
+      "depth": 0.3,
+      "sharpness": 0.4
+    },
+    "chemical": {
+      "peakDepth": 0.92,
+      "spread": 0.16,
+      "strength": 0.95,
+      "color": "#f0e08a"
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}

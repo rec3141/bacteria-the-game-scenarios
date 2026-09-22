@@ -508,6 +508,14 @@
       "file": "scenarios/daily-2026-09-21.json"
     },
     {
+      "id": "daily-2026-09-22",
+      "title": "Ice Worm Reef: Chemosynthesis on a Frozen Methane Hill",
+      "date": "2026-09-22",
+      "difficulty": "hard",
+      "realWorldBasis": "Gulf of Mexico gas-hydrate outcrops (e.g. Bush Hill) hosting sulfide-oxidizing mats and Hesiocaeca methanicola ice worms",
+      "file": "scenarios/daily-2026-09-22.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
