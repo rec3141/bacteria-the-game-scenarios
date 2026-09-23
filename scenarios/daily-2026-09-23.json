@@ -1,0 +1,280 @@
+{
+  "meta": {
+    "title": "Frost Flower Halophiles: Salt Blooms on New Arctic Ice",
+    "date": "2026-09-23",
+    "lesson": "When Arctic sea ice first forms, delicate ice crystals called frost flowers bloom on the surface, wicking up hypersaline brine from the ice below - sometimes 3x seawater salinity. This brine is a refuge for halophilic and halotolerant bacteria that must osmotically adapt to survive. The brine is nutrient-poor and bitterly cold, so growth is slow and cells rely on EPS to buffer salt stress and stay put in favorable brine channels rather than mixing out. This scenario asks: can a founder population persist in a cold, salty, food-poor pocket using EPS and patient chemotaxis rather than speed?",
+    "citation": "Bowman, J.S. et al. (2012) Microbial communities in frost flowers on Arctic sea ice, Beaufort/Chukchi region.",
+    "difficulty": "hard",
+    "realWorldBasis": "Frost flower brine microbial communities on new Arctic sea ice, Beaufort/Chukchi region"
+  },
+  "env": {
+    "diel.tempBase": -12,
+    "diel.tempAmp": 3,
+    "diel.q10RefC": 20,
+    "diel.q10": 2.3,
+    "diel.foodFloor": 0.55,
+    "diel.lightGamma": 2.4,
+    "diel.twilight": 0.4,
+    "diel.waterNight.0": 4,
+    "diel.waterNight.1": 12,
+    "diel.waterNight.2": 26,
+    "diel.waterDay.0": 150,
+    "diel.waterDay.1": 190,
+    "diel.waterDay.2": 210,
+    "diel.goldTint": 0.08,
+    "day.lengthSec": 300,
+    "day.latitude": 71,
+    "day.dayOfYear": 300,
+    "day.startHour": 10,
+    "respirationBase": 0.6,
+    "substrate.count": 46,
+    "substrate.sizeMin": 26,
+    "substrate.sizeMax": 130,
+    "substrate.lifeMin": 220,
+    "substrate.lifeMax": 420,
+    "substrate.driftMin": 3,
+    "substrate.driftMax": 8,
+    "substrate.bloomEvery": 0.9,
+    "cell.startEnergy": 95,
+    "cell.divideThreshold": 190,
+    "cell.maxEnergy": 250,
+    "cell.thrust": 12000,
+    "cell.dragRate": 75,
+    "cell.maxSpeed": 140,
+    "cell.swimCost": 0.9,
+    "cell.runMin": 1.2,
+    "cell.runMax": 2.4,
+    "cell.cystBelow": 20,
+    "cell.cystWake": 55,
+    "cell.cystMetab": 0.02,
+    "cell.chemoRange0": 340,
+    "cell.chemoBias": 1.1,
+    "eps.lifePerLevel": 7,
+    "eps.cost": 3,
+    "eps.threatRange": 70,
+    "eps.cooldown.0": 8,
+    "eps.cooldown.1": 14,
+    "predator.count": 2,
+    "predator.wanderSpeed": 14,
+    "predator.chaseSpeed": 24,
+    "predator.metabolism": 7,
+    "predator.senseRange": 130,
+    "predator.minCount": 1
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid brine exudate",
+      "enzymeLabel": "Cold-active lipase",
+      "color": "#8fb8c9"
+    },
+    {
+      "index": 1,
+      "label": "Ice algae protein debris",
+      "enzymeLabel": "Psychrophilic protease",
+      "color": "#c9a88f"
+    },
+    {
+      "index": 2,
+      "label": "Brine EPS carbohydrate",
+      "enzymeLabel": "Cold-active glucosidase",
+      "color": "#e8f2f5"
+    }
+  ],
+  "particles": {
+    "brineFloc": {
+      "label": "Brine flocculent debris",
+      "mix": [
+        3,
+        3,
+        4
+      ],
+      "shape": "aggregate",
+      "weight": 6
+    },
+    "iceAlgaeShard": {
+      "label": "Ice algae fragment",
+      "mix": [
+        1,
+        5,
+        2
+      ],
+      "shape": "shard",
+      "weight": 3
+    },
+    "saltCrystalGel": {
+      "label": "Salt-crystal mucilage",
+      "mix": [
+        2,
+        1,
+        5
+      ],
+      "shape": "ellipse",
+      "squash": 0.6,
+      "weight": 4
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Cold lipase burst",
+      "color": "#8fb8c9",
+      "weight": 4
+    },
+    "enzyme1": {
+      "label": "Cold protease burst",
+      "color": "#c9a88f",
+      "weight": 4
+    },
+    "enzyme2": {
+      "label": "Cold glucosidase burst",
+      "color": "#e8f2f5",
+      "weight": 5
+    },
+    "chemotaxis": {
+      "label": "Brine channel seeking",
+      "color": "#bcd9e0",
+      "weight": 6
+    },
+    "eps": {
+      "label": "Osmotic EPS shield",
+      "color": "#f0f8fa",
+      "weight": 8
+    },
+    "antibiotic": {
+      "label": "Bacteriocin release",
+      "color": "#d94f4f",
+      "weight": 2
+    },
+    "crispr": {
+      "label": "Phage immunity",
+      "color": "#7a9e9f",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Pilus grip",
+      "color": "#a89bd1",
+      "weight": 1
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "halomonas_frost",
+        "label": "Halomonas frost-flower strain",
+        "color": "#dff0f5",
+        "genome": {
+          "enzLvl": [
+            1,
+            2,
+            2
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 3,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "psychro_generalist",
+        "label": "Psychrophilic generalist",
+        "color": "#a9c8d6",
+        "genome": {
+          "enzLvl": [
+            1,
+            1,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 1,
+          "crispr": true,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "fragilariopsis_frost",
+        "label": "Fragilariopsis sea ice diatom",
+        "color": "#c7e8d4",
+        "form": "pennate",
+        "sizeUm": 35,
+        "chain": 4,
+        "count": 20,
+        "toxin": null
+      }
+    ]
+  },
+  "terrain": [
+    {
+      "at": "top",
+      "thickness": 220,
+      "color": "#eaf6fa",
+      "label": "New sea ice with frost flowers",
+      "roughness": 0.65,
+      "porosity": 0.45,
+      "poreSize": 30,
+      "featureSize": 160,
+      "spires": 0.15,
+      "spireHeight": 90,
+      "spireWidth": 50,
+      "warp": 0.2
+    },
+    {
+      "at": "bottom",
+      "thickness": 60,
+      "color": "#7a8fa0",
+      "label": "Frazil ice slush layer",
+      "roughness": 0.3,
+      "porosity": 0.3,
+      "poreSize": 20,
+      "featureSize": 120,
+      "spires": 0,
+      "spireHeight": 0,
+      "spireWidth": 10,
+      "warp": 0.05
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": -14,
+        "salinity": 55,
+        "light": 0.4,
+        "nutrient": 0.25
+      },
+      {
+        "depth": 0.3,
+        "tempC": -8,
+        "salinity": 40,
+        "light": 0.3,
+        "nutrient": 0.3
+      },
+      {
+        "depth": 0.7,
+        "tempC": -2,
+        "salinity": 32,
+        "light": 0.15,
+        "nutrient": 0.35
+      },
+      {
+        "depth": 1,
+        "tempC": -1.8,
+        "salinity": 30,
+        "light": 0.05,
+        "nutrient": 0.4
+      }
+    ],
+    "thermocline": {
+      "depth": 0.3,
+      "sharpness": 0.6
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}
