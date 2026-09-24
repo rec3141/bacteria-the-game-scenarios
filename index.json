@@ -524,6 +524,14 @@
       "file": "scenarios/daily-2026-09-23.json"
     },
     {
+      "id": "daily-2026-09-24",
+      "title": "Fever Reef Redux: Vibrio Storms the Mucus Layer at Heron Island",
+      "date": "2026-09-24",
+      "difficulty": "hard",
+      "realWorldBasis": "2016 Great Barrier Reef mass bleaching, Heron Island reef flat, Vibrio coralliilyticus mucus-layer opportunism",
+      "file": "scenarios/daily-2026-09-24.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",

@@ -1,0 +1,249 @@
+{
+  "actions": {
+    "enzyme0": {
+      "label": "Chitinase",
+      "color": "#e07a3e",
+      "weight": 6
+    },
+    "enzyme1": {
+      "label": "Collagenase",
+      "color": "#c94f6d",
+      "weight": 4
+    },
+    "enzyme2": {
+      "label": "Beta-glucanase",
+      "color": "#4fae5e",
+      "weight": 3
+    },
+    "chemotaxis": {
+      "label": "Photosynthate Tracking",
+      "weight": 6
+    },
+    "antibiotic": {
+      "label": "Karlotoxin Analog",
+      "color": "#8f4fd1",
+      "weight": 2
+    },
+    "eps": {
+      "label": "Biofilm Matrix",
+      "weight": 5
+    },
+    "crispr": {
+      "label": "CRISPR Immunity",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Surface Twitching",
+      "weight": 4
+    }
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 26,
+        "salinity": 35,
+        "light": 1,
+        "nutrient": 0.3
+      },
+      {
+        "depth": 8,
+        "tempC": 25,
+        "salinity": 35,
+        "light": 0.7,
+        "nutrient": 0.4
+      },
+      {
+        "depth": 20,
+        "tempC": 22,
+        "salinity": 35.5,
+        "light": 0.35,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 40,
+        "tempC": 18,
+        "salinity": 36,
+        "light": 0.08,
+        "nutrient": 0.8
+      }
+    ],
+    "thermocline": {
+      "depth": 18,
+      "sharpness": 0.6
+    }
+  },
+  "env": {
+    "day.lengthSec": 260,
+    "day.latitude": 24,
+    "day.dayOfYear": 210,
+    "diel.tempBase": 25,
+    "diel.tempAmp": 3,
+    "diel.foodFloor": 0.3,
+    "diel.q10": 2.3,
+    "diel.waterDay.0": 40,
+    "diel.waterDay.1": 95,
+    "diel.waterDay.2": 60,
+    "diel.waterNight.0": 4,
+    "diel.waterNight.1": 14,
+    "diel.waterNight.2": 18,
+    "substrate.count": 95,
+    "substrate.sizeMin": 34,
+    "substrate.sizeMax": 180,
+    "substrate.lifeMin": 90,
+    "substrate.lifeMax": 220,
+    "substrate.driftMin": 6,
+    "substrate.driftMax": 14,
+    "predator.count": 6,
+    "predator.senseRange": 150,
+    "predator.metabolism": 9,
+    "predator.mealEnergy": 50,
+    "phage.greenCount": 24,
+    "phage.goldCount": 3,
+    "phage.burst.0": 6,
+    "phage.burst.1": 12,
+    "phage.latent.0": 7,
+    "phage.latent.1": 11,
+    "cell.startEnergy": 100,
+    "cell.divideThreshold": 165,
+    "cell.uptake": 16,
+    "cell.swimCost": 1.4,
+    "respirationBase": 1.05
+  },
+  "meta": {
+    "title": "Fever Reef Redux: Vibrio Storms the Mucus Layer at Heron Island",
+    "date": "2026-09-24",
+    "lesson": "When corals bleach in a marine heatwave, they don't just lose their algal color partners (zooxanthellae) - their surface mucus, normally a nutrient-poor, well-defended barrier, becomes a nutrient-rich, undefended target. This scenario models the reef flat at Heron Island during a bleaching event: warm, shallow water breaks down the coral's protective mucopolysaccharide layer, releasing chitin-rich mucus glycoproteins that opportunistic Vibrio-type bacteria rush to exploit. Play as a chitinolytic colonist racing to break down mucus particles (chitin/glycoprotein-dominant) before ciliate grazers and viral predation cut you down, while EPS matrix production offers refuge in the increasingly crowded, warming water. The lesson: coral disease outbreaks are often less about a single pathogen invading and more about a stressed host's defenses collapsing, opening a feeding frenzy for generalist opportunists already present in reef water.",
+    "citation": "Ushijima et al. 2020, Vibrio coralliilyticus pathogenesis in thermally stressed corals; Great Barrier Reef 2016 mass bleaching event studies",
+    "difficulty": "hard",
+    "realWorldBasis": "2016 Great Barrier Reef mass bleaching, Heron Island reef flat, Vibrio coralliilyticus mucus-layer opportunism"
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "vibrio_founder",
+        "label": "Vibrio coralliilyticus",
+        "color": "#e07a3e",
+        "genome": {
+          "enzLvl": [
+            3,
+            2,
+            1
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 2,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 8
+      },
+      {
+        "id": "pseudoalt",
+        "label": "Pseudoalteromonas sp.",
+        "color": "#c9944f",
+        "genome": {
+          "enzLvl": [
+            2,
+            3,
+            1
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 4
+      },
+      {
+        "id": "defender",
+        "label": "Commensal Reef Bacterium",
+        "color": "#4fae5e",
+        "genome": {
+          "enzLvl": [
+            1,
+            1,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 2,
+          "eps": 3,
+          "crispr": true,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "symbiodinium_free",
+        "label": "Expelled Zooxanthellae (free-living)",
+        "color": "#c9b23e",
+        "form": "centric",
+        "sizeUm": 10,
+        "chain": 1,
+        "count": 40,
+        "toxin": null
+      }
+    ]
+  },
+  "particles": {
+    "mucus_chitin": {
+      "label": "Bleached Coral Mucus Clump",
+      "mix": [
+        1,
+        4,
+        1
+      ],
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 7
+    },
+    "tissue_debris": {
+      "label": "Sloughed Coral Tissue",
+      "mix": [
+        1,
+        3,
+        0.5
+      ],
+      "shape": "shard",
+      "squash": 0.7,
+      "weight": 5
+    },
+    "algal_debris": {
+      "label": "Expelled Algal Debris",
+      "mix": [
+        2,
+        1,
+        3
+      ],
+      "shape": "ellipse",
+      "squash": 0.8,
+      "weight": 3
+    }
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid Droplets",
+      "enzymeLabel": "Lipase",
+      "color": "#e0c23e"
+    },
+    {
+      "index": 1,
+      "label": "Mucus Glycoprotein",
+      "enzymeLabel": "Collagenase",
+      "color": "#c94f6d"
+    },
+    {
+      "index": 2,
+      "label": "Chitin Fragments",
+      "enzymeLabel": "Chitinase",
+      "color": "#e07a3e"
+    }
+  ],
+  "schema": "bacteria-scenario",
+  "version": 1
+}
