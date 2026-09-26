@@ -540,6 +540,14 @@
       "file": "scenarios/daily-2026-09-25.json"
     },
     {
+      "id": "daily-2026-09-26",
+      "title": "Firelight and Rust: Endeavour Segment Snowblower Vent",
+      "date": "2026-09-26",
+      "difficulty": "hard",
+      "realWorldBasis": "Endeavour segment snowblower vents, Juan de Fuca Ridge, ~2200m depth",
+      "file": "scenarios/daily-2026-09-26.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
