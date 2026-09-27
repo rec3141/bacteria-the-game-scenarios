@@ -548,6 +548,14 @@
       "file": "scenarios/daily-2026-09-26.json"
     },
     {
+      "id": "daily-2026-09-27",
+      "title": "Oil Slick Overlap: The Marine Snow of a Tanker Spill",
+      "date": "2026-09-27",
+      "difficulty": "hard",
+      "realWorldBasis": "2010 Deepwater Horizon spill, Gulf of Mexico - oil-snow sedimentation and depth-stratified hydrocarbon-degrading bacteria",
+      "file": "scenarios/daily-2026-09-27.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",

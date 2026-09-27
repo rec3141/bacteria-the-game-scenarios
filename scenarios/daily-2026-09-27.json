@@ -1,0 +1,259 @@
+{
+  "actions": {
+    "enzyme0": {
+      "label": "Wax-ester Esterase",
+      "color": "#e8c35a",
+      "weight": 6
+    },
+    "enzyme1": {
+      "label": "Collagenase",
+      "color": "#d96b6b",
+      "weight": 4
+    },
+    "enzyme2": {
+      "label": "Chitinase",
+      "color": "#7fd6c0",
+      "weight": 3
+    },
+    "chemotaxis": {
+      "label": "Lipid Plume Tracking",
+      "color": "#f2f2c0",
+      "weight": 5
+    },
+    "antibiotic": {
+      "label": "Bacteriocin Burst",
+      "color": "#c85ac8",
+      "weight": 2
+    },
+    "eps": {
+      "label": "Slick Biofilm",
+      "color": "#8899aa",
+      "weight": 3
+    },
+    "crispr": {
+      "label": "Phage Immunity",
+      "color": "#66ccff",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Pili Grip",
+      "color": "#ffaa55",
+      "weight": 1
+    }
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 26,
+        "salinity": 36,
+        "light": 1,
+        "nutrient": 0.3
+      },
+      {
+        "depth": 0.3,
+        "tempC": 22,
+        "salinity": 36,
+        "light": 0.6,
+        "nutrient": 0.5
+      },
+      {
+        "depth": 0.6,
+        "tempC": 16,
+        "salinity": 35,
+        "light": 0.15,
+        "nutrient": 0.8
+      },
+      {
+        "depth": 1,
+        "tempC": 12,
+        "salinity": 35,
+        "light": 0.02,
+        "nutrient": 1
+      }
+    ],
+    "thermocline": {
+      "depth": 0.45,
+      "sharpness": 0.6
+    }
+  },
+  "env": {
+    "day.lengthSec": 300,
+    "day.latitude": 27,
+    "day.dayOfYear": 172,
+    "diel.tempBase": 24,
+    "diel.tempAmp": 4,
+    "diel.foodFloor": 0.55,
+    "diel.q10": 2.4,
+    "diel.waterDay.0": 30,
+    "diel.waterDay.1": 70,
+    "diel.waterDay.2": 55,
+    "diel.waterNight.0": 3,
+    "diel.waterNight.1": 12,
+    "diel.waterNight.2": 15,
+    "substrate.count": 95,
+    "substrate.sizeMin": 34,
+    "substrate.sizeMax": 190,
+    "substrate.sizeExp": 1.3,
+    "substrate.lifeMin": 70,
+    "substrate.lifeMax": 160,
+    "substrate.dissolveTime": 6,
+    "substrate.driftMin": 6,
+    "substrate.driftMax": 14,
+    "substrate.minPerRes": 3,
+    "enzyme.maxRadius": 30,
+    "enzyme.life": 6,
+    "cell.chemoRange0": 380,
+    "cell.chemoBias": 1.1,
+    "cell.uptake": 17,
+    "cell.swimCost": 1,
+    "respirationBase": 1.05,
+    "predator.count": 6,
+    "predator.senseRange": 200,
+    "predator.chaseSpeed": 55,
+    "predator.metabolism": 12,
+    "phage.greenCount": 26,
+    "phage.goldCount": 3,
+    "phage.burst.0": 6,
+    "phage.burst.1": 12,
+    "phage.latent.0": 7,
+    "phage.latent.1": 12,
+    "phage.hostTolerance": 2,
+    "phage.seedRatio": 0.08,
+    "diatom.photoRate": 10,
+    "diatom.exudateFrac": 0.28
+  },
+  "meta": {
+    "title": "Oil Slick Overlap: The Marine Snow of a Tanker Spill",
+    "date": "2026-09-27",
+    "lesson": "When a surface oil slick begins to sink as marine oil snow, it drags a lipid-rich particle field down through the water column, and the bacterial community that greets it stratifies by depth just like the light and oxygen do. Near the sunlit surface, alkane-degrading, lipid-specialist cells race collagen- and chitin-users for the fastest-decaying droplets; deeper down, where oxygen thins and nutrients pool, the same droplets persist longer and reward patience over speed. This level asks you to specialize in a wax-ester esterase (a re-skinned lipid enzyme) to break down oil-flocculated particles, while surviving grazers and phage pressure that track your population as it blooms on the windfall of carbon. The lesson: an oil spill is not just a toxin event, it is a pulse of food that reorganizes an entire microbial food web around its slow sinking and decay.",
+    "citation": "Passow & Ziervogel (2016), Marine oil snow sedimentation and flocculent accumulation (MOSSFA) after Deepwater Horizon",
+    "difficulty": "hard",
+    "realWorldBasis": "2010 Deepwater Horizon spill, Gulf of Mexico - oil-snow sedimentation and depth-stratified hydrocarbon-degrading bacteria"
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "alcanivorax",
+        "label": "Alcanivorax Oil-Eater",
+        "color": "#e8c35a",
+        "genome": {
+          "enzLvl": [
+            3,
+            1,
+            1
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "pseudoalteromonas",
+        "label": "Pseudoalteromonas Chitin-Chaser",
+        "color": "#7fd6c0",
+        "genome": {
+          "enzLvl": [
+            1,
+            1,
+            3
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 0,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 3
+      },
+      {
+        "id": "colwellia",
+        "label": "Colwellia Deep Drifter",
+        "color": "#5588aa",
+        "genome": {
+          "enzLvl": [
+            2,
+            2,
+            1
+          ],
+          "chemoLevel": 3,
+          "antibiotic": 0,
+          "eps": 2,
+          "crispr": true,
+          "twitching": false
+        },
+        "immigrateWeight": 4
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "skeletonema",
+        "label": "Skeletonema (oil-fouled)",
+        "color": "#a3c98f",
+        "form": "centric",
+        "sizeUm": 14,
+        "chain": 6,
+        "count": 40
+      }
+    ]
+  },
+  "particles": {
+    "oilFloc": {
+      "label": "Oil-Flocculated Snow",
+      "mix": [
+        0.75,
+        0.1,
+        0.15
+      ],
+      "shape": "aggregate",
+      "weight": 6
+    },
+    "carcassBits": {
+      "label": "Fish Carcass Fragment",
+      "mix": [
+        0.2,
+        0.6,
+        0.2
+      ],
+      "shape": "shard",
+      "weight": 2
+    },
+    "moltShell": {
+      "label": "Crustacean Molt",
+      "mix": [
+        0.1,
+        0.1,
+        0.8
+      ],
+      "shape": "ellipse",
+      "squash": 0.5,
+      "weight": 2
+    }
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Oil/Lipid Flocs",
+      "enzymeLabel": "Wax-ester Esterase",
+      "color": "#e8c35a"
+    },
+    {
+      "index": 1,
+      "label": "Protein Carcass Matter",
+      "enzymeLabel": "Collagenase",
+      "color": "#d96b6b"
+    },
+    {
+      "index": 2,
+      "label": "Chitin Fragments",
+      "enzymeLabel": "Chitinase",
+      "color": "#7fd6c0"
+    }
+  ],
+  "schema": "bacteria-scenario",
+  "version": 1
+}
