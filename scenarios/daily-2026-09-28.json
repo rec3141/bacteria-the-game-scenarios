@@ -1,0 +1,203 @@
+{
+  "meta": {
+    "title": "Ballast Water Invasion: A Foreign Bacterium in Long Beach Harbor",
+    "date": "2026-09-28",
+    "lesson": "Ships discharge millions of liters of ballast water taken on in one port and released in another, and with it, whole microbial communities hitch a ride across oceans. In Long Beach Harbor, a copiotrophic bacterium from a distant estuary is dumped into resident water alongside the native harbor community. Both must exploit the same organic pollution plume (a mix of ship-derived hydrocarbon residue, sewage-adjacent protein, and algal carbohydrate detritus) but the invader has no evolved relationship with local phages, grazers, or competitors. This models real invasion biology: success depends on whether the newcomer's metabolism matches the available food faster than resident predators and viruses can suppress it. High traffic and nutrient loading make this a crowded, high-turnover, frantic environment very different from an open-ocean level.",
+    "citation": "Ruiz et al. 2000, Global spread of microorganisms by ships (Nature); ballast water invasion ecology studies, Port of Long Beach.",
+    "difficulty": "hard",
+    "realWorldBasis": "Ballast water discharge as a vector for microbial bioinvasion, Port of Long Beach, CA"
+  },
+  "env": {
+    "day.lengthSec": 200,
+    "day.latitude": 33,
+    "day.dayOfYear": 200,
+    "diel.tempBase": 19,
+    "diel.tempAmp": 3,
+    "diel.foodFloor": 0.45,
+    "diel.q10": 2.2,
+    "diel.waterDay.0": 40,
+    "diel.waterDay.1": 62,
+    "diel.waterDay.2": 55,
+    "diel.waterNight.0": 6,
+    "diel.waterNight.1": 14,
+    "diel.waterNight.2": 16,
+    "substrate.count": 95,
+    "substrate.sizeMin": 26,
+    "substrate.sizeMax": 150,
+    "substrate.lifeMin": 60,
+    "substrate.lifeMax": 150,
+    "substrate.bloomEvery": 0.35,
+    "substrate.driftMin": 14,
+    "substrate.driftMax": 34,
+    "cell.startEnergy": 95,
+    "cell.divideThreshold": 155,
+    "cell.swimCost": 1.5,
+    "respirationBase": 1.05,
+    "predator.count": 7,
+    "predator.senseRange": 210,
+    "predator.chaseSpeed": 50,
+    "predator.metabolism": 11,
+    "predator.minCount": 3,
+    "predator.immigratePerPrey": 0.06,
+    "phage.greenCount": 26,
+    "phage.goldCount": 3,
+    "phage.hostTolerance": 2,
+    "phage.adsorbBase": 0.34,
+    "phage.seedRatio": 0.08
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Bilge Hydrocarbon Sheen",
+      "enzymeLabel": "Alkane Hydroxylase",
+      "color": "#7a6a3d"
+    },
+    {
+      "index": 1,
+      "label": "Sewage-Adjacent Protein Floc",
+      "enzymeLabel": "Protease",
+      "color": "#c98a5a"
+    },
+    {
+      "index": 2,
+      "label": "Algal Detritus Flake",
+      "enzymeLabel": "Amylase",
+      "color": "#5aa06a"
+    }
+  ],
+  "particles": {
+    "sheen": {
+      "label": "Oily Bilge Fleck",
+      "mix": [
+        6,
+        2,
+        1
+      ],
+      "shape": "shard",
+      "squash": 1,
+      "weight": 5
+    },
+    "floc": {
+      "label": "Sewage Protein Floc",
+      "mix": [
+        1,
+        6,
+        2
+      ],
+      "shape": "aggregate",
+      "weight": 5
+    },
+    "detritus": {
+      "label": "Algal Detritus Clump",
+      "mix": [
+        1,
+        1,
+        6
+      ],
+      "shape": "aggregate",
+      "weight": 4
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Alkane Hydroxylase",
+      "color": "#a8963f",
+      "weight": 6
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#d4834a",
+      "weight": 5
+    },
+    "enzyme2": {
+      "label": "Amylase",
+      "color": "#4f9b5f",
+      "weight": 4
+    },
+    "chemotaxis": {
+      "label": "Chemotaxis",
+      "color": "#3fa9c9",
+      "weight": 6
+    },
+    "antibiotic": {
+      "label": "Bacteriocin Burst",
+      "color": "#c23b3b",
+      "weight": 4
+    },
+    "eps": {
+      "label": "Biofilm Slime",
+      "color": "#8f8f5c",
+      "weight": 3
+    },
+    "crispr": {
+      "label": "CRISPR Immunity",
+      "color": "#7a5ac9",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Pili Twitching",
+      "color": "#c9a05a",
+      "weight": 2
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "invader",
+        "label": "Invasive Ballast Bacterium",
+        "color": "#e0a83f",
+        "genome": {
+          "enzLvl": [
+            3,
+            2,
+            1
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 3
+      },
+      {
+        "id": "native1",
+        "label": "Resident Harbor Copiotroph",
+        "color": "#5c9ec9",
+        "genome": {
+          "enzLvl": [
+            1,
+            3,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 2,
+          "eps": 2,
+          "crispr": true,
+          "twitching": false
+        },
+        "immigrateWeight": 7
+      },
+      {
+        "id": "native2",
+        "label": "Resident Vibrio-like Opportunist",
+        "color": "#8bc98a",
+        "genome": {
+          "enzLvl": [
+            1,
+            2,
+            3
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 1,
+          "eps": 1,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 6
+      }
+    ]
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}

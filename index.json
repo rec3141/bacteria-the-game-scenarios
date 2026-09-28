@@ -556,6 +556,14 @@
       "file": "scenarios/daily-2026-09-27.json"
     },
     {
+      "id": "daily-2026-09-28",
+      "title": "Ballast Water Invasion: A Foreign Bacterium in Long Beach Harbor",
+      "date": "2026-09-28",
+      "difficulty": "hard",
+      "realWorldBasis": "Ballast water discharge as a vector for microbial bioinvasion, Port of Long Beach, CA",
+      "file": "scenarios/daily-2026-09-28.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
