@@ -1,0 +1,242 @@
+{
+  "meta": {
+    "title": "Deep Chlorophyll Maximum: Diatom-Bacteria Coupling at the Nutricline",
+    "date": "2026-09-29",
+    "lesson": "In the stratified subtropical gyre, surface waters are sunny but starved of nutrients, while deep water is nutrient-rich but dark. Between them sits the deep chlorophyll maximum (DCM): a thin band where just enough light and just enough upwelled nitrate/phosphate overlap to support a standing crop of diatoms and phototrophic bacteria. Heterotrophic bacteria cluster in the phycosphere around these cells, living on their exuded carbon. Drop below the DCM and food gets nutrient-rich but photosynthesis stops; rise above it and light is abundant but the diatoms starve. The player must find and hold that narrow band.",
+    "citation": "Cullen, J.J. (1982) 'The deep chlorophyll maximum: comparing vertical profiles of chlorophyll a.' Can. J. Fish. Aquat. Sci.",
+    "difficulty": "normal",
+    "realWorldBasis": "Deep chlorophyll maximum layers in stratified oligotrophic seas (subtropical gyres, Mediterranean)"
+  },
+  "env": {
+    "day.latitude": 30,
+    "day.dayOfYear": 200,
+    "diel.tempBase": 24,
+    "diel.tempAmp": 3,
+    "diel.foodFloor": 0.25,
+    "diel.q10": 2.1,
+    "diel.waterDay.0": 10,
+    "diel.waterDay.1": 60,
+    "diel.waterDay.2": 90,
+    "diel.waterNight.0": 1,
+    "diel.waterNight.1": 6,
+    "diel.waterNight.2": 18,
+    "substrate.count": 80,
+    "substrate.sizeMin": 24,
+    "substrate.sizeMax": 140,
+    "substrate.lifeMin": 100,
+    "substrate.lifeMax": 260,
+    "substrate.driftMin": 5,
+    "substrate.driftMax": 12,
+    "cell.chemoRange0": 400,
+    "cell.chemoRangePer": 200,
+    "cell.chemoBias": 1.3,
+    "cell.cystBelow": 20,
+    "cell.cystWake": 55,
+    "column.photoRate": 10,
+    "column.chemRate": 3,
+    "predator.count": 3,
+    "predator.senseRange": 140,
+    "predator.metabolism": 8,
+    "phage.greenCount": 12,
+    "phage.goldCount": 3
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid exudate droplets",
+      "enzymeLabel": "Lipase",
+      "color": "#d9b23c"
+    },
+    {
+      "index": 1,
+      "label": "Diatom protein detritus",
+      "enzymeLabel": "Protease",
+      "color": "#7fae6f"
+    },
+    {
+      "index": 2,
+      "label": "Phycosphere carbohydrate",
+      "enzymeLabel": "Glycosidase",
+      "color": "#4a90c4"
+    }
+  ],
+  "particles": {
+    "exudate": {
+      "label": "Diatom carbon exudate",
+      "mix": [
+        0.2,
+        0.2,
+        0.6
+      ],
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 6
+    },
+    "detritus": {
+      "label": "Sinking cell debris",
+      "mix": [
+        0.3,
+        0.5,
+        0.2
+      ],
+      "shape": "shard",
+      "squash": 1,
+      "weight": 3
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase",
+      "color": "#d9b23c",
+      "weight": 5
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#7fae6f",
+      "weight": 5
+    },
+    "enzyme2": {
+      "label": "Glycosidase",
+      "color": "#4a90c4",
+      "weight": 6
+    },
+    "chemotaxis": {
+      "label": "Nutricline sensing",
+      "color": "#7fd0ff",
+      "weight": 8
+    },
+    "antibiotic": {
+      "label": "Antibiotic",
+      "color": "#c0392b",
+      "weight": 3
+    },
+    "eps": {
+      "label": "EPS sheath",
+      "color": "#8e9b97",
+      "weight": 3
+    },
+    "crispr": {
+      "label": "CRISPR",
+      "color": "#9b59b6",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Twitching",
+      "color": "#e67e22",
+      "weight": 1
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "phycosphere_generalist",
+        "label": "Phycosphere heterotroph",
+        "color": "#5aa9c7",
+        "genome": {
+          "enzLvl": [
+            1,
+            2,
+            2
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "prochlorococcus_dcm",
+        "label": "Prochlorococcus ecotype (DCM)",
+        "color": "#2e8b57",
+        "genome": {
+          "enzLvl": [
+            0,
+            0,
+            1
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 0,
+          "crispr": false,
+          "twitching": false,
+          "phototroph": true
+        },
+        "immigrateWeight": 4
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "dcm_pennate",
+        "label": "Nutricline pennate diatom",
+        "color": "#c9a92c",
+        "form": "pennate",
+        "sizeUm": 40,
+        "chain": 3,
+        "count": 60
+      },
+      {
+        "id": "dcm_centric",
+        "label": "Nutricline centric diatom",
+        "color": "#e0c85a",
+        "form": "centric",
+        "sizeUm": 60,
+        "chain": 1,
+        "count": 40
+      }
+    ]
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 26,
+        "salinity": 36,
+        "light": 1,
+        "nutrient": 0.05
+      },
+      {
+        "depth": 40,
+        "tempC": 25,
+        "salinity": 36,
+        "light": 0.6,
+        "nutrient": 0.15
+      },
+      {
+        "depth": 80,
+        "tempC": 22,
+        "salinity": 36,
+        "light": 0.25,
+        "nutrient": 0.4
+      },
+      {
+        "depth": 120,
+        "tempC": 18,
+        "salinity": 36,
+        "light": 0.08,
+        "nutrient": 0.7
+      },
+      {
+        "depth": 160,
+        "tempC": 14,
+        "salinity": 36,
+        "light": 0.02,
+        "nutrient": 0.9
+      }
+    ],
+    "thermocline": {
+      "depth": 90,
+      "sharpness": 0.6
+    },
+    "chemical": {
+      "peakDepth": 0.6,
+      "spread": 0.2,
+      "strength": 0.75,
+      "color": "#3d6b8f"
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}
