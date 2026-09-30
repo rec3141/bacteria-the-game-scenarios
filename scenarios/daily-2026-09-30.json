@@ -1,0 +1,244 @@
+{
+  "meta": {
+    "title": "Shimizu Slope: Purple Bacteria of the Sagami Bay Seep",
+    "date": "2026-09-30",
+    "lesson": "At Sagami Bay's cold seeps off Japan, methane and sulfide leak from the seafloor at ~1000m depth, well below the photic zone in open water -- but on the steep, shallow-shelving slope the seep edge sits close enough to the dim edge of daylight that photosynthesis and chemosynthesis overlap in a narrow band. There, anoxygenic purple sulfur bacteria run photosynthesis using sulfide instead of water as the electron donor, needing BOTH light and sulfide at once. Whichever resource is scarcer sets their growth -- exactly the logic that stripes a Winogradsky column, played out on a real continental slope. This scenario asks you to find and hold that narrow overlap band: too shallow and the sulfide is gone, too deep and the light is gone.",
+    "citation": "Inspired by studies of anoxygenic phototrophic sulfur bacteria at shallow, sunlit cold seeps (e.g. Sagami Bay, Japan) where chemocline and photic zone overlap.",
+    "difficulty": "hard",
+    "realWorldBasis": "Sagami Bay cold seeps, Japan - anoxygenic purple/green sulfur bacteria at the rare overlap of light and sulfide near ~50-80m depth on the upper slope"
+  },
+  "env": {
+    "day.latitude": 35,
+    "day.dayOfYear": 172,
+    "day.lengthSec": 300,
+    "diel.tempBase": 12,
+    "diel.tempAmp": 2,
+    "diel.foodFloor": 0.4,
+    "diel.q10": 2.2,
+    "diel.q10RefC": 12,
+    "diel.waterNight.0": 1,
+    "diel.waterNight.1": 4,
+    "diel.waterNight.2": 10,
+    "diel.waterDay.0": 22,
+    "diel.waterDay.1": 58,
+    "diel.waterDay.2": 54,
+    "column.photoRate": 6,
+    "column.chemRate": 7,
+    "substrate.count": 70,
+    "substrate.sizeMin": 28,
+    "substrate.sizeMax": 170,
+    "substrate.lifeMin": 120,
+    "substrate.lifeMax": 280,
+    "substrate.driftMin": 6,
+    "substrate.driftMax": 14,
+    "cell.chemoRange0": 260,
+    "cell.chemoRangePer": 150,
+    "cell.chemoBias": 1.1,
+    "respirationBase": 0.8,
+    "predator.count": 3,
+    "predator.senseRange": 150,
+    "predator.wanderSpeed": 18,
+    "phage.greenCount": 10,
+    "phage.goldCount": 3
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid film",
+      "enzymeLabel": "Lipase",
+      "color": "#6b5d3a"
+    },
+    {
+      "index": 1,
+      "label": "Microbial floc protein",
+      "enzymeLabel": "Protease",
+      "color": "#8a6d4f"
+    },
+    {
+      "index": 2,
+      "label": "Seep detritus sugars",
+      "enzymeLabel": "Glycosidase",
+      "color": "#a68a5b"
+    }
+  ],
+  "particles": {
+    "floc": {
+      "label": "Sulfur-floc marine snow",
+      "mix": [
+        0.3,
+        0.4,
+        0.3
+      ],
+      "shape": "aggregate",
+      "weight": 6
+    },
+    "filament": {
+      "label": "Beggiatoa filament scrap",
+      "mix": [
+        0.15,
+        0.55,
+        0.3
+      ],
+      "shape": "shard",
+      "weight": 3
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase",
+      "color": "#6b5d3a",
+      "weight": 3
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#8a6d4f",
+      "weight": 4
+    },
+    "enzyme2": {
+      "label": "Glycosidase",
+      "color": "#a68a5b",
+      "weight": 3
+    },
+    "chemotaxis": {
+      "label": "Sulfide/Light Seeking",
+      "color": "#c48be0",
+      "weight": 8
+    },
+    "antibiotic": {
+      "label": "Bacteriocin",
+      "color": "#d94f4f",
+      "weight": 2
+    },
+    "eps": {
+      "label": "Mucus Sheath",
+      "color": "#7fb2c9",
+      "weight": 4
+    },
+    "crispr": {
+      "label": "CRISPR Immunity",
+      "color": "#4fa3d9",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Pili Twitching",
+      "color": "#e0a63a",
+      "weight": 1
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "purple_sulfur",
+        "label": "Purple Sulfur Bacterium",
+        "color": "#a94fd1",
+        "genome": {
+          "enzLvl": [
+            1,
+            1,
+            2
+          ],
+          "chemoLevel": 3,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false,
+          "phototroph": true,
+          "chemolithotroph": true
+        },
+        "immigrateWeight": 5
+      },
+      {
+        "id": "colorless_sulfur",
+        "label": "Colorless Sulfur Oxidizer",
+        "color": "#d9d0b0",
+        "genome": {
+          "enzLvl": [
+            1,
+            2,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 2,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "bay_diatom",
+        "label": "Bay Pennate Drifter",
+        "color": "#7ecbb0",
+        "form": "pennate",
+        "sizeUm": 40,
+        "chain": 2,
+        "count": 25,
+        "toxin": null
+      }
+    ]
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 18,
+        "salinity": 34,
+        "light": 1,
+        "nutrient": 0.2
+      },
+      {
+        "depth": 30,
+        "tempC": 15,
+        "salinity": 34.2,
+        "light": 0.55,
+        "nutrient": 0.35
+      },
+      {
+        "depth": 60,
+        "tempC": 12,
+        "salinity": 34.4,
+        "light": 0.18,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 90,
+        "tempC": 10,
+        "salinity": 34.6,
+        "light": 0.05,
+        "nutrient": 0.85
+      },
+      {
+        "depth": 120,
+        "tempC": 8,
+        "salinity": 34.8,
+        "light": 0,
+        "nutrient": 1
+      }
+    ],
+    "thermocline": {
+      "depth": 60,
+      "sharpness": 0.6
+    }
+  },
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 150,
+      "color": "#4a3d2e",
+      "label": "Seep sediment with sulfide vents",
+      "roughness": 0.6,
+      "porosity": 0.4,
+      "poreSize": 40,
+      "featureSize": 300,
+      "spires": 0.25,
+      "spireHeight": 200,
+      "spireWidth": 50,
+      "warp": 0.3
+    }
+  ],
+  "schema": "bacteria-scenario",
+  "version": 1
+}
