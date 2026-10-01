@@ -580,6 +580,14 @@
       "file": "scenarios/daily-2026-09-30.json"
     },
     {
+      "id": "daily-2026-10-01",
+      "title": "Pink Lake Summer: Halophilic Carotenoid Bloom at Lake Hillier",
+      "date": "2026-10-01",
+      "difficulty": "hard",
+      "realWorldBasis": "Lake Hillier, Western Australia - a naturally pink hypersaline lake colored by halophilic carotenoid-producing microbes",
+      "file": "scenarios/daily-2026-10-01.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
