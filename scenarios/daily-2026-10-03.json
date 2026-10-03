@@ -1,0 +1,270 @@
+{
+  "meta": {
+    "title": "Ice-Free Summer: Cyanobacteria Bloom the North Pole",
+    "date": "2026-10-03",
+    "lesson": "As Arctic sea ice retreats earlier and farther each summer, patches of open water once perpetually capped by ice now sit exposed to 24-hour polar daylight. Picocyanobacteria (Synechococcus-like cells) that used to be minor players under thick ice now bloom explosively in this new open-water niche, while diatom chains that depend on ice-edge stability struggle as the melt outpaces them. The lesson: the Arctic's new phototroph winners are not the classic ice algae but opportunistic free-floating cyanobacteria exploiting a longer, brighter, but also more unstable growing season. Grazers and phage still operate, but the real driver here is continuous light meeting a very cold, nutrient-thin surface layer.",
+    "citation": "Cf. Lewis et al. 2020 Science 'Changes in phytoplankton concentration now drive increased Arctic Ocean primary production'; Ardyna & Arrigo 2020 Nature Climate Change.",
+    "difficulty": "normal",
+    "realWorldBasis": "Arctic Ocean summer ice-free surface waters, high latitude, continuous daylight bloom of picocyanobacteria"
+  },
+  "env": {
+    "day.lengthSec": 300,
+    "day.latitude": 80,
+    "day.dayOfYear": 180,
+    "day.startHour": 6,
+    "diel.tempBase": 1,
+    "diel.tempAmp": 1.5,
+    "diel.foodFloor": 0.6,
+    "diel.q10": 2.2,
+    "diel.q10RefC": 20,
+    "diel.lightGamma": 0.9,
+    "diel.twilight": 0.6,
+    "diel.waterNight.0": 10,
+    "diel.waterNight.1": 30,
+    "diel.waterNight.2": 38,
+    "diel.waterDay.0": 40,
+    "diel.waterDay.1": 110,
+    "diel.waterDay.2": 95,
+    "diel.goldTint": 0.08,
+    "substrate.count": 80,
+    "substrate.sizeMin": 24,
+    "substrate.sizeMax": 140,
+    "substrate.sizeExp": 1.9,
+    "substrate.lifeMin": 160,
+    "substrate.lifeMax": 340,
+    "substrate.driftMin": 5,
+    "substrate.driftMax": 12,
+    "substrate.bloomEvery": 0.4,
+    "cell.thrust": 15000,
+    "cell.dragRate": 55,
+    "cell.maxSpeed": 180,
+    "cell.swimCost": 0.9,
+    "cell.cystBelow": 18,
+    "cell.cystWake": 50,
+    "cell.runMin": 2.2,
+    "cell.runMax": 4,
+    "respirationBase": 0.6,
+    "predator.count": 3,
+    "predator.wanderSpeed": 16,
+    "predator.chaseSpeed": 28,
+    "predator.metabolism": 7,
+    "predator.senseRange": 140,
+    "phage.greenCount": 14,
+    "phage.goldCount": 3,
+    "column.photoRate": 10
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid Exudate Droplets",
+      "enzymeLabel": "Lipase",
+      "color": "#c9a227"
+    },
+    {
+      "index": 1,
+      "label": "Protein Detritus",
+      "enzymeLabel": "Protease",
+      "color": "#7a9bc9"
+    },
+    {
+      "index": 2,
+      "label": "Polysaccharide Mucilage",
+      "enzymeLabel": "Glycosidase",
+      "color": "#4fae8a"
+    }
+  ],
+  "particles": {
+    "exudate": {
+      "label": "Cyanobacterial Exudate Clump",
+      "mix": [
+        1,
+        1,
+        3
+      ],
+      "shape": "aggregate",
+      "weight": 6,
+      "squash": 1
+    },
+    "detritus": {
+      "label": "Sinking Ice-Algae Detritus",
+      "mix": [
+        1,
+        2,
+        1
+      ],
+      "shape": "shard",
+      "weight": 3,
+      "squash": 1
+    },
+    "mucilage": {
+      "label": "Mucilage Raft",
+      "mix": [
+        0,
+        1,
+        4
+      ],
+      "shape": "ellipse",
+      "weight": 3,
+      "squash": 0.6
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase",
+      "color": "#c9a227",
+      "weight": 4
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#7a9bc9",
+      "weight": 4
+    },
+    "enzyme2": {
+      "label": "Glycosidase",
+      "color": "#4fae8a",
+      "weight": 7
+    },
+    "chemotaxis": {
+      "label": "Phototactic Drift",
+      "color": "#d7f0ff",
+      "weight": 6
+    },
+    "antibiotic": {
+      "label": "Bacteriocin Burst",
+      "color": "#e05c5c",
+      "weight": 3
+    },
+    "eps": {
+      "label": "Mucilage Sheath",
+      "color": "#9be3c4",
+      "weight": 5
+    },
+    "crispr": {
+      "label": "CRISPR Immunity",
+      "color": "#b48ee0",
+      "weight": 4
+    },
+    "twitching": {
+      "label": "Pilus Twitching",
+      "color": "#e0c468",
+      "weight": 2
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "synecho",
+        "label": "Synechococcus-like Picocyanobacterium",
+        "color": "#6fe3a0",
+        "genome": {
+          "enzLvl": [
+            1,
+            1,
+            3
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false,
+          "phototroph": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "heterotroph",
+        "label": "Copiotrophic Flavobacterium",
+        "color": "#c98fd1",
+        "genome": {
+          "enzLvl": [
+            1,
+            2,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 1,
+          "crispr": true,
+          "twitching": false
+        },
+        "immigrateWeight": 4
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "fragilariopsis",
+        "label": "Fragilariopsis (Ice-Edge Diatom)",
+        "color": "#bcd8e8",
+        "form": "pennate",
+        "sizeUm": 40,
+        "chain": 6,
+        "count": 30,
+        "toxin": null
+      },
+      {
+        "id": "thalassiosira",
+        "label": "Thalassiosira (Open-Water Centric Diatom)",
+        "color": "#9fc8d9",
+        "form": "centric",
+        "sizeUm": 25,
+        "chain": 1,
+        "count": 45
+      }
+    ]
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 1.5,
+        "salinity": 30,
+        "light": 1,
+        "nutrient": 0.3
+      },
+      {
+        "depth": 20,
+        "tempC": 0.5,
+        "salinity": 31,
+        "light": 0.6,
+        "nutrient": 0.4
+      },
+      {
+        "depth": 50,
+        "tempC": -0.5,
+        "salinity": 33,
+        "light": 0.2,
+        "nutrient": 0.5
+      },
+      {
+        "depth": 90,
+        "tempC": -1.5,
+        "salinity": 34,
+        "light": 0.03,
+        "nutrient": 0.6
+      }
+    ],
+    "thermocline": {
+      "depth": 35,
+      "sharpness": 0.4
+    }
+  },
+  "terrain": [
+    {
+      "at": "top",
+      "thickness": 40,
+      "color": "#eaf6fb",
+      "label": "Retreating Ice Margin",
+      "roughness": 0.3,
+      "porosity": 0.2,
+      "poreSize": 20,
+      "featureSize": 300,
+      "spires": 0,
+      "spireHeight": 0,
+      "spireWidth": 10,
+      "warp": 0
+    }
+  ],
+  "schema": "bacteria-scenario",
+  "version": 1
+}
