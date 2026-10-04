@@ -604,6 +604,14 @@
       "file": "scenarios/daily-2026-10-03.json"
     },
     {
+      "id": "daily-2026-10-04",
+      "title": "Kelp Forest Wrack: Alginate Grazers of the Holdfast",
+      "date": "2026-10-04",
+      "difficulty": "normal",
+      "realWorldBasis": "Giant kelp (Macrocystis pyrifera) forest detrital wrack decomposition on the temperate Pacific coast, where alginate/laminarin-degrading bacteria colonize sinking kelp blades ahead of protein-scavenging successors.",
+      "file": "scenarios/daily-2026-10-04.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",

@@ -1,0 +1,253 @@
+{
+  "actions": {
+    "enzyme0": {
+      "label": "Agarase",
+      "color": "#5fb8a0",
+      "weight": 5
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#c76b4a",
+      "weight": 4
+    },
+    "enzyme2": {
+      "label": "Laminarinase",
+      "color": "#d4b23c",
+      "weight": 6
+    },
+    "chemotaxis": {
+      "label": "Mucilage Taxis",
+      "color": "#9ad1e0",
+      "weight": 5
+    },
+    "eps": {
+      "label": "Capsule Shield",
+      "color": "#e0cda0",
+      "weight": 4
+    },
+    "twitching": {
+      "label": "Pilus Grip",
+      "color": "#b08cd0",
+      "weight": 3
+    },
+    "antibiotic": {
+      "label": "Phlorotannin Defense",
+      "color": "#7a5230",
+      "weight": 2
+    },
+    "crispr": {
+      "label": "CRISPR Immunity",
+      "color": "#888888",
+      "weight": 3
+    }
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 14,
+        "salinity": 32,
+        "light": 1,
+        "nutrient": 0.4
+      },
+      {
+        "depth": 10,
+        "tempC": 13,
+        "salinity": 32,
+        "light": 0.6,
+        "nutrient": 0.55
+      },
+      {
+        "depth": 20,
+        "tempC": 12,
+        "salinity": 33,
+        "light": 0.25,
+        "nutrient": 0.75
+      },
+      {
+        "depth": 30,
+        "tempC": 11,
+        "salinity": 33,
+        "light": 0.08,
+        "nutrient": 0.9
+      }
+    ],
+    "thermocline": {
+      "depth": 15,
+      "sharpness": 0.4
+    }
+  },
+  "env": {
+    "day.lengthSec": 260,
+    "day.latitude": 36,
+    "day.dayOfYear": 200,
+    "diel.tempBase": 12,
+    "diel.tempAmp": 2,
+    "diel.foodFloor": 0.45,
+    "diel.q10": 2.2,
+    "substrate.count": 95,
+    "substrate.sizeMin": 34,
+    "substrate.sizeMax": 190,
+    "substrate.lifeMin": 160,
+    "substrate.lifeMax": 340,
+    "substrate.driftMin": 6,
+    "substrate.driftMax": 14,
+    "substrate.minPerRes": 3,
+    "diel.waterDay.0": 30,
+    "diel.waterDay.1": 92,
+    "diel.waterDay.2": 70,
+    "diel.waterNight.0": 3,
+    "diel.waterNight.1": 12,
+    "diel.waterNight.2": 16,
+    "cell.chemoRange0": 340,
+    "cell.chemoRangePer": 150,
+    "cell.chemoBias": 1.1,
+    "eps.threatRange": 110,
+    "eps.cost": 3.5,
+    "eps.cooldown.0": 9,
+    "eps.cooldown.1": 14,
+    "predator.count": 3,
+    "predator.senseRange": 150,
+    "predator.wanderSpeed": 20,
+    "predator.chaseSpeed": 34,
+    "predator.metabolism": 8,
+    "phage.greenCount": 14,
+    "phage.goldCount": 3,
+    "cell.enzymeCost": 3.5,
+    "enzyme.maxRadius": 27,
+    "enzyme.life": 5.5,
+    "respirationBase": 0.8
+  },
+  "meta": {
+    "title": "Kelp Forest Wrack: Alginate Grazers of the Holdfast",
+    "date": "2026-10-04",
+    "lesson": "When a giant kelp blade tears loose and settles into the forest's detrital wrack, it doesn't rot uniformly - it is dismantled in sequence. The algin and laminarin in the kelp's own cell walls are chewed first by specialist polysaccharide-degraders, exposing proteins in the meristem tissue to protease-wielders only after the structural sugars are gone. This scenario asks the player to BE that first wave: a carbohydrate specialist racing bacterial competitors and grazing protists to strip a sinking kelp fragment before it drifts past the holdfast zone into deeper, colder water where its own enzymes work more slowly. The water column here is shallow and only mildly stratified - it's a kelp forest floor, not an abyss - so light remains usable down to 20-30m and nutrient recycling from the wrack itself enriches the deeper water. EPS capsule formation matters: without it, protist grazers strip bacteria off the wrack surface before they can finish digesting it.",
+    "realWorldBasis": "Giant kelp (Macrocystis pyrifera) forest detrital wrack decomposition on the temperate Pacific coast, where alginate/laminarin-degrading bacteria colonize sinking kelp blades ahead of protein-scavenging successors.",
+    "difficulty": "normal",
+    "citation": "Kelp forest wrack decomposition studies, central California (e.g. Monterey Bay kelp forest floor ecology)."
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "founder",
+        "label": "Pseudoalteromonas sp. (alginolytic)",
+        "color": "#5fb8a0",
+        "genome": {
+          "enzLvl": [
+            1,
+            1,
+            4
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 2,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "competitor",
+        "label": "Protein Scavenger Vibrio",
+        "color": "#c76b4a",
+        "genome": {
+          "enzLvl": [
+            0,
+            4,
+            1
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 0,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 4
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "epiphyte1",
+        "label": "Epiphytic Pennate Diatom",
+        "color": "#b8d68a",
+        "form": "pennate",
+        "sizeUm": 35,
+        "chain": 2,
+        "count": 40,
+        "toxin": null
+      }
+    ]
+  },
+  "particles": {
+    "kelpBlade": {
+      "label": "Torn Kelp Blade Fragment",
+      "mix": [
+        0.1,
+        0.15,
+        0.75
+      ],
+      "shape": "shard",
+      "squash": 0.6,
+      "weight": 7
+    },
+    "meristem": {
+      "label": "Meristem Tissue Shred",
+      "mix": [
+        0.1,
+        0.65,
+        0.25
+      ],
+      "shape": "aggregate",
+      "weight": 4
+    },
+    "holdfastBit": {
+      "label": "Holdfast Fiber Clump",
+      "mix": [
+        0.05,
+        0.2,
+        0.75
+      ],
+      "shape": "aggregate",
+      "weight": 3
+    }
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid Residue",
+      "enzymeLabel": "Lipase",
+      "color": "#e0a830"
+    },
+    {
+      "index": 1,
+      "label": "Meristem Protein",
+      "enzymeLabel": "Protease",
+      "color": "#c76b4a"
+    },
+    {
+      "index": 2,
+      "label": "Algin/Laminarin",
+      "enzymeLabel": "Laminarinase",
+      "color": "#d4b23c"
+    }
+  ],
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 120,
+      "color": "#6b5540",
+      "label": "Holdfast Sediment & Rock",
+      "roughness": 0.55,
+      "porosity": 0.3,
+      "poreSize": 35,
+      "featureSize": 300,
+      "spires": 0.2,
+      "spireHeight": 180,
+      "spireWidth": 60,
+      "warp": 0.3
+    }
+  ],
+  "schema": "bacteria-scenario",
+  "version": 1
+}
