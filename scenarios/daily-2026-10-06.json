@@ -1,0 +1,286 @@
+{
+  "meta": {
+    "title": "Brinicle Descent: Microbial Rain from a Sinking Ice Finger",
+    "date": "2026-10-06",
+    "lesson": "When super-chilled, super-salty brine drains out of forming sea ice, it sinks through the warmer water below and freezes a hollow icicle around itself called a brinicle. As the brinicle descends through the McMurdo Sound water column, it scavenges and concentrates psychrophilic bacteria and ice algae from the brine channels overhead, flushing them downward in a plume of frigid, hyper-saline, nutrient-rich water. This scenario puts your founder at the base of a growing brinicle: the chemistry is brutal (sub-zero, hypersaline) but the food pulse is real, concentrated carbohydrate-rich algal exudate funneled straight down from the ice. The lesson is about extremophile physiology under combined cold and osmotic stress, and about a transient, structured food-delivery event rather than steady background grazing.",
+    "citation": "Lewis, E.W. et al., brinicle formation observations, Antarctica (2011 BBC/Lake Vostok-adjacent studies); Cottier et al. on sea-ice brine drainage dynamics",
+    "difficulty": "hard",
+    "realWorldBasis": "Brinicle ('ice finger of death') formation in McMurdo Sound/Antarctic fast ice, a real filmed phenomenon that flushes brine-channel microbes into the water column below"
+  },
+  "env": {
+    "day.lengthSec": 300,
+    "day.latitude": -77,
+    "day.dayOfYear": 266,
+    "diel.tempBase": -5,
+    "diel.tempAmp": 2,
+    "diel.foodFloor": 0.5,
+    "diel.q10": 2.4,
+    "diel.q10RefC": 5,
+    "diel.waterNight.0": 4,
+    "diel.waterNight.1": 14,
+    "diel.waterNight.2": 28,
+    "diel.waterDay.0": 30,
+    "diel.waterDay.1": 95,
+    "diel.waterDay.2": 120,
+    "diel.lightGamma": 2.4,
+    "respirationBase": 1.15,
+    "substrate.count": 80,
+    "substrate.sizeMin": 24,
+    "substrate.sizeMax": 160,
+    "substrate.sizeExp": 1.3,
+    "substrate.driftMin": 4,
+    "substrate.driftMax": 11,
+    "substrate.lifeMin": 90,
+    "substrate.lifeMax": 220,
+    "substrate.bloomEvery": 0.3,
+    "substrate.minPerRes": 3,
+    "cell.dragRate": 95,
+    "cell.maxSpeed": 150,
+    "cell.swimCost": 0.9,
+    "cell.cystDragRate": 1.2,
+    "cell.cystBelow": 20,
+    "cell.cystWake": 55,
+    "cell.cystMetab": 0.02,
+    "cell.chemoRange0": 360,
+    "cell.chemoRangePer": 160,
+    "cell.fedLinger": 3,
+    "predator.count": 3,
+    "predator.wanderSpeed": 14,
+    "predator.chaseSpeed": 24,
+    "predator.senseRange": 130,
+    "predator.metabolism": 7,
+    "predator.respawnFloor": 1.2,
+    "phage.greenCount": 10,
+    "phage.goldCount": 3,
+    "phage.goldMinDist": 800
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid-rich algal cells",
+      "enzymeLabel": "cold-active lipase",
+      "color": "#7fb8c9"
+    },
+    {
+      "index": 1,
+      "label": "Brine-flushed protein flocs",
+      "enzymeLabel": "psychrophilic protease",
+      "color": "#c9a0dc"
+    },
+    {
+      "index": 2,
+      "label": "Exuded diatom polysaccharide",
+      "enzymeLabel": "cold-active glycosidase",
+      "color": "#dff0ff"
+    }
+  ],
+  "particles": {
+    "algalClump": {
+      "label": "Scavenged ice-algae clump",
+      "mix": [
+        2,
+        1,
+        7
+      ],
+      "shape": "aggregate",
+      "weight": 6
+    },
+    "brineFloc": {
+      "label": "Brine-concentrated protein floc",
+      "mix": [
+        1,
+        6,
+        1
+      ],
+      "shape": "shard",
+      "weight": 3
+    },
+    "frazilShard": {
+      "label": "Frazil ice-crystal detritus",
+      "mix": [
+        4,
+        2,
+        3
+      ],
+      "shape": "shard",
+      "weight": 2
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Cold-active lipase",
+      "color": "#7fb8c9",
+      "weight": 4
+    },
+    "enzyme1": {
+      "label": "Psychrophilic protease",
+      "color": "#c9a0dc",
+      "weight": 3
+    },
+    "enzyme2": {
+      "label": "Cold-active glycosidase",
+      "color": "#dff0ff",
+      "weight": 6
+    },
+    "chemotaxis": {
+      "label": "Brine-plume sensing",
+      "color": "#8fd9ff",
+      "weight": 5
+    },
+    "antibiotic": {
+      "label": "Bacteriocin burst",
+      "color": "#ff8f6f",
+      "weight": 2
+    },
+    "eps": {
+      "label": "Cryoprotectant EPS sheath",
+      "color": "#e8f6ff",
+      "weight": 6
+    },
+    "crispr": {
+      "color": "#ffd27f",
+      "weight": 3
+    },
+    "twitching": {
+      "color": "#c0ffb0",
+      "weight": 1
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "founder",
+        "label": "Psychrophilic brine-channel bacterium",
+        "color": "#bfe8ff",
+        "genome": {
+          "enzLvl": [
+            1,
+            1,
+            3
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 2,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 5
+      },
+      {
+        "id": "competitor",
+        "label": "Generalist copiotroph",
+        "color": "#d6c2e0",
+        "genome": {
+          "enzLvl": [
+            2,
+            2,
+            1
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "pennateIce",
+        "label": "Fragilariopsis (sea-ice pennate)",
+        "color": "#d8f0ff",
+        "form": "pennate",
+        "sizeUm": 40,
+        "chain": 6,
+        "count": 60,
+        "toxin": null
+      },
+      {
+        "id": "centricIce",
+        "label": "Thalassiosira (centric ice diatom)",
+        "color": "#eaf7ff",
+        "form": "centric",
+        "sizeUm": 30,
+        "chain": 2,
+        "count": 30
+      }
+    ]
+  },
+  "terrain": [
+    {
+      "at": "top",
+      "thickness": 260,
+      "color": "#dcecf2",
+      "label": "Fast ice with draining brine channels",
+      "roughness": 0.6,
+      "porosity": 0.5,
+      "poreSize": 40,
+      "featureSize": 300,
+      "spires": 0.35,
+      "spireHeight": 450,
+      "spireWidth": 55,
+      "warp": 0.3
+    },
+    {
+      "at": "bottom",
+      "thickness": 60,
+      "color": "#1c2b33",
+      "label": "Deep sound floor sediment",
+      "roughness": 0.3,
+      "porosity": 0.2,
+      "poreSize": 20,
+      "featureSize": 200,
+      "spires": 0,
+      "spireHeight": 0,
+      "spireWidth": 10,
+      "warp": 0
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": -1.8,
+        "salinity": 35,
+        "light": 0.5,
+        "nutrient": 0.4
+      },
+      {
+        "depth": 0.15,
+        "tempC": -3,
+        "salinity": 60,
+        "light": 0.35,
+        "nutrient": 0.8
+      },
+      {
+        "depth": 0.4,
+        "tempC": -2.2,
+        "salinity": 45,
+        "light": 0.15,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 0.7,
+        "tempC": -1.9,
+        "salinity": 35,
+        "light": 0.05,
+        "nutrient": 0.35
+      },
+      {
+        "depth": 1,
+        "tempC": -1.7,
+        "salinity": 34,
+        "light": 0,
+        "nutrient": 0.25
+      }
+    ],
+    "thermocline": {
+      "depth": 0.15,
+      "sharpness": 0.75
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}
