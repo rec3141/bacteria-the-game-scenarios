@@ -620,6 +620,14 @@
       "file": "scenarios/daily-2026-10-06.json"
     },
     {
+      "id": "daily-2026-10-07",
+      "title": "Low Tide Window: Alginate Lysis in a Tide-Pool Biofilm",
+      "date": "2026-10-07",
+      "difficulty": "hard",
+      "realWorldBasis": "Intertidal rock-pool biofilms on brown algae, Pacific Northwest / Brittany coast tide pools",
+      "file": "scenarios/daily-2026-10-07.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
