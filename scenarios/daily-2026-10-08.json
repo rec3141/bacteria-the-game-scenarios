@@ -1,0 +1,271 @@
+{
+  "meta": {
+    "title": "Snowmelt Pulse: Nitrogen Fixers of a Caribbean Blue Hole",
+    "date": "2026-10-08",
+    "lesson": "The Great Blue Hole off Belize is a flooded karst sinkhole: a shallow rim of warm oxygenated water sits atop a stratified, anoxic deep chamber where hydrogen sulfide accumulates below ~30m. At the thin boundary layer, filamentous cyanobacteria fix atmospheric nitrogen using the nitrogenase enzyme, which is poisoned by oxygen - so they must balance photosynthesis (needs light, makes oxygen) against nitrogen fixation (needs darkness-like conditions, hates oxygen). This scenario asks you to live right at that seam: too shallow and your own photosynthetic oxygen shuts down fixation; too deep and the sulfide and dark kill you outright. Stalactite-draped limestone walls ring the hole, riddled with solution pockets where cells can shelter from grazers drifting up from the anoxic depths.",
+    "citation": "Educational synthesis inspired by Belize Great Blue Hole stratification studies (Gischler et al.) and general diazotrophic cyanobacteria (Trichodesmium, Nostoc) physiology.",
+    "difficulty": "hard",
+    "realWorldBasis": "Great Blue Hole, Belize - karst sinkhole chemocline, anoxic/sulfidic basin beneath an oxygenated reef lagoon"
+  },
+  "env": {
+    "day.lengthSec": 280,
+    "day.latitude": 17,
+    "day.dayOfYear": 172,
+    "diel.tempBase": 27,
+    "diel.tempAmp": 3,
+    "diel.foodFloor": 0.4,
+    "diel.q10": 2.2,
+    "diel.q10RefC": 27,
+    "diel.waterDay.0": 20,
+    "diel.waterDay.1": 110,
+    "diel.waterDay.2": 130,
+    "diel.waterNight.0": 2,
+    "diel.waterNight.1": 14,
+    "diel.waterNight.2": 28,
+    "diel.lightGamma": 2.2,
+    "substrate.count": 78,
+    "substrate.sizeMin": 32,
+    "substrate.sizeMax": 170,
+    "substrate.lifeMin": 110,
+    "substrate.lifeMax": 260,
+    "substrate.driftMin": 6,
+    "substrate.driftMax": 14,
+    "substrate.minPerRes": 3,
+    "cell.chemoRange0": 360,
+    "cell.chemoRangePer": 160,
+    "cell.chemoBias": 1.1,
+    "cell.cystBelow": 18,
+    "cell.cystWake": 50,
+    "respirationBase": 0.75,
+    "column.chemRate": 4.2,
+    "column.photoRate": 9.5,
+    "predator.count": 5,
+    "predator.senseRange": 150,
+    "predator.metabolism": 8,
+    "phage.greenCount": 14,
+    "phage.goldCount": 3
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid film",
+      "enzymeLabel": "Lipase",
+      "color": "#d8c468"
+    },
+    {
+      "index": 1,
+      "label": "Detrital protein",
+      "enzymeLabel": "Protease",
+      "color": "#c9765a"
+    },
+    {
+      "index": 2,
+      "label": "Mucilage carbohydrate",
+      "enzymeLabel": "Glycosidase",
+      "color": "#4fae8c"
+    }
+  ],
+  "particles": {
+    "snowFlake": {
+      "label": "Sinking reef detritus",
+      "mix": [
+        3,
+        3,
+        4
+      ],
+      "shape": "aggregate",
+      "weight": 6,
+      "squash": 1
+    },
+    "sulfideFloc": {
+      "label": "Sulfide-mineral floc",
+      "mix": [
+        1,
+        2,
+        7
+      ],
+      "shape": "shard",
+      "weight": 4,
+      "squash": 1
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase release",
+      "color": "#d8c468",
+      "weight": 4
+    },
+    "enzyme1": {
+      "label": "Protease release",
+      "color": "#c9765a",
+      "weight": 5
+    },
+    "enzyme2": {
+      "label": "Glycosidase release",
+      "color": "#4fae8c",
+      "weight": 6
+    },
+    "chemotaxis": {
+      "label": "Seek the seam",
+      "color": "#79e0c4",
+      "weight": 7
+    },
+    "antibiotic": {
+      "label": "Toxin volley",
+      "color": "#b24fae",
+      "weight": 2
+    },
+    "eps": {
+      "label": "Mucus sheath",
+      "color": "#8fbf6a",
+      "weight": 5
+    },
+    "crispr": {
+      "label": "CRISPR immunity",
+      "color": "#5ab0d6",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Pili grip",
+      "color": "#d6a85a",
+      "weight": 2
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "nostocoid",
+        "label": "Diazotrophic cyanobacterium",
+        "color": "#3fae6a",
+        "genome": {
+          "enzLvl": [
+            1,
+            2,
+            2
+          ],
+          "chemoLevel": 3,
+          "antibiotic": 0,
+          "eps": 2,
+          "crispr": false,
+          "twitching": false,
+          "phototroph": true,
+          "chemolithotroph": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "sulfurOx",
+        "label": "Sulfide-oxidizing scavenger",
+        "color": "#c98b3f",
+        "genome": {
+          "enzLvl": [
+            2,
+            1,
+            1
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 1,
+          "crispr": false,
+          "twitching": true,
+          "chemolithotroph": true
+        },
+        "immigrateWeight": 3
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "reefDiatom",
+        "label": "Reef-rim pennate diatom",
+        "color": "#a6d9c9",
+        "form": "pennate",
+        "sizeUm": 45,
+        "chain": 3,
+        "count": 35
+      }
+    ]
+  },
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 300,
+      "color": "#4a4438",
+      "label": "Karst limestone basin floor",
+      "roughness": 0.65,
+      "porosity": 0.4,
+      "poreSize": 50,
+      "featureSize": 300,
+      "spires": 0.3,
+      "spireHeight": 420,
+      "spireWidth": 90,
+      "warp": 0.2
+    },
+    {
+      "at": "top",
+      "thickness": 60,
+      "color": "#1e5c66",
+      "label": "Reef lagoon rim",
+      "roughness": 0.2,
+      "porosity": 0.1,
+      "poreSize": 10,
+      "featureSize": 200,
+      "spires": 0,
+      "spireHeight": 0,
+      "spireWidth": 10,
+      "warp": 0
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 29,
+        "salinity": 36,
+        "light": 1,
+        "nutrient": 0.2
+      },
+      {
+        "depth": 0.25,
+        "tempC": 28,
+        "salinity": 36,
+        "light": 0.75,
+        "nutrient": 0.3
+      },
+      {
+        "depth": 0.5,
+        "tempC": 26,
+        "salinity": 37,
+        "light": 0.4,
+        "nutrient": 0.5
+      },
+      {
+        "depth": 0.7,
+        "tempC": 23,
+        "salinity": 38,
+        "light": 0.15,
+        "nutrient": 0.7
+      },
+      {
+        "depth": 0.9,
+        "tempC": 20,
+        "salinity": 40,
+        "light": 0.03,
+        "nutrient": 0.9
+      },
+      {
+        "depth": 1,
+        "tempC": 18,
+        "salinity": 41,
+        "light": 0,
+        "nutrient": 1
+      }
+    ],
+    "thermocline": {
+      "depth": 0.6,
+      "sharpness": 0.7
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}

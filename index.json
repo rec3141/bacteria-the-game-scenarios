@@ -628,6 +628,14 @@
       "file": "scenarios/daily-2026-10-07.json"
     },
     {
+      "id": "daily-2026-10-08",
+      "title": "Snowmelt Pulse: Nitrogen Fixers of a Caribbean Blue Hole",
+      "date": "2026-10-08",
+      "difficulty": "hard",
+      "realWorldBasis": "Great Blue Hole, Belize - karst sinkhole chemocline, anoxic/sulfidic basin beneath an oxygenated reef lagoon",
+      "file": "scenarios/daily-2026-10-08.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
