@@ -1,0 +1,243 @@
+{
+  "actions": {
+    "enzyme0": {
+      "label": "Collagenase",
+      "color": "#d94f4f",
+      "weight": 5
+    },
+    "enzyme1": {
+      "label": "Mucinase",
+      "color": "#e08a2c",
+      "weight": 7
+    },
+    "enzyme2": {
+      "label": "Chitinase",
+      "color": "#4fae8f",
+      "weight": 4
+    },
+    "chemotaxis": {
+      "label": "Wound-seeking",
+      "color": "#e3d14f",
+      "weight": 6
+    },
+    "antibiotic": {
+      "label": "Ciliatocidin",
+      "color": "#9a4fd9",
+      "weight": 4
+    },
+    "eps": {
+      "label": "Biofilm Matrix",
+      "color": "#6fcf97",
+      "weight": 5
+    },
+    "crispr": {
+      "label": "Phage Immunity",
+      "color": "#5fa8d9",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Pilus Crawling",
+      "color": "#c9c9c9",
+      "weight": 5
+    }
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 23,
+        "salinity": 35,
+        "light": 1,
+        "nutrient": 0.3
+      },
+      {
+        "depth": 0.3,
+        "tempC": 22,
+        "salinity": 35,
+        "light": 0.8,
+        "nutrient": 0.5
+      },
+      {
+        "depth": 0.6,
+        "tempC": 21,
+        "salinity": 35,
+        "light": 0.5,
+        "nutrient": 0.7
+      },
+      {
+        "depth": 1,
+        "tempC": 20,
+        "salinity": 35,
+        "light": 0.2,
+        "nutrient": 0.9
+      }
+    ],
+    "thermocline": {
+      "depth": 0.5,
+      "sharpness": 0.3
+    }
+  },
+  "env": {
+    "day.lengthSec": 260,
+    "day.latitude": -23,
+    "day.dayOfYear": 60,
+    "diel.tempBase": 29,
+    "diel.tempAmp": 2,
+    "diel.foodFloor": 0.55,
+    "diel.q10": 2.3,
+    "diel.waterDay.0": 40,
+    "diel.waterDay.1": 110,
+    "diel.waterDay.2": 95,
+    "diel.waterNight.0": 5,
+    "diel.waterNight.1": 20,
+    "diel.waterNight.2": 25,
+    "substrate.count": 95,
+    "substrate.sizeMin": 36,
+    "substrate.sizeMax": 170,
+    "substrate.lifeMin": 70,
+    "substrate.lifeMax": 160,
+    "substrate.driftMin": 6,
+    "substrate.driftMax": 14,
+    "substrate.minPerRes": 3,
+    "enzyme.maxRadius": 30,
+    "enzyme.life": 6,
+    "cell.chemoRange0": 360,
+    "cell.chemoBias": 1.1,
+    "cell.swimCost": 1,
+    "cell.uptake": 16,
+    "respirationBase": 1.05,
+    "eps.threatRange": 120,
+    "eps.cost": 3.5,
+    "predator.count": 6,
+    "predator.senseRange": 200,
+    "predator.chaseSpeed": 55,
+    "predator.metabolism": 12,
+    "predator.mealEnergy": 50,
+    "predator.resistStep": 0.1,
+    "phage.greenCount": 22,
+    "phage.goldCount": 3,
+    "phage.hostTolerance": 2,
+    "phage.adsorbBase": 0.32
+  },
+  "meta": {
+    "title": "Fever Mucus: Vibrio coralliilyticus Storms a Bleaching Polyp",
+    "date": "2026-10-09",
+    "lesson": "When seawater crosses roughly 30-31C, reef corals expel their algal symbionts (zooxanthellae) and their protective surface mucus layer breaks down chemically. Vibrio coralliilyticus, normally a minor background resident, switches on collagenases and mucinases that shred the mucopolysaccharide barrier and the coral's own tissue collagen, and chemotaxes straight toward the wound exudate the dying polyp leaks. This level puts you inside that mucus layer during a marine heatwave: food is a thin, warm, oxygen-poor film instead of open water, your enzymes are repurposed virulence factors, and grazing ciliates and phages are thick because every other opportunist in the reef smells the same wound.",
+    "citation": "Ushijima et al. 2014, Appl Environ Microbiol; Great Barrier Reef 2016 bleaching event studies",
+    "difficulty": "hard",
+    "realWorldBasis": "Great Barrier Reef, 2016 marine heatwave mass bleaching; Vibrio coralliilyticus pathogenesis in Pocillopora/Acropora mucus"
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "vibrio_coral",
+        "label": "Vibrio coralliilyticus",
+        "color": "#d9704f",
+        "genome": {
+          "enzLvl": [
+            3,
+            4,
+            1
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 1,
+          "eps": 2,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "commensal_pseudo",
+        "label": "Background Pseudoalteromonas",
+        "color": "#6f9fd9",
+        "genome": {
+          "enzLvl": [
+            1,
+            1,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": true,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      }
+    ],
+    "diatoms": []
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Coral Tissue Collagen",
+      "enzymeLabel": "Collagenase",
+      "color": "#d94f4f"
+    },
+    {
+      "index": 1,
+      "label": "Sloughing Mucus Mat",
+      "enzymeLabel": "Mucinase",
+      "color": "#e08a2c"
+    },
+    {
+      "index": 2,
+      "label": "Zooxanthellae Debris",
+      "enzymeLabel": "Chitinase",
+      "color": "#4fae8f"
+    }
+  ],
+  "particles": {
+    "mucusSheet": {
+      "label": "Sloughing Mucus Sheet",
+      "mix": [
+        0.25,
+        0.65,
+        0.1
+      ],
+      "shape": "aggregate",
+      "weight": 6
+    },
+    "tissueClump": {
+      "label": "Expelled Polyp Tissue",
+      "mix": [
+        0.55,
+        0.3,
+        0.15
+      ],
+      "shape": "shard",
+      "weight": 5
+    },
+    "algalDebris": {
+      "label": "Expelled Zooxanthellae",
+      "mix": [
+        0.1,
+        0.2,
+        0.7
+      ],
+      "shape": "ellipse",
+      "squash": 0.6,
+      "weight": 4
+    }
+  },
+  "schema": "bacteria-scenario",
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 140,
+      "color": "#d8c9a8",
+      "label": "Bleached Coral Skeleton",
+      "roughness": 0.6,
+      "porosity": 0.35,
+      "poreSize": 40,
+      "featureSize": 300,
+      "spires": 0.3,
+      "spireHeight": 220,
+      "spireWidth": 90,
+      "warp": 0.65
+    }
+  ],
+  "version": 1
+}
