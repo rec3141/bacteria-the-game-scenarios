@@ -644,6 +644,14 @@
       "file": "scenarios/daily-2026-10-09.json"
     },
     {
+      "id": "daily-2026-10-10",
+      "title": "Pink Water: Haloarchaea of the Great Salt Lake Causeway",
+      "date": "2026-10-10",
+      "difficulty": "hard",
+      "realWorldBasis": "Great Salt Lake North Arm, Utah - hypersaline halophile bloom (>27% salinity), red-pigmented Halobacteria/Salinibacter community",
+      "file": "scenarios/daily-2026-10-10.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
