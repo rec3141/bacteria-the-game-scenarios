@@ -660,6 +660,14 @@
       "file": "scenarios/daily-2026-10-11.json"
     },
     {
+      "id": "daily-2026-10-12",
+      "title": "Night Side of the Gyre: Heterotrophs Take Over When the Light Fails",
+      "date": "2026-10-12",
+      "difficulty": "hard",
+      "realWorldBasis": "Subtropical gyre diel light/heterotroph handoff; Prochlorococcus photophysiology",
+      "file": "scenarios/daily-2026-10-12.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",

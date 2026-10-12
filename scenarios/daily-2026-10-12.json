@@ -1,0 +1,222 @@
+{
+  "meta": {
+    "title": "Night Side of the Gyre: Heterotrophs Take Over When the Light Fails",
+    "date": "2026-10-12",
+    "lesson": "In the oligotrophic open ocean, phototrophic picocyanobacteria like Prochlorococcus dominate carbon fixation by day, but at night their photosystems go dark and they must coast on stored energy. Heterotrophic bacterioplankton (here modeled as a chemoorganotroph with modest enzyme repertoire) pick up the slack, scavenging the dissolved organic carbon exuded by phototrophs and any sinking detritus, and this handoff repeats every 24 hours. This scenario sets photoRate just above its floor to represent a genuinely marginal gyre (even noon light barely pays the bills for a phototroph), forcing the player to feel how precarious a light-only income is far from nutrient-rich water, and how the heterotrophic lineage becomes the resilient fallback when the sun fails.",
+    "citation": "Inspired by Vaulot et al. and diel-cycle studies of Prochlorococcus physiology in the Sargasso Sea / subtropical gyres",
+    "difficulty": "hard",
+    "realWorldBasis": "Subtropical gyre diel light/heterotroph handoff; Prochlorococcus photophysiology"
+  },
+  "env": {
+    "day.lengthSec": 300,
+    "day.latitude": 28,
+    "day.dayOfYear": 172,
+    "diel.tempBase": 24,
+    "diel.tempAmp": 2,
+    "diel.foodFloor": 0.22,
+    "diel.q10": 2.2,
+    "diel.lightGamma": 2.4,
+    "diel.twilight": 0.3,
+    "diel.waterNight.0": 3,
+    "diel.waterNight.1": 11,
+    "diel.waterNight.2": 28,
+    "diel.waterDay.0": 12,
+    "diel.waterDay.1": 70,
+    "diel.waterDay.2": 110,
+    "diel.goldTint": 0.22,
+    "column.photoRate": 1.2,
+    "column.chemRate": 1.5,
+    "substrate.count": 46,
+    "substrate.sizeMin": 24,
+    "substrate.sizeMax": 120,
+    "substrate.lifeMin": 90,
+    "substrate.lifeMax": 180,
+    "substrate.driftMin": 5,
+    "substrate.driftMax": 14,
+    "substrate.minPerRes": 3,
+    "cell.startEnergy": 85,
+    "cell.divideThreshold": 150,
+    "cell.maxEnergy": 190,
+    "cell.uptake": 10,
+    "respirationBase": 0.65,
+    "cell.swimCost": 0.9,
+    "cell.cystBelow": 10,
+    "cell.cystWake": 34,
+    "cell.cystMetab": 0.02,
+    "cell.chemoRange0": 220,
+    "cell.chemoRangePer": 100,
+    "predator.count": 2,
+    "predator.senseRange": 130,
+    "predator.metabolism": 7,
+    "predator.minCount": 1,
+    "phage.greenCount": 10,
+    "phage.goldCount": 2,
+    "phage.goldMinDist": 800
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid exudate droplets",
+      "enzymeLabel": "Lipase",
+      "color": "#d8c060"
+    },
+    {
+      "index": 1,
+      "label": "Dissolved protein flakes",
+      "enzymeLabel": "Protease",
+      "color": "#c06a6a"
+    },
+    {
+      "index": 2,
+      "label": "DOC carbohydrate drizzle",
+      "enzymeLabel": "Glycosidase",
+      "color": "#6aa0c0"
+    }
+  ],
+  "particles": {
+    "doc_drizzle": {
+      "label": "Phycosphere DOC drizzle",
+      "mix": [
+        0.15,
+        0.25,
+        0.6
+      ],
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 6
+    },
+    "sinking_floc": {
+      "label": "Sinking detrital floc",
+      "mix": [
+        0.3,
+        0.5,
+        0.2
+      ],
+      "shape": "shard",
+      "squash": 1,
+      "weight": 3
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase burst",
+      "color": "#d8c060",
+      "weight": 4
+    },
+    "enzyme1": {
+      "label": "Protease burst",
+      "color": "#c06a6a",
+      "weight": 5
+    },
+    "enzyme2": {
+      "label": "Glycosidase burst",
+      "color": "#6aa0c0",
+      "weight": 6
+    },
+    "chemotaxis": {
+      "label": "DOC tracking",
+      "color": "#9fd0e0",
+      "weight": 5
+    },
+    "antibiotic": {
+      "label": "Bacteriocin pulse",
+      "color": "#e08030",
+      "weight": 2
+    },
+    "eps": {
+      "label": "Slime sheath",
+      "color": "#88cc88",
+      "weight": 2
+    },
+    "crispr": {
+      "label": "Phage immunity",
+      "color": "#aa88cc",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Surface twitch",
+      "color": "#cccc66",
+      "weight": 0
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "heterotroph_scavenger",
+        "label": "Night-shift heterotroph",
+        "color": "#c0a060",
+        "genome": {
+          "enzLvl": [
+            1,
+            2,
+            2
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": 1,
+          "twitching": false
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "prochlorococcus_like",
+        "label": "Dim-light phototroph",
+        "color": "#58b86a",
+        "genome": {
+          "enzLvl": [
+            0,
+            0,
+            1
+          ],
+          "chemoLevel": 0,
+          "antibiotic": 0,
+          "eps": 0,
+          "crispr": 0,
+          "twitching": false,
+          "phototroph": true
+        },
+        "immigrateWeight": 4
+      }
+    ]
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 25,
+        "salinity": 36,
+        "light": 1,
+        "nutrient": 0.08
+      },
+      {
+        "depth": 0.3,
+        "tempC": 24,
+        "salinity": 36,
+        "light": 0.55,
+        "nutrient": 0.12
+      },
+      {
+        "depth": 0.6,
+        "tempC": 21,
+        "salinity": 36,
+        "light": 0.18,
+        "nutrient": 0.2
+      },
+      {
+        "depth": 1,
+        "tempC": 18,
+        "salinity": 36,
+        "light": 0.03,
+        "nutrient": 0.3
+      }
+    ],
+    "thermocline": {
+      "depth": 0.55,
+      "sharpness": 0.5
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}
