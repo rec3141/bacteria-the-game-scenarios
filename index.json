@@ -668,6 +668,14 @@
       "file": "scenarios/daily-2026-10-12.json"
     },
     {
+      "id": "daily-2026-10-13",
+      "title": "Deep Chill: Psychrophiles of a Siberian Permafrost Thaw Pond",
+      "date": "2026-10-13",
+      "difficulty": "hard",
+      "realWorldBasis": "Siberian thermokarst thaw ponds releasing Pleistocene-age permafrost carbon",
+      "file": "scenarios/daily-2026-10-13.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",

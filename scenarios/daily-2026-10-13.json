@@ -1,0 +1,262 @@
+{
+  "meta": {
+    "title": "Deep Chill: Psychrophiles of a Siberian Permafrost Thaw Pond",
+    "date": "2026-10-13",
+    "lesson": "As Siberian permafrost thaws, ancient organic carbon frozen for millennia is suddenly exposed to liquid water for the first time in thousands of years. Cold-adapted (psychrophilic) bacteria in the thermokarst pond water must digest this old carbon before it refreezes each night or diffuses away. Their enzymes work slowly in near-0C water (Q10 physiology means metabolism crawls), but the payoff is huge: permafrost carbon is mostly ancient plant lipid and peat polysaccharide, so lipid- and carbohydrate-digesting enzymes matter most. The lesson: cold does not stop microbial life, it just forces a different pace — longer runs between tumbles, slower division, but genuinely new carbon entering the cycle for the first time since the Pleistocene.",
+    "citation": "Mackelprang et al. 2011, Nature; Vonk et al. 2015, Biogeosciences - permafrost thaw carbon release",
+    "difficulty": "hard",
+    "realWorldBasis": "Siberian thermokarst thaw ponds releasing Pleistocene-age permafrost carbon"
+  },
+  "env": {
+    "day.lengthSec": 300,
+    "day.latitude": 68,
+    "day.dayOfYear": 190,
+    "diel.tempBase": 2,
+    "diel.tempAmp": 3,
+    "diel.foodFloor": 0.5,
+    "diel.q10": 2.6,
+    "diel.q10RefC": 20,
+    "diel.waterNight.0": 5,
+    "diel.waterNight.1": 14,
+    "diel.waterNight.2": 18,
+    "diel.waterDay.0": 40,
+    "diel.waterDay.1": 70,
+    "diel.waterDay.2": 60,
+    "diel.lightGamma": 1.4,
+    "diel.twilight": 0.3,
+    "respirationBase": 0.55,
+    "cell.runMin": 2.8,
+    "cell.runMax": 5.2,
+    "cell.tumbleDur": 0.6,
+    "cell.tumbleTurn": 5,
+    "cell.thrust": 15000,
+    "cell.dragRate": 55,
+    "cell.maxSpeed": 170,
+    "cell.swimCost": 0.9,
+    "cell.uptake": 11,
+    "cell.startEnergy": 95,
+    "cell.divideThreshold": 190,
+    "cell.cystBelow": 20,
+    "cell.cystWake": 55,
+    "cell.cystMetab": 0.02,
+    "substrate.count": 80,
+    "substrate.sizeMin": 40,
+    "substrate.sizeMax": 220,
+    "substrate.sizeExp": 1.3,
+    "substrate.lifeMin": 180,
+    "substrate.lifeMax": 420,
+    "substrate.driftMin": 5,
+    "substrate.driftMax": 12,
+    "substrate.dissolveTime": 14,
+    "substrate.carveRate": 3.2,
+    "enzyme.life": 6.5,
+    "enzyme.maxRadius": 26,
+    "enzyme.growTime": 0.6,
+    "predator.count": 3,
+    "predator.wanderSpeed": 16,
+    "predator.chaseSpeed": 28,
+    "predator.senseRange": 130,
+    "predator.metabolism": 7,
+    "predator.minCount": 2,
+    "phage.greenCount": 10,
+    "phage.goldCount": 3,
+    "phage.goldMinDist": 500
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Ancient Peat Lipid Clots",
+      "enzymeLabel": "Cold-Active Lipase",
+      "color": "#8a6d3b"
+    },
+    {
+      "index": 1,
+      "label": "Freeze-Locked Protein Flocs",
+      "enzymeLabel": "Psychro-Protease",
+      "color": "#b5a28c"
+    },
+    {
+      "index": 2,
+      "label": "Thawed Peat Polysaccharide",
+      "enzymeLabel": "Cold Glycosidase",
+      "color": "#6fa38a"
+    }
+  ],
+  "particles": {
+    "peatClot": {
+      "label": "Permafrost Peat Clot",
+      "mix": [
+        60,
+        10,
+        30
+      ],
+      "shape": "aggregate",
+      "weight": 6
+    },
+    "mossFragment": {
+      "label": "Freeze-Thaw Moss Fragment",
+      "mix": [
+        20,
+        15,
+        65
+      ],
+      "shape": "shard",
+      "weight": 5
+    },
+    "frozenFloc": {
+      "label": "Ice-Shattered Protein Floc",
+      "mix": [
+        15,
+        70,
+        15
+      ],
+      "shape": "ellipse",
+      "squash": 0.7,
+      "weight": 3
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Cold-Active Lipase",
+      "color": "#c99a4e",
+      "weight": 6
+    },
+    "enzyme1": {
+      "label": "Psychro-Protease",
+      "color": "#d7c3a8",
+      "weight": 3
+    },
+    "enzyme2": {
+      "label": "Cold Glycosidase",
+      "color": "#7fbf9e",
+      "weight": 6
+    },
+    "chemotaxis": {
+      "label": "Thaw-Gradient Taxis",
+      "color": "#4fa3c9",
+      "weight": 4
+    },
+    "antibiotic": {
+      "label": "Bacteriocin Release",
+      "color": "#b4455c",
+      "weight": 2
+    },
+    "eps": {
+      "label": "Cryoprotectant EPS",
+      "color": "#d9f0ff",
+      "weight": 5
+    },
+    "crispr": {
+      "label": "CRISPR Defense",
+      "color": "#9d7fd1",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Surface Twitching",
+      "color": "#e0b84f",
+      "weight": 1
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "psychrobacter",
+        "label": "Psychrobacter permafrostensis",
+        "color": "#7fcfe0",
+        "genome": {
+          "enzLvl": [
+            3,
+            1,
+            3
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 2,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "flavo",
+        "label": "Flavobacterium thaw-strain",
+        "color": "#c7e07f",
+        "genome": {
+          "enzLvl": [
+            1,
+            2,
+            2
+          ],
+          "chemoLevel": 0,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 3
+      }
+    ]
+  },
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 220,
+      "color": "#4a3c2e",
+      "label": "Thawing Permafrost Floor",
+      "roughness": 0.6,
+      "porosity": 0.4,
+      "poreSize": 40,
+      "featureSize": 300,
+      "spires": 0,
+      "spireHeight": 0,
+      "spireWidth": 10,
+      "warp": 0.1
+    },
+    {
+      "at": "top",
+      "thickness": 60,
+      "color": "#d8ecf2",
+      "label": "Thin Night-Refreeze Skin",
+      "roughness": 0.3,
+      "porosity": 0.25,
+      "poreSize": 15,
+      "featureSize": 150,
+      "spires": 0,
+      "spireHeight": 0,
+      "spireWidth": 10,
+      "warp": 0
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 3,
+        "salinity": 1,
+        "light": 0.9,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 0.5,
+        "tempC": 1.5,
+        "salinity": 1,
+        "light": 0.5,
+        "nutrient": 0.8
+      },
+      {
+        "depth": 1,
+        "tempC": 0.5,
+        "salinity": 1,
+        "light": 0.1,
+        "nutrient": 1
+      }
+    ],
+    "thermocline": {
+      "depth": 0.4,
+      "sharpness": 0.5
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}
