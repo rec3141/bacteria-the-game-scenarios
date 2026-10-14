@@ -1,0 +1,245 @@
+{
+  "meta": {
+    "title": "Lake Matano's Iron Curtain: Ferrous Microbes of an Ancient Tropical Lake",
+    "date": "2026-10-14",
+    "lesson": "Lake Matano in Sulawesi, Indonesia is one of the few modern analogues of the Archean ocean: its deep water is permanently anoxic, rich in dissolved ferrous iron (Fe2+) rather than sulfide, and almost entirely isolated from the mixed surface layer by a sharp, stable chemocline. Photoferrotrophs - anoxygenic phototrophic bacteria related to Chlorobium and purple non-sulfur groups - live in a thin band where just enough red-shifted light penetrates to overlap the rising iron plume, fixing carbon by oxidizing Fe2+ instead of water or sulfide, the same trick believed to have painted the Earth's Precambrian banded iron formations before oxygenic photosynthesis took over. Above them, ordinary heterotrophs graze a thin rain of surface productivity; below, the iron plume is wasted in the dark. The lesson: life finds the one overlapping band where its two currencies - light and electron donor - are both still paying, and nowhere else.",
+    "citation": "Crowe et al. 2008, Geobiology; Jones et al. 2011, Limnology & Oceanography - Lake Matano ferruginous chemocline studies",
+    "difficulty": "hard",
+    "realWorldBasis": "Lake Matano, Sulawesi, Indonesia - meromictic ferruginous (iron-rich, sulfide-poor) tropical lake, modern Archean-ocean analogue"
+  },
+  "env": {
+    "day.latitude": -2.5,
+    "day.dayOfYear": 80,
+    "day.lengthSec": 260,
+    "diel.tempBase": 28,
+    "diel.tempAmp": 2,
+    "diel.foodFloor": 0.4,
+    "diel.q10": 2.1,
+    "diel.waterDay.0": 60,
+    "diel.waterDay.1": 70,
+    "diel.waterDay.2": 40,
+    "diel.waterNight.0": 4,
+    "diel.waterNight.1": 7,
+    "diel.waterNight.2": 10,
+    "diel.lightGamma": 2.2,
+    "column.chemRate": 6.5,
+    "column.photoRate": 7,
+    "substrate.count": 70,
+    "substrate.sizeMin": 32,
+    "substrate.sizeMax": 170,
+    "substrate.lifeMin": 110,
+    "substrate.lifeMax": 260,
+    "substrate.driftMin": 5,
+    "substrate.driftMax": 14,
+    "cell.chemoRange0": 360,
+    "cell.chemoRangePer": 170,
+    "cell.chemoBias": 1.1,
+    "respirationBase": 0.8,
+    "predator.count": 3,
+    "predator.senseRange": 150,
+    "predator.wanderSpeed": 18,
+    "predator.metabolism": 8,
+    "phage.greenCount": 10,
+    "phage.goldCount": 3
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid Detritus",
+      "enzymeLabel": "Lipase",
+      "color": "#7a6a3e"
+    },
+    {
+      "index": 1,
+      "label": "Sinking Protein Floc",
+      "enzymeLabel": "Protease",
+      "color": "#9c8660"
+    },
+    {
+      "index": 2,
+      "label": "Algal Carbohydrate Snow",
+      "enzymeLabel": "Glycosidase",
+      "color": "#b8a86e"
+    }
+  ],
+  "particles": {
+    "surfaceSnow": {
+      "label": "Surface-Derived Marine Snow",
+      "mix": [
+        20,
+        30,
+        50
+      ],
+      "shape": "aggregate",
+      "weight": 6
+    },
+    "ironFloc": {
+      "label": "Iron-Oxide Floc",
+      "mix": [
+        40,
+        40,
+        20
+      ],
+      "shape": "shard",
+      "weight": 4
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase",
+      "color": "#8a7a4e",
+      "weight": 3
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#a08860",
+      "weight": 4
+    },
+    "enzyme2": {
+      "label": "Glycosidase",
+      "color": "#c0a878",
+      "weight": 5
+    },
+    "chemotaxis": {
+      "label": "Iron-Plume Taxis",
+      "color": "#b3673a",
+      "weight": 7
+    },
+    "antibiotic": {
+      "label": "Antibiotic",
+      "color": "#d94b4b",
+      "weight": 2
+    },
+    "eps": {
+      "label": "EPS Sheath",
+      "color": "#5a7a5a",
+      "weight": 3
+    },
+    "crispr": {
+      "label": "CRISPR",
+      "color": "#4a7aa0",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Twitching",
+      "color": "#888888",
+      "weight": 1
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "photoferrotroph",
+        "label": "Chlorobium-like Photoferrotroph",
+        "color": "#5c3a1e",
+        "genome": {
+          "enzLvl": [
+            0,
+            0,
+            1
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false,
+          "chemolithotroph": true,
+          "phototroph": true
+        },
+        "immigrateWeight": 5
+      },
+      {
+        "id": "heterotroph",
+        "label": "Surface-Rain Heterotroph",
+        "color": "#8a7040",
+        "genome": {
+          "enzLvl": [
+            2,
+            2,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 4
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "surfaceDiatom",
+        "label": "Epilimnetic Pennate Diatom",
+        "color": "#c9d97a",
+        "form": "pennate",
+        "sizeUm": 35,
+        "chain": 3,
+        "count": 40,
+        "toxin": null
+      }
+    ]
+  },
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 140,
+      "color": "#3a2f1e",
+      "label": "Ferruginous Sediment Floor",
+      "roughness": 0.3,
+      "porosity": 0.35,
+      "poreSize": 40,
+      "featureSize": 300,
+      "spires": 0,
+      "spireHeight": 0,
+      "spireWidth": 10,
+      "warp": 0.1
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 29,
+        "salinity": 0,
+        "light": 1,
+        "nutrient": 0.3
+      },
+      {
+        "depth": 0.3,
+        "tempC": 28,
+        "salinity": 0,
+        "light": 0.55,
+        "nutrient": 0.4
+      },
+      {
+        "depth": 0.55,
+        "tempC": 27,
+        "salinity": 0,
+        "light": 0.18,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 0.75,
+        "tempC": 26.5,
+        "salinity": 0,
+        "light": 0.04,
+        "nutrient": 0.85
+      },
+      {
+        "depth": 1,
+        "tempC": 26,
+        "salinity": 0,
+        "light": 0,
+        "nutrient": 1
+      }
+    ],
+    "thermocline": {
+      "depth": 0.55,
+      "sharpness": 0.7
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}
