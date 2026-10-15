@@ -684,6 +684,14 @@
       "file": "scenarios/daily-2026-10-14.json"
     },
     {
+      "id": "daily-2026-10-15",
+      "title": "Shimmering Dark: Vampire Squid Grounds and the Marine Snow Recyclers",
+      "date": "2026-10-15",
+      "difficulty": "hard",
+      "realWorldBasis": "Monterey Bay oxygen minimum zone, ~700m, Vampyroteuthis infernalis marine-snow feeding grounds",
+      "file": "scenarios/daily-2026-10-15.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
