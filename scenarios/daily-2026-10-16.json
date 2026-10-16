@@ -1,0 +1,226 @@
+{
+  "actions": {
+    "enzyme0": {
+      "label": "Collagenase",
+      "color": "#ff8899",
+      "weight": 3
+    },
+    "enzyme1": {
+      "label": "Mucinase",
+      "color": "#ffcc66",
+      "weight": 7
+    },
+    "enzyme2": {
+      "label": "Chitinase",
+      "color": "#66ddcc",
+      "weight": 2
+    },
+    "chemotaxis": {
+      "label": "Mucus-Gradient Taxis",
+      "color": "#ffffff",
+      "weight": 6
+    },
+    "antibiotic": {
+      "label": "Zoocin-like Bacteriocin",
+      "color": "#ff3344",
+      "weight": 4
+    },
+    "eps": {
+      "label": "Biofilm Matrix",
+      "color": "#ccaa33",
+      "weight": 4
+    },
+    "crispr": {
+      "label": "CRISPR Immunity",
+      "color": "#99ffcc",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Pilus Twitching",
+      "color": "#aaaaee",
+      "weight": 3
+    }
+  },
+  "column": {
+    "enabled": false
+  },
+  "env": {
+    "day.lengthSec": 220,
+    "day.latitude": -16,
+    "day.dayOfYear": 60,
+    "diel.tempBase": 29,
+    "diel.tempAmp": 2,
+    "diel.foodFloor": 0.55,
+    "diel.q10": 2.3,
+    "diel.q10RefC": 26,
+    "diel.waterDay.0": 40,
+    "diel.waterDay.1": 90,
+    "diel.waterDay.2": 70,
+    "diel.waterNight.0": 5,
+    "diel.waterNight.1": 18,
+    "diel.waterNight.2": 20,
+    "substrate.count": 78,
+    "substrate.sizeMin": 26,
+    "substrate.sizeMax": 150,
+    "substrate.sizeExp": 1.3,
+    "substrate.lifeMin": 70,
+    "substrate.lifeMax": 160,
+    "substrate.dissolveTime": 5,
+    "substrate.driftMin": 4,
+    "substrate.driftMax": 10,
+    "substrate.minPerRes": 3,
+    "substrate.moteEnergy": 9,
+    "substrate.bloomEvery": 0.35,
+    "enzyme.life": 6,
+    "enzyme.maxRadius": 30,
+    "enzyme.growTime": 0.3,
+    "cell.chemoRange0": 380,
+    "cell.chemoRangePer": 170,
+    "cell.chemoBias": 1.3,
+    "cell.uptake": 17,
+    "cell.swimCost": 1.5,
+    "cell.startEnergy": 100,
+    "cell.divideThreshold": 165,
+    "respirationBase": 1.1,
+    "eps.cost": 3,
+    "eps.lifePerLevel": 5,
+    "eps.threatRange": 120,
+    "toxin.dose": 65,
+    "toxin.potency": 22,
+    "toxin.crossDist": 2,
+    "phage.greenCount": 24,
+    "phage.goldCount": 5,
+    "phage.hostTolerance": 2,
+    "phage.adsorbBase": 0.35,
+    "predator.count": 6,
+    "predator.senseRange": 200,
+    "predator.chaseSpeed": 55,
+    "predator.wanderSpeed": 30,
+    "predator.metabolism": 11,
+    "predator.mealEnergy": 55,
+    "predator.minCount": 3
+  },
+  "meta": {
+    "title": "Fever Mucus Redux: The Bacteriocin Duel on a Dying Polyp",
+    "date": "2026-10-16",
+    "lesson": "During coral bleaching, the protective mucus layer of a stressed coral polyp becomes a battlefield. The polyp's resident commensal bacteria (here your founder) normally hold the mucopolysaccharide surface by producing bacteriocin-like compounds that keep opportunists in check. But heat-stressed coral mucus is rich in exuded mucins and sloughed tissue proteins, and the opportunistic pathogen Vibrio coralliilyticus surges in to exploit it, racing along the mucus gradient via chemotaxis to reach these protein-rich lesions first. This level asks you to hold territory on a single polyp's mucus surface: digest the protein-dominant mucin particles your colony depends on, use chemotaxis to beat competitors to fresh lesions, and deploy a bacteriocin-like antibiotic to suppress rival commensals and invading Vibrio before they displace you. Lose the chemical duel and the surface tips from a protective biofilm into a pathogenic one - exactly the tipping point reef biologists see in real bleaching events.",
+    "citation": "Ushijima et al. 2014, Appl Environ Microbiol; Garren & Azam 2012, ISME J (mucus chemotaxis)",
+    "difficulty": "hard",
+    "realWorldBasis": "Great Barrier Reef mass bleaching, Vibrio coralliilyticus invasion of the coral mucopolysaccharide layer"
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "commensal",
+        "label": "Mucus-Dwelling Commensal (Pseudoalteromonas-like)",
+        "color": "#55cc99",
+        "genome": {
+          "enzLvl": [
+            2,
+            6,
+            2
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 2,
+          "eps": 2,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "vibrio_invader",
+        "label": "Vibrio coralliilyticus",
+        "color": "#dd4433",
+        "genome": {
+          "enzLvl": [
+            1,
+            5,
+            1
+          ],
+          "chemoLevel": 3,
+          "antibiotic": 1,
+          "eps": 1,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 5
+      },
+      {
+        "id": "generalist_rival",
+        "label": "Opportunist Copiotroph",
+        "color": "#9988cc",
+        "genome": {
+          "enzLvl": [
+            1,
+            3,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": true,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      }
+    ]
+  },
+  "particles": {
+    "mucin_lesion": {
+      "label": "Mucin Lesion Clot",
+      "mix": [
+        0.1,
+        0.75,
+        0.15
+      ],
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 7
+    },
+    "sloughed_tissue": {
+      "label": "Sloughed Tissue Fragment",
+      "mix": [
+        0.2,
+        0.65,
+        0.15
+      ],
+      "shape": "shard",
+      "squash": 0.6,
+      "weight": 4
+    },
+    "algal_debris": {
+      "label": "Zooxanthellae Debris",
+      "mix": [
+        0.35,
+        0.25,
+        0.4
+      ],
+      "shape": "ellipse",
+      "squash": 0.7,
+      "weight": 2
+    }
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid Membrane Debris",
+      "enzymeLabel": "Collagenase",
+      "color": "#ff8899"
+    },
+    {
+      "index": 1,
+      "label": "Coral Mucin Protein",
+      "enzymeLabel": "Mucinase",
+      "color": "#ffcc66"
+    },
+    {
+      "index": 2,
+      "label": "Chitin/Polysaccharide Fragment",
+      "enzymeLabel": "Chitinase",
+      "color": "#66ddcc"
+    }
+  ],
+  "schema": "bacteria-scenario",
+  "version": 1
+}

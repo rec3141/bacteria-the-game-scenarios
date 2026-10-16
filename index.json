@@ -692,6 +692,14 @@
       "file": "scenarios/daily-2026-10-15.json"
     },
     {
+      "id": "daily-2026-10-16",
+      "title": "Fever Mucus Redux: The Bacteriocin Duel on a Dying Polyp",
+      "date": "2026-10-16",
+      "difficulty": "hard",
+      "realWorldBasis": "Great Barrier Reef mass bleaching, Vibrio coralliilyticus invasion of the coral mucopolysaccharide layer",
+      "file": "scenarios/daily-2026-10-16.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
