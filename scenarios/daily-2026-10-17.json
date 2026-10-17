@@ -1,0 +1,277 @@
+{
+  "meta": {
+    "title": "Red Snow: Chlamydomonas Blooms the Himalayan Glacier Surface",
+    "date": "2026-10-17",
+    "lesson": "In summer, high-altitude glacier snowfields turn watermelon-pink as the cryophilic alga Chlamydomonas nivalis blooms on the melting surface, its carotenoid pigments shielding chlorophyll from intense UV while darkening the snow and accelerating its own melt (the 'bioalbedo' feedback). The meltwater films that pool between ice grains host a thin bacterial community living off algal exudate, surviving near-freezing meltwater, fierce midday light, and a food supply that all but vanishes the moment the sun drops and refreezing locks the films shut. This level asks the founder to subsist on that exudate drizzle under a punishing diel light/food swing, in cold, slow water, while a pennate diatom-free but alga-rich 'photic ice' column features sea-ice-like terrain overhead.",
+    "citation": "Williamson et al. 2020, Frontiers in Microbiology; Hoham & Duval 2001 on snow algae communities",
+    "difficulty": "hard",
+    "realWorldBasis": "Himalayan/alpine 'watermelon snow' blooms of Chlamydomonas nivalis and associated meltwater bacteria"
+  },
+  "env": {
+    "day.lengthSec": 300,
+    "day.latitude": 34,
+    "day.dayOfYear": 200,
+    "day.startHour": 9,
+    "diel.tempBase": 1,
+    "diel.tempAmp": 6,
+    "diel.tempLag": 0.08,
+    "diel.foodFloor": 0.18,
+    "diel.grazeNight": 0.6,
+    "diel.lightGamma": 2.6,
+    "diel.twilight": 0.3,
+    "diel.waterNight.0": 4,
+    "diel.waterNight.1": 6,
+    "diel.waterNight.2": 14,
+    "diel.waterDay.0": 120,
+    "diel.waterDay.1": 40,
+    "diel.waterDay.2": 60,
+    "diel.goldTint": 0.3,
+    "diel.q10": 2.4,
+    "diel.q10RefC": 10,
+    "respirationBase": 0.6,
+    "cell.dragRate": 90,
+    "cell.maxSpeed": 140,
+    "cell.swimCost": 0.9,
+    "cell.cystBelow": 20,
+    "cell.cystWake": 55,
+    "cell.cystMetab": 0.02,
+    "cell.chemoRange0": 220,
+    "cell.chemoRangePer": 100,
+    "substrate.count": 50,
+    "substrate.sizeMin": 24,
+    "substrate.sizeMax": 140,
+    "substrate.sizeExp": 2,
+    "substrate.lifeMin": 60,
+    "substrate.lifeMax": 140,
+    "substrate.driftMin": 4,
+    "substrate.driftMax": 9,
+    "substrate.bloomEvery": 0.7,
+    "substrate.moteEnergy": 6,
+    "nutrient.life": 10,
+    "predator.count": 2,
+    "predator.wanderSpeed": 14,
+    "predator.chaseSpeed": 24,
+    "predator.senseRange": 110,
+    "predator.metabolism": 7,
+    "predator.minCount": 1,
+    "column.photoRate": 10,
+    "diatom.photoRate": 7,
+    "diatom.metabolism": 1.1,
+    "diatom.sinkSpeed": 0.5
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Algal exudate droplets",
+      "enzymeLabel": "Lipase (cryo-lipase)",
+      "color": "#c23b5a"
+    },
+    {
+      "index": 1,
+      "label": "Dead algal cell protein",
+      "enzymeLabel": "Cold-active protease",
+      "color": "#8a4b6b"
+    },
+    {
+      "index": 2,
+      "label": "Meltwater carbohydrate film",
+      "enzymeLabel": "Glucanase",
+      "color": "#d98a9c"
+    }
+  ],
+  "particles": {
+    "exudate": {
+      "label": "Carotenoid-rich exudate bead",
+      "mix": [
+        6,
+        1,
+        1
+      ],
+      "shape": "ellipse",
+      "squash": 0.7,
+      "weight": 6
+    },
+    "debris": {
+      "label": "Lysed alga fragment",
+      "mix": [
+        1,
+        5,
+        2
+      ],
+      "shape": "shard",
+      "weight": 3
+    },
+    "film": {
+      "label": "Thin meltwater film carbohydrate",
+      "mix": [
+        1,
+        1,
+        5
+      ],
+      "shape": "aggregate",
+      "weight": 4
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Cryo-lipase release",
+      "color": "#c23b5a",
+      "weight": 7
+    },
+    "enzyme1": {
+      "label": "Cold protease release",
+      "color": "#8a4b6b",
+      "weight": 4
+    },
+    "enzyme2": {
+      "label": "Glucanase release",
+      "color": "#d98a9c",
+      "weight": 4
+    },
+    "chemotaxis": {
+      "label": "Film-tracking chemotaxis",
+      "color": "#e8a0b0",
+      "weight": 5
+    },
+    "eps": {
+      "label": "Cryoprotective EPS sheath",
+      "color": "#f0c0cc",
+      "weight": 5
+    },
+    "antibiotic": {
+      "label": "Bacteriocin",
+      "color": "#772244",
+      "weight": 2
+    },
+    "crispr": {
+      "label": "CRISPR immunity",
+      "color": "#993355",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Grain-surface twitching",
+      "color": "#aa4466",
+      "weight": 3
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "founder",
+        "label": "Meltwater psychrophile",
+        "color": "#d9798f",
+        "genome": {
+          "enzLvl": [
+            3,
+            1,
+            2
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 2,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "competitor",
+        "label": "Generalist meltwater colonist",
+        "color": "#b86b84",
+        "genome": {
+          "enzLvl": [
+            1,
+            2,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "snowalga",
+        "label": "Chlamydomonas nivalis bloom cell",
+        "color": "#e23f5f",
+        "form": "centric",
+        "sizeUm": 20,
+        "chain": 1,
+        "count": 90
+      }
+    ]
+  },
+  "terrain": [
+    {
+      "at": "top",
+      "thickness": 260,
+      "color": "#eef3fa",
+      "label": "Melting glacier surface ice",
+      "roughness": 0.55,
+      "porosity": 0.4,
+      "poreSize": 30,
+      "featureSize": 300,
+      "spires": 0,
+      "spireHeight": 0,
+      "spireWidth": 10,
+      "warp": 0.1
+    },
+    {
+      "at": "bottom",
+      "thickness": 120,
+      "color": "#c9d6e6",
+      "label": "Compacted firn layer",
+      "roughness": 0.35,
+      "porosity": 0.25,
+      "poreSize": 18,
+      "featureSize": 180,
+      "spires": 0,
+      "spireHeight": 0,
+      "spireWidth": 10,
+      "warp": 0
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 2,
+        "salinity": 1,
+        "light": 1,
+        "nutrient": 0.3
+      },
+      {
+        "depth": 0.3,
+        "tempC": 0.5,
+        "salinity": 1,
+        "light": 0.8,
+        "nutrient": 0.5
+      },
+      {
+        "depth": 0.7,
+        "tempC": 0,
+        "salinity": 1,
+        "light": 0.3,
+        "nutrient": 0.4
+      },
+      {
+        "depth": 1,
+        "tempC": -1,
+        "salinity": 1,
+        "light": 0.05,
+        "nutrient": 0.2
+      }
+    ],
+    "thermocline": {
+      "depth": 0.5,
+      "sharpness": 0.4
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}
