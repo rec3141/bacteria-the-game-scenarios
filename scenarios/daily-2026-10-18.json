@@ -1,0 +1,267 @@
+{
+  "meta": {
+    "title": "Pink Snow: Sea-Ice Diatoms of the Weddell Sea Platelet Layer",
+    "date": "2026-10-18",
+    "lesson": "In the Weddell Sea, loose platelet ice forms a spongy sub-ice layer where pennate diatoms graze and glide along ice crystal surfaces, feeding on dissolved organics leaking from algae while bacteria recycle the rest. Unlike solid fast ice, platelet ice is porous and fragile, giving diatoms and heterotrophic bacteria a three-dimensional lattice to colonize rather than a flat ceiling. Pennate diatoms like Fragilariopsis use their raphe to glide into brine pockets chasing light, while psychrophilic bacteria break down lipid-rich diatom exudate (this habitat's dominant food class) with cold-adapted lipases. Light is extremely scarce and seasonal at this high latitude, so the whole community lives on a slim energetic margin: a founder must scavenge efficiently and tolerate near-freezing brine, while diatom chains sink slowly when they die, releasing their biomass to feed the bacterial loop below.",
+    "citation": "Arrigo et al., platelet ice ecology, Weddell Sea; Günther & Dieckmann sea-ice algal studies",
+    "difficulty": "hard",
+    "realWorldBasis": "Weddell Sea platelet ice layer, Antarctica - under-ice diatom/bacteria coupling in loose porous ice"
+  },
+  "env": {
+    "day.lengthSec": 300,
+    "day.latitude": -74,
+    "day.dayOfYear": 300,
+    "day.startHour": 10,
+    "diel.tempBase": -1.8,
+    "diel.tempAmp": 0.6,
+    "diel.foodFloor": 0.25,
+    "diel.q10": 2.4,
+    "diel.q10RefC": 20,
+    "diel.waterNight.0": 3,
+    "diel.waterNight.1": 12,
+    "diel.waterNight.2": 28,
+    "diel.waterDay.0": 60,
+    "diel.waterDay.1": 110,
+    "diel.waterDay.2": 130,
+    "diel.lightGamma": 2.4,
+    "diel.twilight": 0.35,
+    "respirationBase": 0.6,
+    "substrate.count": 75,
+    "substrate.sizeMin": 26,
+    "substrate.sizeMax": 160,
+    "substrate.lifeMin": 180,
+    "substrate.lifeMax": 420,
+    "substrate.driftMin": 4,
+    "substrate.driftMax": 10,
+    "substrate.bloomEvery": 0.7,
+    "cell.startEnergy": 95,
+    "cell.divideThreshold": 160,
+    "cell.uptake": 11,
+    "cell.swimCost": 0.9,
+    "cell.thrust": 15000,
+    "cell.dragRate": 50,
+    "cell.maxSpeed": 180,
+    "cell.cystBelow": 20,
+    "cell.cystWake": 50,
+    "cell.chemoRange0": 260,
+    "predator.count": 3,
+    "predator.wanderSpeed": 16,
+    "predator.chaseSpeed": 28,
+    "predator.metabolism": 7,
+    "predator.senseRange": 140,
+    "phage.greenCount": 12,
+    "phage.goldCount": 3,
+    "column.chemRate": 4,
+    "column.photoRate": 5
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Diatom Lipid Exudate",
+      "enzymeLabel": "Cold Lipase",
+      "color": "#d98cb3"
+    },
+    {
+      "index": 1,
+      "label": "Bacterial Protein Debris",
+      "enzymeLabel": "Psychro-protease",
+      "color": "#8fa8c2"
+    },
+    {
+      "index": 2,
+      "label": "EPS Carbohydrate Mucus",
+      "enzymeLabel": "Glycanase",
+      "color": "#bfe8e0"
+    }
+  ],
+  "particles": {
+    "exudateDroplet": {
+      "label": "Lipid Exudate Droplet",
+      "mix": [
+        8,
+        1,
+        1
+      ],
+      "shape": "ellipse",
+      "squash": 0.7,
+      "weight": 6
+    },
+    "frustuleDebris": {
+      "label": "Frustule Debris Clump",
+      "mix": [
+        2,
+        3,
+        3
+      ],
+      "shape": "shard",
+      "weight": 4
+    },
+    "mucusFloc": {
+      "label": "EPS Mucus Floc",
+      "mix": [
+        1,
+        1,
+        5
+      ],
+      "shape": "aggregate",
+      "weight": 5
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Cold Lipase Burst",
+      "color": "#d98cb3",
+      "weight": 6
+    },
+    "enzyme1": {
+      "label": "Psychro-protease Burst",
+      "color": "#8fa8c2",
+      "weight": 3
+    },
+    "enzyme2": {
+      "label": "Glycanase Burst",
+      "color": "#bfe8e0",
+      "weight": 3
+    },
+    "chemotaxis": {
+      "label": "Brine Channel Seeking",
+      "color": "#c9e6ff",
+      "weight": 5
+    },
+    "eps": {
+      "label": "Antifreeze EPS Shield",
+      "color": "#e8f7f5",
+      "weight": 4
+    },
+    "twitching": {
+      "label": "Ice-Surface Gliding",
+      "color": "#f0c9de",
+      "weight": 3
+    },
+    "antibiotic": {
+      "label": "Psychrophile Toxin",
+      "color": "#9b5fa3",
+      "weight": 2
+    },
+    "crispr": {
+      "label": "Phage Immunity",
+      "color": "#5f7d9b",
+      "weight": 2
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "coldLipaseFounder",
+        "label": "Psychrophilic Lipid Scavenger",
+        "color": "#d98cb3",
+        "genome": {
+          "enzLvl": [
+            3,
+            1,
+            1
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "epsSurvivor",
+        "label": "EPS-Shielded Generalist",
+        "color": "#bfe8e0",
+        "genome": {
+          "enzLvl": [
+            1,
+            1,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 3,
+          "crispr": true,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "fragilariopsis",
+        "label": "Fragilariopsis Chain",
+        "color": "#e8c4dd",
+        "form": "pennate",
+        "sizeUm": 40,
+        "chain": 8,
+        "count": 60
+      },
+      {
+        "id": "coscinodiscusSolitary",
+        "label": "Solitary Coscinodiscus",
+        "color": "#cdd8e6",
+        "form": "centric",
+        "sizeUm": 70,
+        "chain": 1,
+        "count": 20
+      }
+    ]
+  },
+  "terrain": [
+    {
+      "at": "top",
+      "thickness": 260,
+      "color": "#dceaf0",
+      "label": "Platelet Ice Layer",
+      "roughness": 0.65,
+      "porosity": 0.5,
+      "poreSize": 60,
+      "featureSize": 300,
+      "spires": 0.15,
+      "spireHeight": 120,
+      "spireWidth": 50,
+      "warp": 0.3
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": -1.8,
+        "salinity": 34,
+        "light": 0.3,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 0.3,
+        "tempC": -1.8,
+        "salinity": 35,
+        "light": 0.15,
+        "nutrient": 0.7
+      },
+      {
+        "depth": 0.7,
+        "tempC": -1.9,
+        "salinity": 36,
+        "light": 0.03,
+        "nutrient": 0.8
+      },
+      {
+        "depth": 1,
+        "tempC": -1.9,
+        "salinity": 36,
+        "light": 0,
+        "nutrient": 0.9
+      }
+    ],
+    "thermocline": {
+      "depth": 0.4,
+      "sharpness": 0.3
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}

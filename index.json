@@ -708,6 +708,14 @@
       "file": "scenarios/daily-2026-10-17.json"
     },
     {
+      "id": "daily-2026-10-18",
+      "title": "Pink Snow: Sea-Ice Diatoms of the Weddell Sea Platelet Layer",
+      "date": "2026-10-18",
+      "difficulty": "hard",
+      "realWorldBasis": "Weddell Sea platelet ice layer, Antarctica - under-ice diatom/bacteria coupling in loose porous ice",
+      "file": "scenarios/daily-2026-10-18.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
