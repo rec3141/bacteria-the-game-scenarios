@@ -1,0 +1,222 @@
+{
+  "actions": {
+    "enzyme0": {
+      "label": "Alkane Hydroxylase",
+      "color": "#e8b84b",
+      "weight": 6
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#d1573a",
+      "weight": 3
+    },
+    "enzyme2": {
+      "label": "Glycosidase",
+      "color": "#4ba6e8",
+      "weight": 2
+    },
+    "chemotaxis": {
+      "label": "Oil-Plume Taxis",
+      "color": "#c9c9c9",
+      "weight": 5
+    },
+    "antibiotic": {
+      "label": "Bacteriocin",
+      "color": "#9b59b6",
+      "weight": 3
+    },
+    "eps": {
+      "label": "Biofilm Matrix",
+      "color": "#7f8c8d",
+      "weight": 4
+    },
+    "crispr": {
+      "label": "CRISPR Immunity",
+      "color": "#2ecc71",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Twitching Motility",
+      "color": "#f39c12",
+      "weight": 2
+    }
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 22,
+        "salinity": 36,
+        "light": 1,
+        "nutrient": 0.3
+      },
+      {
+        "depth": 0.3,
+        "tempC": 14,
+        "salinity": 36,
+        "light": 0.4,
+        "nutrient": 0.5
+      },
+      {
+        "depth": 0.6,
+        "tempC": 8,
+        "salinity": 35,
+        "light": 0.08,
+        "nutrient": 0.75
+      },
+      {
+        "depth": 1,
+        "tempC": 5,
+        "salinity": 35,
+        "light": 0,
+        "nutrient": 1
+      }
+    ],
+    "thermocline": {
+      "depth": 0.35,
+      "sharpness": 0.7
+    }
+  },
+  "env": {
+    "day.lengthSec": 300,
+    "day.latitude": 27,
+    "day.dayOfYear": 150,
+    "diel.tempBase": 14,
+    "diel.tempAmp": 4,
+    "diel.foodFloor": 0.4,
+    "diel.q10": 2.2,
+    "diel.waterNight.0": 5,
+    "diel.waterNight.1": 7,
+    "diel.waterNight.2": 4,
+    "diel.waterDay.0": 32,
+    "diel.waterDay.1": 38,
+    "diel.waterDay.2": 18,
+    "substrate.count": 95,
+    "substrate.sizeMin": 36,
+    "substrate.sizeMax": 220,
+    "substrate.sizeExp": 1.3,
+    "substrate.lifeMin": 90,
+    "substrate.lifeMax": 220,
+    "substrate.driftMin": 4,
+    "substrate.driftMax": 11,
+    "substrate.moteEnergy": 9,
+    "substrate.minPerRes": 3,
+    "enzyme.maxRadius": 30,
+    "enzyme.life": 6.5,
+    "enzyme.growTime": 0.5,
+    "cell.uptake": 17,
+    "cell.swimCost": 1,
+    "cell.startEnergy": 120,
+    "cell.divideThreshold": 180,
+    "cell.chemoRange0": 360,
+    "cell.chemoRangePer": 170,
+    "cell.chemoBias": 1.1,
+    "respirationBase": 0.75,
+    "predator.count": 3,
+    "predator.senseRange": 150,
+    "predator.metabolism": 9,
+    "predator.wanderSpeed": 20,
+    "predator.chaseSpeed": 34,
+    "phage.greenCount": 20,
+    "phage.goldCount": 4,
+    "phage.hostTolerance": 2,
+    "eps.threatRange": 100,
+    "eps.cost": 3.5
+  },
+  "meta": {
+    "title": "Slick Overlap: Alcanivorax Meets the Sulfide Seam",
+    "date": "2026-10-20",
+    "lesson": "After the Deepwater Horizon blowout, oil droplets and natural gas hydrate seep sulfide sometimes overlapped on the same stretch of Gulf of Mexico slope water. Two very different metabolisms competed for the same depth band: obligate hydrocarbonoclastic bacteria like Alcanivorax, which only switch on when alkanes are present and otherwise nearly vanish from the community, and sulfide-oxidizing chemolithotrophs feeding on a seep plume rising from cracks in the seafloor. This level puts oil-droplet food (lipid-class particles, re-skinned as an alkane hydroxylase target) in the upper water, and a sulfide chemical gradient peaking near the bottom, so the founder must track a drifting, patchy oil slick while a deep chemosynthetic community thrives independently in the sulfide band below. Players learn that marine snow from an oil spill is transient and patchy -- unlike a steady natural food source, oil droplets disperse, biodegrade, and vanish, so an alkane-specialist population booms and busts with the slick rather than settling into equilibrium.",
+    "citation": "Hazen et al. 2010 Science; Kessler et al. 2011; Gulf of Mexico MOSSFA observations",
+    "difficulty": "hard",
+    "realWorldBasis": "Deepwater Horizon oil spill overlapping natural seep sulfide plumes, Gulf of Mexico slope ~150-300m"
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "alcanivorax",
+        "label": "Alcanivorax borkumensis",
+        "color": "#e8b84b",
+        "genome": {
+          "enzLvl": [
+            3,
+            1,
+            1
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 2,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "thiomicrospira",
+        "label": "Thiomicrospira (sulfide oxidizer)",
+        "color": "#5dade2",
+        "genome": {
+          "enzLvl": [
+            0,
+            0,
+            1
+          ],
+          "chemoLevel": 0,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false,
+          "chemolithotroph": true
+        },
+        "immigrateWeight": 3
+      }
+    ]
+  },
+  "particles": {
+    "oilDroplet": {
+      "label": "Dispersed Oil Droplet",
+      "mix": [
+        85,
+        5,
+        10
+      ],
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 7
+    },
+    "marineSnow": {
+      "label": "Background Marine Snow",
+      "mix": [
+        20,
+        40,
+        40
+      ],
+      "shape": "shard",
+      "squash": 1,
+      "weight": 2
+    }
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Dispersed Oil (alkanes)",
+      "enzymeLabel": "Alkane Hydroxylase",
+      "color": "#e8b84b"
+    },
+    {
+      "index": 1,
+      "label": "Marine Protein Detritus",
+      "enzymeLabel": "Protease",
+      "color": "#d1573a"
+    },
+    {
+      "index": 2,
+      "label": "Carbohydrate Snow",
+      "enzymeLabel": "Glycosidase",
+      "color": "#4ba6e8"
+    }
+  ],
+  "schema": "bacteria-scenario",
+  "version": 1
+}

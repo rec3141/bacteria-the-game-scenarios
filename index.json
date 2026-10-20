@@ -724,6 +724,14 @@
       "file": "scenarios/daily-2026-10-19.json"
     },
     {
+      "id": "daily-2026-10-20",
+      "title": "Slick Overlap: Alcanivorax Meets the Sulfide Seam",
+      "date": "2026-10-20",
+      "difficulty": "hard",
+      "realWorldBasis": "Deepwater Horizon oil spill overlapping natural seep sulfide plumes, Gulf of Mexico slope ~150-300m",
+      "file": "scenarios/daily-2026-10-20.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
