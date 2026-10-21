@@ -732,6 +732,14 @@
       "file": "scenarios/daily-2026-10-20.json"
     },
     {
+      "id": "daily-2026-10-21",
+      "title": "Spoonworm's Harvest: Osedax Bone-Eaters of Monterey Canyon",
+      "date": "2026-10-21",
+      "difficulty": "hard",
+      "realWorldBasis": "Osedax bone-eating worm bacterial symbiont communities on whale-fall skeletons, Monterey Canyon, ~1600-2900m depth",
+      "file": "scenarios/daily-2026-10-21.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",

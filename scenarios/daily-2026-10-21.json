@@ -1,0 +1,240 @@
+{
+  "meta": {
+    "title": "Spoonworm's Harvest: Osedax Bone-Eaters of Monterey Canyon",
+    "date": "2026-10-21",
+    "lesson": "When a whale carcass settles on the abyssal floor, its lipid-rich bones become a feast that lasts decades. Osedax worms bore into the bone matrix with symbiotic Oceanospirillales bacteria that break down the collagen and lipid stores, releasing a slow but steady bloom of organic matter. Around this bone-fall, heterotrophic bacteria compete for the lipid-heavy oil trapped in the bone, protein from decaying tissue, and whatever carbohydrate scraps remain in connective cartilage. The lesson here is succession on a concentrated, long-lived nutrient fall in permanent darkness and cold: no light, no photosynthesis, just slow metabolism, dense but patchy food, and heavy competition from grazers drawn in by the smell of lipid breakdown products diffusing through near-freezing water.",
+    "citation": "Based on whale-fall ecology studies, Monterey Bay / Monterey Canyon, ~1000-3000m depth (MBARI ROV observations of Osedax spp. bone communities).",
+    "difficulty": "hard",
+    "realWorldBasis": "Osedax bone-eating worm bacterial symbiont communities on whale-fall skeletons, Monterey Canyon, ~1600-2900m depth"
+  },
+  "env": {
+    "day.lengthSec": 300,
+    "day.latitude": 36,
+    "day.dayOfYear": 300,
+    "diel.tempBase": 3,
+    "diel.tempAmp": 0.5,
+    "diel.foodFloor": 0.75,
+    "diel.q10": 2.2,
+    "diel.q10RefC": 3,
+    "diel.waterNight.0": 1,
+    "diel.waterNight.1": 3,
+    "diel.waterNight.2": 6,
+    "diel.waterDay.0": 2,
+    "diel.waterDay.1": 5,
+    "diel.waterDay.2": 9,
+    "diel.lightGamma": 6,
+    "respirationBase": 0.55,
+    "substrate.count": 78,
+    "substrate.sizeMin": 45,
+    "substrate.sizeMax": 220,
+    "substrate.sizeExp": 1.3,
+    "substrate.lifeMin": 280,
+    "substrate.lifeMax": 600,
+    "substrate.driftMin": 3,
+    "substrate.driftMax": 9,
+    "substrate.moteEnergy": 9,
+    "substrate.minPerRes": 3,
+    "cell.chemoRange0": 420,
+    "cell.chemoRangePer": 180,
+    "cell.chemoBias": 1.3,
+    "cell.uptake": 11,
+    "cell.swimCost": 0.9,
+    "cell.cystBelow": 20,
+    "cell.cystWake": 55,
+    "cell.cystMetab": 0.02,
+    "enzyme.life": 7,
+    "enzyme.maxRadius": 30,
+    "predator.count": 6,
+    "predator.senseRange": 220,
+    "predator.wanderSpeed": 14,
+    "predator.chaseSpeed": 24,
+    "predator.metabolism": 6,
+    "predator.mealEnergy": 70,
+    "phage.greenCount": 10,
+    "phage.goldCount": 3,
+    "phage.goldMinDist": 800
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Bone Lipid Marrow",
+      "enzymeLabel": "Bone Lipase",
+      "color": "#d4a24c"
+    },
+    {
+      "index": 1,
+      "label": "Decaying Collagen Tissue",
+      "enzymeLabel": "Collagenase",
+      "color": "#b85c5c"
+    },
+    {
+      "index": 2,
+      "label": "Cartilage Scraps",
+      "enzymeLabel": "Chondroitinase",
+      "color": "#7a9e8c"
+    }
+  ],
+  "particles": {
+    "boneMarrow": {
+      "label": "Lipid-Rich Bone Marrow",
+      "mix": [
+        85,
+        10,
+        5
+      ],
+      "shape": "aggregate",
+      "weight": 6
+    },
+    "tissueShred": {
+      "label": "Collagen Tissue Shred",
+      "mix": [
+        15,
+        70,
+        15
+      ],
+      "shape": "shard",
+      "weight": 3
+    },
+    "cartilageBit": {
+      "label": "Cartilage Fragment",
+      "mix": [
+        10,
+        20,
+        70
+      ],
+      "shape": "ellipse",
+      "squash": 0.6,
+      "weight": 2
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Bone Lipase Release",
+      "color": "#e0b05c",
+      "weight": 7
+    },
+    "enzyme1": {
+      "label": "Collagenase Release",
+      "color": "#c06b6b",
+      "weight": 4
+    },
+    "enzyme2": {
+      "label": "Chondroitinase Release",
+      "color": "#8cae9c",
+      "weight": 3
+    },
+    "chemotaxis": {
+      "label": "Bone-Scent Taxis",
+      "color": "#f0d090",
+      "weight": 6
+    },
+    "antibiotic": {
+      "label": "Competitor Toxin",
+      "color": "#8e44ad",
+      "weight": 3
+    },
+    "eps": {
+      "label": "Mucopolysaccharide Shield",
+      "color": "#5dade2",
+      "weight": 3
+    },
+    "crispr": {
+      "label": "Phage Immunity",
+      "color": "#48c9b0",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Bone-Surface Gripping",
+      "color": "#f5b041",
+      "weight": 4
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "oceanospirillales",
+        "label": "Osedax Symbiont (Oceanospirillales)",
+        "color": "#d4a24c",
+        "genome": {
+          "enzLvl": [
+            3,
+            1,
+            1
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 8
+      },
+      {
+        "id": "sulfideScavenger",
+        "label": "Bone-Sulfide Scavenger",
+        "color": "#7a9e8c",
+        "genome": {
+          "enzLvl": [
+            1,
+            2,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 0,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 4
+      }
+    ]
+  },
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 220,
+      "color": "#e8e0d0",
+      "label": "Whale Bone Matrix",
+      "roughness": 0.55,
+      "porosity": 0.45,
+      "poreSize": 40,
+      "featureSize": 300,
+      "spires": 0.3,
+      "spireHeight": 150,
+      "spireWidth": 80,
+      "warp": 0.65
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 4,
+        "salinity": 34.5,
+        "light": 0,
+        "nutrient": 0.3
+      },
+      {
+        "depth": 0.5,
+        "tempC": 3.5,
+        "salinity": 34.6,
+        "light": 0,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 1,
+        "tempC": 3,
+        "salinity": 34.7,
+        "light": 0,
+        "nutrient": 0.95
+      }
+    ],
+    "thermocline": {
+      "depth": 0.3,
+      "sharpness": 0.1
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}
