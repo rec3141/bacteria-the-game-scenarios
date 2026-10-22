@@ -740,6 +740,14 @@
       "file": "scenarios/daily-2026-10-21.json"
     },
     {
+      "id": "daily-2026-10-22",
+      "title": "Cracked Crust: Cyanobacteria of a Thawing Gypsum Microbialite",
+      "date": "2026-10-22",
+      "difficulty": "hard",
+      "realWorldBasis": "Guerrero Negro hypersaline microbial mats, gypsum crust crack recolonization dynamics",
+      "file": "scenarios/daily-2026-10-22.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",

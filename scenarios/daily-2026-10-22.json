@@ -1,0 +1,289 @@
+{
+  "meta": {
+    "title": "Cracked Crust: Cyanobacteria of a Thawing Gypsum Microbialite",
+    "date": "2026-10-22",
+    "lesson": "In the hypersaline ponds of Guerrero Negro, Mexico, laminated microbial mats grow over gypsum crusts. The top millimetre is a cyanobacterial layer (Microcoleus-type) that photosynthesizes only in the thin daylight band that penetrates the brine and mineral crust above it; below, the mat shifts to fermenters and sulfate reducers in the dark anoxic layers. When the crust cracks (desiccation, storm surge, or a thaw-refreeze cycle in a cold hypersaline pond), light and oxygen suddenly reach deeper, and the cyanobacteria race to recolonize the exposed crack faces before heterotrophic bacteria and protist grazers consume the freshly exposed organic matrix. This level asks the player to run a phototrophic founder that must bank energy fast during the short daylight window, use EPS to cement itself into the gypsum pore structure against grazers, and out-race copiotrophic scavengers converging on the crack's carbohydrate-rich mucilage.",
+    "citation": "Based on microbialite mat studies at Guerrero Negro, Baja California Sur, Mexico (Des Marais et al.)",
+    "difficulty": "hard",
+    "realWorldBasis": "Guerrero Negro hypersaline microbial mats, gypsum crust crack recolonization dynamics"
+  },
+  "env": {
+    "day.lengthSec": 220,
+    "day.latitude": 28,
+    "day.dayOfYear": 200,
+    "diel.tempBase": 24,
+    "diel.tempAmp": 9,
+    "diel.foodFloor": 0.22,
+    "diel.q10": 2.4,
+    "diel.waterDay.0": 40,
+    "diel.waterDay.1": 92,
+    "diel.waterDay.2": 60,
+    "diel.waterNight.0": 3,
+    "diel.waterNight.1": 12,
+    "diel.waterNight.2": 10,
+    "diel.goldTint": 0.26,
+    "diel.lightGamma": 2.4,
+    "substrate.count": 80,
+    "substrate.sizeMin": 26,
+    "substrate.sizeMax": 160,
+    "substrate.lifeMin": 90,
+    "substrate.lifeMax": 220,
+    "substrate.driftMin": 4,
+    "substrate.driftMax": 10,
+    "substrate.minPerRes": 3,
+    "cell.uptake": 16,
+    "cell.startEnergy": 95,
+    "cell.divideThreshold": 165,
+    "cell.swimCost": 1.4,
+    "respirationBase": 1.1,
+    "eps.cost": 3,
+    "eps.lifePerLevel": 6,
+    "eps.threatRange": 120,
+    "eps.maxCount": 300,
+    "predator.count": 5,
+    "predator.senseRange": 150,
+    "predator.wanderSpeed": 18,
+    "predator.chaseSpeed": 34,
+    "predator.metabolism": 9,
+    "phage.greenCount": 12,
+    "phage.goldCount": 3,
+    "column.photoRate": 11
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Gypsum-bound lipid residue",
+      "enzymeLabel": "Lipase (crust scavenger)",
+      "color": "#c9a86a"
+    },
+    {
+      "index": 1,
+      "label": "Mat protein debris",
+      "enzymeLabel": "Protease (mat recycler)",
+      "color": "#b5654a"
+    },
+    {
+      "index": 2,
+      "label": "Exopolysaccharide mucilage",
+      "enzymeLabel": "Glycosidase (mucilage digester)",
+      "color": "#5fae6e"
+    }
+  ],
+  "particles": {
+    "crack_mucilage": {
+      "label": "Fresh crack mucilage",
+      "mix": [
+        1,
+        1,
+        5
+      ],
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 7
+    },
+    "mat_debris": {
+      "label": "Sloughed mat fragment",
+      "mix": [
+        2,
+        3,
+        1
+      ],
+      "shape": "shard",
+      "squash": 0.6,
+      "weight": 4
+    },
+    "gypsum_film": {
+      "label": "Mineral-bound lipid film",
+      "mix": [
+        4,
+        1,
+        1
+      ],
+      "shape": "ellipse",
+      "squash": 0.4,
+      "weight": 3
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase",
+      "color": "#c9a86a",
+      "weight": 3
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#b5654a",
+      "weight": 4
+    },
+    "enzyme2": {
+      "label": "Glycosidase",
+      "color": "#5fae6e",
+      "weight": 7
+    },
+    "chemotaxis": {
+      "label": "Light-seeking glide",
+      "color": "#f2e26b",
+      "weight": 6
+    },
+    "antibiotic": {
+      "label": "Bacteriocin pulse",
+      "color": "#d1495b",
+      "weight": 3
+    },
+    "eps": {
+      "label": "Gypsum-cementing EPS",
+      "color": "#e8d9a0",
+      "weight": 8
+    },
+    "crispr": {
+      "label": "CRISPR immunity",
+      "color": "#7fb3d5",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Crack-crevice twitching",
+      "color": "#9b7fb5",
+      "weight": 5
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "microcoleus_founder",
+        "label": "Microcoleus-type mat cyanobacterium",
+        "color": "#3f8f5c",
+        "genome": {
+          "enzLvl": [
+            1,
+            1,
+            3
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 3,
+          "crispr": false,
+          "twitching": true,
+          "phototroph": true
+        },
+        "immigrateWeight": 5
+      },
+      {
+        "id": "scavenger_vibrio",
+        "label": "Copiotrophic crack scavenger",
+        "color": "#a85c32",
+        "genome": {
+          "enzLvl": [
+            2,
+            3,
+            2
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 1,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 4
+      },
+      {
+        "id": "sulfate_reducer",
+        "label": "Deep-layer fermenter",
+        "color": "#6b4a8a",
+        "genome": {
+          "enzLvl": [
+            1,
+            2,
+            2
+          ],
+          "chemoLevel": 0,
+          "antibiotic": 0,
+          "eps": 2,
+          "crispr": true,
+          "twitching": false
+        },
+        "immigrateWeight": 2
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "crack_pennate",
+        "label": "Crevice-gliding pennate diatom",
+        "color": "#d8c070",
+        "form": "pennate",
+        "sizeUm": 35,
+        "chain": 2,
+        "count": 30,
+        "toxin": null
+      }
+    ]
+  },
+  "terrain": [
+    {
+      "at": "top",
+      "thickness": 160,
+      "color": "#d8cfa8",
+      "label": "Gypsum crust with fresh crack",
+      "roughness": 0.65,
+      "porosity": 0.4,
+      "poreSize": 30,
+      "featureSize": 300,
+      "spires": 0.15,
+      "spireHeight": 140,
+      "spireWidth": 60,
+      "warp": 0.2
+    },
+    {
+      "at": "bottom",
+      "thickness": 220,
+      "color": "#3a2e1f",
+      "label": "Anoxic mat sediment",
+      "roughness": 0.3,
+      "porosity": 0.35,
+      "poreSize": 20,
+      "featureSize": 400,
+      "spires": 0,
+      "spireHeight": 0,
+      "spireWidth": 10,
+      "warp": 0.15
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 26,
+        "salinity": 38,
+        "light": 1,
+        "nutrient": 0.5
+      },
+      {
+        "depth": 0.3,
+        "tempC": 24,
+        "salinity": 42,
+        "light": 0.55,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 0.6,
+        "tempC": 22,
+        "salinity": 50,
+        "light": 0.15,
+        "nutrient": 0.75
+      },
+      {
+        "depth": 1,
+        "tempC": 20,
+        "salinity": 60,
+        "light": 0.02,
+        "nutrient": 0.9
+      }
+    ],
+    "thermocline": {
+      "depth": 0.45,
+      "sharpness": 0.5
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}
