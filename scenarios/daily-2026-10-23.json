@@ -1,0 +1,236 @@
+{
+  "meta": {
+    "title": "Mangrove Snorkel Roots: Sulfate Reducers of the Pneumatophore Mud",
+    "date": "2026-10-23",
+    "lesson": "Red mangroves breathe through pencil-like roots called pneumatophores that poke up through anoxic, sulfidic mud to grab air. The mud around every root is a battleground: sulfate-reducing bacteria (Desulfovibrio-type) thrive in the black, rotten-egg sediment just millimetres from the root's oxygenated halo, where a thin rim of oxygen leaking from the aerenchyma tissue briefly flips the chemistry. Root exudates (sugars, organic acids) feed heterotrophs right at that rim, while deeper anoxic mud is pure sulfate-reduction territory producing the sulfide that would poison the tree if it reached the root tips. This level asks you to live as a carbohydrate-loving heterotroph colonizing the oxygenated root halo while your sulfate-reducing neighbors work the sulfidic mud just beyond reach, with grazing nematode-like protists patrolling the whole rhizosphere and phages keeping any single lineage from taking over the root surface.",
+    "citation": "Lovell, C.R. (2012) Ecological Rhizosphere Biology of Marsh Plants; Nedwell & Walker (1995), mangrove sediment sulfate reduction studies",
+    "difficulty": "normal",
+    "realWorldBasis": "Rhizophora mangle pneumatophore rhizosphere, tropical estuarine mangrove mud, sulfate-reducing bacteria vs root-oxygen microzone"
+  },
+  "env": {
+    "day.lengthSec": 260,
+    "day.latitude": 10,
+    "day.dayOfYear": 172,
+    "diel.tempBase": 28,
+    "diel.tempAmp": 3,
+    "diel.foodFloor": 0.5,
+    "diel.q10": 2.2,
+    "diel.q10RefC": 28,
+    "diel.waterNight.0": 4,
+    "diel.waterNight.1": 10,
+    "diel.waterNight.2": 8,
+    "diel.waterDay.0": 40,
+    "diel.waterDay.1": 62,
+    "diel.waterDay.2": 46,
+    "substrate.count": 78,
+    "substrate.sizeMin": 28,
+    "substrate.sizeMax": 150,
+    "substrate.lifeMin": 110,
+    "substrate.lifeMax": 260,
+    "substrate.driftMin": 5,
+    "substrate.driftMax": 14,
+    "substrate.minPerRes": 3,
+    "respirationBase": 1.05,
+    "cell.chemoRange0": 220,
+    "cell.chemoBias": 1.1,
+    "predator.count": 5,
+    "predator.senseRange": 150,
+    "predator.wanderSpeed": 18,
+    "predator.chaseSpeed": 34,
+    "predator.metabolism": 9,
+    "phage.greenCount": 14,
+    "phage.goldCount": 3,
+    "phage.hostTolerance": 2,
+    "eps.threatRange": 90
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Root Lipid Exudate",
+      "enzymeLabel": "Lipase (root-cuticle wax)",
+      "color": "#c98a3f"
+    },
+    {
+      "index": 1,
+      "label": "Sulfide-Rich Detritus Protein",
+      "enzymeLabel": "Protease (sulfidic mud)",
+      "color": "#5b4a3a"
+    },
+    {
+      "index": 2,
+      "label": "Root Sugar Exudate",
+      "enzymeLabel": "Amylase (pneumatophore sap)",
+      "color": "#d9c86a"
+    }
+  ],
+  "particles": {
+    "rootSugar": {
+      "label": "Pneumatophore Sugar Droplet",
+      "mix": [
+        0.1,
+        0.1,
+        0.8
+      ],
+      "shape": "ellipse",
+      "squash": 0.6,
+      "weight": 6
+    },
+    "sulfidicClump": {
+      "label": "Sulfidic Mud Clump",
+      "mix": [
+        0.15,
+        0.7,
+        0.15
+      ],
+      "shape": "aggregate",
+      "weight": 5
+    },
+    "rootWax": {
+      "label": "Root Cuticle Wax Shard",
+      "mix": [
+        0.6,
+        0.2,
+        0.2
+      ],
+      "shape": "shard",
+      "weight": 3
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase",
+      "color": "#c98a3f",
+      "weight": 3
+    },
+    "enzyme1": {
+      "label": "Sulfidic Protease",
+      "color": "#5b4a3a",
+      "weight": 5
+    },
+    "enzyme2": {
+      "label": "Root Amylase",
+      "color": "#d9c86a",
+      "weight": 8
+    },
+    "chemotaxis": {
+      "label": "Root-Halo Seeking",
+      "color": "#88c97a",
+      "weight": 7
+    },
+    "antibiotic": {
+      "label": "Bacteriocin",
+      "color": "#b53b3b",
+      "weight": 4
+    },
+    "eps": {
+      "label": "Mucoid Sheath",
+      "color": "#8a9a6b",
+      "weight": 5
+    },
+    "crispr": {
+      "label": "CRISPR Immunity",
+      "color": "#6a8fc9",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Root-Surface Twitching",
+      "color": "#c9a53b",
+      "weight": 4
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "root-halo-heterotroph",
+        "label": "Root-Halo Heterotroph",
+        "color": "#d9c86a",
+        "genome": {
+          "enzLvl": [
+            1,
+            1,
+            3
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 2,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "sulfate-reducer",
+        "label": "Sulfate-Reducing Bacterium",
+        "color": "#5b4a3a",
+        "genome": {
+          "enzLvl": [
+            1,
+            3,
+            1
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 2,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 4
+      }
+    ]
+  },
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 420,
+      "color": "#3d2b1f",
+      "label": "Sulfidic Mangrove Mud",
+      "roughness": 0.55,
+      "porosity": 0.45,
+      "poreSize": 40,
+      "featureSize": 300,
+      "spires": 0.35,
+      "spireHeight": 260,
+      "spireWidth": 55,
+      "warp": 0.6
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 29,
+        "salinity": 25,
+        "light": 0.85,
+        "nutrient": 0.5
+      },
+      {
+        "depth": 0.4,
+        "tempC": 28,
+        "salinity": 27,
+        "light": 0.4,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 0.75,
+        "tempC": 27,
+        "salinity": 30,
+        "light": 0.08,
+        "nutrient": 0.8
+      },
+      {
+        "depth": 1,
+        "tempC": 26,
+        "salinity": 32,
+        "light": 0,
+        "nutrient": 0.95
+      }
+    ],
+    "thermocline": {
+      "depth": 0.6,
+      "sharpness": 0.5
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}

@@ -748,6 +748,14 @@
       "file": "scenarios/daily-2026-10-22.json"
     },
     {
+      "id": "daily-2026-10-23",
+      "title": "Mangrove Snorkel Roots: Sulfate Reducers of the Pneumatophore Mud",
+      "date": "2026-10-23",
+      "difficulty": "normal",
+      "realWorldBasis": "Rhizophora mangle pneumatophore rhizosphere, tropical estuarine mangrove mud, sulfate-reducing bacteria vs root-oxygen microzone",
+      "file": "scenarios/daily-2026-10-23.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
