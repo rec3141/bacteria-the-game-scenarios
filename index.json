@@ -756,6 +756,14 @@
       "file": "scenarios/daily-2026-10-23.json"
     },
     {
+      "id": "daily-2026-10-24",
+      "title": "Jellyfish Lake: Symbiont Commuters of a Palau Marine Lake",
+      "date": "2026-10-24",
+      "difficulty": "hard",
+      "realWorldBasis": "Jellyfish Lake, Palau - meromictic marine lake with a sulfidic chemocline beneath a jellyfish-photosymbiont surface layer",
+      "file": "scenarios/daily-2026-10-24.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",

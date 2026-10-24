@@ -1,0 +1,272 @@
+{
+  "meta": {
+    "title": "Jellyfish Lake: Symbiont Commuters of a Palau Marine Lake",
+    "date": "2026-10-24",
+    "lesson": "Jellyfish Lake in Palau is a marine lake isolated from the open ocean, famous for millions of golden jellyfish (Mastigias) that migrate across it daily to sunbathe their photosynthetic algal symbionts (zooxanthellae). Below about 15m the water turns anoxic and sulfidic, a chemocline no jellyfish or diatom can cross, built by purple and green sulfur bacteria living at the narrow overlap of faint deep light and rising sulfide. At the surface a bloom of diatoms and cyanobacteria feeds on sunlight and the nutrients the migrating jellyfish stir upward. This level stacks a photic surface bloom over a sharp sulfidic floor: phototrophs that must stay shallow, and an anoxygenic specialist that must straddle the light/sulfide overlap exactly where the two gradients meet, or starve on either side.",
+    "citation": "Fitt & Hofmann 1999, Jellyfish Lake jellyfish migration; Winogradsky-style chemocline stratification studies",
+    "difficulty": "hard",
+    "realWorldBasis": "Jellyfish Lake, Palau - meromictic marine lake with a sulfidic chemocline beneath a jellyfish-photosymbiont surface layer"
+  },
+  "env": {
+    "day.lengthSec": 260,
+    "day.latitude": 7,
+    "day.dayOfYear": 172,
+    "diel.tempBase": 29,
+    "diel.tempAmp": 2,
+    "diel.foodFloor": 0.4,
+    "diel.q10": 2.1,
+    "diel.waterDay.0": 20,
+    "diel.waterDay.1": 110,
+    "diel.waterDay.2": 95,
+    "diel.waterNight.0": 2,
+    "diel.waterNight.1": 14,
+    "diel.waterNight.2": 18,
+    "substrate.count": 85,
+    "substrate.sizeMin": 32,
+    "substrate.sizeMax": 180,
+    "substrate.lifeMin": 110,
+    "substrate.lifeMax": 260,
+    "substrate.driftMin": 6,
+    "substrate.driftMax": 14,
+    "cell.thrust": 18000,
+    "cell.dragRate": 55,
+    "cell.chemoRange0": 320,
+    "cell.chemoBias": 1.1,
+    "respirationBase": 0.85,
+    "column.photoRate": 9,
+    "column.chemRate": 6.5,
+    "predator.count": 5,
+    "predator.senseRange": 160,
+    "predator.metabolism": 9,
+    "phage.greenCount": 14,
+    "phage.goldCount": 3
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Algal lipid droplet",
+      "enzymeLabel": "Lipase",
+      "color": "#d8c060"
+    },
+    {
+      "index": 1,
+      "label": "Jellyfish mucus protein",
+      "enzymeLabel": "Protease",
+      "color": "#c06878"
+    },
+    {
+      "index": 2,
+      "label": "Diatom exudate sugar",
+      "enzymeLabel": "Glycosidase",
+      "color": "#70b0a8"
+    }
+  ],
+  "particles": {
+    "mucusFloc": {
+      "label": "Mucus-algal floc",
+      "mix": [
+        2,
+        5,
+        2
+      ],
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 6
+    },
+    "diatomExudate": {
+      "label": "Diatom exudate clump",
+      "mix": [
+        1,
+        1,
+        4
+      ],
+      "shape": "ellipse",
+      "squash": 0.7,
+      "weight": 4
+    },
+    "sulfideSnow": {
+      "label": "Sulfur-bacterial floc",
+      "mix": [
+        3,
+        2,
+        1
+      ],
+      "shape": "shard",
+      "weight": 3
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase",
+      "color": "#d8c060",
+      "weight": 5
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#c06878",
+      "weight": 5
+    },
+    "enzyme2": {
+      "label": "Glycosidase",
+      "color": "#70b0a8",
+      "weight": 5
+    },
+    "chemotaxis": {
+      "label": "Chemotaxis",
+      "color": "#aaffee",
+      "weight": 6
+    },
+    "antibiotic": {
+      "label": "Antibiotic",
+      "color": "#ff5555",
+      "weight": 3
+    },
+    "eps": {
+      "label": "EPS Sheath",
+      "color": "#88ccff",
+      "weight": 3
+    },
+    "crispr": {
+      "label": "CRISPR",
+      "color": "#ffcc00",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Twitching",
+      "color": "#cc88ff",
+      "weight": 2
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "mucusScavenger",
+        "label": "Mucus-floc scavenger",
+        "color": "#c08850",
+        "genome": {
+          "enzLvl": [
+            2,
+            2,
+            1
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "purpleSulfur",
+        "label": "Purple sulfur bacterium (chemocline specialist)",
+        "color": "#8c3fae",
+        "genome": {
+          "enzLvl": [
+            0,
+            0,
+            1
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false,
+          "phototroph": true,
+          "chemolithotroph": true
+        },
+        "immigrateWeight": 3
+      },
+      {
+        "id": "cyanoSurface",
+        "label": "Surface cyanobacterium",
+        "color": "#3fae6e",
+        "genome": {
+          "enzLvl": [
+            0,
+            0,
+            1
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 0,
+          "crispr": false,
+          "twitching": false,
+          "phototroph": true
+        },
+        "immigrateWeight": 3
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "surfaceDiatom",
+        "label": "Surface centric diatom",
+        "color": "#d4b86a",
+        "form": "centric",
+        "sizeUm": 40,
+        "chain": 3,
+        "count": 60
+      },
+      {
+        "id": "pennateRaft",
+        "label": "Pennate floc-grazer diatom",
+        "color": "#b8a860",
+        "form": "pennate",
+        "sizeUm": 25,
+        "chain": 2,
+        "count": 25
+      }
+    ]
+  },
+  "column": {
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 29,
+        "salinity": 34,
+        "light": 1,
+        "nutrient": 0.3
+      },
+      {
+        "depth": 0.3,
+        "tempC": 28.5,
+        "salinity": 34,
+        "light": 0.55,
+        "nutrient": 0.5
+      },
+      {
+        "depth": 0.55,
+        "tempC": 27,
+        "salinity": 35,
+        "light": 0.18,
+        "nutrient": 0.7
+      },
+      {
+        "depth": 0.75,
+        "tempC": 25,
+        "salinity": 36,
+        "light": 0.05,
+        "nutrient": 0.9
+      },
+      {
+        "depth": 1,
+        "tempC": 23,
+        "salinity": 37,
+        "light": 0,
+        "nutrient": 1
+      }
+    ],
+    "thermocline": {
+      "depth": 0.6,
+      "sharpness": 0.75
+    },
+    "chemical": {
+      "peakDepth": 0.72,
+      "spread": 0.18,
+      "strength": 0.85,
+      "color": "#7a4a9c"
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}
