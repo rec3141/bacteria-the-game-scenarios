@@ -1,0 +1,256 @@
+{
+  "meta": {
+    "title": "Snowmelt Lagoon: Nitrogen-Starved Diatoms of a Patagonian Fjord",
+    "date": "2026-10-25",
+    "lesson": "In Chilean Patagonian fjords, spring glacial meltwater floods the surface with buoyant, nitrate-poor freshwater that caps the fjord in a shallow lens. Diatoms bloom fast on the light and leftover winter nitrate, but within days they strip the lens bare of nitrogen while phosphorus and silica remain plentiful - a classic case of nitrogen limitation capping an otherwise light-rich, carbon-rich bloom. As the diatoms stall and start dying, heterotrophic bacteria specializing in protein scavenging (nitrogen-rich compounds) gain a huge competitive edge over carbohydrate specialists, because protein is now the limiting currency in the water, not sugar. This level asks the player's founder bacterium to lean hard on protease (enzyme1) to catch that nitrogen before it's gone, while diatom chains sink slowly through a stratified, cold, fresh-capped water column and die off as the bloom collapses, feeding the very community that depends on their exudates.",
+    "citation": "Gonzalez et al. 2013, Prog. Oceanogr.; Iriarte et al. studies of Chilean Patagonian fjord blooms",
+    "difficulty": "normal",
+    "realWorldBasis": "Chilean Patagonian fjord (e.g. Aysen/Reloncavi) spring glacial-meltwater-capped diatom bloom and nitrogen drawdown"
+  },
+  "env": {
+    "day.lengthSec": 260,
+    "day.latitude": -45,
+    "day.dayOfYear": 300,
+    "diel.tempBase": 7,
+    "diel.tempAmp": 2,
+    "diel.foodFloor": 0.3,
+    "diel.q10": 2.2,
+    "diel.q10RefC": 10,
+    "diel.waterDay.0": 30,
+    "diel.waterDay.1": 90,
+    "diel.waterDay.2": 80,
+    "diel.waterNight.0": 3,
+    "diel.waterNight.1": 12,
+    "diel.waterNight.2": 18,
+    "substrate.count": 85,
+    "substrate.sizeMin": 28,
+    "substrate.sizeMax": 170,
+    "substrate.lifeMin": 90,
+    "substrate.lifeMax": 220,
+    "substrate.driftMin": 6,
+    "substrate.driftMax": 14,
+    "substrate.minPerRes": 3,
+    "cell.enzymeCost": 4.5,
+    "cell.chemoBias": 1.1,
+    "respirationBase": 0.85,
+    "predator.count": 3,
+    "predator.wanderSpeed": 18,
+    "predator.chaseSpeed": 30,
+    "predator.metabolism": 7,
+    "phage.greenCount": 14,
+    "phage.goldCount": 3,
+    "column.chemRate": 3
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid droplet",
+      "enzymeLabel": "Lipase",
+      "color": "#d9b35c"
+    },
+    {
+      "index": 1,
+      "label": "Diatom protein detritus",
+      "enzymeLabel": "Protease",
+      "color": "#7fb3a0"
+    },
+    {
+      "index": 2,
+      "label": "Frustule carbohydrate coat",
+      "enzymeLabel": "Glucanase",
+      "color": "#c7d6e8"
+    }
+  ],
+  "particles": {
+    "deadDiatomClump": {
+      "label": "Dying diatom clump",
+      "mix": [
+        0.15,
+        0.65,
+        0.2
+      ],
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 6
+    },
+    "exudateFloc": {
+      "label": "Exudate floc",
+      "mix": [
+        0.1,
+        0.2,
+        0.7
+      ],
+      "shape": "shard",
+      "squash": 1,
+      "weight": 4
+    },
+    "meltSnow": {
+      "label": "Glacial marine snow",
+      "mix": [
+        0.3,
+        0.45,
+        0.25
+      ],
+      "shape": "aggregate",
+      "squash": 0.8,
+      "weight": 5
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase",
+      "color": "#d9b35c",
+      "weight": 3
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#7fb3a0",
+      "weight": 8
+    },
+    "enzyme2": {
+      "label": "Glucanase",
+      "color": "#c7d6e8",
+      "weight": 4
+    },
+    "chemotaxis": {
+      "label": "Nitrogen-seeking taxis",
+      "color": "#8fd0ff",
+      "weight": 6
+    },
+    "antibiotic": {
+      "label": "Antibiotic",
+      "color": "#e05a5a",
+      "weight": 2
+    },
+    "eps": {
+      "label": "EPS sheath",
+      "color": "#b0c4de",
+      "weight": 3
+    },
+    "crispr": {
+      "label": "CRISPR",
+      "color": "#9b59b6",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Twitching pili",
+      "color": "#f39c12",
+      "weight": 2
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "founder",
+        "label": "Nitrogen-scavenging bacterium",
+        "color": "#7fb3a0",
+        "genome": {
+          "enzLvl": [
+            1,
+            3,
+            1
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 0,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 5
+      },
+      {
+        "id": "generalist",
+        "label": "Generalist decomposer",
+        "color": "#c7d6e8",
+        "genome": {
+          "enzLvl": [
+            1,
+            1,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "thalassiosira",
+        "label": "Thalassiosira (chain diatom)",
+        "color": "#a8c8d8",
+        "form": "centric",
+        "sizeUm": 35,
+        "chain": 6,
+        "count": 70,
+        "toxin": null
+      },
+      {
+        "id": "pseudonitzschia",
+        "label": "Pseudo-nitzschia ribbon",
+        "color": "#c9a8d8",
+        "form": "pennate",
+        "sizeUm": 60,
+        "chain": 8,
+        "count": 25,
+        "toxin": {
+          "label": "Domoic acid",
+          "color": "#d060d0",
+          "radius": 60,
+          "potency": 40,
+          "life": 20
+        }
+      }
+    ]
+  },
+  "terrain": [],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 5,
+        "salinity": 8,
+        "light": 1,
+        "nutrient": 0.2
+      },
+      {
+        "depth": 0.15,
+        "tempC": 6,
+        "salinity": 15,
+        "light": 0.85,
+        "nutrient": 0.3
+      },
+      {
+        "depth": 0.4,
+        "tempC": 8,
+        "salinity": 28,
+        "light": 0.5,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 0.8,
+        "tempC": 8,
+        "salinity": 32,
+        "light": 0.15,
+        "nutrient": 0.8
+      },
+      {
+        "depth": 1,
+        "tempC": 7,
+        "salinity": 33,
+        "light": 0.05,
+        "nutrient": 0.9
+      }
+    ],
+    "thermocline": {
+      "depth": 0.3,
+      "sharpness": 0.75
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}

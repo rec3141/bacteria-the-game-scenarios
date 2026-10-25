@@ -764,6 +764,14 @@
       "file": "scenarios/daily-2026-10-24.json"
     },
     {
+      "id": "daily-2026-10-25",
+      "title": "Snowmelt Lagoon: Nitrogen-Starved Diatoms of a Patagonian Fjord",
+      "date": "2026-10-25",
+      "difficulty": "normal",
+      "realWorldBasis": "Chilean Patagonian fjord (e.g. Aysen/Reloncavi) spring glacial-meltwater-capped diatom bloom and nitrogen drawdown",
+      "file": "scenarios/daily-2026-10-25.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
