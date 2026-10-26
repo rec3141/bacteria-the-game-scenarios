@@ -1,0 +1,268 @@
+{
+  "meta": {
+    "title": "Fast Ice Breakup: Nitrogen Fixers of a Spring Melt Lead",
+    "date": "2026-10-26",
+    "lesson": "When Arctic landfast ice cracks open in spring, a 'lead' of open water forms, flooded with light but starved of fixed nitrogen after the long dark winter drew it down. Filamentous diazotrophic cyanobacteria (Nodularia-like) exploit this gap: they fix their own nitrogen from dissolved N2 rather than competing for the scarce nitrate pool, letting them bloom where ordinary phototrophs stall. Pennate diatoms released from the ice's brine channels ride the same meltwater pulse, gliding across drifting ice chips to grab what nitrate remains. The lesson: nutrient limitation shapes who wins a bloom as much as light does, and nitrogen fixation is the trick that lets some organisms ignore that limitation entirely.",
+    "citation": "Composite of landfast ice breakup studies, Arctic diazotroph blooms, and under-ice diatom-ice coupling research (e.g. Chukchi/Beaufort spring lead observations).",
+    "difficulty": "normal",
+    "realWorldBasis": "Arctic landfast ice breakup leads, spring diazotrophic cyanobacteria bloom and ice-algae release"
+  },
+  "env": {
+    "day.lengthSec": 260,
+    "day.latitude": 73,
+    "day.dayOfYear": 135,
+    "day.startHour": 7,
+    "diel.tempBase": -1.2,
+    "diel.tempAmp": 1.5,
+    "diel.foodFloor": 0.45,
+    "diel.q10": 2.2,
+    "diel.q10RefC": 5,
+    "diel.waterNight.0": 3,
+    "diel.waterNight.1": 14,
+    "diel.waterNight.2": 28,
+    "diel.waterDay.0": 30,
+    "diel.waterDay.1": 110,
+    "diel.waterDay.2": 120,
+    "diel.lightGamma": 1.3,
+    "diel.twilight": 0.4,
+    "diel.grazeNight": 0.6,
+    "cell.thrust": 15000,
+    "cell.dragRate": 55,
+    "cell.maxSpeed": 180,
+    "cell.swimCost": 0.9,
+    "cell.cystBelow": 20,
+    "cell.cystWake": 40,
+    "cell.chemoRange0": 360,
+    "cell.chemoRangePer": 170,
+    "respirationBase": 0.75,
+    "substrate.count": 80,
+    "substrate.sizeMin": 32,
+    "substrate.sizeMax": 180,
+    "substrate.lifeMin": 180,
+    "substrate.lifeMax": 340,
+    "substrate.driftMin": 5,
+    "substrate.driftMax": 12,
+    "substrate.minPerRes": 3,
+    "predator.count": 3,
+    "predator.wanderSpeed": 18,
+    "predator.chaseSpeed": 30,
+    "predator.senseRange": 140,
+    "predator.metabolism": 8,
+    "phage.greenCount": 12,
+    "phage.goldCount": 3,
+    "column.chemRate": 3.5,
+    "column.photoRate": 9
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid Droplets (algal exudate)",
+      "enzymeLabel": "Lipase",
+      "color": "#8fd1c9"
+    },
+    {
+      "index": 1,
+      "label": "Dead Diatom Protein",
+      "enzymeLabel": "Protease",
+      "color": "#c9b382"
+    },
+    {
+      "index": 2,
+      "label": "Ice-Algae Polysaccharide",
+      "enzymeLabel": "Glycanase",
+      "color": "#d7e8f0"
+    }
+  ],
+  "particles": {
+    "meltFloc": {
+      "label": "Meltwater Floc",
+      "mix": [
+        1,
+        1,
+        3
+      ],
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 6
+    },
+    "deadDiatomClump": {
+      "label": "Dead Diatom Clump",
+      "mix": [
+        1,
+        3,
+        1
+      ],
+      "shape": "shard",
+      "squash": 1,
+      "weight": 4
+    },
+    "brineExudate": {
+      "label": "Brine Channel Exudate",
+      "mix": [
+        2,
+        1,
+        2
+      ],
+      "shape": "ellipse",
+      "squash": 0.6,
+      "weight": 3
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase",
+      "color": "#8fd1c9",
+      "weight": 3
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#c9b382",
+      "weight": 4
+    },
+    "enzyme2": {
+      "label": "Glycanase",
+      "color": "#d7e8f0",
+      "weight": 6
+    },
+    "chemotaxis": {
+      "label": "Nitrate Seeking",
+      "color": "#6fa8dc",
+      "weight": 7
+    },
+    "antibiotic": {
+      "label": "Bacteriocin",
+      "color": "#e06666",
+      "weight": 2
+    },
+    "eps": {
+      "label": "Mucilage Sheath",
+      "color": "#a6d1e6",
+      "weight": 4
+    },
+    "crispr": {
+      "label": "CRISPR Immunity",
+      "color": "#999999",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Twitching Pili",
+      "color": "#b48ead",
+      "weight": 2
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "nodularia_like",
+        "label": "Diazotrophic Filament (Nodularia-like)",
+        "color": "#5fae7a",
+        "genome": {
+          "enzLvl": [
+            1,
+            1,
+            3
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 2,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "scavenger_copiotroph",
+        "label": "Opportunist Copiotroph",
+        "color": "#b08968",
+        "genome": {
+          "enzLvl": [
+            2,
+            3,
+            1
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 1,
+          "crispr": true,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "fragilariopsis_ice",
+        "label": "Fragilariopsis (ice-released pennate)",
+        "color": "#cde8f5",
+        "form": "pennate",
+        "sizeUm": 45,
+        "chain": 6,
+        "count": 60
+      },
+      {
+        "id": "thalassiosira_bloom",
+        "label": "Thalassiosira (lead bloomer)",
+        "color": "#aad4e0",
+        "form": "centric",
+        "sizeUm": 30,
+        "chain": 2,
+        "count": 40
+      }
+    ]
+  },
+  "terrain": [
+    {
+      "at": "top",
+      "thickness": 160,
+      "color": "#dff0f7",
+      "label": "Landfast Sea Ice (cracked lead edge)",
+      "roughness": 0.6,
+      "porosity": 0.45,
+      "poreSize": 40,
+      "featureSize": 300,
+      "spires": 0.15,
+      "spireHeight": 200,
+      "spireWidth": 60,
+      "warp": 0.2
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": -1.5,
+        "salinity": 28,
+        "light": 0.9,
+        "nutrient": 0.25
+      },
+      {
+        "depth": 0.3,
+        "tempC": -1.3,
+        "salinity": 30,
+        "light": 0.6,
+        "nutrient": 0.35
+      },
+      {
+        "depth": 0.6,
+        "tempC": -1,
+        "salinity": 32,
+        "light": 0.25,
+        "nutrient": 0.5
+      },
+      {
+        "depth": 1,
+        "tempC": -0.5,
+        "salinity": 33,
+        "light": 0.05,
+        "nutrient": 0.65
+      }
+    ],
+    "thermocline": {
+      "depth": 0.5,
+      "sharpness": 0.4
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}
