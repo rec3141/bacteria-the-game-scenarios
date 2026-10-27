@@ -780,6 +780,14 @@
       "file": "scenarios/daily-2026-10-26.json"
     },
     {
+      "id": "daily-2026-10-27",
+      "title": "Squid Fall Redux: Chitin Rush at Depth",
+      "date": "2026-10-27",
+      "difficulty": "hard",
+      "realWorldBasis": "Gulf of California jumbo squid carcass falls and chitinolytic Vibrio/Pseudoalteromonas bloom-and-crash succession",
+      "file": "scenarios/daily-2026-10-27.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",

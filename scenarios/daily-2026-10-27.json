@@ -1,0 +1,231 @@
+{
+  "actions": {
+    "enzyme0": {
+      "label": "Chitobiase",
+      "color": "#55c2a8",
+      "weight": 6
+    },
+    "enzyme1": {
+      "label": "Collagenase",
+      "color": "#d98f4a",
+      "weight": 4
+    },
+    "enzyme2": {
+      "label": "Glycogenase",
+      "color": "#7fa6d9",
+      "weight": 2
+    },
+    "chemotaxis": {
+      "label": "Bioluminescent Taxis",
+      "color": "#8fffe0",
+      "weight": 5
+    },
+    "antibiotic": {
+      "label": "Pyocin Burst",
+      "color": "#c04ad0",
+      "weight": 3
+    },
+    "eps": {
+      "label": "Mucoid Sheath",
+      "color": "#b8d8c8",
+      "weight": 3
+    },
+    "crispr": {
+      "label": "CRISPR Immunity",
+      "color": "#ffffff",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Pilus Twitch",
+      "color": "#ffd166",
+      "weight": 2
+    }
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 4,
+        "salinity": 34.5,
+        "light": 0.3,
+        "nutrient": 0.3
+      },
+      {
+        "depth": 0.3,
+        "tempC": 3.5,
+        "salinity": 34.7,
+        "light": 0.08,
+        "nutrient": 0.5
+      },
+      {
+        "depth": 0.6,
+        "tempC": 3,
+        "salinity": 34.8,
+        "light": 0.01,
+        "nutrient": 0.8
+      },
+      {
+        "depth": 1,
+        "tempC": 2.5,
+        "salinity": 34.9,
+        "light": 0,
+        "nutrient": 1
+      }
+    ],
+    "thermocline": {
+      "depth": 0.4,
+      "sharpness": 0.5
+    }
+  },
+  "env": {
+    "day.lengthSec": 300,
+    "day.latitude": 27,
+    "day.dayOfYear": 266,
+    "diel.tempBase": 3.5,
+    "diel.tempAmp": 1.5,
+    "diel.foodFloor": 0.5,
+    "diel.q10": 2.3,
+    "diel.q10RefC": 10,
+    "diel.waterNight.0": 2,
+    "diel.waterNight.1": 6,
+    "diel.waterNight.2": 14,
+    "diel.waterDay.0": 10,
+    "diel.waterDay.1": 30,
+    "diel.waterDay.2": 42,
+    "substrate.count": 95,
+    "substrate.sizeMin": 40,
+    "substrate.sizeMax": 220,
+    "substrate.sizeExp": 1.3,
+    "substrate.lifeMin": 60,
+    "substrate.lifeMax": 150,
+    "substrate.dissolveTime": 6,
+    "substrate.driftMin": 4,
+    "substrate.driftMax": 12,
+    "substrate.minPerRes": 4,
+    "enzyme.maxRadius": 30,
+    "enzyme.life": 6,
+    "cell.chemoRange0": 420,
+    "cell.chemoRangePer": 180,
+    "cell.chemoBias": 1.2,
+    "cell.uptake": 18,
+    "cell.swimCost": 1.5,
+    "respirationBase": 0.6,
+    "predator.count": 6,
+    "predator.senseRange": 140,
+    "predator.wanderSpeed": 18,
+    "predator.chaseSpeed": 30,
+    "predator.metabolism": 7,
+    "phage.greenCount": 26,
+    "phage.goldCount": 3,
+    "phage.hostTolerance": 3,
+    "phage.burst.0": 6,
+    "phage.burst.1": 14,
+    "phage.latent.0": 6,
+    "phage.latent.1": 11,
+    "eps.threatRange": 120
+  },
+  "meta": {
+    "title": "Squid Fall Redux: Chitin Rush at Depth",
+    "date": "2026-10-27",
+    "lesson": "When a jumbo squid carcass sinks into the cold dim water of the Gulf of California, its chitinous beak and pen become a sudden feast. Copiotrophic bacteria like Vibrio and Pseudoalteromonas race to colonize the fall, deploying chitinases to crack the polymer into sugars they can absorb. The bloom is explosive but short-lived: as bacterial density spikes, so does phage pressure, and the population can crash within days to a kill-the-winner cycle. This level asks you to exploit a chitin-dominated particle field fast, before viral lysis and patient grazers catch up with your success.",
+    "citation": "Simplified from observations of squid-fall microbial succession studies in the Gulf of California (Dosidicus gigas carcasses, 600-900m).",
+    "difficulty": "hard",
+    "realWorldBasis": "Gulf of California jumbo squid carcass falls and chitinolytic Vibrio/Pseudoalteromonas bloom-and-crash succession"
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "founder",
+        "label": "Pseudoalteromonas sp.",
+        "color": "#55c2a8",
+        "genome": {
+          "enzLvl": [
+            3,
+            1,
+            1
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "vibrio",
+        "label": "Vibrio splendidus",
+        "color": "#d98f4a",
+        "genome": {
+          "enzLvl": [
+            2,
+            2,
+            1
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 0,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 4
+      }
+    ]
+  },
+  "particles": {
+    "beak": {
+      "label": "Chitin Beak Fragment",
+      "mix": [
+        85,
+        10,
+        5
+      ],
+      "shape": "shard",
+      "weight": 7
+    },
+    "mantle": {
+      "label": "Mantle Tissue",
+      "mix": [
+        10,
+        70,
+        20
+      ],
+      "shape": "aggregate",
+      "weight": 4
+    },
+    "slick": {
+      "label": "Lipid Slick",
+      "mix": [
+        20,
+        10,
+        70
+      ],
+      "shape": "ellipse",
+      "squash": 0.6,
+      "weight": 2
+    }
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Chitin (beak/pen)",
+      "enzymeLabel": "Chitobiase",
+      "color": "#55c2a8"
+    },
+    {
+      "index": 1,
+      "label": "Mantle Protein",
+      "enzymeLabel": "Collagenase",
+      "color": "#d98f4a"
+    },
+    {
+      "index": 2,
+      "label": "Lipid Reserve",
+      "enzymeLabel": "Glycogenase",
+      "color": "#7fa6d9"
+    }
+  ],
+  "schema": "bacteria-scenario",
+  "version": 1
+}
