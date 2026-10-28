@@ -788,6 +788,14 @@
       "file": "scenarios/daily-2026-10-27.json"
     },
     {
+      "id": "daily-2026-10-28",
+      "title": "Shieldwater: Giant Tube Worm Symbiont Handoff at 9°N East Pacific Rise",
+      "date": "2026-10-28",
+      "difficulty": "hard",
+      "realWorldBasis": "9°N East Pacific Rise hydrothermal vent field, Riftia pachyptila tube worm bushes and free-living Candidatus Endoriftia persephone symbiont population in the surrounding diffuse-flow water",
+      "file": "scenarios/daily-2026-10-28.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",

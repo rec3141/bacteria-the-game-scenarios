@@ -1,0 +1,245 @@
+{
+  "meta": {
+    "title": "Shieldwater: Giant Tube Worm Symbiont Handoff at 9°N East Pacific Rise",
+    "date": "2026-10-28",
+    "lesson": "Riftia pachyptila tube worms have no gut: their trophosome is packed with thiolithotrophic bacteria that fix carbon from hydrothermal sulfide using oxygen the worm carries down from above. Firsthand symbiont acquisition happens anew each generation - free-living Candidatus Endoriftia percolate up through the fresh basalt, and the larva must find the narrow band where vent sulfide still reaches but the water isn't yet anoxic or scalding. This level puts you in that band: a chemosynthetic founder must hold position in a thin overlap zone between a rising sulfide plume and the oxygen it needs, while free-floating competitor symbionts stream past toward the same worms. Too high and the sulfide is gone; too low and the heat and anoxia both spike.",
+    "citation": "Nussbaumer et al. 2006 Nature; Beinart et al. 2012 ISME J (Riftia symbiont colonization)",
+    "difficulty": "hard",
+    "realWorldBasis": "9°N East Pacific Rise hydrothermal vent field, Riftia pachyptila tube worm bushes and free-living Candidatus Endoriftia persephone symbiont population in the surrounding diffuse-flow water"
+  },
+  "env": {
+    "day.latitude": 9,
+    "day.dayOfYear": 172,
+    "day.lengthSec": 260,
+    "diel.tempBase": 12,
+    "diel.tempAmp": 3,
+    "diel.foodFloor": 0.5,
+    "diel.q10": 2.4,
+    "diel.waterNight.0": 3,
+    "diel.waterNight.1": 4,
+    "diel.waterNight.2": 10,
+    "diel.waterDay.0": 10,
+    "diel.waterDay.1": 14,
+    "diel.waterDay.2": 20,
+    "column.chemRate": 7.5,
+    "column.photoRate": 0.8,
+    "substrate.count": 70,
+    "substrate.sizeMin": 32,
+    "substrate.sizeMax": 170,
+    "substrate.lifeMin": 90,
+    "substrate.lifeMax": 220,
+    "substrate.driftMin": 5,
+    "substrate.driftMax": 14,
+    "cell.uptake": 11,
+    "cell.startEnergy": 95,
+    "cell.divideThreshold": 165,
+    "cell.swimCost": 1.6,
+    "respirationBase": 1.05,
+    "cell.cystBelow": 18,
+    "cell.cystWake": 50,
+    "predator.count": 3,
+    "predator.senseRange": 140,
+    "predator.metabolism": 9,
+    "phage.greenCount": 10,
+    "phage.goldCount": 3,
+    "phage.goldMinDist": 500
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid floc from bacterial mat shreds",
+      "enzymeLabel": "Lipase",
+      "color": "#7a5230"
+    },
+    {
+      "index": 1,
+      "label": "Worm plume tissue debris",
+      "enzymeLabel": "Protease",
+      "color": "#b5493f"
+    },
+    {
+      "index": 2,
+      "label": "Detrital exopolymer strands",
+      "enzymeLabel": "Glycanase",
+      "color": "#c9a227"
+    }
+  ],
+  "particles": {
+    "flocDrift": {
+      "label": "Mat floc clump",
+      "mix": [
+        5,
+        2,
+        1
+      ],
+      "shape": "aggregate",
+      "weight": 5
+    },
+    "tissueBits": {
+      "label": "Plume tissue shred",
+      "mix": [
+        1,
+        5,
+        1
+      ],
+      "shape": "shard",
+      "weight": 4
+    },
+    "epsStrand": {
+      "label": "EPS strand wisp",
+      "mix": [
+        1,
+        1,
+        4
+      ],
+      "shape": "ellipse",
+      "squash": 0.4,
+      "weight": 3
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase",
+      "color": "#c98b4a",
+      "weight": 3
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#d9574a",
+      "weight": 3
+    },
+    "enzyme2": {
+      "label": "Glycanase",
+      "color": "#d1b23a",
+      "weight": 3
+    },
+    "chemotaxis": {
+      "label": "Sulfide-seeking",
+      "color": "#5ad1c8",
+      "weight": 8
+    },
+    "antibiotic": {
+      "label": "Bacteriocin",
+      "color": "#9b4fd1",
+      "weight": 2
+    },
+    "eps": {
+      "label": "Symbiont sheath",
+      "color": "#e0d49a",
+      "weight": 4
+    },
+    "crispr": {
+      "label": "CRISPR immunity",
+      "color": "#4fd17e",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Pilus crawl",
+      "color": "#4f8fd1",
+      "weight": 3
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "endoriftia",
+        "label": "Candidatus Endoriftia persephone",
+        "color": "#5ad1c8",
+        "genome": {
+          "enzLvl": [
+            1,
+            1,
+            2
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false,
+          "chemolithotroph": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "rival_symbiont",
+        "label": "Rival free-living Endoriftia strain",
+        "color": "#d18a5a",
+        "genome": {
+          "enzLvl": [
+            1,
+            0,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 0,
+          "crispr": false,
+          "twitching": false,
+          "chemolithotroph": true
+        },
+        "immigrateWeight": 4
+      }
+    ]
+  },
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 260,
+      "color": "#3a2a20",
+      "label": "Fresh basalt rubble with diffuse-flow cracks",
+      "roughness": 0.65,
+      "porosity": 0.4,
+      "poreSize": 40,
+      "featureSize": 300,
+      "spires": 0.35,
+      "spireHeight": 400,
+      "spireWidth": 70,
+      "warp": 0.3
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 3,
+        "salinity": 34.7,
+        "light": 0,
+        "nutrient": 0.2
+      },
+      {
+        "depth": 0.5,
+        "tempC": 6,
+        "salinity": 34.8,
+        "light": 0,
+        "nutrient": 0.4
+      },
+      {
+        "depth": 0.85,
+        "tempC": 14,
+        "salinity": 35,
+        "light": 0,
+        "nutrient": 0.8
+      },
+      {
+        "depth": 1,
+        "tempC": 28,
+        "salinity": 35.5,
+        "light": 0,
+        "nutrient": 1
+      }
+    ],
+    "thermocline": {
+      "depth": 0.85,
+      "sharpness": 0.8
+    },
+    "chemical": {
+      "peakDepth": 0.88,
+      "spread": 0.1,
+      "strength": 0.95,
+      "color": "#e8c84a"
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}
