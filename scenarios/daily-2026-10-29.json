@@ -1,0 +1,280 @@
+{
+  "actions": {
+    "enzyme0": {
+      "label": "Lignocellulase",
+      "color": "#8b5a2b",
+      "weight": 6
+    },
+    "enzyme1": {
+      "label": "Peptidase",
+      "color": "#b03060",
+      "weight": 3
+    },
+    "enzyme2": {
+      "label": "Pectinase",
+      "color": "#4a7a3a",
+      "weight": 7
+    },
+    "chemotaxis": {
+      "label": "Wood-cue taxis",
+      "color": "#c9a66b",
+      "weight": 5
+    },
+    "antibiotic": {
+      "label": "Bacteriocin burst",
+      "color": "#9932cc",
+      "weight": 4
+    },
+    "eps": {
+      "label": "Biofilm matrix",
+      "color": "#556b2f",
+      "weight": 5
+    },
+    "crispr": {
+      "label": "CRISPR immunity",
+      "color": "#00ced1",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Pilus twitch",
+      "color": "#ff8c00",
+      "weight": 3
+    }
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 4,
+        "salinity": 35,
+        "light": 0.3,
+        "nutrient": 0.4
+      },
+      {
+        "depth": 300,
+        "tempC": 3.5,
+        "salinity": 35,
+        "light": 0.05,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 900,
+        "tempC": 3,
+        "salinity": 35,
+        "light": 0,
+        "nutrient": 0.8
+      },
+      {
+        "depth": 1800,
+        "tempC": 2.8,
+        "salinity": 35,
+        "light": 0,
+        "nutrient": 1
+      }
+    ],
+    "thermocline": {
+      "depth": 400,
+      "sharpness": 0.5
+    }
+  },
+  "env": {
+    "day.lengthSec": 300,
+    "day.latitude": 19,
+    "day.dayOfYear": 200,
+    "diel.tempBase": 3,
+    "diel.tempAmp": 0.5,
+    "diel.foodFloor": 0.5,
+    "diel.q10": 2.3,
+    "diel.q10RefC": 20,
+    "diel.waterNight.0": 2,
+    "diel.waterNight.1": 4,
+    "diel.waterNight.2": 10,
+    "diel.waterDay.0": 10,
+    "diel.waterDay.1": 22,
+    "diel.waterDay.2": 28,
+    "substrate.count": 110,
+    "substrate.sizeMin": 60,
+    "substrate.sizeMax": 260,
+    "substrate.sizeExp": 1.1,
+    "substrate.lifeMin": 200,
+    "substrate.lifeMax": 420,
+    "substrate.driftMin": 4,
+    "substrate.driftMax": 10,
+    "substrate.minPerRes": 3,
+    "substrate.carveRate": 6,
+    "substrate.bloomEvery": 0.5,
+    "enzyme.maxRadius": 30,
+    "enzyme.life": 6,
+    "cell.radius": 5,
+    "cell.baseHalf": 9,
+    "cell.maxHalf": 24,
+    "cell.thrust": 15000,
+    "cell.dragRate": 55,
+    "cell.maxSpeed": 180,
+    "cell.uptake": 11,
+    "cell.startEnergy": 95,
+    "cell.divideThreshold": 165,
+    "cell.swimCost": 1,
+    "cell.enzymeCost": 3.5,
+    "cell.cystBelow": 18,
+    "cell.cystWake": 50,
+    "cell.chemoRange0": 420,
+    "cell.chemoRangePer": 180,
+    "cell.chemoBias": 1.1,
+    "respirationBase": 0.55,
+    "predator.count": 3,
+    "predator.senseRange": 140,
+    "predator.wanderSpeed": 16,
+    "predator.chaseSpeed": 28,
+    "predator.metabolism": 7,
+    "predator.mealEnergy": 50,
+    "phage.greenCount": 10,
+    "phage.goldCount": 3,
+    "phage.goldMinDist": 700,
+    "eps.cost": 3.5,
+    "eps.maxCount": 260,
+    "eps.threatRange": 110,
+    "nutrient.life": 22,
+    "nutrient.radius": 3.6
+  },
+  "meta": {
+    "title": "Wood Fall at Depth: Xylophaga and the Cellulose Rush of the Gulf of Mexico",
+    "date": "2026-10-29",
+    "lesson": "When a storm-felled tree or a shipwreck's timber sinks into deep water, it becomes a sudden island of concentrated carbon in an otherwise carbon-starved deep sea. Wood-boring bivalves (Xylophaga) and their gut symbionts begin the attack, but it is cellulolytic and pectinolytic bacteria that unlock the lignocellulose matrix itself, releasing sugars that fuel a dense, short-lived bacterial bloom before sulfate reducers take over the bored-out, anoxic interior. This level re-skins the three digestive enzymes as a lignocellulose-degradation suite: lignocellulase (class 0) and pectinase (class 2) are the workhorses that crack the wood's structural polymers, while peptidase (class 1) scavenges the comparatively rare proteinaceous bits (symbiont tissue, biofilm). Founders need strong carbohydrate-class digestion to break in, mirroring how real wood-fall colonizers specialize on structural carbohydrates rather than protein. The cold, dim, food-rich-but-tough deep water is conveyed through low light, low temperature, slow metabolism (low respirationBase, Q10), slow-drifting long-lived particles, and sparse, low-energy grazers -- a patient, methodical dig into a hard substrate rather than a frantic chase.",
+    "citation": "Based on wood-fall ecology studies (e.g., Bienhold et al. 2013, Gulf of Mexico wood-fall experiments; Xylophaga/Deshayesiella wood-boring bivalve communities)",
+    "difficulty": "normal",
+    "realWorldBasis": "Sunken wood-fall microbial succession, Gulf of Mexico deep sea, ~900-1800m depth"
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "cellulolytic_founder",
+        "label": "Wood-Boring Cellulolytic Bacterium",
+        "color": "#a0783c",
+        "genome": {
+          "enzLvl": [
+            3,
+            1,
+            4
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 1,
+          "eps": 2,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 8
+      },
+      {
+        "id": "proteolytic_scavenger",
+        "label": "Symbiont-Tissue Scavenger",
+        "color": "#b03060",
+        "genome": {
+          "enzLvl": [
+            1,
+            3,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 2,
+          "eps": 1,
+          "crispr": true,
+          "twitching": false
+        },
+        "immigrateWeight": 4
+      },
+      {
+        "id": "sulfidic_latecomer",
+        "label": "Sulfate-Reducing Latecomer",
+        "color": "#4b3b5c",
+        "genome": {
+          "enzLvl": [
+            2,
+            1,
+            3
+          ],
+          "chemoLevel": 0,
+          "antibiotic": 0,
+          "eps": 3,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      }
+    ]
+  },
+  "particles": {
+    "wood_chunk": {
+      "label": "Lignocellulose Chunk",
+      "mix": [
+        0.15,
+        0.15,
+        0.7
+      ],
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 7
+    },
+    "bark_shard": {
+      "label": "Bark Shard",
+      "mix": [
+        0.1,
+        0.1,
+        0.8
+      ],
+      "shape": "shard",
+      "squash": 0.6,
+      "weight": 5
+    },
+    "symbiont_tissue": {
+      "label": "Bivalve Symbiont Tissue Clump",
+      "mix": [
+        0.2,
+        0.65,
+        0.15
+      ],
+      "shape": "ellipse",
+      "squash": 0.7,
+      "weight": 3
+    }
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid Residue",
+      "enzymeLabel": "Lignocellulase (lipid-adjacent)",
+      "color": "#c49a6c"
+    },
+    {
+      "index": 1,
+      "label": "Symbiont Protein",
+      "enzymeLabel": "Peptidase",
+      "color": "#b03060"
+    },
+    {
+      "index": 2,
+      "label": "Structural Cellulose/Lignin",
+      "enzymeLabel": "Pectinase/Cellulase",
+      "color": "#4a7a3a"
+    }
+  ],
+  "schema": "bacteria-scenario",
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 140,
+      "color": "#3a2a1e",
+      "label": "Sunken Timber and Sediment",
+      "roughness": 0.6,
+      "porosity": 0.4,
+      "poreSize": 30,
+      "featureSize": 300,
+      "spires": 0,
+      "spireHeight": 0,
+      "spireWidth": 40,
+      "warp": 0.5
+    }
+  ],
+  "version": 1
+}
