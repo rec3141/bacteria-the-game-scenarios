@@ -804,6 +804,14 @@
       "file": "scenarios/daily-2026-10-29.json"
     },
     {
+      "id": "daily-2026-10-30",
+      "title": "Methane Bubble Curtain: Seep Microbes of the Cascadia Margin",
+      "date": "2026-10-30",
+      "difficulty": "hard",
+      "realWorldBasis": "Hydrate Ridge methane seep, Cascadia Margin, offshore Oregon, ~780m depth",
+      "file": "scenarios/daily-2026-10-30.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
