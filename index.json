@@ -812,6 +812,14 @@
       "file": "scenarios/daily-2026-10-30.json"
     },
     {
+      "id": "daily-2026-10-31",
+      "title": "Nitrogen in the Dark: Thaumarchaeota of the Mesopelagic Nitracline",
+      "date": "2026-10-31",
+      "difficulty": "hard",
+      "realWorldBasis": "Mesopelagic ammonia-oxidizing archaea (Nitrosopumilus-type Thaumarchaeota) dominating nitrification below the photic zone, e.g. North Pacific water column studies",
+      "file": "scenarios/daily-2026-10-31.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",

@@ -1,0 +1,253 @@
+{
+  "meta": {
+    "title": "Nitrogen in the Dark: Thaumarchaeota of the Mesopelagic Nitracline",
+    "date": "2026-10-31",
+    "lesson": "Below the sunlit surface, most ammonia oxidation in the ocean is not done by bacteria but by ammonia-oxidizing archaea (Thaumarchaeota, e.g. Nitrosopumilus maritimus), which fix carbon using energy from oxidizing ammonia to nitrite in cold, dark, nutrient-rich deep water. This level models that chemolithotrophic lifestyle directly with the chemosynthesis primitive rather than digestion: the founder organism draws energy from an ammonia-rich band at mid-depth instead of eating particles, and must stay parked in that band or starve. Above it, sinking organic matter (marine snow, diatom frustules) feeds ordinary heterotrophs and protist grazers that drift down from the photic zone. The lesson is about niche partitioning by depth and energy source: photic-zone life runs on light and particulate food, archaeal nitrifiers run on a chemical plume that peaks where light has vanished, and the two economies only lightly overlap.",
+    "citation": "Francis et al. 2005 PNAS; Karner, DeLong & Karl 2001 Nature (archaeal dominance of mesopelagic plankton)",
+    "difficulty": "hard",
+    "realWorldBasis": "Mesopelagic ammonia-oxidizing archaea (Nitrosopumilus-type Thaumarchaeota) dominating nitrification below the photic zone, e.g. North Pacific water column studies"
+  },
+  "env": {
+    "day.lengthSec": 300,
+    "day.latitude": 32,
+    "day.dayOfYear": 80,
+    "diel.tempBase": 6,
+    "diel.tempAmp": 1.5,
+    "diel.foodFloor": 0.5,
+    "diel.q10": 2.2,
+    "diel.q10RefC": 6,
+    "diel.waterNight.0": 1,
+    "diel.waterNight.1": 4,
+    "diel.waterNight.2": 10,
+    "diel.waterDay.0": 6,
+    "diel.waterDay.1": 20,
+    "diel.waterDay.2": 34,
+    "diel.lightGamma": 3.2,
+    "diel.twilight": 0.1,
+    "column.chemRate": 6.5,
+    "column.photoRate": 5,
+    "substrate.count": 70,
+    "substrate.sizeMin": 28,
+    "substrate.sizeMax": 160,
+    "substrate.lifeMin": 160,
+    "substrate.lifeMax": 340,
+    "substrate.driftMin": 4,
+    "substrate.driftMax": 10,
+    "cell.startEnergy": 95,
+    "cell.divideThreshold": 165,
+    "cell.uptake": 11,
+    "respirationBase": 0.6,
+    "cell.cystBelow": 18,
+    "cell.cystWake": 40,
+    "cell.cystMetab": 0.025,
+    "cell.chemoRange0": 360,
+    "cell.chemoRangePer": 160,
+    "predator.count": 3,
+    "predator.wanderSpeed": 18,
+    "predator.chaseSpeed": 30,
+    "predator.senseRange": 140,
+    "predator.metabolism": 7,
+    "phage.greenCount": 10,
+    "phage.goldCount": 3,
+    "phage.goldMinDist": 700
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid-rich marine snow",
+      "enzymeLabel": "Lipase",
+      "color": "#8a7148"
+    },
+    {
+      "index": 1,
+      "label": "Diatom frustule debris",
+      "enzymeLabel": "Protease",
+      "color": "#c7b299"
+    },
+    {
+      "index": 2,
+      "label": "Exopolymer flocs",
+      "enzymeLabel": "Glycosidase",
+      "color": "#5a7a6a"
+    }
+  ],
+  "particles": {
+    "snow1": {
+      "label": "Sinking marine snow",
+      "mix": [
+        0.4,
+        0.35,
+        0.25
+      ],
+      "shape": "aggregate",
+      "weight": 6
+    },
+    "frustule": {
+      "label": "Dead diatom frustule",
+      "mix": [
+        0.1,
+        0.6,
+        0.3
+      ],
+      "shape": "shard",
+      "weight": 3
+    },
+    "floc": {
+      "label": "Mucilage floc",
+      "mix": [
+        0.2,
+        0.2,
+        0.6
+      ],
+      "shape": "ellipse",
+      "squash": 0.6,
+      "weight": 4
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase release",
+      "color": "#a08050",
+      "weight": 3
+    },
+    "enzyme1": {
+      "label": "Protease release",
+      "color": "#cfa06a",
+      "weight": 3
+    },
+    "enzyme2": {
+      "label": "Glycosidase release",
+      "color": "#6fae8e",
+      "weight": 3
+    },
+    "chemotaxis": {
+      "label": "Ammonia-gradient taxis",
+      "color": "#3fae7a",
+      "weight": 6
+    },
+    "antibiotic": {
+      "label": "Antibiotic",
+      "color": "#b03030",
+      "weight": 2
+    },
+    "eps": {
+      "label": "Mucus sheath",
+      "color": "#7090a0",
+      "weight": 3
+    },
+    "crispr": {
+      "label": "CRISPR immunity",
+      "color": "#9060c0",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Twitching motility",
+      "color": "#c08030",
+      "weight": 1
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "nitrosopumilus",
+        "label": "Nitrosopumilus-type ammonia oxidizer",
+        "color": "#3fcf9f",
+        "genome": {
+          "enzLvl": [
+            0,
+            0,
+            1
+          ],
+          "chemoLevel": 3,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false,
+          "chemolithotroph": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "copiotroph",
+        "label": "Opportunist heterotroph",
+        "color": "#d8a040",
+        "genome": {
+          "enzLvl": [
+            2,
+            2,
+            1
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 0,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "sinking_centric",
+        "label": "Senescent centric diatom",
+        "color": "#8899aa",
+        "form": "centric",
+        "sizeUm": 45,
+        "chain": 2,
+        "count": 30
+      }
+    ]
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 14,
+        "salinity": 35,
+        "light": 1,
+        "nutrient": 0.2
+      },
+      {
+        "depth": 0.3,
+        "tempC": 10,
+        "salinity": 35,
+        "light": 0.4,
+        "nutrient": 0.4
+      },
+      {
+        "depth": 0.55,
+        "tempC": 7,
+        "salinity": 35,
+        "light": 0.05,
+        "nutrient": 0.7
+      },
+      {
+        "depth": 0.75,
+        "tempC": 6,
+        "salinity": 35,
+        "light": 0,
+        "nutrient": 0.9
+      },
+      {
+        "depth": 1,
+        "tempC": 5,
+        "salinity": 35,
+        "light": 0,
+        "nutrient": 1
+      }
+    ],
+    "thermocline": {
+      "depth": 0.3,
+      "sharpness": 0.7
+    },
+    "chemical": {
+      "peakDepth": 0.75,
+      "spread": 0.15,
+      "strength": 0.9,
+      "color": "#4fd8a0"
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}
