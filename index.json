@@ -820,6 +820,14 @@
       "file": "scenarios/daily-2026-10-31.json"
     },
     {
+      "id": "daily-2026-11-01",
+      "title": "Baltic Filament Bloom: Nodularia's Buoyancy Trap at the Gotland Deep",
+      "date": "2026-11-01",
+      "difficulty": "normal",
+      "realWorldBasis": "Central Baltic Sea (Gotland Deep) summer Nodularia spumigena surface cyanobacterial bloom",
+      "file": "scenarios/daily-2026-11-01.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",

@@ -1,0 +1,232 @@
+{
+  "meta": {
+    "title": "Baltic Filament Bloom: Nodularia's Buoyancy Trap at the Gotland Deep",
+    "date": "2026-11-01",
+    "lesson": "In late summer the central Baltic Sea grows warm and strongly stratified. Nitrogen runs out near the surface while phosphorus still leaks up from anoxic deep water, and the nitrogen-fixing cyanobacterium Nodularia spumigena exploits the gap: its gas vesicles let it float up into bright, warm, nitrogen-poor surface water where it fixes its own nitrogen from N2 instead of competing for scarce nitrate. The result is a visible surface slick. This level puts the player in that slick: light and warmth are abundant at the surface but food particles are nitrogen-starved carbohydrate/lipid motes, so a founder cell needs chemotaxis to track the thin protein plume rising off the thermocline rather than relying on surface motes alone. Grazers are sluggish in the warm but brackish water, and the water itself is tinted the dull yellow-green of an August cyanobacteria slick.",
+    "citation": "Baltic Sea Nodularia spumigena summer surface blooms; Baltic Monitoring Programme / HELCOM observations",
+    "difficulty": "normal",
+    "realWorldBasis": "Central Baltic Sea (Gotland Deep) summer Nodularia spumigena surface cyanobacterial bloom"
+  },
+  "env": {
+    "day.latitude": 57,
+    "day.dayOfYear": 210,
+    "day.lengthSec": 260,
+    "diel.tempBase": 18,
+    "diel.tempAmp": 4,
+    "diel.foodFloor": 0.3,
+    "diel.q10": 2.2,
+    "diel.waterDay.0": 60,
+    "diel.waterDay.1": 86,
+    "diel.waterDay.2": 32,
+    "diel.waterNight.0": 6,
+    "diel.waterNight.1": 14,
+    "diel.waterNight.2": 10,
+    "diel.goldTint": 0.22,
+    "substrate.count": 70,
+    "substrate.sizeMin": 26,
+    "substrate.sizeMax": 160,
+    "substrate.lifeMin": 90,
+    "substrate.lifeMax": 220,
+    "substrate.driftMin": 6,
+    "substrate.driftMax": 14,
+    "substrate.minPerRes": 3,
+    "cell.chemoRange0": 360,
+    "cell.chemoRangePer": 170,
+    "cell.chemoBias": 1.1,
+    "cell.uptake": 12,
+    "cell.swimCost": 1,
+    "respirationBase": 0.75,
+    "predator.count": 3,
+    "predator.wanderSpeed": 18,
+    "predator.chaseSpeed": 32,
+    "predator.senseRange": 140,
+    "predator.metabolism": 8,
+    "column.chemRate": 3,
+    "column.photoRate": 10
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid droplet",
+      "enzymeLabel": "Lipase",
+      "color": "#c9b45a"
+    },
+    {
+      "index": 1,
+      "label": "Deep protein plume",
+      "enzymeLabel": "Protease",
+      "color": "#7fae7a"
+    },
+    {
+      "index": 2,
+      "label": "Carbohydrate flake",
+      "enzymeLabel": "Glycosidase",
+      "color": "#d7cf8e"
+    }
+  ],
+  "particles": {
+    "slick0": {
+      "label": "Surface lipid mote",
+      "mix": [
+        6,
+        1,
+        3
+      ],
+      "shape": "ellipse",
+      "squash": 0.6,
+      "weight": 5
+    },
+    "plume1": {
+      "label": "Thermocline protein wisp",
+      "mix": [
+        1,
+        6,
+        1
+      ],
+      "shape": "shard",
+      "weight": 4
+    },
+    "carb2": {
+      "label": "Carbohydrate flake",
+      "mix": [
+        2,
+        1,
+        7
+      ],
+      "shape": "aggregate",
+      "weight": 3
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase burst",
+      "color": "#c9b45a",
+      "weight": 4
+    },
+    "enzyme1": {
+      "label": "Protease burst",
+      "color": "#7fae7a",
+      "weight": 6
+    },
+    "enzyme2": {
+      "label": "Glycosidase burst",
+      "color": "#d7cf8e",
+      "weight": 3
+    },
+    "chemotaxis": {
+      "label": "Gas-vesicle buoyancy steer",
+      "color": "#e8e0a0",
+      "weight": 7
+    },
+    "antibiotic": {
+      "label": "Nodularin release",
+      "color": "#8a7bc8",
+      "weight": 3
+    },
+    "eps": {
+      "label": "Mucilage sheath",
+      "color": "#b8d9a0",
+      "weight": 4
+    },
+    "crispr": {
+      "label": "CRISPR immunity",
+      "color": "#aaaaaa",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Twitching",
+      "color": "#999999",
+      "weight": 1
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "nodularia",
+        "label": "Nodularia spumigena filament",
+        "color": "#c7c05a",
+        "genome": {
+          "enzLvl": [
+            2,
+            2,
+            1
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 1,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "synecho",
+        "label": "Synechococcus competitor",
+        "color": "#5aa0c7",
+        "genome": {
+          "enzLvl": [
+            1,
+            1,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 0,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "aulacoseira",
+        "label": "Aulacoseira baltica chain",
+        "color": "#8faebf",
+        "form": "centric",
+        "sizeUm": 18,
+        "chain": 6,
+        "count": 40
+      }
+    ]
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 19,
+        "salinity": 7,
+        "light": 1,
+        "nutrient": 0.15
+      },
+      {
+        "depth": 8,
+        "tempC": 17,
+        "salinity": 7.5,
+        "light": 0.7,
+        "nutrient": 0.3
+      },
+      {
+        "depth": 16,
+        "tempC": 10,
+        "salinity": 9,
+        "light": 0.3,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 25,
+        "tempC": 6,
+        "salinity": 11,
+        "light": 0.08,
+        "nutrient": 0.85
+      }
+    ],
+    "thermocline": {
+      "depth": 14,
+      "sharpness": 0.7
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}
