@@ -1,0 +1,255 @@
+{
+  "meta": {
+    "title": "Pink Water, Hidden Life: Spain's Salterns and the Halophile Harvest",
+    "date": "2026-11-02",
+    "lesson": "In the saltern ponds of Spain's Mediterranean coast (e.g. Santa Pola, near Alicante), seawater is evaporated stepwise in shallow crystallizer ponds. As salinity climbs past ~25%, most life dies off except extreme halophiles: square-shaped Haloquadratum, red-pigmented Halobacteria, and the alga Dunaliella salina, whose beta-carotene (plus bacterial bacterioruberin) turns the water flamingo-pink. These organisms survive osmotic crush by pumping potassium or making compatible solutes, and they are so dense near the surface that grazers all but vanish - there is too little water activity left for most protists to function. This level asks a founder cell to build EPS to armor against desiccating brine, lean on carbohydrate scavenging from dying Dunaliella, and survive with almost no predation but brutal, unrelenting upkeep cost from osmotic stress.",
+    "citation": "Oren, A. (2002) Halophilic Microorganisms and their Environments; Rodriguez-Valera et al. on Haloquadratum walsbyi, Santa Pola salterns",
+    "difficulty": "hard",
+    "realWorldBasis": "Santa Pola saline crystallizer ponds, Spain - hypersaline halophile and Dunaliella salina bloom"
+  },
+  "env": {
+    "diel.tempBase": 27,
+    "diel.tempAmp": 8,
+    "diel.q10": 2.2,
+    "diel.q10RefC": 20,
+    "diel.foodFloor": 0.3,
+    "diel.waterDay.0": 180,
+    "diel.waterDay.1": 70,
+    "diel.waterDay.2": 110,
+    "diel.waterNight.0": 60,
+    "diel.waterNight.1": 15,
+    "diel.waterNight.2": 40,
+    "diel.goldTint": 0.3,
+    "day.latitude": 38,
+    "day.dayOfYear": 200,
+    "day.lengthSec": 260,
+    "respirationBase": 1.5,
+    "cell.swimCost": 1.8,
+    "cell.uptake": 11,
+    "cell.startEnergy": 95,
+    "cell.divideThreshold": 190,
+    "cell.cystBelow": 20,
+    "cell.cystWake": 55,
+    "cell.cystMetab": 0.02,
+    "cell.genomeUpkeep": 0.08,
+    "eps.cost": 3,
+    "eps.lifePerLevel": 6,
+    "eps.maxCount": 300,
+    "eps.cooldown.0": 8,
+    "eps.cooldown.1": 13,
+    "eps.threatRange": 60,
+    "substrate.count": 70,
+    "substrate.sizeMin": 28,
+    "substrate.sizeMax": 170,
+    "substrate.lifeMin": 80,
+    "substrate.lifeMax": 180,
+    "substrate.driftMin": 4,
+    "substrate.driftMax": 10,
+    "substrate.minPerRes": 3,
+    "predator.count": 1,
+    "predator.senseRange": 90,
+    "predator.metabolism": 14,
+    "predator.minCount": 1,
+    "predator.immigrateMax": 2,
+    "predator.wanderSpeed": 14,
+    "predator.chaseSpeed": 22,
+    "phage.greenCount": 6,
+    "phage.goldCount": 2,
+    "phage.goldMinDist": 800
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Dunaliella carotenoid lipid bodies",
+      "enzymeLabel": "carotenoid lipase",
+      "color": "#e0548a"
+    },
+    {
+      "index": 1,
+      "label": "Halobacterial membrane protein debris",
+      "enzymeLabel": "halo-protease",
+      "color": "#b03060"
+    },
+    {
+      "index": 2,
+      "label": "Glycerol & compatible-solute exudate",
+      "enzymeLabel": "glycerol dehydrogenase",
+      "color": "#f2b5d4"
+    }
+  ],
+  "particles": {
+    "dunaliellaClump": {
+      "label": "Dying Dunaliella clump",
+      "mix": [
+        55,
+        15,
+        30
+      ],
+      "shape": "aggregate",
+      "weight": 6
+    },
+    "haloDebris": {
+      "label": "Lysed halobacterial debris",
+      "mix": [
+        20,
+        60,
+        20
+      ],
+      "shape": "shard",
+      "weight": 3
+    },
+    "brineFloc": {
+      "label": "Glycerol brine floc",
+      "mix": [
+        15,
+        10,
+        75
+      ],
+      "shape": "ellipse",
+      "squash": 0.6,
+      "weight": 5
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Carotenoid Lipase",
+      "color": "#e0548a",
+      "weight": 5
+    },
+    "enzyme1": {
+      "label": "Halo-Protease",
+      "color": "#b03060",
+      "weight": 3
+    },
+    "enzyme2": {
+      "label": "Glycerol Dehydrogenase",
+      "color": "#f2b5d4",
+      "weight": 6
+    },
+    "chemotaxis": {
+      "label": "Osmotic Gradient Sensing",
+      "color": "#ffffff",
+      "weight": 3
+    },
+    "eps": {
+      "label": "Bacterioruberin Sheath",
+      "color": "#ff7fae",
+      "weight": 9
+    },
+    "antibiotic": {
+      "label": "Halocin",
+      "color": "#9b1b50",
+      "weight": 2
+    },
+    "crispr": {
+      "label": "CRISPR Immunity",
+      "color": "#888888",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Twitching Motility",
+      "color": "#cccccc",
+      "weight": 0
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "halobacterium_founder",
+        "label": "Halobacterium-like square archaeon",
+        "color": "#e0548a",
+        "genome": {
+          "enzLvl": [
+            2,
+            1,
+            3
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 3,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "salinibacter_competitor",
+        "label": "Salinibacter ruber competitor",
+        "color": "#c23b6b",
+        "genome": {
+          "enzLvl": [
+            1,
+            2,
+            2
+          ],
+          "chemoLevel": 0,
+          "antibiotic": 0,
+          "eps": 2,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "dunaliella_alga",
+        "label": "Dunaliella salina",
+        "color": "#ff4f9e",
+        "form": "centric",
+        "sizeUm": 14,
+        "chain": 1,
+        "count": 50,
+        "toxin": null
+      }
+    ]
+  },
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 60,
+      "color": "#d8c37a",
+      "label": "Gypsum-salt crust floor",
+      "roughness": 0.4,
+      "porosity": 0.25,
+      "poreSize": 20,
+      "featureSize": 300,
+      "spires": 0,
+      "spireHeight": 0,
+      "spireWidth": 10,
+      "warp": 0.1
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 29,
+        "salinity": 32,
+        "light": 1,
+        "nutrient": 0.4
+      },
+      {
+        "depth": 0.5,
+        "tempC": 27,
+        "salinity": 38,
+        "light": 0.7,
+        "nutrient": 0.5
+      },
+      {
+        "depth": 1,
+        "tempC": 25,
+        "salinity": 42,
+        "light": 0.4,
+        "nutrient": 0.6
+      }
+    ],
+    "thermocline": {
+      "depth": 0.6,
+      "sharpness": 0.3
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}

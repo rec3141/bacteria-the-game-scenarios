@@ -828,6 +828,14 @@
       "file": "scenarios/daily-2026-11-01.json"
     },
     {
+      "id": "daily-2026-11-02",
+      "title": "Pink Water, Hidden Life: Spain's Salterns and the Halophile Harvest",
+      "date": "2026-11-02",
+      "difficulty": "hard",
+      "realWorldBasis": "Santa Pola saline crystallizer ponds, Spain - hypersaline halophile and Dunaliella salina bloom",
+      "file": "scenarios/daily-2026-11-02.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
