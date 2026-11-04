@@ -1,0 +1,254 @@
+{
+  "meta": {
+    "title": "Aphotic Pulse: Nitrogen Fixers of a Flooded Lava Tube",
+    "date": "2026-11-04",
+    "lesson": "Anchialine lava tubes on young volcanic coasts (e.g. Hawai'i Island) hold stratified pools where fresh groundwater floats on intruded seawater in total darkness. With no light for photosynthesis, resident bacteria live on dissolved organic carbon seeping through porous basalt and on nitrogen fixed in situ, since the water arrives nitrogen-poor. Populations are small, isolated, and slow-growing: cave darkness removes the day/night rhythm entirely, temperature stays rock-stable, and food arrives as rare, long-lived trickles rather than blooms. This level removes light as a resource altogether and forces a heterotroph to live on a thin, steady carbon drip through a porous rock matrix it can actually shelter inside.",
+    "citation": "Educational synthesis; cf. studies of Hawaiian anchialine lava tube microbiology (e.g. Kaumana Cave, Hawai'i Island).",
+    "difficulty": "hard",
+    "realWorldBasis": "Anchialine lava tube pools, Hawai'i Island - stratified freshwater/seawater cave systems with chemoheterotrophic microbial communities in permanent darkness"
+  },
+  "env": {
+    "day.lengthSec": 300,
+    "day.latitude": 19,
+    "day.dayOfYear": 172,
+    "diel.tempBase": 17,
+    "diel.tempAmp": 0.5,
+    "diel.foodFloor": 0.9,
+    "diel.q10": 1.6,
+    "diel.lightGamma": 10,
+    "diel.waterNight.0": 2,
+    "diel.waterNight.1": 3,
+    "diel.waterNight.2": 5,
+    "diel.waterDay.0": 4,
+    "diel.waterDay.1": 6,
+    "diel.waterDay.2": 9,
+    "diel.goldTint": 0.02,
+    "substrate.count": 48,
+    "substrate.sizeMin": 24,
+    "substrate.sizeMax": 130,
+    "substrate.lifeMin": 260,
+    "substrate.lifeMax": 600,
+    "substrate.driftMin": 3,
+    "substrate.driftMax": 8,
+    "substrate.bloomEvery": 1.2,
+    "substrate.minPerRes": 3,
+    "respirationBase": 0.6,
+    "cell.startEnergy": 95,
+    "cell.divideThreshold": 190,
+    "cell.cystBelow": 20,
+    "cell.cystWake": 40,
+    "cell.cystMetab": 0.02,
+    "cell.swimCost": 0.9,
+    "cell.runMin": 2.5,
+    "cell.runMax": 5,
+    "cell.chemoRange0": 380,
+    "cell.chemoRangePer": 180,
+    "cell.chemoBias": 1.3,
+    "predator.count": 2,
+    "predator.wanderSpeed": 14,
+    "predator.chaseSpeed": 24,
+    "predator.senseRange": 110,
+    "predator.metabolism": 6,
+    "predator.minCount": 1,
+    "phage.greenCount": 8,
+    "phage.goldCount": 2,
+    "phage.goldMinDist": 500
+  },
+  "particles": {
+    "lavaDrip": {
+      "label": "DOC seep flake",
+      "mix": [
+        1,
+        5,
+        2
+      ],
+      "shape": "aggregate",
+      "weight": 6
+    },
+    "rockBiofilm": {
+      "label": "basalt biofilm scrap",
+      "mix": [
+        1,
+        6,
+        1
+      ],
+      "shape": "shard",
+      "weight": 3
+    },
+    "porewaterFloc": {
+      "label": "pore-water floc",
+      "mix": [
+        2,
+        4,
+        3
+      ],
+      "shape": "ellipse",
+      "squash": 0.6,
+      "weight": 2
+    }
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid film",
+      "enzymeLabel": "Lipase",
+      "color": "#4a3b2b"
+    },
+    {
+      "index": 1,
+      "label": "Peptide seep",
+      "enzymeLabel": "Protease",
+      "color": "#7a6a4f"
+    },
+    {
+      "index": 2,
+      "label": "Glycan floc",
+      "enzymeLabel": "Glycanase",
+      "color": "#9c8c5e"
+    }
+  ],
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase",
+      "color": "#4a3b2b",
+      "weight": 2
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#7a6a4f",
+      "weight": 6
+    },
+    "enzyme2": {
+      "label": "Glycanase",
+      "color": "#9c8c5e",
+      "weight": 3
+    },
+    "chemotaxis": {
+      "label": "Seep tracking",
+      "color": "#5ec8c8",
+      "weight": 7
+    },
+    "antibiotic": {
+      "label": "Bacteriocin",
+      "color": "#b33a3a",
+      "weight": 2
+    },
+    "eps": {
+      "label": "Mineral biofilm",
+      "color": "#8a9aa0",
+      "weight": 5
+    },
+    "crispr": {
+      "label": "CRISPR immunity",
+      "color": "#d9b64a",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Pilus grip",
+      "color": "#c97fd1",
+      "weight": 4
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "founder",
+        "label": "Cave DOC heterotroph",
+        "color": "#c7b88a",
+        "genome": {
+          "enzLvl": [
+            1,
+            3,
+            2
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "diazotroph",
+        "label": "N2-fixing cave dweller",
+        "color": "#8fae6e",
+        "genome": {
+          "enzLvl": [
+            0,
+            2,
+            1
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 2,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 2
+      }
+    ]
+  },
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 260,
+      "color": "#241d18",
+      "label": "Porous basalt floor",
+      "roughness": 0.6,
+      "porosity": 0.45,
+      "poreSize": 40,
+      "featureSize": 300,
+      "spires": 0.15,
+      "spireHeight": 220,
+      "spireWidth": 60,
+      "warp": 0.2
+    },
+    {
+      "at": "top",
+      "thickness": 180,
+      "color": "#1a1512",
+      "label": "Lava tube ceiling",
+      "roughness": 0.7,
+      "porosity": 0.3,
+      "poreSize": 30,
+      "featureSize": 260,
+      "spires": 0.1,
+      "spireHeight": 150,
+      "spireWidth": 50,
+      "warp": 0.15
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 17,
+        "salinity": 5,
+        "light": 0,
+        "nutrient": 0.2
+      },
+      {
+        "depth": 0.5,
+        "tempC": 17,
+        "salinity": 20,
+        "light": 0,
+        "nutrient": 0.35
+      },
+      {
+        "depth": 1,
+        "tempC": 17.5,
+        "salinity": 34,
+        "light": 0,
+        "nutrient": 0.5
+      }
+    ],
+    "thermocline": {
+      "depth": 0.55,
+      "sharpness": 0.4
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}

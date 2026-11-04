@@ -844,6 +844,14 @@
       "file": "scenarios/daily-2026-11-03.json"
     },
     {
+      "id": "daily-2026-11-04",
+      "title": "Aphotic Pulse: Nitrogen Fixers of a Flooded Lava Tube",
+      "date": "2026-11-04",
+      "difficulty": "hard",
+      "realWorldBasis": "Anchialine lava tube pools, Hawai'i Island - stratified freshwater/seawater cave systems with chemoheterotrophic microbial communities in permanent darkness",
+      "file": "scenarios/daily-2026-11-04.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
