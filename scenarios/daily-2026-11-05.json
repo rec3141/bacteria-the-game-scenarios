@@ -1,0 +1,275 @@
+{
+  "meta": {
+    "title": "Antarctic Diatom Mats: Microbial Succession on Decaying Sea Ice",
+    "date": "2026-11-05",
+    "lesson": "As Antarctic fast ice rots in spring, the platelet-ice diatom community that bloomed through the brine channels begins to die and sink, dumping huge pulses of organic carbon into the water below. Heterotrophic bacteria race to colonize this falling biomass, digesting lipids and carbohydrates leaking from dying frustules before grazing protists or phage sweep through. The lesson: a photosynthetic bloom's death is itself a resource pulse, and the bacteria who out-compete for sinking diatom debris determine how much carbon reaches the deep sea versus how much is respired back near the surface.",
+    "citation": "Based on observations of ice-algal bloom senescence and bacterial succession in McMurdo Sound platelet ice, Antarctica.",
+    "difficulty": "normal",
+    "realWorldBasis": "McMurdo Sound platelet ice algal bloom collapse and bacterial carbon recycling"
+  },
+  "env": {
+    "day.lengthSec": 260,
+    "day.latitude": -77.8,
+    "day.dayOfYear": 300,
+    "day.startHour": 8,
+    "diel.tempBase": -1.8,
+    "diel.tempAmp": 0.6,
+    "diel.foodFloor": 0.5,
+    "diel.q10": 2.3,
+    "diel.q10RefC": 0,
+    "diel.waterNight.0": 3,
+    "diel.waterNight.1": 12,
+    "diel.waterNight.2": 25,
+    "diel.waterDay.0": 40,
+    "diel.waterDay.1": 95,
+    "diel.waterDay.2": 88,
+    "diel.lightGamma": 1.4,
+    "diel.twilight": 0.3,
+    "substrate.count": 95,
+    "substrate.sizeMin": 40,
+    "substrate.sizeMax": 220,
+    "substrate.lifeMin": 90,
+    "substrate.lifeMax": 220,
+    "substrate.driftMin": 5,
+    "substrate.driftMax": 14,
+    "substrate.minPerRes": 3,
+    "respirationBase": 0.65,
+    "cell.startEnergy": 120,
+    "cell.divideThreshold": 180,
+    "cell.cystBelow": 20,
+    "cell.cystWake": 50,
+    "predator.count": 3,
+    "predator.wanderSpeed": 16,
+    "predator.chaseSpeed": 28,
+    "predator.metabolism": 7,
+    "predator.senseRange": 140,
+    "phage.greenCount": 10,
+    "phage.goldCount": 3,
+    "column.chemRate": 1,
+    "column.photoRate": 7
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid-rich diatom debris",
+      "enzymeLabel": "Lipase",
+      "color": "#d9c07a"
+    },
+    {
+      "index": 1,
+      "label": "Algal protein exudate",
+      "enzymeLabel": "Protease",
+      "color": "#8fae9c"
+    },
+    {
+      "index": 2,
+      "label": "Chrysolaminarin carbohydrate",
+      "enzymeLabel": "Carbohydrase",
+      "color": "#bcd6e0"
+    }
+  ],
+  "particles": {
+    "frustuleDebris": {
+      "label": "Sinking frustule clump",
+      "mix": [
+        5,
+        2,
+        3
+      ],
+      "shape": "aggregate",
+      "weight": 6
+    },
+    "brineFlake": {
+      "label": "Brine channel flake",
+      "mix": [
+        2,
+        1,
+        5
+      ],
+      "shape": "shard",
+      "weight": 4
+    },
+    "exudateDroplet": {
+      "label": "Diatom exudate droplet",
+      "mix": [
+        6,
+        1,
+        1
+      ],
+      "shape": "ellipse",
+      "squash": 0.6,
+      "weight": 3
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase",
+      "color": "#d9c07a",
+      "weight": 6
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#8fae9c",
+      "weight": 4
+    },
+    "enzyme2": {
+      "label": "Carbohydrase",
+      "color": "#bcd6e0",
+      "weight": 5
+    },
+    "chemotaxis": {
+      "label": "Chemotaxis",
+      "color": "#66aacc",
+      "weight": 5
+    },
+    "antibiotic": {
+      "label": "Antibiotic",
+      "color": "#cc6688",
+      "weight": 3
+    },
+    "eps": {
+      "label": "EPS",
+      "color": "#aaccbb",
+      "weight": 4
+    },
+    "crispr": {
+      "label": "CRISPR",
+      "color": "#9988cc",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Twitching",
+      "color": "#dd9955",
+      "weight": 3
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "founder",
+        "label": "Colwellia-type psychrophile",
+        "color": "#7fb6c9",
+        "genome": {
+          "enzLvl": [
+            3,
+            1,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 5
+      },
+      {
+        "id": "competitor",
+        "label": "Polaribacter opportunist",
+        "color": "#c9a87f",
+        "genome": {
+          "enzLvl": [
+            1,
+            2,
+            3
+          ],
+          "chemoLevel": 0,
+          "antibiotic": 1,
+          "eps": 0,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 3
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "fragilariopsis",
+        "label": "Fragilariopsis cylindrus (dying)",
+        "color": "#9fd4c7",
+        "form": "pennate",
+        "sizeUm": 30,
+        "chain": 6,
+        "count": 70
+      },
+      {
+        "id": "thalassiosira",
+        "label": "Thalassiosira antarctica",
+        "color": "#c7d89f",
+        "form": "centric",
+        "sizeUm": 45,
+        "chain": 2,
+        "count": 35
+      }
+    ]
+  },
+  "terrain": [
+    {
+      "at": "top",
+      "thickness": 220,
+      "color": "#dff0f5",
+      "label": "Rotting platelet ice",
+      "roughness": 0.6,
+      "porosity": 0.45,
+      "poreSize": 40,
+      "featureSize": 300,
+      "spires": 0,
+      "spireHeight": 0,
+      "spireWidth": 10,
+      "warp": 0.1
+    },
+    {
+      "at": "bottom",
+      "thickness": 60,
+      "color": "#3b4a52",
+      "label": "Sediment-starved seafloor silt",
+      "roughness": 0.3,
+      "porosity": 0.2,
+      "poreSize": 20,
+      "featureSize": 200,
+      "spires": 0,
+      "spireHeight": 0,
+      "spireWidth": 10,
+      "warp": 0
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": -1.9,
+        "salinity": 34,
+        "light": 0.5,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 0.3,
+        "tempC": -1.85,
+        "salinity": 34.2,
+        "light": 0.3,
+        "nutrient": 0.7
+      },
+      {
+        "depth": 0.6,
+        "tempC": -1.8,
+        "salinity": 34.5,
+        "light": 0.1,
+        "nutrient": 0.8
+      },
+      {
+        "depth": 1,
+        "tempC": -1.7,
+        "salinity": 34.7,
+        "light": 0.02,
+        "nutrient": 0.9
+      }
+    ],
+    "thermocline": {
+      "depth": 0.5,
+      "sharpness": 0.2
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}
