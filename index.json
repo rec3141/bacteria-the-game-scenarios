@@ -860,6 +860,14 @@
       "file": "scenarios/daily-2026-11-05.json"
     },
     {
+      "id": "daily-2026-11-06",
+      "title": "Comb Jelly Wake: Mnemiopsis Carbon Pulse in the Black Sea",
+      "date": "2026-11-06",
+      "difficulty": "normal",
+      "realWorldBasis": "Black Sea Mnemiopsis leidyi jelly-fall carbon flux and copiotroph bacterial bloom dynamics",
+      "file": "scenarios/daily-2026-11-06.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
