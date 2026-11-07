@@ -1,0 +1,243 @@
+{
+  "meta": {
+    "title": "Caspian Shallows: Brine-Shrimp Chitin and the Isolated Halophile Bloom",
+    "date": "2026-11-07",
+    "lesson": "The Caspian Sea is the world's largest inland water body, isolated from the ocean for millions of years, with its own endemic microbial fauna adapted to moderate salinity and huge seasonal temperature swings. In the shallow northern Caspian shelf, die-offs of the brine shrimp Artemia and other crustaceans dump chitin-rich exoskeleton debris onto the floor each autumn. Chitinolytic bacteria bloom to break it down, racing local protist grazers and viruses before winter cold shuts metabolism down. Because the basin is cut off, these lineages have evolved in isolation - a living lesson in how geographic isolation shapes microbial communities differently from the connected open ocean.",
+    "citation": "Based on studies of Caspian Sea endemic microbiota and seasonal Artemia/crustacean die-off carbon flux, northern Caspian shelf.",
+    "difficulty": "normal",
+    "realWorldBasis": "Northern Caspian Sea shallow shelf, autumn crustacean die-off, endemic brackish-water chitinolytic bacteria"
+  },
+  "env": {
+    "day.lengthSec": 260,
+    "day.latitude": 46,
+    "day.dayOfYear": 285,
+    "diel.tempBase": 11,
+    "diel.tempAmp": 7,
+    "diel.foodFloor": 0.3,
+    "diel.q10": 2.2,
+    "diel.waterNight.0": 4,
+    "diel.waterNight.1": 12,
+    "diel.waterNight.2": 18,
+    "diel.waterDay.0": 30,
+    "diel.waterDay.1": 70,
+    "diel.waterDay.2": 60,
+    "substrate.count": 72,
+    "substrate.sizeMin": 34,
+    "substrate.sizeMax": 170,
+    "substrate.lifeMin": 90,
+    "substrate.lifeMax": 220,
+    "substrate.driftMin": 7,
+    "substrate.driftMax": 16,
+    "substrate.minPerRes": 3,
+    "enzyme.maxRadius": 28,
+    "enzyme.life": 6,
+    "cell.chemoRange0": 340,
+    "cell.chemoBias": 1.1,
+    "cell.uptake": 15,
+    "respirationBase": 0.95,
+    "predator.count": 5,
+    "predator.senseRange": 150,
+    "predator.metabolism": 9,
+    "predator.wanderSpeed": 20,
+    "phage.greenCount": 14,
+    "phage.goldCount": 3,
+    "phage.hostTolerance": 2
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid droplets (shrimp fat body)",
+      "enzymeLabel": "Lipase",
+      "color": "#d8a23a"
+    },
+    {
+      "index": 1,
+      "label": "Chitin-protein shell fragments",
+      "enzymeLabel": "Chitinase",
+      "color": "#8e7a5c"
+    },
+    {
+      "index": 2,
+      "label": "Sediment carbohydrate film",
+      "enzymeLabel": "Amylase",
+      "color": "#5c8a6e"
+    }
+  ],
+  "particles": {
+    "shrimpCuticle": {
+      "label": "Artemia exoskeleton fragment",
+      "mix": [
+        1,
+        6,
+        1
+      ],
+      "shape": "shard",
+      "squash": 1,
+      "weight": 6
+    },
+    "fatGlob": {
+      "label": "Fat-body droplet",
+      "mix": [
+        5,
+        1,
+        1
+      ],
+      "shape": "ellipse",
+      "squash": 0.6,
+      "weight": 3
+    },
+    "siltFilm": {
+      "label": "Sediment carb film clump",
+      "mix": [
+        1,
+        1,
+        4
+      ],
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 2
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase",
+      "color": "#d8a23a",
+      "weight": 3
+    },
+    "enzyme1": {
+      "label": "Chitinase",
+      "color": "#8e7a5c",
+      "weight": 8
+    },
+    "enzyme2": {
+      "label": "Amylase",
+      "color": "#5c8a6e",
+      "weight": 4
+    },
+    "chemotaxis": {
+      "label": "Chitin-taxis",
+      "color": "#c2b280",
+      "weight": 6
+    },
+    "antibiotic": {
+      "label": "Bacteriocin",
+      "color": "#b04040",
+      "weight": 3
+    },
+    "eps": {
+      "label": "Mucoid capsule",
+      "color": "#7fa6c9",
+      "weight": 4
+    },
+    "crispr": {
+      "label": "CRISPR immunity",
+      "color": "#9966cc",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Pili twitching",
+      "color": "#4ba3a3",
+      "weight": 3
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "caspian_chitinovorax",
+        "label": "Caspian chitin-eater (endemic Pseudoalteromonas-like)",
+        "color": "#8e7a5c",
+        "genome": {
+          "enzLvl": [
+            1,
+            3,
+            1
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 1,
+          "eps": 1,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "generalist_scavenger",
+        "label": "Brackish generalist scavenger",
+        "color": "#5c8a6e",
+        "genome": {
+          "enzLvl": [
+            2,
+            2,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 4
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "caspian_pennate",
+        "label": "Caspian benthic pennate diatom",
+        "color": "#7fae7f",
+        "form": "pennate",
+        "sizeUm": 40,
+        "chain": 2,
+        "count": 30,
+        "toxin": null
+      }
+    ]
+  },
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 120,
+      "color": "#6b5b3e",
+      "label": "Northern Caspian shell-sand sediment",
+      "roughness": 0.4,
+      "porosity": 0.35,
+      "poreSize": 30,
+      "featureSize": 300,
+      "spires": 0,
+      "spireHeight": 0,
+      "spireWidth": 40,
+      "warp": 0.1
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 12,
+        "salinity": 13,
+        "light": 1,
+        "nutrient": 0.4
+      },
+      {
+        "depth": 0.5,
+        "tempC": 10,
+        "salinity": 13,
+        "light": 0.5,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 1,
+        "tempC": 8,
+        "salinity": 13,
+        "light": 0.15,
+        "nutrient": 0.8
+      }
+    ],
+    "thermocline": {
+      "depth": 0.5,
+      "sharpness": 0.4
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}

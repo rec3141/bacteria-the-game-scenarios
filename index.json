@@ -868,6 +868,14 @@
       "file": "scenarios/daily-2026-11-06.json"
     },
     {
+      "id": "daily-2026-11-07",
+      "title": "Caspian Shallows: Brine-Shrimp Chitin and the Isolated Halophile Bloom",
+      "date": "2026-11-07",
+      "difficulty": "normal",
+      "realWorldBasis": "Northern Caspian Sea shallow shelf, autumn crustacean die-off, endemic brackish-water chitinolytic bacteria",
+      "file": "scenarios/daily-2026-11-07.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
