@@ -876,6 +876,14 @@
       "file": "scenarios/daily-2026-11-07.json"
     },
     {
+      "id": "daily-2026-11-08",
+      "title": "Pink Tide: Noctiluca Blooms the Arabian Sea Night",
+      "date": "2026-11-08",
+      "difficulty": "normal",
+      "realWorldBasis": "Winter monsoon Noctiluca scintillans blooms, northern Arabian Sea shelf, with associated diatom decline and oxygen minimum zone intensification",
+      "file": "scenarios/daily-2026-11-08.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",

@@ -1,0 +1,245 @@
+{
+  "meta": {
+    "title": "Pink Tide: Noctiluca Blooms the Arabian Sea Night",
+    "date": "2026-11-08",
+    "lesson": "Each winter the northern Arabian Sea blooms pink-orange with Noctiluca scintillans, a giant heterotrophic dinoflagellate that has displaced diatoms across huge swaths of this monsoon-driven upwelling sea. Noctiluca does not photosynthesize on its own - it swallows diatoms whole and houses a symbiotic green alga, Pedinomonas, that fixes carbon for it. At night the cells flash blue-green with bioluminescence when disturbed, a defense that can attract the very predators that eat its predators. The bloom's collapse dumps huge pulses of ammonium into the water, fueling bacterial blooms and worsening the seasonal oxygen minimum zone that already grips the open shelf. This level asks you to survive the bacterial side of that story: fast, protein-rich decay food from grazed diatoms and dying Noctiluca cells, falling oxygen (modeled as rising predator pressure and metabolic cost), and a dense, chain-forming diatom population being devoured around you.",
+    "citation": "Goes et al. 2005, Science; Gomes et al. 2014, Nature Communications (Arabian Sea Noctiluca blooms)",
+    "difficulty": "normal",
+    "realWorldBasis": "Winter monsoon Noctiluca scintillans blooms, northern Arabian Sea shelf, with associated diatom decline and oxygen minimum zone intensification"
+  },
+  "env": {
+    "day.latitude": 18,
+    "day.dayOfYear": 350,
+    "day.lengthSec": 260,
+    "diel.tempBase": 24,
+    "diel.tempAmp": 3,
+    "diel.foodFloor": 0.5,
+    "diel.q10": 2.1,
+    "diel.waterDay.0": 40,
+    "diel.waterDay.1": 55,
+    "diel.waterDay.2": 48,
+    "diel.waterNight.0": 4,
+    "diel.waterNight.1": 14,
+    "diel.waterNight.2": 18,
+    "diel.grazeNight": 1.6,
+    "diel.lightGamma": 2.1,
+    "substrate.count": 95,
+    "substrate.sizeMin": 34,
+    "substrate.sizeMax": 190,
+    "substrate.lifeMin": 90,
+    "substrate.lifeMax": 220,
+    "substrate.bloomEvery": 0.4,
+    "substrate.driftMax": 26,
+    "nutrient.life": 20,
+    "predator.count": 7,
+    "predator.senseRange": 200,
+    "predator.chaseSpeed": 50,
+    "predator.metabolism": 12,
+    "predator.mealEnergy": 64,
+    "predator.minCount": 4,
+    "predator.immigratePerPrey": 0.06,
+    "respirationBase": 1.05,
+    "cell.startEnergy": 100,
+    "cell.divideThreshold": 168,
+    "cell.swimCost": 1.35,
+    "phage.greenCount": 20,
+    "phage.goldCount": 3,
+    "column.chemRate": 3
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid Droplet",
+      "enzymeLabel": "Lipase",
+      "color": "#e8893a"
+    },
+    {
+      "index": 1,
+      "label": "Diatom Debris Protein",
+      "enzymeLabel": "Protease",
+      "color": "#d94f6c"
+    },
+    {
+      "index": 2,
+      "label": "Mucilage Carbohydrate",
+      "enzymeLabel": "Glucanase",
+      "color": "#f2c14e"
+    }
+  ],
+  "particles": {
+    "grazedDiatom": {
+      "label": "Grazed Diatom Fragment",
+      "mix": [
+        1,
+        6,
+        2
+      ],
+      "shape": "shard",
+      "squash": 0.6,
+      "weight": 7
+    },
+    "noctilucaLysate": {
+      "label": "Noctiluca Lysate Clump",
+      "mix": [
+        2,
+        5,
+        3
+      ],
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 5
+    },
+    "mucusFloc": {
+      "label": "Mucilage Floc",
+      "mix": [
+        1,
+        1,
+        4
+      ],
+      "shape": "ellipse",
+      "squash": 0.4,
+      "weight": 3
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase",
+      "color": "#e8893a",
+      "weight": 4
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#d94f6c",
+      "weight": 8
+    },
+    "enzyme2": {
+      "label": "Glucanase",
+      "color": "#f2c14e",
+      "weight": 5
+    },
+    "chemotaxis": {
+      "label": "Chemotaxis",
+      "color": "#7fd1d1",
+      "weight": 6
+    },
+    "antibiotic": {
+      "label": "Toxin Burst",
+      "color": "#b23a9e",
+      "weight": 4
+    },
+    "eps": {
+      "label": "EPS Shield",
+      "color": "#9bc24a",
+      "weight": 5
+    },
+    "crispr": {
+      "label": "CRISPR",
+      "color": "#5ab0ff",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Twitching",
+      "color": "#c7a35a",
+      "weight": 2
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "founder",
+        "label": "Pseudoalteromonas sp.",
+        "color": "#e85d75",
+        "genome": {
+          "enzLvl": [
+            1,
+            3,
+            1
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "rival",
+        "label": "Alteromonas macleodii",
+        "color": "#f4a259",
+        "genome": {
+          "enzLvl": [
+            2,
+            2,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 0,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "chaetoceros",
+        "label": "Chaetoceros sp.",
+        "color": "#c9a94a",
+        "form": "centric",
+        "sizeUm": 22,
+        "chain": 6,
+        "count": 90
+      },
+      {
+        "id": "navicula",
+        "label": "Navicula sp.",
+        "color": "#a3c96a",
+        "form": "pennate",
+        "sizeUm": 35,
+        "chain": 2,
+        "count": 30
+      }
+    ]
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 25,
+        "salinity": 36,
+        "light": 1,
+        "nutrient": 0.4
+      },
+      {
+        "depth": 15,
+        "tempC": 24,
+        "salinity": 36,
+        "light": 0.6,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 40,
+        "tempC": 21,
+        "salinity": 36.2,
+        "light": 0.25,
+        "nutrient": 0.8
+      },
+      {
+        "depth": 80,
+        "tempC": 18,
+        "salinity": 36.3,
+        "light": 0.05,
+        "nutrient": 0.9
+      }
+    ],
+    "thermocline": {
+      "depth": 35,
+      "sharpness": 0.6
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}
