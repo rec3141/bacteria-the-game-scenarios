@@ -884,6 +884,14 @@
       "file": "scenarios/daily-2026-11-08.json"
     },
     {
+      "id": "daily-2026-11-09",
+      "title": "Guaymas Redux: Purple Bacteria at the Sulfide-Oil Overlap",
+      "date": "2026-11-09",
+      "difficulty": "hard",
+      "realWorldBasis": "Guaymas Basin hydrothermal vent field, purple sulfur bacteria living at the rare overlap of residual light and sulfide-rich vent fluid.",
+      "file": "scenarios/daily-2026-11-09.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
