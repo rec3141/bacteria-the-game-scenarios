@@ -892,6 +892,14 @@
       "file": "scenarios/daily-2026-11-09.json"
     },
     {
+      "id": "daily-2026-11-10",
+      "title": "Nutricline Handoff: Diatoms and Bacteria at Monterey's Edge",
+      "date": "2026-11-10",
+      "difficulty": "normal",
+      "realWorldBasis": "Deep chlorophyll maximum / nutricline diatom-bacteria coupling, temperate shelf stratified water column (Monterey Bay-type system)",
+      "file": "scenarios/daily-2026-11-10.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",

@@ -1,0 +1,251 @@
+{
+  "actions": {
+    "enzyme0": {
+      "label": "Urease (urea-N scavenger)",
+      "color": "#7fd4a8",
+      "weight": 3
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#e0a23c",
+      "weight": 5
+    },
+    "enzyme2": {
+      "label": "Laminarinase",
+      "color": "#5aa8e0",
+      "weight": 4
+    },
+    "chemotaxis": {
+      "label": "Nitrate chemotaxis",
+      "color": "#d6f5ff",
+      "weight": 6
+    },
+    "antibiotic": {
+      "label": "Bacteriocin burst",
+      "color": "#ff5e5e",
+      "weight": 2
+    },
+    "eps": {
+      "label": "Mucilage sheath",
+      "color": "#c9c9f5",
+      "weight": 4
+    },
+    "crispr": {
+      "label": "CRISPR immunity",
+      "color": "#aaffaa",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Pilus twitching",
+      "color": "#ffd166",
+      "weight": 2
+    }
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 12,
+        "salinity": 33,
+        "light": 0.95,
+        "nutrient": 0.2
+      },
+      {
+        "depth": 10,
+        "tempC": 11,
+        "salinity": 33.2,
+        "light": 0.6,
+        "nutrient": 0.5
+      },
+      {
+        "depth": 25,
+        "tempC": 9,
+        "salinity": 33.6,
+        "light": 0.2,
+        "nutrient": 0.85
+      },
+      {
+        "depth": 40,
+        "tempC": 8,
+        "salinity": 33.8,
+        "light": 0.03,
+        "nutrient": 0.95
+      }
+    ],
+    "thermocline": {
+      "depth": 18,
+      "sharpness": 0.55
+    }
+  },
+  "env": {
+    "day.lengthSec": 260,
+    "day.latitude": 36,
+    "day.dayOfYear": 110,
+    "day.startHour": 6,
+    "diel.tempBase": 10,
+    "diel.tempAmp": 2,
+    "diel.foodFloor": 0.5,
+    "diel.q10": 2.1,
+    "diel.q10RefC": 10,
+    "diel.waterDay.0": 30,
+    "diel.waterDay.1": 95,
+    "diel.waterDay.2": 80,
+    "diel.waterNight.0": 3,
+    "diel.waterNight.1": 14,
+    "diel.waterNight.2": 18,
+    "substrate.count": 100,
+    "substrate.sizeMin": 34,
+    "substrate.sizeMax": 190,
+    "substrate.lifeMin": 100,
+    "substrate.lifeMax": 260,
+    "substrate.driftMin": 6,
+    "substrate.driftMax": 14,
+    "substrate.minPerRes": 3,
+    "cell.chemoRange0": 360,
+    "cell.chemoRangePer": 160,
+    "cell.chemoBias": 1.1,
+    "cell.uptake": 15,
+    "cell.startEnergy": 115,
+    "respirationBase": 0.85,
+    "predator.count": 5,
+    "predator.senseRange": 190,
+    "predator.metabolism": 9,
+    "diatom.photoRate": 10,
+    "diatom.exudateFrac": 0.3,
+    "diatom.exudateMote": 22,
+    "diatom.sinkSpeed": 1,
+    "phage.greenCount": 16,
+    "phage.goldCount": 4
+  },
+  "meta": {
+    "title": "Nutricline Handoff: Diatoms and Bacteria at Monterey's Edge",
+    "date": "2026-11-10",
+    "lesson": "In the open ocean, phytoplankton and bacteria are tightly coupled across depth. Near the surface, light is abundant but nutrients are scarce, so diatoms photosynthesize weakly and leak dissolved carbon (exudate) that feeds surface bacteria. Below the mixed layer, at the nutricline, nitrate and other nutrients pile up but light fades, so diatoms crowd there too, racing to catch the last usable light while drawing on the nutrient-rich water. Chemotactic bacteria track nitrate gradients up and down this boundary, scavenging both diatom exudate and the particulate debris of dying cells. This level asks you to live at that seam: hunt motes shed by a diatom bloom straddling the thermocline, follow the nutrient gradient with chemotaxis, and survive grazers whose numbers track the bloom's success.",
+    "citation": "Based on deep chlorophyll maximum and nutricline coupling studies in stratified subtropical and temperate shelf waters (e.g. Monterey Bay, Mediterranean DCM research).",
+    "difficulty": "normal",
+    "realWorldBasis": "Deep chlorophyll maximum / nutricline diatom-bacteria coupling, temperate shelf stratified water column (Monterey Bay-type system)"
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "founder",
+        "label": "Nutricline Scavenger",
+        "color": "#6fc2b0",
+        "genome": {
+          "enzLvl": [
+            1,
+            3,
+            2
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 5
+      },
+      {
+        "id": "opportunist",
+        "label": "Twitching Colonizer",
+        "color": "#e8b94a",
+        "genome": {
+          "enzLvl": [
+            0,
+            2,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 0,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 3
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "surface_centric",
+        "label": "Surface Thalassiosira",
+        "color": "#9fd8e0",
+        "form": "centric",
+        "sizeUm": 30,
+        "chain": 3,
+        "count": 40
+      },
+      {
+        "id": "nutricline_pennate",
+        "label": "Nutricline Pseudo-nitzschia",
+        "color": "#d9a6e0",
+        "form": "pennate",
+        "sizeUm": 45,
+        "chain": 5,
+        "count": 55,
+        "toxin": {
+          "label": "Domoic acid plume",
+          "color": "#b06fd1",
+          "radius": 90,
+          "potency": 55,
+          "life": 18
+        }
+      }
+    ]
+  },
+  "particles": {
+    "detritus": {
+      "label": "Diatom exudate floc",
+      "mix": [
+        0.1,
+        0.3,
+        0.6
+      ],
+      "shape": "aggregate",
+      "weight": 6
+    },
+    "proteinSnow": {
+      "label": "Dead zooplankton snow",
+      "mix": [
+        0.1,
+        0.7,
+        0.2
+      ],
+      "shape": "shard",
+      "weight": 3
+    },
+    "lipidDrop": {
+      "label": "Diatom lipid droplet",
+      "mix": [
+        0.6,
+        0.1,
+        0.3
+      ],
+      "shape": "ellipse",
+      "squash": 0.6,
+      "weight": 2
+    }
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Diatom lipid stores",
+      "enzymeLabel": "Lipase",
+      "color": "#f2d98a"
+    },
+    {
+      "index": 1,
+      "label": "Zooplankton protein debris",
+      "enzymeLabel": "Protease",
+      "color": "#e0a23c"
+    },
+    {
+      "index": 2,
+      "label": "Diatom exudate carbohydrate",
+      "enzymeLabel": "Laminarinase",
+      "color": "#5aa8e0"
+    }
+  ],
+  "schema": "bacteria-scenario",
+  "version": 1
+}
