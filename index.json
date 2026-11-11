@@ -900,6 +900,14 @@
       "file": "scenarios/daily-2026-11-10.json"
     },
     {
+      "id": "daily-2026-11-11",
+      "title": "Bone Garden: Sulfur Bacteria of a Baltic Shipwreck",
+      "date": "2026-11-11",
+      "difficulty": "hard",
+      "realWorldBasis": "Anoxic Baltic Sea shipwrecks (e.g. 17th-18th c. wooden hulls in the Gulf of Finland/Bothnia) preserved by cold, dark, brackish, low-oxygen deep basins; sulfate-reducing and sulfide-oxidizing bacterial succession on waterlogged wood",
+      "file": "scenarios/daily-2026-11-11.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
