@@ -908,6 +908,14 @@
       "file": "scenarios/daily-2026-11-11.json"
     },
     {
+      "id": "daily-2026-11-12",
+      "title": "Lake Vostok's Cousin: Methane Seep Life Under Antarctica's Lake Untersee",
+      "date": "2026-11-12",
+      "difficulty": "hard",
+      "realWorldBasis": "Lake Untersee, East Antarctica - perennially ice-covered lake with methane seep and anoxic chemocline",
+      "file": "scenarios/daily-2026-11-12.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",

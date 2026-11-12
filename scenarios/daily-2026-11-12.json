@@ -1,0 +1,236 @@
+{
+  "meta": {
+    "title": "Lake Vostok's Cousin: Methane Seep Life Under Antarctica's Lake Untersee",
+    "date": "2026-11-12",
+    "lesson": "Lake Untersee is a perennially ice-covered Antarctic lake with a sharp chemocline: an oxic upper layer sits atop an anoxic, methane-rich lower layer where methanogen-derived gas seeps upward. Chemolithotrophic bacteria cluster at that boundary, oxidizing methane and sulfide for energy completely independent of sunlight filtering through 3-4m of perennial ice. This scenario places a chemolithotroph at a mid-column chemical plume while heterotrophs scavenge organic falls from the thin microbial mats above. The lesson: not all dark, cold habitats are starved -- a steady chemical seep can support a permanent, depth-locked community, but only within the narrow band where the plume actually reaches.",
+    "citation": "McKay et al. 2005, Lake Untersee limnology; Andersen et al. microbial mat studies, Dry Valleys Antarctica",
+    "difficulty": "hard",
+    "realWorldBasis": "Lake Untersee, East Antarctica - perennially ice-covered lake with methane seep and anoxic chemocline"
+  },
+  "env": {
+    "day.lengthSec": 300,
+    "day.latitude": -71,
+    "day.dayOfYear": 356,
+    "diel.tempBase": -2,
+    "diel.tempAmp": 0.5,
+    "diel.foodFloor": 0.55,
+    "diel.q10": 1.6,
+    "diel.q10RefC": 4,
+    "diel.waterNight.0": 2,
+    "diel.waterNight.1": 7,
+    "diel.waterNight.2": 14,
+    "diel.waterDay.0": 10,
+    "diel.waterDay.1": 34,
+    "diel.waterDay.2": 46,
+    "diel.lightGamma": 3.2,
+    "diel.twilight": 0.4,
+    "substrate.count": 70,
+    "substrate.sizeMin": 32,
+    "substrate.sizeMax": 170,
+    "substrate.lifeMin": 200,
+    "substrate.lifeMax": 420,
+    "substrate.driftMin": 4,
+    "substrate.driftMax": 10,
+    "substrate.minPerRes": 3,
+    "column.chemRate": 6.5,
+    "column.photoRate": 2,
+    "cell.cystDragRate": 1.2,
+    "cell.cystDiffuse": 30,
+    "cell.cystMetab": 0.02,
+    "cell.cystBelow": 18,
+    "cell.cystWake": 50,
+    "cell.thrust": 15000,
+    "cell.dragRate": 70,
+    "cell.maxSpeed": 160,
+    "respirationBase": 0.6,
+    "predator.count": 2,
+    "predator.wanderSpeed": 14,
+    "predator.chaseSpeed": 24,
+    "predator.senseRange": 110,
+    "predator.metabolism": 6,
+    "predator.minCount": 1,
+    "phage.greenCount": 8,
+    "phage.goldCount": 2,
+    "phage.goldMinDist": 500
+  },
+  "particles": {
+    "matFall": {
+      "label": "Mat fragment",
+      "mix": [
+        0.2,
+        0.5,
+        0.3
+      ],
+      "shape": "aggregate",
+      "weight": 5
+    },
+    "iceFloc": {
+      "label": "Ice-rafted floc",
+      "mix": [
+        0.1,
+        0.2,
+        0.7
+      ],
+      "shape": "shard",
+      "weight": 3
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase",
+      "color": "#7fd6c2",
+      "weight": 2
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#d8a0e0",
+      "weight": 4
+    },
+    "enzyme2": {
+      "label": "Glycosidase",
+      "color": "#a8d16a",
+      "weight": 4
+    },
+    "chemotaxis": {
+      "label": "Methane-seep taxis",
+      "color": "#4ab0c9",
+      "weight": 6
+    },
+    "antibiotic": {
+      "label": "Bacteriocin",
+      "color": "#c94a4a",
+      "weight": 2
+    },
+    "eps": {
+      "label": "Cryoprotective sheath",
+      "color": "#cfe9ee",
+      "weight": 4
+    },
+    "crispr": {
+      "label": "CRISPR immunity",
+      "color": "#888888",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Pilus twitching",
+      "color": "#e0c050",
+      "weight": 1
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "methanoxidizer",
+        "label": "Methylobacter-type methanotroph",
+        "color": "#4ab0c9",
+        "genome": {
+          "enzLvl": [
+            0,
+            0,
+            1
+          ],
+          "chemoLevel": 3,
+          "antibiotic": 0,
+          "eps": 2,
+          "crispr": false,
+          "twitching": false,
+          "chemolithotroph": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "matscavenger",
+        "label": "Mat-edge heterotroph",
+        "color": "#d8a0e0",
+        "genome": {
+          "enzLvl": [
+            1,
+            3,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 2,
+          "crispr": true,
+          "twitching": false
+        },
+        "immigrateWeight": 4
+      }
+    ]
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": -1,
+        "salinity": 1,
+        "light": 0.25,
+        "nutrient": 0.2
+      },
+      {
+        "depth": 30,
+        "tempC": 0,
+        "salinity": 1,
+        "light": 0.08,
+        "nutrient": 0.3
+      },
+      {
+        "depth": 70,
+        "tempC": 2,
+        "salinity": 2,
+        "light": 0.01,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 100,
+        "tempC": 3,
+        "salinity": 3,
+        "light": 0,
+        "nutrient": 0.9
+      }
+    ],
+    "thermocline": {
+      "depth": 70,
+      "sharpness": 0.6
+    },
+    "chemical": {
+      "peakDepth": 0.85,
+      "spread": 0.18,
+      "strength": 0.9,
+      "color": "#3fa9c9"
+    }
+  },
+  "terrain": [
+    {
+      "at": "top",
+      "thickness": 300,
+      "color": "#dceef2",
+      "label": "Perennial lake ice (3-4m)",
+      "roughness": 0.15,
+      "porosity": 0.2,
+      "poreSize": 20,
+      "featureSize": 300,
+      "spires": 0,
+      "spireHeight": 0,
+      "spireWidth": 10,
+      "warp": 0
+    },
+    {
+      "at": "bottom",
+      "thickness": 150,
+      "color": "#2e2a22",
+      "label": "Anoxic sediment with methane seep vents",
+      "roughness": 0.5,
+      "porosity": 0.4,
+      "poreSize": 30,
+      "featureSize": 200,
+      "spires": 0.3,
+      "spireHeight": 180,
+      "spireWidth": 60,
+      "warp": 0.2
+    }
+  ],
+  "schema": "bacteria-scenario",
+  "version": 1
+}
