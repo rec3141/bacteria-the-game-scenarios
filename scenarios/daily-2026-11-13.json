@@ -1,0 +1,226 @@
+{
+  "meta": {
+    "title": "Cassie's Ledge: Alkalitrophs of a Serpentinite Spring",
+    "date": "2026-11-13",
+    "lesson": "At The Cedars, a serpentinizing seep in California, mantle rock reacting with water produces hydrogen gas and drives pH above 11 - some of the most extreme water chemistry on Earth's surface. There is almost no dissolved carbon and no sunlight reaches the spring mouth; the microbes that live here are hydrogenotrophic, pulling electrons from H2 to fix carbon chemosynthetically, surviving in water so caustic it would dissolve ordinary cell membranes. This level puts the chemical plume (your H2 source) deep near the rock face, forces a low-nutrient, low-food board befitting an ecosystem running on gas instead of organics, and gives the founder a chemolithotroph genome that must hug the vent face rather than roam for particles.",
+    "citation": "Suzuki et al. 2017 PNAS; Schrenk et al. 2013, The Cedars serpentinite-hosted ecosystem, California",
+    "difficulty": "hard",
+    "realWorldBasis": "The Cedars, Sonoma County CA - serpentinization-driven hyperalkaline springs (pH 11-12), hydrogen-fueled chemolithotrophy"
+  },
+  "env": {
+    "day.latitude": 38,
+    "day.dayOfYear": 172,
+    "diel.tempBase": 14,
+    "diel.tempAmp": 2,
+    "diel.foodFloor": 0.5,
+    "diel.waterDay.0": 40,
+    "diel.waterDay.1": 70,
+    "diel.waterDay.2": 50,
+    "diel.waterNight.0": 3,
+    "diel.waterNight.1": 10,
+    "diel.waterNight.2": 8,
+    "substrate.count": 42,
+    "substrate.sizeMin": 24,
+    "substrate.sizeMax": 110,
+    "substrate.lifeMin": 90,
+    "substrate.lifeMax": 200,
+    "substrate.driftMin": 4,
+    "substrate.driftMax": 10,
+    "respirationBase": 0.6,
+    "cell.startEnergy": 95,
+    "cell.divideThreshold": 190,
+    "cell.uptake": 10,
+    "cell.cystBelow": 20,
+    "cell.cystMetab": 0.02,
+    "cell.chemoRange0": 420,
+    "cell.chemoRangePer": 180,
+    "column.chemRate": 7.5,
+    "column.photoRate": 2,
+    "predator.count": 2,
+    "predator.senseRange": 110,
+    "predator.wanderSpeed": 14,
+    "predator.chaseSpeed": 24,
+    "predator.metabolism": 7,
+    "phage.greenCount": 8,
+    "phage.goldCount": 2
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Serpentine Floc",
+      "enzymeLabel": "Lipase (scavenged membrane debris)",
+      "color": "#4a7a6a"
+    },
+    {
+      "index": 1,
+      "label": "Mineral-Bound Protein Scraps",
+      "enzymeLabel": "Protease",
+      "color": "#8a7a5a"
+    },
+    {
+      "index": 2,
+      "label": "Carbonate Crust Carbohydrate",
+      "enzymeLabel": "Glycanase",
+      "color": "#c9c2a0"
+    }
+  ],
+  "particles": {
+    "floc1": {
+      "label": "Serpentine Floc Clump",
+      "mix": [
+        2,
+        1,
+        3
+      ],
+      "shape": "aggregate",
+      "weight": 5
+    },
+    "crust1": {
+      "label": "Carbonate Crust Flake",
+      "mix": [
+        0,
+        1,
+        5
+      ],
+      "shape": "shard",
+      "weight": 3
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase",
+      "color": "#5a9a80",
+      "weight": 3
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#a08850",
+      "weight": 3
+    },
+    "enzyme2": {
+      "label": "Glycanase",
+      "color": "#d8d0a0",
+      "weight": 4
+    },
+    "chemotaxis": {
+      "label": "H2-Seeking Taxis",
+      "color": "#66ddee",
+      "weight": 8
+    },
+    "antibiotic": {
+      "label": "Alkaline Bacteriocin",
+      "color": "#cc6688",
+      "weight": 2
+    },
+    "eps": {
+      "label": "Alkali-Resistant Sheath",
+      "color": "#ddeedd",
+      "weight": 4
+    },
+    "crispr": {
+      "label": "CRISPR Immunity",
+      "color": "#99ccff",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Rock-Face Twitching",
+      "color": "#bbaa88",
+      "weight": 2
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "hydrogenovibrio",
+        "label": "Serpentinite Hydrogenotroph",
+        "color": "#55ccee",
+        "genome": {
+          "enzLvl": [
+            0,
+            0,
+            1
+          ],
+          "chemoLevel": 3,
+          "antibiotic": 0,
+          "eps": 2,
+          "crispr": false,
+          "twitching": true,
+          "chemolithotroph": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "scavenger",
+        "label": "Opportunist Alkaliphile",
+        "color": "#ddaa66",
+        "genome": {
+          "enzLvl": [
+            1,
+            1,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      }
+    ]
+  },
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 260,
+      "color": "#8a9a8a",
+      "label": "Serpentinite Rock Face",
+      "roughness": 0.7,
+      "porosity": 0.4,
+      "poreSize": 30,
+      "featureSize": 300,
+      "spires": 0.3,
+      "spireHeight": 220,
+      "spireWidth": 70,
+      "warp": 0.15
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 15,
+        "salinity": 2,
+        "light": 0.3,
+        "nutrient": 0.1
+      },
+      {
+        "depth": 0.5,
+        "tempC": 14,
+        "salinity": 3,
+        "light": 0.08,
+        "nutrient": 0.2
+      },
+      {
+        "depth": 1,
+        "tempC": 13,
+        "salinity": 4,
+        "light": 0,
+        "nutrient": 0.5
+      }
+    ],
+    "thermocline": {
+      "depth": 0.6,
+      "sharpness": 0.3
+    },
+    "chemical": {
+      "peakDepth": 0.9,
+      "spread": 0.18,
+      "strength": 0.9,
+      "color": "#66ddee"
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}

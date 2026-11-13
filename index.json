@@ -916,6 +916,14 @@
       "file": "scenarios/daily-2026-11-12.json"
     },
     {
+      "id": "daily-2026-11-13",
+      "title": "Cassie's Ledge: Alkalitrophs of a Serpentinite Spring",
+      "date": "2026-11-13",
+      "difficulty": "hard",
+      "realWorldBasis": "The Cedars, Sonoma County CA - serpentinization-driven hyperalkaline springs (pH 11-12), hydrogen-fueled chemolithotrophy",
+      "file": "scenarios/daily-2026-11-13.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
