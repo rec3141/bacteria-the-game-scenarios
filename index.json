@@ -924,6 +924,14 @@
       "file": "scenarios/daily-2026-11-13.json"
     },
     {
+      "id": "daily-2026-11-14",
+      "title": "Posidonia Meadow: Sulfide Ambush in a Seagrass Rhizosphere",
+      "date": "2026-11-14",
+      "difficulty": "hard",
+      "realWorldBasis": "Posidonia oceanica meadow rhizosphere sulfide cycling, NW Mediterranean (e.g. Mallorca coastal meadows)",
+      "file": "scenarios/daily-2026-11-14.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
