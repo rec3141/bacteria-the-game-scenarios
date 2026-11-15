@@ -932,6 +932,14 @@
       "file": "scenarios/daily-2026-11-14.json"
     },
     {
+      "id": "daily-2026-11-15",
+      "title": "Sea Otter's Graveyard: Chitin Rush on a Kelp Urchin Barren",
+      "date": "2026-11-15",
+      "difficulty": "normal",
+      "realWorldBasis": "Sea otter decline -> purple urchin (Strongylocentrotus purpuratus) barren formation and die-off chitin pulses, central California kelp forest, ~15-20m depth",
+      "file": "scenarios/daily-2026-11-15.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",

@@ -1,0 +1,249 @@
+{
+  "meta": {
+    "title": "Sea Otter's Graveyard: Chitin Rush on a Kelp Urchin Barren",
+    "date": "2026-11-15",
+    "lesson": "When sea otters disappear from a kelp forest, purple sea urchins explode in number and mow down the kelp canopy, leaving a bare 'urchin barren'. But urchins also die in mass die-offs (disease, starvation after they exhaust the kelp), and each urchin test (shell) is loaded with chitin in its tube-feet and in the mouthparts of the decomposing crustacean fauna that used to live in the canopy. This scenario models the bacterial feast that follows an urchin die-off on a barren: chitinolytic copiotrophs (Vibrio- and Pseudoalteromonas-like) bloom fast on the falling chitin debris, racing grazing protists and a trailing phage bloom that eventually crashes the party - a smaller, shallower, colder echo of a whale-fall or squid-fall bonanza, but driven by a trophic cascade instead of a single carcass.",
+    "citation": "Estes & Palmisano 1974; Konar & Estes 2003 (urchin barrens); chitin-degrading Vibrio succession studies",
+    "difficulty": "normal",
+    "realWorldBasis": "Sea otter decline -> purple urchin (Strongylocentrotus purpuratus) barren formation and die-off chitin pulses, central California kelp forest, ~15-20m depth"
+  },
+  "env": {
+    "diel.tempBase": 12,
+    "diel.tempAmp": 2.5,
+    "diel.foodFloor": 0.4,
+    "diel.q10": 2,
+    "diel.q10RefC": 12,
+    "diel.waterDay.0": 20,
+    "diel.waterDay.1": 70,
+    "diel.waterDay.2": 60,
+    "diel.waterNight.0": 3,
+    "diel.waterNight.1": 12,
+    "diel.waterNight.2": 14,
+    "day.latitude": 36,
+    "day.dayOfYear": 260,
+    "day.lengthSec": 240,
+    "substrate.count": 95,
+    "substrate.sizeMin": 28,
+    "substrate.sizeMax": 170,
+    "substrate.sizeExp": 1.3,
+    "substrate.lifeMin": 90,
+    "substrate.lifeMax": 220,
+    "substrate.driftMin": 6,
+    "substrate.driftMax": 14,
+    "substrate.minPerRes": 3,
+    "enzyme.maxRadius": 30,
+    "enzyme.life": 6,
+    "cell.uptake": 16,
+    "cell.swimCost": 1.1,
+    "cell.startEnergy": 100,
+    "cell.divideThreshold": 165,
+    "cell.chemoRange0": 340,
+    "cell.chemoBias": 1.1,
+    "predator.count": 6,
+    "predator.senseRange": 190,
+    "predator.chaseSpeed": 46,
+    "predator.metabolism": 11,
+    "predator.mealEnergy": 55,
+    "phage.greenCount": 24,
+    "phage.goldCount": 3,
+    "phage.latent.0": 8,
+    "phage.latent.1": 13,
+    "phage.burst.0": 5,
+    "phage.burst.1": 10,
+    "phage.hostTolerance": 2,
+    "respirationBase": 0.95
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Urchin Gonad Lipid",
+      "enzymeLabel": "Lipase",
+      "color": "#d98c2e"
+    },
+    {
+      "index": 1,
+      "label": "Test & Tube-Foot Chitin",
+      "enzymeLabel": "Chitinase",
+      "color": "#8a5fd1"
+    },
+    {
+      "index": 2,
+      "label": "Kelp Detritus Sugars",
+      "enzymeLabel": "Laminarinase",
+      "color": "#4caf6b"
+    }
+  ],
+  "particles": {
+    "urchinTest": {
+      "label": "Collapsed Urchin Test",
+      "mix": [
+        15,
+        70,
+        15
+      ],
+      "shape": "shard",
+      "weight": 6
+    },
+    "kelpScrap": {
+      "label": "Shredded Kelp Blade",
+      "mix": [
+        10,
+        10,
+        80
+      ],
+      "shape": "aggregate",
+      "weight": 3
+    },
+    "crabMolt": {
+      "label": "Scavenger Crab Molt",
+      "mix": [
+        5,
+        85,
+        10
+      ],
+      "shape": "shard",
+      "weight": 2
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase Burst",
+      "color": "#d98c2e",
+      "weight": 3
+    },
+    "enzyme1": {
+      "label": "Chitinase Burst",
+      "color": "#8a5fd1",
+      "weight": 8
+    },
+    "enzyme2": {
+      "label": "Laminarinase Burst",
+      "color": "#4caf6b",
+      "weight": 4
+    },
+    "chemotaxis": {
+      "label": "Chitin Taxis",
+      "color": "#c9a6ff",
+      "weight": 6
+    },
+    "antibiotic": {
+      "label": "Bacteriocin Spray",
+      "color": "#ff5566",
+      "weight": 3
+    },
+    "eps": {
+      "label": "Biofilm Slick",
+      "color": "#a0a0a0",
+      "weight": 3
+    },
+    "crispr": {
+      "label": "CRISPR Immunity",
+      "color": "#55ccff",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Pilus Twitch",
+      "color": "#ffcc55",
+      "weight": 4
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "vibrio_barren",
+        "label": "Chitinolytic Vibrio",
+        "color": "#8a5fd1",
+        "genome": {
+          "enzLvl": [
+            1,
+            3,
+            2
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 7
+      },
+      {
+        "id": "pseudoalt_barren",
+        "label": "Pseudoalteromonas Scavenger",
+        "color": "#5fa0d1",
+        "genome": {
+          "enzLvl": [
+            2,
+            2,
+            1
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 0,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 4
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "pennate_barren",
+        "label": "Epiphytic Pennate Diatom",
+        "color": "#7fcf9f",
+        "form": "pennate",
+        "sizeUm": 35,
+        "chain": 2,
+        "count": 25
+      }
+    ]
+  },
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 140,
+      "color": "#776655",
+      "label": "Urchin Barren Rock & Shell Hash",
+      "roughness": 0.55,
+      "porosity": 0.3,
+      "poreSize": 30,
+      "featureSize": 300,
+      "spires": 0.15,
+      "spireHeight": 120,
+      "spireWidth": 60,
+      "warp": 0.2
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 13.5,
+        "salinity": 33,
+        "light": 0.9,
+        "nutrient": 0.4
+      },
+      {
+        "depth": 0.5,
+        "tempC": 12,
+        "salinity": 33.2,
+        "light": 0.5,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 1,
+        "tempC": 10.5,
+        "salinity": 33.5,
+        "light": 0.15,
+        "nutrient": 0.8
+      }
+    ],
+    "thermocline": {
+      "depth": 0.55,
+      "sharpness": 0.4
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}
