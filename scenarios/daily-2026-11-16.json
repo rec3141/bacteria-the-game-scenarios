@@ -1,0 +1,238 @@
+{
+  "actions": {
+    "enzyme0": {
+      "label": "Alkane hydroxylase",
+      "color": "#e8a33d",
+      "weight": 6
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#c9524a",
+      "weight": 4
+    },
+    "enzyme2": {
+      "label": "Chitinase",
+      "color": "#4ac9a0",
+      "weight": 3
+    },
+    "chemotaxis": {
+      "label": "Chemotaxis",
+      "color": "#9ad1ff",
+      "weight": 5
+    },
+    "antibiotic": {
+      "label": "Bacteriocin",
+      "color": "#b26fe0",
+      "weight": 3
+    },
+    "eps": {
+      "label": "Biofilm EPS",
+      "color": "#d9c65a",
+      "weight": 3
+    },
+    "crispr": {
+      "label": "CRISPR immunity",
+      "color": "#7fffd4",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Twitching motility",
+      "color": "#ff8fb3",
+      "weight": 2
+    }
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 24,
+        "salinity": 36,
+        "light": 0.9,
+        "nutrient": 0.2
+      },
+      {
+        "depth": 0.3,
+        "tempC": 22,
+        "salinity": 36,
+        "light": 0.5,
+        "nutrient": 0.4
+      },
+      {
+        "depth": 0.6,
+        "tempC": 19,
+        "salinity": 36.5,
+        "light": 0.15,
+        "nutrient": 0.7
+      },
+      {
+        "depth": 1,
+        "tempC": 16,
+        "salinity": 37,
+        "light": 0.02,
+        "nutrient": 0.9
+      }
+    ],
+    "thermocline": {
+      "depth": 0.5,
+      "sharpness": 0.6
+    }
+  },
+  "env": {
+    "diel.tempBase": 21,
+    "diel.tempAmp": 3,
+    "diel.foodFloor": 0.4,
+    "diel.q10": 2.1,
+    "substrate.count": 95,
+    "substrate.sizeMin": 34,
+    "substrate.sizeMax": 190,
+    "substrate.lifeMin": 100,
+    "substrate.lifeMax": 260,
+    "substrate.driftMin": 6,
+    "substrate.driftMax": 14,
+    "enzyme.maxRadius": 30,
+    "enzyme.life": 6,
+    "cell.chemoRange0": 360,
+    "cell.chemoBias": 1.1,
+    "cell.uptake": 16,
+    "cell.startEnergy": 100,
+    "cell.divideThreshold": 165,
+    "respirationBase": 0.95,
+    "predator.count": 5,
+    "predator.senseRange": 190,
+    "predator.chaseSpeed": 46,
+    "phage.greenCount": 22,
+    "phage.goldCount": 3,
+    "phage.hostTolerance": 2,
+    "day.lengthSec": 260,
+    "day.latitude": 27,
+    "day.dayOfYear": 200,
+    "diel.waterDay.0": 20,
+    "diel.waterDay.1": 90,
+    "diel.waterDay.2": 80,
+    "diel.waterNight.0": 3,
+    "diel.waterNight.1": 12,
+    "diel.waterNight.2": 18
+  },
+  "meta": {
+    "title": "Slick and Seam: Alcanivorax Rides the Oil-Snow Column",
+    "date": "2026-11-16",
+    "lesson": "When oil spills into the open ocean it doesn't just sit on the surface — weathered droplets aggregate with mucus and dead plankton into 'marine oil snow' that sinks, carrying hydrocarbon-degrading specialists like Alcanivorax down through the water column. These obligate oil-eaters carry alkane hydroxylase to crack the lipid chains others can't touch, giving them a near-monopoly on a sudden lipid-rich food source — but that advantage evaporates as the slick disperses and ordinary protein/carbohydrate feeders retake the column. This level asks you to ride that narrow window: dominate the lipid class while it lasts, sense your way down the thermocline toward where nutrient-rich deep water is mixing up into the slick's base, and survive the grazers and phage that build up around any sudden bloom.",
+    "citation": "Deepwater Horizon spill marine-oil-snow sedimentation (MOSSFA) studies, Gulf of Mexico, 2010-2015.",
+    "difficulty": "hard",
+    "realWorldBasis": "Deepwater Horizon oil spill, Gulf of Mexico - marine oil snow sedimentation and Alcanivorax/Oleispira bloom dynamics"
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "alcanivorax",
+        "label": "Alcanivorax borkumensis",
+        "color": "#e8a33d",
+        "genome": {
+          "enzLvl": [
+            3,
+            1,
+            1
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "oleispira",
+        "label": "Oleispira antarctica",
+        "color": "#f2c078",
+        "genome": {
+          "enzLvl": [
+            2,
+            0,
+            1
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 0,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 3
+      },
+      {
+        "id": "copiotroph",
+        "label": "Generalist copiotroph",
+        "color": "#7fa6c9",
+        "genome": {
+          "enzLvl": [
+            1,
+            2,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 0,
+          "crispr": true,
+          "twitching": false
+        },
+        "immigrateWeight": 4
+      }
+    ]
+  },
+  "particles": {
+    "oilDroplet": {
+      "label": "Weathered oil-snow floc",
+      "mix": [
+        80,
+        10,
+        10
+      ],
+      "shape": "aggregate",
+      "weight": 7
+    },
+    "marineSnow": {
+      "label": "Mucus-plankton marine snow",
+      "mix": [
+        30,
+        35,
+        35
+      ],
+      "shape": "aggregate",
+      "weight": 5
+    },
+    "planktonDebris": {
+      "label": "Dead plankton shard",
+      "mix": [
+        15,
+        55,
+        30
+      ],
+      "shape": "shard",
+      "weight": 3
+    }
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Weathered hydrocarbons",
+      "enzymeLabel": "Alkane hydroxylase",
+      "color": "#e8a33d"
+    },
+    {
+      "index": 1,
+      "label": "Plankton protein",
+      "enzymeLabel": "Protease",
+      "color": "#c9524a"
+    },
+    {
+      "index": 2,
+      "label": "Mucus carbohydrate",
+      "enzymeLabel": "Chitinase",
+      "color": "#4ac9a0"
+    }
+  ],
+  "schema": "bacteria-scenario",
+  "terrain": [],
+  "version": 1
+}
