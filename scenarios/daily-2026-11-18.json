@@ -1,0 +1,285 @@
+{
+  "meta": {
+    "title": "Cave Lake Halocline: Sulfide Harvest in a Yucatán Cenote",
+    "date": "2026-11-18",
+    "lesson": "In the flooded caves of the Yucatán Peninsula, fresh meteoric water floats atop intruding saline groundwater, forming a sharp halocline. Just below it, rotting leaf litter and root mat create a thin anoxic, sulfide-rich layer sandwiched between dim cave-filtered light above and total darkness below. Here, purple and green sulfur bacteria exploit a rare double resource: enough stray light leaking down through the cenote's open mouth to drive photosynthesis, and enough sulfide seeping up from decomposing organic matter to power it anoxygenically. The two gradients overlap only in a narrow band - move too high and sulfide runs out, too low and light does. This teaches how anoxygenic phototrophs are squeezed into knife-edge niches by two independently-sourced resources that must physically intersect, exactly as in a Winogradsky column but written into real cave geology.",
+    "citation": "Based on studies of Yucatán cenote haloclines and sulfur bacteria plates (e.g. Angelita cenote 'river of hydrogen sulfide').",
+    "difficulty": "hard",
+    "realWorldBasis": "Yucatán Peninsula anchialine cenotes (e.g. Cenote Angelita), halocline sulfide layers"
+  },
+  "env": {
+    "day.lengthSec": 260,
+    "day.latitude": 20,
+    "day.dayOfYear": 172,
+    "diel.tempBase": 24,
+    "diel.tempAmp": 1.5,
+    "diel.foodFloor": 0.4,
+    "diel.q10": 2.1,
+    "diel.lightGamma": 3.2,
+    "diel.twilight": 0.3,
+    "diel.waterNight.0": 3,
+    "diel.waterNight.1": 6,
+    "diel.waterNight.2": 10,
+    "diel.waterDay.0": 40,
+    "diel.waterDay.1": 55,
+    "diel.waterDay.2": 38,
+    "diel.goldTint": 0.22,
+    "substrate.count": 70,
+    "substrate.sizeMin": 26,
+    "substrate.sizeMax": 160,
+    "substrate.lifeMin": 160,
+    "substrate.lifeMax": 340,
+    "substrate.driftMin": 4,
+    "substrate.driftMax": 10,
+    "substrate.minPerRes": 3,
+    "column.chemRate": 6.5,
+    "column.photoRate": 5.5,
+    "cell.thrust": 15000,
+    "cell.dragRate": 70,
+    "cell.maxSpeed": 160,
+    "cell.swimCost": 0.9,
+    "respirationBase": 0.75,
+    "cell.cystBelow": 18,
+    "cell.cystMetab": 0.025,
+    "predator.count": 3,
+    "predator.wanderSpeed": 16,
+    "predator.chaseSpeed": 28,
+    "predator.senseRange": 130,
+    "predator.metabolism": 7,
+    "phage.greenCount": 10,
+    "phage.goldCount": 3,
+    "phage.goldMinDist": 500
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Decaying Leaf Lipids",
+      "enzymeLabel": "Lipase (leaf-wax)",
+      "color": "#5a4a2e"
+    },
+    {
+      "index": 1,
+      "label": "Root-Mat Protein",
+      "enzymeLabel": "Protease",
+      "color": "#7a6b4f"
+    },
+    {
+      "index": 2,
+      "label": "Detrital Carbohydrate",
+      "enzymeLabel": "Glycosidase",
+      "color": "#8a9a5b"
+    }
+  ],
+  "particles": {
+    "leafFloc": {
+      "label": "Leaf-litter floc",
+      "mix": [
+        5,
+        2,
+        3
+      ],
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 6
+    },
+    "rootShred": {
+      "label": "Root-mat shred",
+      "mix": [
+        1,
+        5,
+        2
+      ],
+      "shape": "shard",
+      "squash": 0.6,
+      "weight": 4
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase",
+      "color": "#c9a24a",
+      "weight": 4
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#cf7e3a",
+      "weight": 4
+    },
+    "enzyme2": {
+      "label": "Glycosidase",
+      "color": "#9fb04a",
+      "weight": 5
+    },
+    "chemotaxis": {
+      "label": "Sulfide/Light Taxis",
+      "color": "#b14fd6",
+      "weight": 7
+    },
+    "antibiotic": {
+      "label": "Bacteriocin",
+      "color": "#d6395a",
+      "weight": 3
+    },
+    "eps": {
+      "label": "Mucilage Sheath",
+      "color": "#5ac9b0",
+      "weight": 4
+    },
+    "crispr": {
+      "label": "CRISPR Immunity",
+      "color": "#4fa3d6",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Twitching Pili",
+      "color": "#d6c24f",
+      "weight": 2
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "purpleSulfur",
+        "label": "Purple Sulfur Bacterium",
+        "color": "#8e2a8f",
+        "genome": {
+          "enzLvl": [
+            1,
+            1,
+            2
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false,
+          "phototroph": true,
+          "chemolithotroph": true
+        },
+        "immigrateWeight": 5
+      },
+      {
+        "id": "greenSulfur",
+        "label": "Green Sulfur Bacterium",
+        "color": "#2e7d4f",
+        "genome": {
+          "enzLvl": [
+            0,
+            1,
+            2
+          ],
+          "chemoLevel": 3,
+          "antibiotic": 0,
+          "eps": 0,
+          "crispr": false,
+          "twitching": false,
+          "phototroph": true,
+          "chemolithotroph": true
+        },
+        "immigrateWeight": 3
+      },
+      {
+        "id": "heterotroph",
+        "label": "Cave Heterotroph",
+        "color": "#8a7355",
+        "genome": {
+          "enzLvl": [
+            2,
+            2,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 1,
+          "crispr": true,
+          "twitching": false
+        },
+        "immigrateWeight": 4
+      }
+    ],
+    "diatoms": []
+  },
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 220,
+      "color": "#3a2e22",
+      "label": "Leaf-litter and root mat floor",
+      "roughness": 0.5,
+      "porosity": 0.45,
+      "poreSize": 40,
+      "featureSize": 300,
+      "spires": 0,
+      "spireHeight": 0,
+      "spireWidth": 10,
+      "warp": 0.35
+    },
+    {
+      "at": "top",
+      "thickness": 60,
+      "color": "#bcd4c8",
+      "label": "Cenote mouth / freshwater lens",
+      "roughness": 0.15,
+      "porosity": 0.05,
+      "poreSize": 10,
+      "featureSize": 500,
+      "spires": 0,
+      "spireHeight": 0,
+      "spireWidth": 10,
+      "warp": 0
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 25,
+        "salinity": 1,
+        "light": 0.95,
+        "nutrient": 0.15
+      },
+      {
+        "depth": 0.3,
+        "tempC": 25,
+        "salinity": 2,
+        "light": 0.6,
+        "nutrient": 0.2
+      },
+      {
+        "depth": 0.5,
+        "tempC": 24,
+        "salinity": 25,
+        "light": 0.25,
+        "nutrient": 0.5
+      },
+      {
+        "depth": 0.65,
+        "tempC": 23.5,
+        "salinity": 32,
+        "light": 0.08,
+        "nutrient": 0.85
+      },
+      {
+        "depth": 0.8,
+        "tempC": 23,
+        "salinity": 36,
+        "light": 0.02,
+        "nutrient": 0.95
+      },
+      {
+        "depth": 1,
+        "tempC": 22.5,
+        "salinity": 38,
+        "light": 0,
+        "nutrient": 0.7
+      }
+    ],
+    "thermocline": {
+      "depth": 0.5,
+      "sharpness": 0.8
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}
