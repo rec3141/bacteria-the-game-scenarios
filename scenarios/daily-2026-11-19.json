@@ -1,0 +1,241 @@
+{
+  "meta": {
+    "title": "Snottite Siege: Sulfuric Acid Caves of the Frasassi",
+    "date": "2026-11-19",
+    "lesson": "In the Frasassi cave system of Italy, hydrogen sulfide rising from deep aquifers meets cave air and is oxidized by Acidithiobacillus-type bacteria hanging from the ceiling in dripping biofilm 'snottites.' The reaction produces sulfuric acid strong enough to dissolve limestone (pH below 1), carving the cave itself. These extremophiles get no light and no organic food from outside - they are chemolithotrophs living entirely off the sulfide plume seeping from the rock. The lesson: in this engine a chemolithotroph never digests a particle, it must simply sit inside the chemical plume (here set to peak at the cave ceiling) to fix carbon, and it survives extreme acidity because it IS the acid - any competitor without matching resistance gets dissolved by its own waste.",
+    "citation": "Macalady et al. 2006, Env. Microbiol.; Jones et al. 2012, ISME J. - Frasassi Caves snottite biofilms",
+    "difficulty": "hard",
+    "realWorldBasis": "Frasassi Caves, Italy - sulfuric acid speleogenesis by snottite biofilms (Acidithiobacillus/Acidithiobacillus-like autotrophs)"
+  },
+  "env": {
+    "day.lengthSec": 260,
+    "day.latitude": 43,
+    "day.dayOfYear": 172,
+    "diel.tempBase": 13,
+    "diel.tempAmp": 1.5,
+    "diel.foodFloor": 0.5,
+    "diel.q10": 1.6,
+    "diel.waterNight.0": 3,
+    "diel.waterNight.1": 2,
+    "diel.waterNight.2": 1,
+    "diel.waterDay.0": 40,
+    "diel.waterDay.1": 30,
+    "diel.waterDay.2": 10,
+    "diel.lightGamma": 4,
+    "substrate.count": 50,
+    "substrate.sizeMin": 24,
+    "substrate.sizeMax": 110,
+    "substrate.lifeMin": 90,
+    "substrate.lifeMax": 200,
+    "substrate.driftMin": 4,
+    "substrate.driftMax": 10,
+    "respirationBase": 1.1,
+    "column.chemRate": 7,
+    "toxin.dose": 90,
+    "toxin.potency": 35,
+    "toxin.crossDist": 1,
+    "toxin.crossFactor": 1.6,
+    "toxin.life": 6,
+    "toxin.maxRadius": 55,
+    "predator.count": 2,
+    "predator.senseRange": 110,
+    "predator.wanderSpeed": 14,
+    "predator.chaseSpeed": 24,
+    "predator.metabolism": 14,
+    "predator.minCount": 1,
+    "predator.resistMax": 0.3,
+    "phage.greenCount": 10,
+    "phage.goldCount": 3,
+    "phage.goldMinDist": 500,
+    "cell.cystBelow": 20,
+    "cell.cystMetab": 0.02,
+    "cell.swimCost": 1.6,
+    "cell.uptake": 10
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Biofilm Lipid Droplet",
+      "enzymeLabel": "Lipase",
+      "color": "#998833"
+    },
+    {
+      "index": 1,
+      "label": "Dead Microbial Mat Protein",
+      "enzymeLabel": "Protease",
+      "color": "#aa6655"
+    },
+    {
+      "index": 2,
+      "label": "Limestone-Leached Carbohydrate Film",
+      "enzymeLabel": "Carbohydrase",
+      "color": "#c9b896"
+    }
+  ],
+  "particles": {
+    "snot1": {
+      "label": "Dripping Biofilm Clump",
+      "mix": [
+        2,
+        5,
+        2
+      ],
+      "shape": "aggregate",
+      "weight": 6
+    },
+    "mat1": {
+      "label": "Dead Mat Fragment",
+      "mix": [
+        1,
+        4,
+        1
+      ],
+      "shape": "shard",
+      "weight": 4
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase",
+      "color": "#998833",
+      "weight": 3
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#aa6655",
+      "weight": 5
+    },
+    "enzyme2": {
+      "label": "Carbohydrase",
+      "color": "#c9b896",
+      "weight": 4
+    },
+    "antibiotic": {
+      "label": "Sulfuric Acid Burst",
+      "color": "#ffee33",
+      "weight": 8
+    },
+    "chemotaxis": {
+      "label": "Sulfide Seeking",
+      "color": "#88ff66",
+      "weight": 6
+    },
+    "eps": {
+      "label": "Acid-Resistant Sheath",
+      "color": "#ddddaa",
+      "weight": 5
+    },
+    "crispr": {
+      "label": "Phage Immunity",
+      "color": "#66ccff",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Ceiling Grip",
+      "color": "#cc99ff",
+      "weight": 3
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "acidithio",
+        "label": "Acidithiobacillus Snottite Dweller",
+        "color": "#ffee33",
+        "genome": {
+          "enzLvl": [
+            1,
+            2,
+            1
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 3,
+          "eps": 3,
+          "crispr": false,
+          "twitching": true,
+          "chemolithotroph": true
+        },
+        "immigrateWeight": 7
+      },
+      {
+        "id": "heterotroph1",
+        "label": "Opportunist Scavenger Bacterium",
+        "color": "#aa8855",
+        "genome": {
+          "enzLvl": [
+            1,
+            2,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      }
+    ]
+  },
+  "terrain": [
+    {
+      "at": "top",
+      "thickness": 220,
+      "color": "#8a7a5c",
+      "label": "Limestone Cave Ceiling (Snottite-Hung)",
+      "roughness": 0.75,
+      "porosity": 0.45,
+      "poreSize": 30,
+      "featureSize": 260,
+      "spires": 0.2,
+      "spireHeight": 180,
+      "spireWidth": 50,
+      "warp": 0.3
+    },
+    {
+      "at": "bottom",
+      "thickness": 140,
+      "color": "#6b5a42",
+      "label": "Acid-Etched Cave Floor Sediment",
+      "roughness": 0.5,
+      "porosity": 0.25,
+      "poreSize": 18,
+      "featureSize": 180,
+      "warp": 0.1
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 13,
+        "salinity": 1,
+        "light": 0,
+        "nutrient": 0.2
+      },
+      {
+        "depth": 0.5,
+        "tempC": 13,
+        "salinity": 1,
+        "light": 0,
+        "nutrient": 0.4
+      },
+      {
+        "depth": 1,
+        "tempC": 14,
+        "salinity": 1,
+        "light": 0,
+        "nutrient": 0.9
+      }
+    ],
+    "chemical": {
+      "peakDepth": 0.05,
+      "spread": 0.18,
+      "strength": 0.95,
+      "color": "#ffee33"
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}
