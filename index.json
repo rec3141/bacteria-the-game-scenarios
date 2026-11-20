@@ -972,6 +972,14 @@
       "file": "scenarios/daily-2026-11-19.json"
     },
     {
+      "id": "daily-2026-11-20",
+      "title": "Snowmelt Lens: Nitrogen Fixers Trapped Under Baffin Bay Ice",
+      "date": "2026-11-20",
+      "difficulty": "hard",
+      "realWorldBasis": "Baffin Bay land-fast ice spring melt, under-ice meltwater lens microbiology",
+      "file": "scenarios/daily-2026-11-20.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
