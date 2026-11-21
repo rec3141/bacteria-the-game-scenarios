@@ -1,0 +1,181 @@
+{
+  "actions": {
+    "enzyme0": {
+      "label": "Chitinase",
+      "color": "#e0a030",
+      "weight": 6
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#d1455b",
+      "weight": 4
+    },
+    "enzyme2": {
+      "label": "Agarase",
+      "color": "#4fae6a",
+      "weight": 2
+    },
+    "chemotaxis": {
+      "label": "Chemotaxis",
+      "color": "#8fd3ff",
+      "weight": 5
+    },
+    "antibiotic": {
+      "label": "Bacteriocin",
+      "color": "#b36bff",
+      "weight": 3
+    },
+    "eps": {
+      "label": "Capsule EPS",
+      "color": "#9adbc4",
+      "weight": 3
+    },
+    "crispr": {
+      "label": "CRISPR Immunity",
+      "color": "#ffd166",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Pilus Twitch",
+      "color": "#ff9f6b",
+      "weight": 4
+    }
+  },
+  "meta": {
+    "title": "Molt Rush: Chitin Bloom in a Caspian Shallows Die-off",
+    "date": "2026-11-21",
+    "lesson": "When brine shrimp and amphipods molt or die en masse in autumn in the shallow northern Caspian shelf, their chitinous exoskeletons sink and create a sudden pulse of a normally scarce polymer. Chitinolytic bacteria specialized for this brackish, low-salinity inland sea respond fast, since chitin is their dominant carbon source here rather than the protein/lipid mix typical of the open ocean. Because the Caspian is isolated and endemic lineages are genetically distant from marine relatives, cross-reactive antibiotics and viruses behave differently than textbook marine examples. This level asks you to specialize digestion on chitin (carbohydrate-class) while surviving opportunistic grazers and phage pressure in a confined, nutrient-pulsed shelf habitat.",
+    "citation": "Based on reports of seasonal crustacean die-offs and endemic bacterial chitin degradation in the shallow northern Caspian Sea shelf.",
+    "difficulty": "normal",
+    "realWorldBasis": "Northern Caspian Sea shallow shelf, autumn brine-shrimp/amphipod die-off, endemic brackish-water chitinolytic bacteria"
+  },
+  "env": {
+    "substrate.count": 78,
+    "substrate.sizeMin": 34,
+    "substrate.sizeMax": 170,
+    "substrate.minPerRes": 3,
+    "substrate.lifeMin": 90,
+    "substrate.lifeMax": 220,
+    "substrate.driftMin": 6,
+    "substrate.driftMax": 14,
+    "diel.tempBase": 14,
+    "diel.tempAmp": 7,
+    "diel.foodFloor": 0.3,
+    "diel.q10": 2.2,
+    "diel.waterDay.0": 40,
+    "diel.waterDay.1": 70,
+    "diel.waterDay.2": 58,
+    "diel.waterNight.0": 4,
+    "diel.waterNight.1": 11,
+    "diel.waterNight.2": 16,
+    "day.latitude": 46,
+    "day.dayOfYear": 280,
+    "day.lengthSec": 220,
+    "predator.count": 5,
+    "predator.senseRange": 150,
+    "predator.metabolism": 12,
+    "predator.mealEnergy": 50,
+    "phage.greenCount": 14,
+    "phage.goldCount": 3,
+    "phage.hostTolerance": 2,
+    "cell.enzymeCost": 4.5,
+    "respirationBase": 1
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "chitinovorax",
+        "label": "Caspiibacter chitinovorax",
+        "color": "#e0a030",
+        "genome": {
+          "enzLvl": [
+            1,
+            1,
+            3
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "opportunist",
+        "label": "Brackish Pseudoalteromonas sp.",
+        "color": "#d1455b",
+        "genome": {
+          "enzLvl": [
+            2,
+            2,
+            1
+          ],
+          "chemoLevel": 0,
+          "antibiotic": 1,
+          "eps": 0,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      }
+    ]
+  },
+  "particles": {
+    "molt0": {
+      "label": "Brine Shrimp Molt",
+      "mix": [
+        0,
+        10,
+        85
+      ],
+      "shape": "shard",
+      "squash": 0.6,
+      "weight": 7
+    },
+    "molt1": {
+      "label": "Amphipod Carcass",
+      "mix": [
+        5,
+        25,
+        70
+      ],
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 5
+    },
+    "silt": {
+      "label": "Silt-bound Detritus",
+      "mix": [
+        10,
+        10,
+        80
+      ],
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 3
+    }
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid Film",
+      "enzymeLabel": "Lipase",
+      "color": "#6b93d1"
+    },
+    {
+      "index": 1,
+      "label": "Shrimp Protein",
+      "enzymeLabel": "Protease",
+      "color": "#d1455b"
+    },
+    {
+      "index": 2,
+      "label": "Chitin Shell",
+      "enzymeLabel": "Chitinase",
+      "color": "#e0a030"
+    }
+  ],
+  "schema": "bacteria-scenario",
+  "version": 1
+}
