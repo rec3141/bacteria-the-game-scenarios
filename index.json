@@ -988,6 +988,14 @@
       "file": "scenarios/daily-2026-11-21.json"
     },
     {
+      "id": "daily-2026-11-22",
+      "title": "Drift Ice Return: Pseudomonas Wake-Up in the North Water Polynya",
+      "date": "2026-11-22",
+      "difficulty": "normal",
+      "realWorldBasis": "North Water Polynya (Pikialasorsuaq), Nares Strait/Baffin Bay, Arctic spring transition",
+      "file": "scenarios/daily-2026-11-22.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
