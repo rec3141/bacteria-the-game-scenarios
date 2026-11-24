@@ -1004,6 +1004,14 @@
       "file": "scenarios/daily-2026-11-23.json"
     },
     {
+      "id": "daily-2026-11-24",
+      "title": "Snow Algae Burst: Microbial Life in a High-Arctic Meltwater Pond",
+      "date": "2026-11-24",
+      "difficulty": "normal",
+      "realWorldBasis": "High-Arctic supraglacial meltwater pond, summer continuous daylight, oligotrophic ice-surface microbial community",
+      "file": "scenarios/daily-2026-11-24.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
