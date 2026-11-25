@@ -1,0 +1,280 @@
+{
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase (membrane lipid scavenger)",
+      "color": "#e8c468",
+      "weight": 5
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#d96b6b",
+      "weight": 4
+    },
+    "enzyme2": {
+      "label": "Chitinase",
+      "color": "#6bd9a0",
+      "weight": 3
+    },
+    "chemotaxis": {
+      "label": "Brine-channel chemotaxis",
+      "color": "#8fd1e8",
+      "weight": 5
+    },
+    "antibiotic": {
+      "label": "Psychrophilic bacteriocin",
+      "color": "#b48ce8",
+      "weight": 3
+    },
+    "eps": {
+      "label": "Cryoprotective EPS sheath",
+      "color": "#c9e8f0",
+      "weight": 6
+    },
+    "crispr": {
+      "label": "CRISPR immunity",
+      "color": "#9fe89f",
+      "weight": 3
+    },
+    "twitching": {
+      "label": "Twitching (pore-gripping pili)",
+      "color": "#e8a0d9",
+      "weight": 2
+    }
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": -18,
+        "salinity": 55,
+        "light": 0.55,
+        "nutrient": 0.4
+      },
+      {
+        "depth": 0.3,
+        "tempC": -8,
+        "salinity": 40,
+        "light": 0.3,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 0.6,
+        "tempC": -2,
+        "salinity": 25,
+        "light": 0.08,
+        "nutrient": 0.75
+      },
+      {
+        "depth": 1,
+        "tempC": -1.8,
+        "salinity": 10,
+        "light": 0.02,
+        "nutrient": 0.5
+      }
+    ],
+    "thermocline": {
+      "depth": 0.35,
+      "sharpness": 0.7
+    }
+  },
+  "env": {
+    "day.lengthSec": 300,
+    "day.latitude": 78,
+    "day.dayOfYear": 60,
+    "day.startHour": 9,
+    "diel.tempBase": -10,
+    "diel.tempAmp": 4,
+    "diel.foodFloor": 0.5,
+    "diel.q10": 2.4,
+    "diel.q10RefC": -5,
+    "diel.waterNight.0": 3,
+    "diel.waterNight.1": 12,
+    "diel.waterNight.2": 28,
+    "diel.waterDay.0": 40,
+    "diel.waterDay.1": 90,
+    "diel.waterDay.2": 110,
+    "diel.lightGamma": 1.3,
+    "diel.twilight": 0.4,
+    "diel.grazeNight": 0.6,
+    "respirationBase": 0.55,
+    "substrate.count": 80,
+    "substrate.sizeMin": 28,
+    "substrate.sizeMax": 170,
+    "substrate.lifeMin": 220,
+    "substrate.lifeMax": 420,
+    "substrate.driftMin": 4,
+    "substrate.driftMax": 9,
+    "substrate.bloomEvery": 0.7,
+    "substrate.minPerRes": 3,
+    "cell.dragRate": 90,
+    "cell.maxSpeed": 150,
+    "cell.thrust": 13500,
+    "cell.swimCost": 0.9,
+    "cell.cystBelow": 20,
+    "cell.cystWake": 38,
+    "cell.cystMetab": 0.02,
+    "cell.cystDiffuse": 35,
+    "cell.chemoRange0": 360,
+    "cell.chemoRangePer": 160,
+    "cell.fedLinger": 3,
+    "eps.lifePerLevel": 6,
+    "eps.cost": 3.2,
+    "predator.count": 3,
+    "predator.wanderSpeed": 14,
+    "predator.chaseSpeed": 24,
+    "predator.senseRange": 130,
+    "predator.metabolism": 7,
+    "predator.minCount": 1,
+    "phage.greenCount": 10,
+    "phage.goldCount": 3,
+    "phage.latent.0": 14,
+    "phage.latent.1": 22
+  },
+  "meta": {
+    "title": "Brine Channel Refuge: Psychrophiles of Winter Fast Ice",
+    "date": "2026-11-25",
+    "lesson": "Antarctic fast ice in deep winter is not a solid block but a sponge threaded with brine channels - liquid veins where salt concentrates as seawater freezes, down to temperatures and salinities that would kill a temperate microbe outright. Here, psychrophilic bacteria persist through months of near-total darkness by clinging to particle surfaces, sheltering in the porous channel network, and switching to dormancy when the channels narrow and freeze further. This scenario asks the player to find and work the oxic, nutrient-concentrated brine pockets within an icy, twitching-friendly matrix, use EPS as cryoprotection against the osmotic violence of freezing brine, and survive on a trickle of food under a long low-angle polar night sun with almost no grazing pressure to compensate for the cold.",
+    "citation": "Junge, K. et al. (2004) 'Bacterial Activity, Colony-Forming Units, and Community Composition in Arctic and Antarctic Sea Ice', Microb Ecol; Deming, J.W. (2010) psychrophile brine channel reviews",
+    "difficulty": "hard",
+    "realWorldBasis": "Antarctic land-fast sea ice brine channel microbial communities in deep winter (McMurdo Sound region)"
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "psychro1",
+        "label": "Colwellia-like psychrophile",
+        "color": "#8fd1e8",
+        "genome": {
+          "enzLvl": [
+            2,
+            1,
+            2
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 2,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "shewie",
+        "label": "Shewanella-like opportunist",
+        "color": "#c9e8f0",
+        "genome": {
+          "enzLvl": [
+            1,
+            2,
+            1
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 1,
+          "crispr": true,
+          "twitching": false
+        },
+        "immigrateWeight": 3
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "frag1",
+        "label": "Fragilariopsis ice diatom",
+        "color": "#6bd9a0",
+        "form": "pennate",
+        "sizeUm": 40,
+        "chain": 6,
+        "count": 25
+      }
+    ]
+  },
+  "particles": {
+    "brineFloc": {
+      "label": "Brine-concentrated organic floc",
+      "mix": [
+        55,
+        25,
+        20
+      ],
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 7
+    },
+    "iceAlgaeDebris": {
+      "label": "Dead ice-algae debris",
+      "mix": [
+        15,
+        20,
+        65
+      ],
+      "shape": "shard",
+      "squash": 1,
+      "weight": 4
+    },
+    "sealedPocket": {
+      "label": "Sealed nutrient pocket",
+      "mix": [
+        30,
+        50,
+        20
+      ],
+      "shape": "ellipse",
+      "squash": 0.6,
+      "weight": 3
+    }
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Membrane lipid residue",
+      "enzymeLabel": "Lipase",
+      "color": "#e8c468"
+    },
+    {
+      "index": 1,
+      "label": "Algal protein debris",
+      "enzymeLabel": "Protease",
+      "color": "#d96b6b"
+    },
+    {
+      "index": 2,
+      "label": "Diatom frustule chitin/polysaccharide",
+      "enzymeLabel": "Chitinase",
+      "color": "#6bd9a0"
+    }
+  ],
+  "schema": "bacteria-scenario",
+  "terrain": [
+    {
+      "at": "top",
+      "thickness": 420,
+      "color": "#dfeff5",
+      "label": "Winter fast ice ceiling",
+      "roughness": 0.5,
+      "porosity": 0.45,
+      "poreSize": 30,
+      "featureSize": 300,
+      "spires": 0.15,
+      "spireHeight": 150,
+      "spireWidth": 60,
+      "warp": 0.2
+    },
+    {
+      "at": "bottom",
+      "thickness": 60,
+      "color": "#1c3a4a",
+      "label": "Platelet ice / seawater interface",
+      "roughness": 0.3,
+      "porosity": 0.3,
+      "poreSize": 20,
+      "featureSize": 200,
+      "spires": 0,
+      "spireHeight": 0,
+      "spireWidth": 10,
+      "warp": 0.1
+    }
+  ],
+  "version": 1
+}

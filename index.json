@@ -1012,6 +1012,14 @@
       "file": "scenarios/daily-2026-11-24.json"
     },
     {
+      "id": "daily-2026-11-25",
+      "title": "Brine Channel Refuge: Psychrophiles of Winter Fast Ice",
+      "date": "2026-11-25",
+      "difficulty": "hard",
+      "realWorldBasis": "Antarctic land-fast sea ice brine channel microbial communities in deep winter (McMurdo Sound region)",
+      "file": "scenarios/daily-2026-11-25.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",
