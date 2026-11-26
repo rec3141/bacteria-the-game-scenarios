@@ -1,0 +1,250 @@
+{
+  "meta": {
+    "title": "Lake Kivu's Hidden Floor: Methane and Microbes at 250m",
+    "date": "2026-11-26",
+    "lesson": "Lake Kivu (Rwanda/DR Congo) is one of only three known 'exploding lakes' - a meromictic tropical lake that holds vast reservoirs of dissolved CO2 and methane trapped at depth by stable density stratification. Below ~250m, warm salty water never mixes with the surface, and in that permanent dark, chemolithotrophic bacteria oxidize methane and sulfide seeping from volcanic groundwater, fixing carbon with no light at all. Above them, a thin photic lid supports ordinary phototrophic life. The lesson: stratification isn't just a gradient, it's a wall. The chemical energy is right there, concentrated, but a cell can only use it if it stays inside the narrow depth band where the plume sits, because drifting even a little lets the methane spike kill it or the lightless depths starve it.",
+    "citation": "Schmid, M. et al. (2005) 'Lake Kivu: Gas Explosion or Gas Exploitation?'; Pasche et al. (2009) 'Methane sources and sinks in Lake Kivu'",
+    "difficulty": "hard",
+    "realWorldBasis": "Lake Kivu meromictic stratification, East African Rift, methane/CO2 reservoir at ~250m depth"
+  },
+  "env": {
+    "day.latitude": -2,
+    "day.dayOfYear": 80,
+    "diel.tempBase": 24,
+    "diel.tempAmp": 2,
+    "diel.foodFloor": 0.4,
+    "diel.q10": 2.3,
+    "diel.q10RefC": 24,
+    "diel.waterDay.0": 20,
+    "diel.waterDay.1": 70,
+    "diel.waterDay.2": 60,
+    "diel.waterNight.0": 2,
+    "diel.waterNight.1": 6,
+    "diel.waterNight.2": 10,
+    "substrate.count": 80,
+    "substrate.sizeMin": 32,
+    "substrate.sizeMax": 170,
+    "substrate.lifeMin": 110,
+    "substrate.lifeMax": 260,
+    "substrate.driftMin": 5,
+    "substrate.driftMax": 12,
+    "column.chemRate": 7.5,
+    "column.photoRate": 8,
+    "cell.cystMetab": 0.02,
+    "cell.cystBelow": 18,
+    "cell.cystWake": 50,
+    "respirationBase": 0.75,
+    "predator.count": 3,
+    "predator.senseRange": 140,
+    "predator.wanderSpeed": 18,
+    "predator.chaseSpeed": 30,
+    "phage.greenCount": 10,
+    "phage.goldCount": 3
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Lipid Marine Snow",
+      "enzymeLabel": "Lipase",
+      "color": "#4a7d6b"
+    },
+    {
+      "index": 1,
+      "label": "Sinking Protist Debris",
+      "enzymeLabel": "Protease",
+      "color": "#7d6a4a"
+    },
+    {
+      "index": 2,
+      "label": "Diatom Exudate Floc",
+      "enzymeLabel": "Glycosidase",
+      "color": "#5a8f9c"
+    }
+  ],
+  "particles": {
+    "snowFloc": {
+      "label": "Organic Floc",
+      "mix": [
+        1,
+        1,
+        2
+      ],
+      "shape": "aggregate",
+      "weight": 6
+    },
+    "debrisShard": {
+      "label": "Sinking Debris",
+      "mix": [
+        1,
+        2,
+        0
+      ],
+      "shape": "shard",
+      "weight": 4
+    }
+  },
+  "actions": {
+    "enzyme0": {
+      "label": "Lipase",
+      "color": "#4a7d6b",
+      "weight": 3
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#7d6a4a",
+      "weight": 3
+    },
+    "enzyme2": {
+      "label": "Glycosidase",
+      "color": "#5a8f9c",
+      "weight": 4
+    },
+    "chemotaxis": {
+      "label": "Methane-seeking",
+      "color": "#c9a227",
+      "weight": 7
+    },
+    "antibiotic": {
+      "label": "Bacteriocin",
+      "color": "#b33939",
+      "weight": 2
+    },
+    "eps": {
+      "label": "Mucus Sheath",
+      "color": "#8a8f5c",
+      "weight": 3
+    },
+    "crispr": {
+      "label": "CRISPR Immunity",
+      "color": "#6b5b95",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Twitching Pili",
+      "color": "#3c6e71",
+      "weight": 1
+    }
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "methylobacter",
+        "label": "Methylobacter (methanotroph)",
+        "color": "#c9a227",
+        "genome": {
+          "enzLvl": [
+            0,
+            0,
+            1
+          ],
+          "chemoLevel": 3,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false,
+          "chemolithotroph": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "generalist",
+        "label": "Surface Heterotroph",
+        "color": "#5a8f9c",
+        "genome": {
+          "enzLvl": [
+            1,
+            1,
+            2
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 0,
+          "eps": 0,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 4
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "kivuDiatom",
+        "label": "Epilimnetic Diatom",
+        "color": "#8fbf9f",
+        "form": "centric",
+        "sizeUm": 25,
+        "chain": 3,
+        "count": 40,
+        "toxin": null
+      }
+    ]
+  },
+  "terrain": [
+    {
+      "at": "bottom",
+      "thickness": 140,
+      "color": "#3b2e2a",
+      "label": "Volcanic Sediment Floor",
+      "roughness": 0.4,
+      "porosity": 0.35,
+      "poreSize": 40,
+      "featureSize": 300,
+      "spires": 0.15,
+      "spireHeight": 200,
+      "spireWidth": 60,
+      "warp": 0.2
+    }
+  ],
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 24.5,
+        "salinity": 0.2,
+        "light": 1,
+        "nutrient": 0.15
+      },
+      {
+        "depth": 0.2,
+        "tempC": 23.8,
+        "salinity": 0.3,
+        "light": 0.55,
+        "nutrient": 0.2
+      },
+      {
+        "depth": 0.45,
+        "tempC": 23.5,
+        "salinity": 0.6,
+        "light": 0.1,
+        "nutrient": 0.3
+      },
+      {
+        "depth": 0.7,
+        "tempC": 23.6,
+        "salinity": 1.2,
+        "light": 0.01,
+        "nutrient": 0.5
+      },
+      {
+        "depth": 0.9,
+        "tempC": 24,
+        "salinity": 2.5,
+        "light": 0,
+        "nutrient": 0.9
+      },
+      {
+        "depth": 1,
+        "tempC": 24.5,
+        "salinity": 3,
+        "light": 0,
+        "nutrient": 1
+      }
+    ],
+    "thermocline": {
+      "depth": 0.45,
+      "sharpness": 0.7
+    }
+  },
+  "schema": "bacteria-scenario",
+  "version": 1
+}
