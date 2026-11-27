@@ -1028,6 +1028,14 @@
       "file": "scenarios/daily-2026-11-26.json"
     },
     {
+      "id": "daily-2026-11-27",
+      "title": "Molt Tide: Copepod Exuviae Beneath the Chukchi Pack Ice",
+      "date": "2026-11-27",
+      "difficulty": "normal",
+      "realWorldBasis": "Arctic land-fast sea ice over the Chukchi shelf; copepod diel vertical migration and molting beneath the ice; psychrophilic chitinolytic bacterial colonization of sinking exoskeleton particles.",
+      "file": "scenarios/daily-2026-11-27.json"
+    },
+    {
       "id": "deepwater-horizon",
       "title": "Deepwater Horizon: the oil-eaters",
       "date": "2026-07-18",

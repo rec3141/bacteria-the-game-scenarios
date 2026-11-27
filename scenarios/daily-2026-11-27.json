@@ -1,0 +1,259 @@
+{
+  "actions": {
+    "enzyme0": {
+      "label": "Chitobiase",
+      "color": "#4fa3c7",
+      "weight": 5
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#d98b3f",
+      "weight": 4
+    },
+    "enzyme2": {
+      "label": "Alginate lyase",
+      "color": "#6fbf73",
+      "weight": 3
+    },
+    "chemotaxis": {
+      "label": "Mucilage taxis",
+      "color": "#9ad1e6",
+      "weight": 4
+    },
+    "antibiotic": {
+      "label": "Bacteriocin burst",
+      "color": "#c0392b",
+      "weight": 2
+    },
+    "eps": {
+      "label": "Capsule slime",
+      "color": "#b08cc9",
+      "weight": 3
+    },
+    "crispr": {
+      "label": "CRISPR immunity",
+      "color": "#888888",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Pilus twitch",
+      "color": "#e0c341",
+      "weight": 2
+    }
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 4,
+        "salinity": 32,
+        "light": 0.55,
+        "nutrient": 0.4
+      },
+      {
+        "depth": 40,
+        "tempC": 2,
+        "salinity": 33,
+        "light": 0.15,
+        "nutrient": 0.6
+      },
+      {
+        "depth": 90,
+        "tempC": 1,
+        "salinity": 34,
+        "light": 0.02,
+        "nutrient": 0.85
+      },
+      {
+        "depth": 160,
+        "tempC": 0.5,
+        "salinity": 34.5,
+        "light": 0,
+        "nutrient": 0.9
+      }
+    ],
+    "thermocline": {
+      "depth": 45,
+      "sharpness": 0.55
+    }
+  },
+  "env": {
+    "day.lengthSec": 260,
+    "day.latitude": 66,
+    "day.dayOfYear": 100,
+    "day.startHour": 7,
+    "diel.tempBase": 2,
+    "diel.tempAmp": 1.5,
+    "diel.foodFloor": 0.45,
+    "diel.q10": 2.2,
+    "diel.q10RefC": 10,
+    "diel.waterNight.0": 4,
+    "diel.waterNight.1": 14,
+    "diel.waterNight.2": 28,
+    "diel.waterDay.0": 30,
+    "diel.waterDay.1": 92,
+    "diel.waterDay.2": 98,
+    "substrate.count": 100,
+    "substrate.sizeMin": 34,
+    "substrate.sizeMax": 190,
+    "substrate.lifeMin": 100,
+    "substrate.lifeMax": 220,
+    "substrate.driftMin": 4,
+    "substrate.driftMax": 10,
+    "substrate.minPerRes": 4,
+    "cell.chemoRange0": 260,
+    "cell.chemoRangePer": 150,
+    "respirationBase": 0.65,
+    "predator.count": 3,
+    "predator.wanderSpeed": 16,
+    "predator.chaseSpeed": 28,
+    "predator.senseRange": 140,
+    "predator.metabolism": 7,
+    "phage.greenCount": 14,
+    "phage.goldCount": 3,
+    "diatom.photoRate": 7,
+    "diatom.sinkSpeed": 0.9
+  },
+  "meta": {
+    "title": "Molt Tide: Copepod Exuviae Beneath the Chukchi Pack Ice",
+    "date": "2026-11-27",
+    "lesson": "Under Arctic fast ice, millions of copepods (Calanus, Metridia) molt and migrate daily, shedding chitinous exoskeletons that sink slowly through frigid, stratified water. This 'molt tide' is a steady, cold-adapted analog to a marine-snow fall: chitinolytic bacteria like Vibrio and Pseudoalteromonas-type psychrophiles sense and swim toward the dissolving shells (chemotaxis up a mucilage gradient), carve the chitin with chitobiase, and divide slowly in near-freezing, nutrient-rich but light-starved water. Pennate ice diatoms glide on the underside of the pack, feeding a thin rain of exudate carbon, while grazing protists move sluggishly in the cold (Q10 penalty) and phage pressure persists but bursts slowly. The lesson: cold does not mean lifeless -- it means everything, growth, grazing, viral turnover, runs on a slower clock, while the chitin supply itself stays rich because molting never stops.",
+    "citation": "Arctic under-ice biogeochemistry and copepod molt flux studies, Chukchi/Beaufort fast ice regions (e.g. ICESCAPE, SUBICE campaigns).",
+    "difficulty": "normal",
+    "realWorldBasis": "Arctic land-fast sea ice over the Chukchi shelf; copepod diel vertical migration and molting beneath the ice; psychrophilic chitinolytic bacterial colonization of sinking exoskeleton particles."
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "vibrio_psychro",
+        "label": "Psychrophilic Vibrio sp.",
+        "color": "#4fa3c7",
+        "genome": {
+          "enzLvl": [
+            3,
+            1,
+            1
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "pseudoalt",
+        "label": "Pseudoalteromonas sp.",
+        "color": "#e0c341",
+        "genome": {
+          "enzLvl": [
+            2,
+            2,
+            1
+          ],
+          "chemoLevel": 1,
+          "antibiotic": 1,
+          "eps": 0,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 3
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "navicula_ice",
+        "label": "Navicula (ice pennate)",
+        "color": "#7fd4a0",
+        "form": "pennate",
+        "sizeUm": 45,
+        "chain": 2,
+        "count": 40
+      },
+      {
+        "id": "fragilaria_chain",
+        "label": "Fragilaria chain",
+        "color": "#a0e6b0",
+        "form": "pennate",
+        "sizeUm": 60,
+        "chain": 6,
+        "count": 20
+      }
+    ]
+  },
+  "particles": {
+    "molt_shell": {
+      "label": "Copepod exuvia (chitin shell)",
+      "mix": [
+        85,
+        10,
+        5
+      ],
+      "shape": "shard",
+      "squash": 1,
+      "weight": 7
+    },
+    "krill_bit": {
+      "label": "Krill fragment",
+      "mix": [
+        30,
+        60,
+        10
+      ],
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 2
+    },
+    "algal_exudate": {
+      "label": "Diatom exudate floc",
+      "mix": [
+        10,
+        10,
+        80
+      ],
+      "shape": "aggregate",
+      "squash": 0.6,
+      "weight": 1
+    }
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Chitin",
+      "enzymeLabel": "Chitobiase",
+      "color": "#4fa3c7"
+    },
+    {
+      "index": 1,
+      "label": "Protein",
+      "enzymeLabel": "Protease",
+      "color": "#d98b3f"
+    },
+    {
+      "index": 2,
+      "label": "Carbohydrate",
+      "enzymeLabel": "Alginate lyase",
+      "color": "#6fbf73"
+    }
+  ],
+  "schema": "bacteria-scenario",
+  "terrain": [
+    {
+      "at": "top",
+      "thickness": 120,
+      "color": "#d8ecf0",
+      "label": "Fast ice underside",
+      "roughness": 0.6,
+      "porosity": 0.4,
+      "poreSize": 30,
+      "featureSize": 300,
+      "spires": 0.2,
+      "spireHeight": 150,
+      "spireWidth": 60,
+      "warp": 0.1
+    }
+  ],
+  "version": 1
+}
