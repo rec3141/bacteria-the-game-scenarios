@@ -1,0 +1,259 @@
+{
+  "actions": {
+    "enzyme0": {
+      "label": "Chitobiase",
+      "color": "#5fb8c9",
+      "weight": 6
+    },
+    "enzyme1": {
+      "label": "Protease",
+      "color": "#d98c3c",
+      "weight": 4
+    },
+    "enzyme2": {
+      "label": "Agarase",
+      "color": "#9ad45c",
+      "weight": 3
+    },
+    "chemotaxis": {
+      "label": "Gradient Taxis",
+      "color": "#e8d35a",
+      "weight": 5
+    },
+    "antibiotic": {
+      "label": "Bacteriocin Burst",
+      "color": "#c13a3a",
+      "weight": 3
+    },
+    "eps": {
+      "label": "Capsule Shield",
+      "color": "#8aa6ff",
+      "weight": 3
+    },
+    "crispr": {
+      "label": "CRISPR Immunity",
+      "weight": 2
+    },
+    "twitching": {
+      "label": "Pilus Twitch",
+      "color": "#caa6e8",
+      "weight": 4
+    }
+  },
+  "column": {
+    "enabled": true,
+    "layers": [
+      {
+        "depth": 0,
+        "tempC": 26,
+        "salinity": 35,
+        "light": 0.95,
+        "nutrient": 0.2
+      },
+      {
+        "depth": 30,
+        "tempC": 24,
+        "salinity": 35,
+        "light": 0.5,
+        "nutrient": 0.4
+      },
+      {
+        "depth": 80,
+        "tempC": 18,
+        "salinity": 35.2,
+        "light": 0.08,
+        "nutrient": 0.75
+      },
+      {
+        "depth": 150,
+        "tempC": 11,
+        "salinity": 35.3,
+        "light": 0,
+        "nutrient": 0.9
+      }
+    ],
+    "thermocline": {
+      "depth": 60,
+      "sharpness": 0.6
+    }
+  },
+  "env": {
+    "day.lengthSec": 260,
+    "day.latitude": 27,
+    "day.dayOfYear": 205,
+    "diel.tempBase": 22,
+    "diel.tempAmp": 4,
+    "diel.foodFloor": 0.3,
+    "diel.q10": 2.2,
+    "diel.q10RefC": 20,
+    "substrate.count": 95,
+    "substrate.sizeMin": 34,
+    "substrate.sizeMax": 210,
+    "substrate.minPerRes": 3,
+    "substrate.lifeMin": 80,
+    "substrate.lifeMax": 200,
+    "substrate.driftMin": 14,
+    "substrate.driftMax": 34,
+    "cell.chemoRange0": 360,
+    "cell.chemoRangePer": 170,
+    "cell.chemoBias": 1.2,
+    "cell.twitchSpeedScale": 0.65,
+    "cell.uptake": 17,
+    "cell.startEnergy": 100,
+    "cell.divideThreshold": 165,
+    "phage.greenCount": 24,
+    "phage.goldCount": 3,
+    "phage.burst.0": 6,
+    "phage.burst.1": 14,
+    "phage.latent.0": 7,
+    "phage.latent.1": 12,
+    "phage.hostTolerance": 2,
+    "phage.adsorbBase": 0.34,
+    "phage.twitchAdsorbMult": 2.4,
+    "predator.count": 5,
+    "predator.senseRange": 200,
+    "predator.chaseSpeed": 48,
+    "diatom.photoRate": 9,
+    "diatom.metabolism": 1.6,
+    "diel.waterDay.0": 30,
+    "diel.waterDay.1": 92,
+    "diel.waterDay.2": 80,
+    "diel.waterNight.0": 3,
+    "diel.waterNight.1": 11,
+    "diel.waterNight.2": 18
+  },
+  "meta": {
+    "title": "Squid Beak Rush: Chitin Taxis on the Falling Carcass",
+    "date": "2026-11-28",
+    "lesson": "When a jumbo squid dies in the Gulf of California its chitinous beak and pen sink into the mesopelagic twilight zone, delivering a sudden pulse of recalcitrant chitin into otherwise nutrient-poor deep water. Copiotrophic bacteria (Vibrio- and Pseudoalteromonas-like lineages) detect the dissolving chitin plume by chemotaxis, race toward it, and secrete chitobiase to crack the polymer into assimilable sugars faster than competitors or phage can catch them. This level emphasizes chemotaxis range and bias as the deciding trait: cells that sense and swim toward the falling particle first get first bite, while twitching pili let them cling to the carcass surface once there -- at the cost of being an easier phage target. A sharp thermocline separates the warm sunlit surface from the cold nutrient-rich depth where the carcass actually settles, so success means leaving the light and racing down the gradient toward the chitin signal before free phage and grazers arrive.",
+    "citation": "Based on studies of Dosidicus gigas carcass falls and chitinolytic Vibrio/Pseudoalteromonas succession in the Gulf of California mesopelagic.",
+    "difficulty": "hard",
+    "realWorldBasis": "Gulf of California jumbo squid (Dosidicus gigas) carcass/beak falls and chitin-driven bacterial chemotaxis and bloom-phage succession"
+  },
+  "organisms": {
+    "cells": [
+      {
+        "id": "vibrio_founder",
+        "label": "Chitinivorous Vibrio",
+        "color": "#5fb8c9",
+        "genome": {
+          "enzLvl": [
+            3,
+            1,
+            1
+          ],
+          "chemoLevel": 3,
+          "antibiotic": 0,
+          "eps": 0,
+          "crispr": false,
+          "twitching": true
+        },
+        "immigrateWeight": 6
+      },
+      {
+        "id": "pseudoalt",
+        "label": "Pseudoalteromonas Opportunist",
+        "color": "#d9a23c",
+        "genome": {
+          "enzLvl": [
+            2,
+            2,
+            1
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 2,
+          "eps": 1,
+          "crispr": false,
+          "twitching": false
+        },
+        "immigrateWeight": 4
+      },
+      {
+        "id": "resistant_strain",
+        "label": "CRISPR-Armed Colonizer",
+        "color": "#8aa6ff",
+        "genome": {
+          "enzLvl": [
+            2,
+            1,
+            2
+          ],
+          "chemoLevel": 2,
+          "antibiotic": 0,
+          "eps": 2,
+          "crispr": true,
+          "twitching": false
+        },
+        "immigrateWeight": 2
+      }
+    ],
+    "diatoms": [
+      {
+        "id": "surface_diatom",
+        "label": "Surface Diatom Drift",
+        "color": "#7fcf9a",
+        "form": "centric",
+        "sizeUm": 28,
+        "chain": 3,
+        "count": 30
+      }
+    ]
+  },
+  "particles": {
+    "carcass_chitin": {
+      "label": "Squid Beak Fragment",
+      "mix": [
+        0.75,
+        0.15,
+        0.1
+      ],
+      "shape": "shard",
+      "squash": 1,
+      "weight": 8
+    },
+    "mantle_protein": {
+      "label": "Mantle Tissue Shred",
+      "mix": [
+        0.1,
+        0.75,
+        0.15
+      ],
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 4
+    },
+    "marine_snow": {
+      "label": "Background Marine Snow",
+      "mix": [
+        0.2,
+        0.3,
+        0.5
+      ],
+      "shape": "aggregate",
+      "squash": 1,
+      "weight": 2
+    }
+  },
+  "resources": [
+    {
+      "index": 0,
+      "label": "Chitin",
+      "enzymeLabel": "Chitobiase",
+      "color": "#5fb8c9"
+    },
+    {
+      "index": 1,
+      "label": "Protein",
+      "enzymeLabel": "Protease",
+      "color": "#d98c3c"
+    },
+    {
+      "index": 2,
+      "label": "Carbohydrate",
+      "enzymeLabel": "Agarase",
+      "color": "#9ad45c"
+    }
+  ],
+  "schema": "bacteria-scenario",
+  "version": 1
+}
